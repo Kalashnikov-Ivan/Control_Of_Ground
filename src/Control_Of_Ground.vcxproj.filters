@@ -17,7 +17,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Service\docs">
-      <UniqueIdentifier>{a8e8fee2-53db-4e9a-bbe9-120361e9f3c4}</UniqueIdentifier>
+      <UniqueIdentifier>{6bcae54d-fe4f-4944-acc5-f6d19d5e139f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -26,10 +26,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include=".gitignore">
+    <None Include="..\.gitignore">
       <Filter>Service</Filter>
     </None>
-    <None Include="README.rst">
+    <None Include="..\README.rst">
       <Filter>Service</Filter>
     </None>
   </ItemGroup>
