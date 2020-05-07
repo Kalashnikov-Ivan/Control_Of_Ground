@@ -1,12 +1,16 @@
-class Unit
+namespace cog
 {
-	public:
+	class Unit
+	{
+		public:
 
-		Unit();
-		~Unit();
+			Unit();
+			~Unit();
 
 
 
-	private:
+		private:
 
-};
+	};
+
+}
