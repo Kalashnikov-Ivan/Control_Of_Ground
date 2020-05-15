@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Unit.hpp">
-      <Filter>Source</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

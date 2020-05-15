@@ -110,7 +110,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\source\_libraries\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
-      <EnableModules>true</EnableModules>
+      <EnableModules>false</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,7 +128,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\source\_libraries\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
-      <EnableModules>true</EnableModules>
+      <EnableModules>false</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,7 +148,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\source\_libraries\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
-      <EnableModules>true</EnableModules>
+      <EnableModules>false</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -170,7 +170,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\source\_libraries\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
-      <EnableModules>true</EnableModules>
+      <EnableModules>false</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
