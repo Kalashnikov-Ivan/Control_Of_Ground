@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Unit.cpp" />
   </ItemGroup>
@@ -28,6 +29,8 @@
     <None Include="..\README.rst" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Game.hpp" />
+    <ClInclude Include="source\stdHeader.hpp" />
     <ClInclude Include="source\Unit.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
