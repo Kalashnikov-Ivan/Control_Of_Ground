@@ -1,3 +1,6 @@
+#ifndef UNIT_H
+#define UNIT_H
+
 namespace cog
 {
 
@@ -7,7 +10,7 @@ public:
 
 	//Constructors
 	Unit();
-	Unit(std::string name, double m_hp, double m_power);
+	Unit(std::string& name, double hp, double power, sf::Texture* texture_ptr);
 	~Unit();
 
 	//Name
@@ -16,16 +19,17 @@ public:
 
 	//HP
 	double get_hp() const;
-	void set_hp(const double& hp);
+	void set_hp(const double hp);
 
 	void get_damage(double damage);
 
 	//Power of damage
 	double get_power() const;
-	void set_power(const double& m_power);
+	void set_power(const double m_power);
 
 private:
-	static size_t id;
+	static size_t m_id;
+	sf::Texture* m_texture_ptr;
 
 	std::string m_name;
 	double m_hp;
@@ -33,3 +37,5 @@ private:
 };
 
 } // namespace cog
+
+#endif // !UNIT_H

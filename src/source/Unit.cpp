@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 #include "Unit.hpp"
 
 using namespace cog;
 
-size_t Unit::id = 0;
+size_t Unit::m_id = 0;
 
 ////////////////////////////////////////////////////////////
 // Constructors
@@ -40,7 +40,7 @@ double Unit::get_hp() const
 {
 	return m_hp;
 }
-void Unit::set_hp(const double& hp)
+void Unit::set_hp(const double hp)
 {
 	m_hp = hp;
 }
@@ -57,7 +57,7 @@ double Unit::get_power() const
 {
 	return m_power;
 }
-void Unit::set_power(const double& power)
+void Unit::set_power(const double power)
 {
 	m_power = power;
 }

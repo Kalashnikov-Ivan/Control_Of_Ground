@@ -1,11 +1,24 @@
+#include <iostream>
+
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 int main(int argc, char* argv[])
 {
-    sf::RenderWindow window{ sf::VideoMode(400, 400), "SFML works!" };
+    const char* PATH_DEFAULT_TEXTURE = "resources/default_0.png";
 
-    sf::CircleShape shape{ 200.f };
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window{ sf::VideoMode(800, 600), "Control of Ground" };
+    window.setFramerateLimit(60);
+
+    sf::Texture hero_texture{ };
+    if (!hero_texture.loadFromFile("resources/default_0.png"))
+    {
+        std::cerr << "Load texture from: " << " is failed. Used default texture." << std::endl;
+        hero_texture.loadFromFile(PATH_DEFAULT_TEXTURE);
+    }
+    
+    sf::CircleShape test{ 100.f };
+    test.setTexture(&hero_texture);
 
     while (window.isOpen())
     {
@@ -16,11 +29,15 @@ int main(int argc, char* argv[])
                 window.close();
         }
 
+        //Update state
+
         //Clearing of frame
-        window.clear();
+        window.clear(sf::Color::White);
 
         //Drawling of frame
-        window.draw(shape);
+
+        window.draw(test);
+        //window.draw(shape);
 
         //Display in window all of has been draw
         window.display();
