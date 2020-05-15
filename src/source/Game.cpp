@@ -4,6 +4,7 @@
 
 using namespace cog;
 
+/*
 bool Game::init_window(const sf::VideoMode& video_mode, unsigned int frame_rate = 60U)
 {
 	m_window = new sf::RenderWindow{ video_mode, "Control of Ground" };
@@ -20,7 +21,12 @@ bool Game::init_window(const sf::VideoMode& video_mode, unsigned int frame_rate 
 	std::cout << "Frame rate = " << frame_rate << std::endl;
 	return true;
 }
+*/
 
+
+////////////////////////////////////////////////////////////
+// Constructors
+////////////////////////////////////////////////////////////
 Game::Game() : m_window { new sf::RenderWindow(sf::VideoMode(800U, 600U), "Control of Ground")}
 {
 	if (m_window == nullptr)
@@ -35,7 +41,6 @@ Game::Game() : m_window { new sf::RenderWindow(sf::VideoMode(800U, 600U), "Contr
 	//init_window(sf::VideoMode(800U, 600U));
 }
 
-
 Game::Game(const sf::VideoMode& video_mode, unsigned int frame_rate = 60U) :
 	m_window{ new sf::RenderWindow(video_mode, "Control of Ground") }
 {
@@ -48,8 +53,41 @@ Game::Game(const sf::VideoMode& video_mode, unsigned int frame_rate = 60U) :
 	std::cout << "Frame rate = " << frame_rate << std::endl;
 }
 
-
 Game::~Game()
 {
 	delete m_window;
+}
+
+////////////////////////////////////////////////////////////
+// Core
+////////////////////////////////////////////////////////////
+void Game::run()
+{
+	while (m_window->isOpen())
+	{
+		update_all();
+		render();
+	}
+}
+
+////////////////////////////////////////////////////////////
+// Update and render
+////////////////////////////////////////////////////////////
+void Game::update_sf_events()
+{
+	while (m_window->pollEvent(m_sf_event))
+	{
+		if (m_sf_event.type == sf::Event::Closed)
+			m_window->close();
+	}
+}
+
+void Game::update_all()
+{
+	update_sf_events();
+}
+
+void Game::render()
+{
+
 }

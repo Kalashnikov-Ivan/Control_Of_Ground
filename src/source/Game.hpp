@@ -13,14 +13,19 @@ public:
 	Game(const sf::VideoMode& video_mode, unsigned int frame_rate = 60U);
 	virtual ~Game();
 
-
-
 	//Core
 	void run();
 
 private:
-	sf::RenderWindow* m_window;
+	sf::RenderWindow* const m_window;
+	sf::Event m_sf_event;
 
+	//Update
+	void update_sf_events();
+	void update_all();
+
+	//Render
+	void render();
 };
 } //namespace my
 

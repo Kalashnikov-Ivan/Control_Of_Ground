@@ -22,25 +22,30 @@ int main(int argc, char* argv[])
 
     while (window.isOpen())
     {
+        //Update event
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        //Update event
 
         //Update state
 
+        //Update state
+
+        //Render
         //Clearing of frame
         window.clear(sf::Color::White);
 
         //Drawling of frame
-
         window.draw(test);
         //window.draw(shape);
 
         //Display in window all of has been draw
         window.display();
+        //Render
     }
 
     return 0;
