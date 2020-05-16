@@ -29,13 +29,13 @@ public:
 
 private:
 	static size_t m_id;
-	sf::Texture* m_texture_ptr;
+	const sf::Texture* m_texture_ptr;
 
 	std::string m_name;
 	double m_hp;
 	double m_power;
 };
 
-} // namespace cog
+} // !namespace cog
 
 #endif // !UNIT_H

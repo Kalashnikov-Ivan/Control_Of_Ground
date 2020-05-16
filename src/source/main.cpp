@@ -1,10 +1,10 @@
-#include <iostream>
+#include "stdHeader.hpp"
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
+#include "Game.hpp"
 
 int main(int argc, char* argv[])
 {
+    
     const char* PATH_DEFAULT_TEXTURE = "resources/default_0.png";
 
     sf::RenderWindow window{ sf::VideoMode(800, 600), "Control of Ground" };
@@ -33,6 +33,8 @@ int main(int argc, char* argv[])
 
         //Update state
 
+        test.move(1, 1);
+
         //Update state
 
         //Render
@@ -47,6 +49,11 @@ int main(int argc, char* argv[])
         window.display();
         //Render
     }
+    
+    /*
+    cog::Game game{};
 
+    game.run();
+    */
     return 0;
 }

@@ -19,16 +19,37 @@
     <Filter Include="Service\docs">
       <UniqueIdentifier>{6bcae54d-fe4f-4944-acc5-f6d19d5e139f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\Global_classes">
+      <UniqueIdentifier>{3b0d71aa-2f60-4630-93cb-dc55f8599dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Global_classes">
+      <UniqueIdentifier>{23b55432-6818-419e-997c-37b9bd76a2e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\SFML">
+      <UniqueIdentifier>{4afecf1c-4e71-474f-bdbb-30cba976e090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\SFML\Graphics">
+      <UniqueIdentifier>{dc4a3be0-d13b-4fa0-9f45-99a5d3dd0ab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\States">
+      <UniqueIdentifier>{7d0de18b-6503-4835-a01a-416dc0ffb780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\States">
+      <UniqueIdentifier>{771c94ba-368f-4ac5-83f3-ce3dd2fc09cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="source\Unit.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Global_classes</Filter>
     </ClCompile>
     <ClCompile Include="source\Game.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Global_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\State.cpp">
+      <Filter>Source\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,16 +62,112 @@
     <None Include="..\.gitattributes">
       <Filter>Service</Filter>
     </None>
+    <None Include="..\docs\ClassDiagram.cd">
+      <Filter>Service\docs</Filter>
+    </None>
+    <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Glsl.inl">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </None>
+    <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Unit.hpp">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Global_classes</Filter>
     </ClInclude>
     <ClInclude Include="source\Game.hpp">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Global_classes</Filter>
     </ClInclude>
     <ClInclude Include="source\stdHeader.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\BlendMode.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\CircleShape.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Color.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\ConvexShape.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Drawable.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Export.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Font.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Glsl.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Glyph.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Image.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\PrimitiveType.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Rect.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\RectangleShape.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\RenderStates.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\RenderTarget.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\RenderTexture.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\RenderWindow.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Shader.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Shape.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Sprite.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Text.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Texture.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Transform.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Transformable.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Vertex.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\VertexArray.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\VertexBuffer.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\View.hpp">
+      <Filter>Headers\SFML\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\State.hpp">
+      <Filter>Headers\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,11 +6,11 @@ namespace cog
 class Game
 {
 public:
-	bool init_window(const sf::VideoMode& video_mode, unsigned int frame_rate = 60U);
+	bool init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
 
 	//Constructors and Destructor
 	Game();
-	Game(const sf::VideoMode& video_mode, unsigned int frame_rate = 60U);
+	Game(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
 	virtual ~Game();
 
 	//Core
@@ -20,13 +20,20 @@ private:
 	sf::RenderWindow* const m_window;
 	sf::Event m_sf_event;
 
+	sf::Clock m_delta_time_clock;
+	float m_delta_time;
+
 	//Update
+	void update_delta_time();
 	void update_sf_events();
-	void update_all();
+	void update_state();
 
 	//Render
 	void render();
+
+	//Print tech
+	void print_dt(); //delta time and frame rate
 };
-} //namespace my
+} // !namespace my
 
 #endif // !GAME_H
