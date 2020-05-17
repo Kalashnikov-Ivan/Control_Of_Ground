@@ -1,4 +1,6 @@
-Template
-========
+Control of Ground
+=================
 
-Template template template template template template template template
+This is 2D game.
+
+At the moment, is in the initial stage of development.
