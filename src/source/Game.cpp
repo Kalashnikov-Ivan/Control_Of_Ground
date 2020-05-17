@@ -1,33 +1,17 @@
 #include "stdHeader.hpp"
 
+#include "State.hpp"
+#include "GameState.hpp"
+
 #include "Game.hpp"
 
 using namespace cog;
 
-/*
-bool Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit = 60U)
-{
-	m_window = new sf::RenderWindow{ video_mode, "Control of Ground" };
-
-	if (m_window == nullptr)
-	{
-		std::cerr << "Fault of init_window! Is nullptr..." << std::endl;
-		return false;
-	}
-
-	m_window->setFramerateLimit(framerate_limit);
-
-	std::cout << "Init_window successful! Video mode: " << video_mode.width << ", " << video_mode.height << std::endl;
-	std::cout << "Frame rate = " << frame_rate << std::endl;
-	return true;
-}
-*/
-
-
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Game::Game() : m_window { new sf::RenderWindow(sf::VideoMode(800U, 600U), "Control of Ground")}
+Game::Game() 
+	: m_window{ new sf::RenderWindow(sf::VideoMode(800U, 600U), "Control of Ground") }
 {
 	if (m_window == nullptr)
 		throw std::runtime_error("Fault of init_window! Is bad alloc...");
@@ -40,10 +24,12 @@ Game::Game() : m_window { new sf::RenderWindow(sf::VideoMode(800U, 600U), "Contr
 	std::cout << "Init_window successful! Video mode: " << 800U << ", " << 600U << std::endl;
 	std::cout << "Frame rate = " << frame_rate << std::endl;
 	//init_window(sf::VideoMode(800U, 600U));
+
+	init_states();
 }
 
-Game::Game(const sf::VideoMode& video_mode, unsigned int framerate_limit) :
-	m_window{ new sf::RenderWindow(video_mode, "Control of Ground") }
+Game::Game(const sf::VideoMode& video_mode, unsigned int framerate_limit) 
+	: m_window{ new sf::RenderWindow(video_mode, "Control of Ground") }
 {
 	if (m_window == nullptr)
 		throw std::runtime_error("Fault of init_window! Is bad alloc...");
@@ -57,22 +43,41 @@ Game::Game(const sf::VideoMode& video_mode, unsigned int framerate_limit) :
 Game::~Game()
 {
 	delete m_window;
-}
 
-////////////////////////////////////////////////////////////
-// Core
-////////////////////////////////////////////////////////////
-void Game::run()
-{
-	while (m_window->isOpen())
+	while (!m_states.empty())
 	{
-		update_delta_time();
-		print_dt();
-
-		update_state();
-		render();
+		delete m_states.top();
+		m_states.pop();
 	}
 }
+
+////////////////////////////////////////////////////////////
+// Init
+////////////////////////////////////////////////////////////
+bool Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit)
+{
+	m_window = new sf::RenderWindow{ video_mode, "Control of Ground" };
+
+	if (m_window == nullptr)
+	{
+		std::cerr << "Fault of init_window! Is nullptr..." << std::endl;
+		return false;
+	}
+
+	m_window->setFramerateLimit(framerate_limit);
+
+	std::cout << "Init_window successful! Video mode: " << video_mode.width << ", " << video_mode.height << std::endl;
+	std::cout << "Frame rate = " << framerate_limit << std::endl;
+	return true;
+}
+
+bool Game::init_states()
+{
+	m_states.push(new GameState(m_window));
+
+	return true;
+}
+
 
 ////////////////////////////////////////////////////////////
 // Update and render
@@ -91,20 +96,65 @@ void Game::update_sf_events()
 	}
 }
 
-void Game::update_state()
+void Game::update_game()
 {
 	update_sf_events();
+
+	if (!m_states.empty())
+	{
+		m_states.top()->update(m_delta_time);
+
+		if (m_states.top()->get_quit())
+		{
+			m_states.top()->end_state();
+			delete m_states.top();
+			m_states.pop();
+		}
+	}
+	else //Application end
+	{
+		application_end();
+		m_window->close();
+	}
+}
+
+void Game::application_end()
+{
+	std::cout << "Application: Control of Ground is end..." << std::endl;
 }
 
 void Game::render()
 {
 	m_window->clear();
 
+	if (!m_states.empty())
+	{
+		m_states.top()->render(m_window);
+	}
+
 	m_window->display();
 }
 
+////////////////////////////////////////////////////////////
+// Print tech
+////////////////////////////////////////////////////////////
 void Game::print_dt() //delta time and frame rate
 {
 	system("cls");
 	std::cout << "Delta time: " << m_delta_time << " sec" << std::endl;
+}
+
+////////////////////////////////////////////////////////////
+// Core
+////////////////////////////////////////////////////////////
+void Game::run()
+{
+	while (m_window->isOpen())
+	{
+		update_delta_time();
+		//print_dt();
+
+		update_game();
+		render();
+	}
 }

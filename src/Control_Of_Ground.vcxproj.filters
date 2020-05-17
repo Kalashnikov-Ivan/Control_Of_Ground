@@ -51,6 +51,9 @@
     <ClCompile Include="source\State.cpp">
       <Filter>Source\States</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameState.cpp">
+      <Filter>Source\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -167,6 +170,9 @@
       <Filter>Headers\SFML\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="source\State.hpp">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GameState.hpp">
       <Filter>Headers\States</Filter>
     </ClInclude>
   </ItemGroup>

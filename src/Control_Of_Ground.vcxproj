@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Game.cpp" />
+    <ClCompile Include="source\GameState.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\State.cpp" />
     <ClCompile Include="source\Unit.cpp" />
@@ -34,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Game.hpp" />
+    <ClInclude Include="source\GameState.hpp" />
     <ClInclude Include="source\State.hpp" />
     <ClInclude Include="source\stdHeader.hpp" />
     <ClInclude Include="source\Unit.hpp" />

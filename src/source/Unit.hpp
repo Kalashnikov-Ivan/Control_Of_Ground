@@ -4,14 +4,14 @@
 namespace cog
 {
 
-class Unit : public sf::Sprite
+class Unit : 
+	public sf::Sprite
 {
 public:
-
 	//Constructors
 	Unit();
 	Unit(std::string& name, double hp, double power, sf::Texture* texture_ptr);
-	~Unit();
+	virtual ~Unit();
 
 	//Name
 	std::string get_name() const;
@@ -29,7 +29,7 @@ public:
 
 private:
 	static size_t m_id;
-	const sf::Texture* m_texture_ptr;
+	//const sf::Texture* m_texture_ptr;
 
 	std::string m_name;
 	double m_hp;
