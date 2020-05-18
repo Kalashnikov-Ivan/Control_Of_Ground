@@ -13,10 +13,6 @@ public:
 	Game(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
 	~Game();
 
-	//Init
-	bool init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
-	bool init_states();
-
 	//Core
 	void run();
 
@@ -31,6 +27,14 @@ private:
 
 	//States
 	std::stack<State*> m_states;
+
+	std::map<const std::string, int> m_supported_keys;
+
+	//-----Functions
+	//Init
+	bool init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
+	bool init_keys();
+	bool init_states();
 
 	//Update
 	void update_delta_time();

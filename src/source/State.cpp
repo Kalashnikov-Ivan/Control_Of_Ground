@@ -7,8 +7,9 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-State::State(sf::RenderWindow* window) :
-	m_window(window), m_quit(false)
+State::State(sf::RenderWindow* window, std::map<const std::string, int>* supported_keys) :
+	m_window(window), m_quit(false),
+	m_supported_keys(supported_keys)
 {
 
 }
