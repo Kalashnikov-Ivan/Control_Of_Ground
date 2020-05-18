@@ -1,5 +1,7 @@
 #include "stdHeader.hpp"
 
+#include "Entity.hpp"
+
 #include "State.hpp"
 #include "GameState.hpp"
 
@@ -11,7 +13,6 @@ using namespace cog;
 GameState::GameState(sf::RenderWindow* window)
 	: State(window)
 {
-
 }
 
 GameState::~GameState()
@@ -30,13 +31,12 @@ void GameState::update(const float& dt)
 {
 	update_key_binds(dt);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		std::cout << 'A' << '\n';
+	m_player.update(dt);
 }
 
 void GameState::render(sf::RenderTarget* target)
 {
-
+	m_player.render(target);
 }
 
 void GameState::end_state()

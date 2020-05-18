@@ -3,6 +3,8 @@
 
 namespace cog
 {
+//class Entity;
+
 class GameState : 
 	public State
 {
@@ -19,6 +21,8 @@ public:
 	virtual void end_state() override;
 
 private:
+	//Entities
+	Entity m_player;
 
 };
 } // !namespace cog

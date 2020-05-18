@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameState.cpp" />
     <ClCompile Include="source\main.cpp" />
@@ -34,6 +35,7 @@
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Entity.hpp" />
     <ClInclude Include="source\Game.hpp" />
     <ClInclude Include="source\GameState.hpp" />
     <ClInclude Include="source\State.hpp" />

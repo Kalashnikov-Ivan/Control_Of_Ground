@@ -12,7 +12,6 @@ public:
 
 	//Functions
 	const bool get_quit() const;
-
 	virtual void check_for_quit();
 	
 	//Pure virtual

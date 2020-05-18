@@ -1,5 +1,7 @@
 #include "stdHeader.hpp"
 
+#include "Entity.hpp"
+
 #include "State.hpp"
 #include "GameState.hpp"
 
