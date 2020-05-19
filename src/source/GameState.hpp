@@ -1,6 +1,9 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
+#include "State.hpp"
+#include "Entity.hpp"
+
 namespace cog
 {
 //class Entity;

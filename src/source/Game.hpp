@@ -1,10 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "State.hpp"
+#include "GameState.hpp"
+
 namespace cog
 {
-class State;
-
 class Game final
 {
 public:
@@ -32,9 +33,9 @@ private:
 
 	//-----Functions
 	//Init
-	bool init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
-	bool init_keys();
-	bool init_states();
+	void init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
+	void init_supported_keys();
+	void init_states();
 
 	//Update
 	void update_delta_time();

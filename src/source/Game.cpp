@@ -1,10 +1,5 @@
 #include "stdHeader.hpp"
 
-#include "Entity.hpp"
-
-#include "State.hpp"
-#include "GameState.hpp"
-
 #include "Game.hpp"
 
 #define DEBUG
@@ -14,10 +9,10 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Game::Game() 
+Game::Game()
 {
 	init_window(sf::VideoMode(800U, 600U));
-	init_keys();
+	init_supported_keys();
 	init_states();
 }
 
@@ -47,7 +42,7 @@ Game::~Game()
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
-bool Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit)
+void Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit)
 {
 #ifdef DEBUG
 	std::cout << "Game: Start of init_window..." << std::endl;
@@ -58,7 +53,7 @@ bool Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_l
 	if (m_window == nullptr)
 	{
 		std::cerr << "Fault of init_window! Is nullptr..." << std::endl;
-		return false;
+		throw std::runtime_error("Fault of init_window!Is nullptr...");
 	}
 
 	m_window->setFramerateLimit(framerate_limit);
@@ -68,42 +63,60 @@ bool Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_l
 	std::cout << "Init_window successful!\nVideo mode: " << video_mode.width << ", " << video_mode.height << std::endl;
 	std::cout << "Frame rate = " << framerate_limit << "\n" << std::endl;
 #endif // DEBUG
-
-	return true;
 }
 
-bool Game::init_keys()
+void Game::init_supported_keys()
 {
 #ifdef DEBUG
-	std::cout << "Game: Start of init_keys..." << std::endl;
+	std::cout << "Game: Start of init_supported_keys..." << std::endl;
 #endif // DEBUG
 
-	m_supported_keys["Escape"] = sf::Keyboard::Escape;
+	std::ifstream keys_ifs("config/supported_keys.ini");
+	if (keys_ifs.is_open())
+	{
+		std::string key{ "" };
+		int key_value{ 0 };
 
-	m_supported_keys["A"] = sf::Keyboard::A;
-	m_supported_keys["D"] = sf::Keyboard::D;
-	m_supported_keys["W"] = sf::Keyboard::W;
-	m_supported_keys["S"] = sf::Keyboard::S;
+		while (keys_ifs >> key >> key_value)
+		{
+			m_supported_keys[key] = key_value;
+		}
+	}
+	else
+	{
+		std::cerr << "config/supported_keys.ini - cannot open!"
+				  << std::endl
+				  << "Using default keys..." << std::endl;
 
+		m_supported_keys["Escape"] = sf::Keyboard::Escape;
+
+		m_supported_keys["A"] = sf::Keyboard::A;
+		m_supported_keys["D"] = sf::Keyboard::D;
+		m_supported_keys["W"] = sf::Keyboard::W;
+		m_supported_keys["S"] = sf::Keyboard::S;
+	}
+
+	keys_ifs.close();
+	
 #ifdef DEBUG
 	for (auto& i : m_supported_keys)
 		std::cout << i.first << " = " << i.second << std::endl;
 
-	std::cout << "Game: init_keys is success!" << std::endl;
+	std::cout << "Game: init_supported_keys is success!" << std::endl;
 #endif // DEBUG
-
-	return true;
 }
 
-bool Game::init_states()
+void Game::init_states()
 {
 #ifdef DEBUG
-	std::cout << "Game: Start of init_states..." << std::endl;
+	std::cout << "\nGame: Start of init_states..." << std::endl;
 #endif // DEBUG
 
 	m_states.push(new GameState(m_window, &m_supported_keys));
 
-	return true;
+#ifdef DEBUG
+	std::cout << "\nGame: init_states is success!" << std::endl;
+#endif // DEBUG
 }
 
 ////////////////////////////////////////////////////////////
@@ -165,7 +178,7 @@ void Game::render()
 ////////////////////////////////////////////////////////////
 // Print tech
 ////////////////////////////////////////////////////////////
-void Game::print_dt() //delta time and frame rate
+void Game::print_dt() //delta time
 {
 	system("cls");
 	std::cout << "Delta time: " << m_delta_time << " sec" << std::endl;

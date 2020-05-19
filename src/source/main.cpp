@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[])
 {   
-    cog::Game game{};
+	cog::Game game{};
 
     game.run();
 

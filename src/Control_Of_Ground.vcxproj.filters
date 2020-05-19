@@ -43,6 +43,9 @@
     <Filter Include="Headers\Entities">
       <UniqueIdentifier>{87dd7c73-198c-4a31-bcbe-a132c879edd0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\config">
+      <UniqueIdentifier>{938baeca-1331-49ed-bdbb-630256dcd2be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -82,6 +85,15 @@
     </None>
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl">
       <Filter>Headers\SFML\Graphics</Filter>
+    </None>
+    <None Include="config\supported_keys.ini">
+      <Filter>Resources\config</Filter>
+    </None>
+    <None Include="config\window.ini">
+      <Filter>Resources\config</Filter>
+    </None>
+    <None Include="config\GameState_keybinds.ini">
+      <Filter>Resources\config</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,9 @@
     <None Include="..\.gitignore" />
     <None Include="..\docs\ClassDiagram.cd" />
     <None Include="..\README.rst" />
+    <None Include="config\GameState_keybinds.ini" />
+    <None Include="config\supported_keys.ini" />
+    <None Include="config\window.ini" />
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Glsl.inl" />
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl" />
   </ItemGroup>

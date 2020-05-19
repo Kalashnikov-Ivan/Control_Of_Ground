@@ -1,8 +1,5 @@
 #include "stdHeader.hpp"
 
-#include "Entity.hpp"
-
-#include "State.hpp"
 #include "GameState.hpp"
 
 #define DEBUG
@@ -27,10 +24,43 @@ GameState::~GameState()
 ////////////////////////////////////////////////////////////
 void GameState::init_keybinds()
 {
-	m_keybinds["MOVE_LEFT"] = m_supported_keys->at("A");
-	m_keybinds["MOVE_RIGHT"] = m_supported_keys->at("D");
-	m_keybinds["MOVE_TOP"] = m_supported_keys->at("W");
-	m_keybinds["MOVE_DOWN"] = m_supported_keys->at("S");
+#ifdef DEBUG
+	std::cout << "\nGameState: Start of init_keybinds..." << std::endl;
+#endif // DEBUG
+
+	std::ifstream keys_ifs("config/GameState_keybinds.ini");
+	if (keys_ifs.is_open())
+	{
+		std::string key{ "" };
+		std::string key_value{ "" };
+
+		while (keys_ifs >> key >> key_value)
+		{
+			m_keybinds[key] = m_supported_keys->at(key_value);
+		}
+	}
+	else
+	{
+		std::cerr << "config/GameState_keybinds.ini - cannot open!"
+				  << std::endl
+				  << "Using default keys..." << std::endl;
+
+		m_keybinds["CLOSE"] = m_supported_keys->at("Escape");
+
+		m_keybinds["MOVE_LEFT"] = m_supported_keys->at("A");
+		m_keybinds["MOVE_RIGHT"] = m_supported_keys->at("D");
+		m_keybinds["MOVE_TOP"] = m_supported_keys->at("W");
+		m_keybinds["MOVE_DOWN"] = m_supported_keys->at("S");
+	}
+
+	keys_ifs.close();
+
+#ifdef DEBUG
+	for (auto& i : m_keybinds)
+		std::cout << i.first << " = " << i.second << std::endl;
+
+	std::cout << "GameState: init_keybinds is success!" << std::endl;
+#endif // DEBUG
 }
 
 ////////////////////////////////////////////////////////////
