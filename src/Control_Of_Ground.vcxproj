@@ -23,6 +23,7 @@
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameState.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\MainMenuState.cpp" />
     <ClCompile Include="source\State.cpp" />
     <ClCompile Include="source\Unit.cpp" />
   </ItemGroup>
@@ -32,6 +33,7 @@
     <None Include="..\docs\ClassDiagram.cd" />
     <None Include="..\README.rst" />
     <None Include="config\GameState_keybinds.ini" />
+    <None Include="config\MainMenuState_keybinds.ini" />
     <None Include="config\supported_keys.ini" />
     <None Include="config\window.ini" />
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Glsl.inl" />
@@ -41,6 +43,7 @@
     <ClInclude Include="source\Entity.hpp" />
     <ClInclude Include="source\Game.hpp" />
     <ClInclude Include="source\GameState.hpp" />
+    <ClInclude Include="source\MainMenuState.hpp" />
     <ClInclude Include="source\State.hpp" />
     <ClInclude Include="source\stdHeader.hpp" />
     <ClInclude Include="source\Unit.hpp" />

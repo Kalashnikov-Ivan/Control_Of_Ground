@@ -97,5 +97,5 @@ void GameState::render(sf::RenderTarget* target)
 
 void GameState::end_state()
 {
-	std::cout << "State: Ending GameState..." << std::endl;
+	std::cout << "GameState: Ending..." << std::endl;
 }

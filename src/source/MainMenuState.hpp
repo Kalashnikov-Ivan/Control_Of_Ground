@@ -20,7 +20,9 @@ public:
 	virtual void end_state() override;
 
 private:
+	sf::RectangleShape m_background;
 
+	virtual void init_keybinds() override;
 };
 } // !namespace cog
 #endif // !MAIN_MENU_H

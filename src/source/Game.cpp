@@ -1,6 +1,7 @@
 #include "stdHeader.hpp"
 
 #include "Game.hpp"
+#include "MainMenuState.hpp"
 
 #define DEBUG
 
@@ -104,6 +105,7 @@ void Game::init_states()
 #endif // DEBUG
 
 	m_states.push(new GameState(m_window, &m_supported_keys));
+	m_states.push(new MainMenuState(m_window, &m_supported_keys));
 
 #ifdef DEBUG
 	std::cout << "\nGame: init_states is success!" << std::endl;

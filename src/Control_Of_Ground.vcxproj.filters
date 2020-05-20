@@ -66,6 +66,9 @@
     <ClCompile Include="source\Entity.cpp">
       <Filter>Source\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="source\MainMenuState.cpp">
+      <Filter>Source\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -93,6 +96,9 @@
       <Filter>Resources\config</Filter>
     </None>
     <None Include="config\GameState_keybinds.ini">
+      <Filter>Resources\config</Filter>
+    </None>
+    <None Include="config\MainMenuState_keybinds.ini">
       <Filter>Resources\config</Filter>
     </None>
   </ItemGroup>
@@ -198,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="source\Entity.hpp">
       <Filter>Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MainMenuState.hpp">
+      <Filter>Headers\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
