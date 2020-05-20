@@ -3,7 +3,7 @@
 
 namespace cog
 {
-class State
+class State //Abstract
 {
 public:
 	//Constructors
@@ -22,9 +22,9 @@ public:
 	virtual void end_state() = 0;
 
 protected:
-	sf::RenderWindow* m_window; //Main render target
-	std::map<const std::string, int>* m_supported_keys;
-	std::map<const std::string, int> m_keybinds;
+	sf::RenderWindow* m_window; //Main render target -> Game
+	std::map<const std::string, int>* m_supported_keys; // -> Game
+	std::map<const std::string, int> m_keybinds; // -> Inherit
 
 	bool m_quit;
 

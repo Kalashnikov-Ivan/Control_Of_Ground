@@ -18,9 +18,14 @@ public:
 	void run();
 
 private:
+////////////////////////////////////////////////////////////
+// Property objects
+////////////////////////////////////////////////////////////
 	//Window, event
 	sf::RenderWindow* m_window;
 	sf::Event m_sf_event;
+
+	std::map<const std::string, int> m_supported_keys;
 
 	//Time
 	sf::Clock m_delta_time_clock;
@@ -29,9 +34,9 @@ private:
 	//States
 	std::stack<State*> m_states;
 
-	std::map<const std::string, int> m_supported_keys;
-
-	//-----Functions
+////////////////////////////////////////////////////////////
+// Tech functions
+////////////////////////////////////////////////////////////
 	//Init
 	void init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
 	void init_supported_keys();
@@ -49,6 +54,9 @@ private:
 
 	//Print tech
 	void print_dt(); //delta time and frame rate
+
+	//Support_cleaner
+	void delete_states();
 };
 } // !namespace my
 #endif // !GAME_H

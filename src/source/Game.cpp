@@ -28,20 +28,11 @@ Game::Game(const sf::VideoMode& video_mode, unsigned int framerate_limit)
 	std::cout << "Frame rate = " << framerate_limit << std::endl;
 }
 
-Game::~Game()
-{
-	delete m_window;
-
-	while (!m_states.empty())
-	{
-		delete m_states.top();
-		m_states.pop();
-	}
-}
-
 ////////////////////////////////////////////////////////////
-// Init
+// Tech functions
 ////////////////////////////////////////////////////////////
+
+//Init
 void Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit)
 {
 #ifdef DEBUG
@@ -85,8 +76,8 @@ void Game::init_supported_keys()
 	else
 	{
 		std::cerr << "config/supported_keys.ini - cannot open!"
-				  << std::endl
-				  << "Using default keys..." << std::endl;
+			<< std::endl
+			<< "Using default keys..." << std::endl;
 
 		m_supported_keys["Escape"] = sf::Keyboard::Escape;
 
@@ -97,7 +88,7 @@ void Game::init_supported_keys()
 	}
 
 	keys_ifs.close();
-	
+
 #ifdef DEBUG
 	for (auto& i : m_supported_keys)
 		std::cout << i.first << " = " << i.second << std::endl;
@@ -125,6 +116,13 @@ void Game::init_states()
 void Game::update_delta_time()
 {
 	m_delta_time = m_delta_time_clock.restart().asSeconds();
+}
+
+// ^ Tech for update_delta_time ^
+void Game::print_dt() //delta time
+{
+	system("cls");
+	std::cout << "Delta time: " << m_delta_time << " sec" << std::endl;
 }
 
 void Game::update_sf_events()
@@ -175,13 +173,21 @@ void Game::render()
 	m_window->display();
 }
 
-////////////////////////////////////////////////////////////
-// Print tech
-////////////////////////////////////////////////////////////
-void Game::print_dt() //delta time
+Game::~Game()
 {
-	system("cls");
-	std::cout << "Delta time: " << m_delta_time << " sec" << std::endl;
+	delete m_window;
+
+	delete_states();
+}
+
+//Support_cleaner
+void Game::delete_states()
+{
+	while (!m_states.empty())
+	{
+		delete m_states.top();
+		m_states.pop();
+	}
 }
 
 ////////////////////////////////////////////////////////////
