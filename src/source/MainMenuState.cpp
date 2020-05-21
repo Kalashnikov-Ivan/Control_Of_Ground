@@ -9,8 +9,9 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<const std::string, int>* supported_keys) :
-	State{ window, supported_keys }
+MainMenuState::MainMenuState(sf::RenderWindow* window, 
+	std::map<const std::string, int>* supported_keys, std::stack<State*>* states) 
+	: State{ window, supported_keys, states }
 {
 	init_fonts();
 	init_buttons();
@@ -21,6 +22,12 @@ MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<const std::strin
 }
 
 MainMenuState::~MainMenuState()
+{
+	delete_buttons();
+}
+
+//Support_cleaner
+void MainMenuState::delete_buttons()
 {
 	for (auto& i : m_buttons)
 		delete i.second;

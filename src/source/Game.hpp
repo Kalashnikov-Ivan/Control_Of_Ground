@@ -10,7 +10,7 @@ class Game final
 {
 public:
 	//Constructors
-	Game();
+	Game() = delete;
 	Game(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
 	~Game();
 

@@ -10,30 +10,34 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Game::Game()
+Game::Game(const sf::VideoMode& video_mode, unsigned int framerate_limit) 
+	: m_delta_time {0.f}
 {
-	init_window(sf::VideoMode(800U, 600U));
+	init_window(video_mode, framerate_limit);
 	init_supported_keys();
 	init_states();
 }
 
-Game::Game(const sf::VideoMode& video_mode, unsigned int framerate_limit) 
-	: m_window{ new sf::RenderWindow(video_mode, "Control of Ground") }
+Game::~Game()
 {
-	if (m_window == nullptr)
-		throw std::runtime_error("Fault of init_window! Is bad alloc...");
+	delete m_window;
 
-	m_window->setFramerateLimit(framerate_limit);
+	delete_states();
+}
 
-	std::cout << "Init_window successful! Video mode: " << 800U << ", " << 600U << std::endl;
-	std::cout << "Frame rate = " << framerate_limit << std::endl;
+//Support_cleaner
+void Game::delete_states()
+{
+	while (!m_states.empty())
+	{
+		delete m_states.top();
+		m_states.pop();
+	}
 }
 
 ////////////////////////////////////////////////////////////
-// Tech functions
+// Init
 ////////////////////////////////////////////////////////////
-
-//Init
 void Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit)
 {
 #ifdef DEBUG
@@ -104,7 +108,7 @@ void Game::init_states()
 	std::cout << "\nGame: Start of init_states..." << std::endl;
 #endif // DEBUG
 
-	m_states.push(new MainMenuState(m_window, &m_supported_keys));
+	m_states.push(new MainMenuState(m_window, &m_supported_keys, &m_states));
 
 #ifdef DEBUG
 	std::cout << "\nGame: init_states is success!" << std::endl;
@@ -174,22 +178,6 @@ void Game::render()
 	m_window->display();
 }
 
-Game::~Game()
-{
-	delete m_window;
-
-	delete_states();
-}
-
-//Support_cleaner
-void Game::delete_states()
-{
-	while (!m_states.empty())
-	{
-		delete m_states.top();
-		m_states.pop();
-	}
-}
 
 ////////////////////////////////////////////////////////////
 // Core

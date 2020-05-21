@@ -10,7 +10,10 @@ class MainMenuState :
 	public State
 {
 public:
-	MainMenuState(sf::RenderWindow* window, std::map<const std::string, int>* supported_keys);
+	//Constructors
+	MainMenuState() = delete;
+	MainMenuState(sf::RenderWindow* window,
+		std::map<const std::string, int>* supported_keys, std::stack<State*>* states);
 	~MainMenuState();
 
 	//Virtual override
@@ -32,6 +35,8 @@ private:
 	void init_fonts();
 	void init_buttons();
 	virtual void init_keybinds() override;
+
+	void delete_buttons();
 
 };
 } // !namespace cog

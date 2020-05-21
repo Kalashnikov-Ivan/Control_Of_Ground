@@ -7,7 +7,9 @@ class State //Abstract
 {
 public:
 	//Constructors
-	State(sf::RenderWindow* window, std::map<const std::string, int>* supported_keys);
+	State() = delete;
+	State(sf::RenderWindow* window, 
+		std::map<const std::string, int>* supported_keys, std::stack<State*>* states);
 	virtual ~State();
 
 	//Functions
@@ -25,8 +27,9 @@ public:
 	virtual void end_state() = 0;
 
 protected:
-	sf::RenderWindow* m_window; //Main render target -> Game
-	std::map<const std::string, int>* m_supported_keys; // -> Game
+	sf::RenderWindow* m_window; //Main render target <- Game
+	std::stack<State*>* m_states; //Global stack of states <- Game
+	std::map<const std::string, int>* m_supported_keys; // <- Game
 	std::map<const std::string, int> m_keybinds; // -> Inherit
 
 	//Mouse

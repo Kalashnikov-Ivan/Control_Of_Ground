@@ -7,10 +7,10 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-State::State(sf::RenderWindow* window, std::map<const std::string, int>* supported_keys) :
-	m_window(window), 
-	m_supported_keys(supported_keys),
-	m_quit(false)
+State::State(sf::RenderWindow* window,
+	std::map<const std::string, int>* supported_keys, std::stack<State*>* states)
+	: m_window(window), m_supported_keys(supported_keys), m_states(states),
+	  m_quit(false)
 {
 
 }
@@ -44,7 +44,7 @@ void State::update_mouse_pos()
 
 void State::print_mouse_pos()
 {
-	system("cls");
+	//system("cls");
 	std::cout << "Pos_view: " << m_mouse_pos_view.x << " " << m_mouse_pos_view.y << std::endl;
 	std::cout << "Pos_window: " << m_mouse_pos_window.x << " " << m_mouse_pos_window.y << std::endl;
 	std::cout << "Pos_screen: " << m_mouse_pos_screen.x << " " << m_mouse_pos_screen.y << "\r";

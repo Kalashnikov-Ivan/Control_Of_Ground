@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[])
 {   
-	cog::Game game{};
+	cog::Game game{ sf::VideoMode(800U, 600U) };
 
     game.run();
 

@@ -13,7 +13,9 @@ class GameState :
 {
 public:
 	//Constructors
-	GameState(sf::RenderWindow* window, std::map<const std::string, int>* supported_keys);
+	GameState() = delete;
+	GameState(sf::RenderWindow* window, 
+		std::map<const std::string, int>* supported_keys, std::stack<State*>* states);
 	virtual ~GameState();
 
 	//Virtual override
