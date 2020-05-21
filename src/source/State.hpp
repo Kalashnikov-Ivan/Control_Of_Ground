@@ -14,7 +14,7 @@ public:
 
 	//Functions
 	const bool get_quit() const;
-	virtual void check_for_quit();
+	virtual void end_state();
 
 	virtual void update_mouse_pos();
 	sf::Text get_mouse_pos_text(const sf::Font& font) const;
@@ -23,8 +23,6 @@ public:
 	virtual void update_input(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;
-
-	virtual void end_state() = 0;
 
 protected:
 	sf::RenderWindow* m_window; //Main render target <- Game

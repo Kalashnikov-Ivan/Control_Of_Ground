@@ -34,12 +34,9 @@ const bool State::get_quit() const
 	return m_quit;
 }
 
-void State::check_for_quit()
+void State::end_state()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
-	{
-		m_quit = true;
-	}
+	m_quit = true;
 }
 
 void State::update_mouse_pos()

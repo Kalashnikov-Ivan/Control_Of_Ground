@@ -10,7 +10,7 @@ public:
 	Entity();
 	virtual ~Entity();
 
-	//Functiong
+	//Functions
 	virtual void move(const float& dt, const float dir_x, const float dir_y);
 	virtual void move(const float& dt, const sf::Vector2f& dir_vector_xy);
 
@@ -20,7 +20,8 @@ public:
 	virtual void render(sf::RenderTarget* target);
 
 protected:
-	sf::RectangleShape m_shape;
+	sf::Texture* m_texture;
+	sf::Sprite* m_sprite;
 
 	//Movement
 	float m_movement_speed;

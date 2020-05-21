@@ -69,7 +69,8 @@ void GameState::init_keybinds()
 ////////////////////////////////////////////////////////////
 void GameState::update_input(const float& dt)
 {
-	check_for_quit();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
+		end_state();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_LEFT"])))
 		m_player.move(dt, -1.f, 0.f);
@@ -95,9 +96,4 @@ void GameState::render(sf::RenderTarget* target)
 		target = m_window;
 		
 	m_player.render(target);
-}
-
-void GameState::end_state()
-{
-	std::cout << "GameState: Ending..." << std::endl;
 }

@@ -18,14 +18,12 @@ public:
 	~MainMenuState();
 
 	//Virtual override
-	virtual void update_input(const float& dt) override;
+	virtual void update_input(const float& dt) override; //Delete
 	virtual void update(const float& dt) override;
 	virtual void render(sf::RenderTarget* target = nullptr) override;
 
 	void update_buttons(const float& dt);
 	void render_buttons(sf::RenderTarget* target = nullptr);
-
-	virtual void end_state() override;
 
 private:
 	sf::RectangleShape m_background;
@@ -36,7 +34,7 @@ private:
 	void init_background();
 	void init_fonts();
 	void init_buttons();
-	virtual void init_keybinds() override;
+	virtual void init_keybinds() override; //Delete
 
 	//Support_cleaner
 	void delete_buttons();

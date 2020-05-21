@@ -23,8 +23,6 @@ public:
 	virtual void update(const float& dt) override;
 	virtual void render(sf::RenderTarget* target = nullptr) override;
 
-	virtual void end_state() override;
-
 private:
 	//Entities
 	Entity m_player;

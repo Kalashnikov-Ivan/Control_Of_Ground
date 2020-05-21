@@ -16,7 +16,6 @@ MainMenuState::MainMenuState(sf::RenderWindow* window,
 	init_background();
 	init_fonts();
 	init_buttons();
-	init_keybinds();
 }
 
 MainMenuState::~MainMenuState()
@@ -59,8 +58,6 @@ void MainMenuState::init_buttons()
 	float button_width = 230.f;
 	float button_height = 85.f;
 
-	//m_shape.getPosition().x + (m_shape.getGlobalBounds().width / 2.f) - m_text.getGlobalBounds().width / 2.f
-
 	float default_position_x = (m_window->getSize().x / 2.f) - (button_width / 2.f); // 150.f;
 	float default_position_y = (m_window->getSize().y / 2.f) - (button_height / 2.f); // 350.f;
 	float default_ofset = 120.f;
@@ -84,41 +81,6 @@ void MainMenuState::init_buttons()
 
 void MainMenuState::init_keybinds()
 {
-#ifdef DEBUG
-	std::cout << "\nMainMenuState: Start of init_keybinds..." << std::endl;
-#endif // DEBUG
-
-	std::ifstream keys_ifs("config/MainMenuState_keybinds.ini");
-	if (keys_ifs.is_open())
-	{
-		std::string key{ "" };
-		std::string key_value{ "" };
-
-		while (keys_ifs >> key >> key_value)
-		{
-			m_keybinds[key] = m_supported_keys->at(key_value);
-		}
-	}
-	else
-	{
-		std::cerr << "config/MainMenuState_keybinds.ini - cannot open!"
-			<< std::endl
-			<< "Using default keys..." << std::endl;
-
-		m_keybinds["MOVE_LEFT"] = m_supported_keys->at("A");
-		m_keybinds["MOVE_RIGHT"] = m_supported_keys->at("D");
-		m_keybinds["MOVE_TOP"] = m_supported_keys->at("W");
-		m_keybinds["MOVE_DOWN"] = m_supported_keys->at("S");
-	}
-
-	keys_ifs.close();
-
-#ifdef DEBUG
-	for (auto& i : m_keybinds)
-		std::cout << i.first << " = " << i.second << std::endl;
-
-	std::cout << "\nMainMenuState: init_keybinds is success!" << std::endl;
-#endif // DEBUG
 }
 
 ////////////////////////////////////////////////////////////
@@ -126,7 +88,6 @@ void MainMenuState::init_keybinds()
 ////////////////////////////////////////////////////////////
 void MainMenuState::update_input(const float& dt)
 {
-	check_for_quit();
 }
 
 void MainMenuState::update_buttons(const float& dt)
@@ -138,7 +99,7 @@ void MainMenuState::update_buttons(const float& dt)
 		m_states->push(new GameState{ m_window, m_supported_keys, m_states });
 	
 	if (m_buttons["EXIT_STATE"]->is_pressed())
-		m_quit = true;
+		end_state();
 }
 
 void MainMenuState::render_buttons(sf::RenderTarget* target)
@@ -163,9 +124,4 @@ void MainMenuState::render(sf::RenderTarget* target)
 	target->draw(m_background);
 	render_buttons(target);
 	target->draw(get_mouse_pos_text(m_font));
-}
-
-void MainMenuState::end_state()
-{
-	std::cout << "MainMenuState: Ending..." << std::endl;
 }
