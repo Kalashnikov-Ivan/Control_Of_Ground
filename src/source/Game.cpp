@@ -10,10 +10,13 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Game::Game(const sf::VideoMode& video_mode, unsigned int framerate_limit) 
-	: m_delta_time {0.f}
+Game::Game() 
+	: m_window             { nullptr }, 
+	  m_video_modes        { sf::VideoMode::getFullscreenModes() }, 
+	  m_delta_time         { 0.f },
+	  m_fullscreen_enabled { false }
 {
-	init_window(video_mode, framerate_limit);
+	init_window();
 	init_supported_keys();
 	init_states();
 }
@@ -38,13 +41,58 @@ void Game::delete_states()
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
-void Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit)
+void Game::init_window()
 {
 #ifdef DEBUG
 	std::cout << "Game: Start of init_window..." << std::endl;
 #endif // DEBUG
 
-	m_window = new sf::RenderWindow{ video_mode, "Control of Ground" };
+	//Default
+	std::string title = "Control of Ground";
+	sf::VideoMode video_mode{ sf::VideoMode::getDesktopMode() };
+	unsigned int framerate_limit = 120U;
+
+	m_window_settings.antialiasingLevel = 0U;
+
+	m_fullscreen_enabled = false;
+	bool vertical_sync_enabled = false;
+
+	//From file
+	std::ifstream window_ini_ifs{ "config/window.ini" }; // window_ini_ifs
+	if (window_ini_ifs.is_open())
+	{
+		std::string option{ "" };
+		while (window_ini_ifs >> option)
+		{
+			if (option == "VIDEO_MODE")
+			{
+				window_ini_ifs >> video_mode.width;
+				window_ini_ifs >> video_mode.height;
+			}
+			else if (option == "TITLE")
+				window_ini_ifs >> title;
+			else if (option == "FRAMERATE")
+				window_ini_ifs >> framerate_limit;
+			else if (option == "ANTIALISING")
+				window_ini_ifs >> m_window_settings.antialiasingLevel;
+			else if (option == "FULLSCREEN")
+				window_ini_ifs >> m_fullscreen_enabled;
+			else if (option == "VERTICAL_SYNC")
+				window_ini_ifs >> vertical_sync_enabled;
+		}
+	}
+	else
+	{
+		std::cerr << "config/window.ini - cannot open!"
+			<< std::endl
+			<< "Using default settings..." << std::endl;
+	}
+	window_ini_ifs.close(); // !window_ini_ifs
+
+	if (m_fullscreen_enabled)
+		m_window = new sf::RenderWindow{ video_mode, title,  sf::Style::Fullscreen, m_window_settings };
+	else
+		m_window = new sf::RenderWindow{ video_mode, title,  sf::Style::Titlebar | sf::Style::Close, m_window_settings };
 
 	if (m_window == nullptr)
 	{
@@ -53,7 +101,7 @@ void Game::init_window(const sf::VideoMode& video_mode, unsigned int framerate_l
 	}
 
 	m_window->setFramerateLimit(framerate_limit);
-	m_window->setVerticalSyncEnabled(false);
+	m_window->setVerticalSyncEnabled(vertical_sync_enabled);
 
 #ifdef DEBUG
 	std::cout << "Init_window successful!\nVideo mode: " << video_mode.width << ", " << video_mode.height << std::endl;

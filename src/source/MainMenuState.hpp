@@ -2,6 +2,7 @@
 #define MAIN_MENU_H
 
 #include "State.hpp"
+#include "GameState.hpp"
 #include "Button.hpp"
 
 namespace cog
@@ -32,10 +33,12 @@ private:
 
 	std::map<std::string, Button*> m_buttons;
 
+	void init_background();
 	void init_fonts();
 	void init_buttons();
 	virtual void init_keybinds() override;
 
+	//Support_cleaner
 	void delete_buttons();
 
 };

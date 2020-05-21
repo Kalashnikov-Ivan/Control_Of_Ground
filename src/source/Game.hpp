@@ -10,8 +10,7 @@ class Game final
 {
 public:
 	//Constructors
-	Game() = delete;
-	Game(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
+	Game();
 	~Game();
 
 	//Core
@@ -22,8 +21,12 @@ private:
 // Property objects
 ////////////////////////////////////////////////////////////
 	//Window, event
-	sf::RenderWindow* m_window;
-	sf::Event m_sf_event;
+	sf::RenderWindow*          m_window;
+	sf::ContextSettings        m_window_settings;
+	std::vector<sf::VideoMode> m_video_modes;
+	bool m_fullscreen_enabled;
+
+	sf::Event                  m_sf_event;
 
 	std::map<const std::string, int> m_supported_keys;
 
@@ -38,7 +41,7 @@ private:
 // Tech functions
 ////////////////////////////////////////////////////////////
 	//Init
-	void init_window(const sf::VideoMode& video_mode, unsigned int framerate_limit = 120U);
+	void init_window();
 	void init_supported_keys();
 	void init_states();
 

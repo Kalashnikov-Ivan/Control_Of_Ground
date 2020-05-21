@@ -16,7 +16,14 @@ State::State(sf::RenderWindow* window,
 }
 State::~State()
 {
+	delete_textures();
+}
 
+//Support_cleaner
+void State::delete_textures()
+{
+	for (auto& i : m_textures)
+		delete i.second;
 }
 
 ////////////////////////////////////////////////////////////
@@ -42,10 +49,13 @@ void State::update_mouse_pos()
 	m_mouse_pos_view = m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window));
 }
 
-void State::print_mouse_pos()
+sf::Text State::get_mouse_pos_text(const sf::Font& font) const
 {
-	//system("cls");
-	std::cout << "Pos_view: " << m_mouse_pos_view.x << " " << m_mouse_pos_view.y << std::endl;
-	std::cout << "Pos_window: " << m_mouse_pos_window.x << " " << m_mouse_pos_window.y << std::endl;
-	std::cout << "Pos_screen: " << m_mouse_pos_screen.x << " " << m_mouse_pos_screen.y << "\r";
+	std::stringstream ss; 
+	ss << "x: " << m_mouse_pos_view.x << " " << "y: " << m_mouse_pos_view.y << std::endl;
+	
+	sf::Text mouse_text{ ss.str(), font, 12U };
+	mouse_text.setPosition(m_mouse_pos_view.x + 10.f, m_mouse_pos_view.y - 10.f);
+
+	return mouse_text;
 }

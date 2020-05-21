@@ -17,7 +17,7 @@ public:
 	virtual void check_for_quit();
 
 	virtual void update_mouse_pos();
-	void print_mouse_pos();
+	sf::Text get_mouse_pos_text(const sf::Font& font) const;
 	
 	//Pure virtual
 	virtual void update_input(const float& dt) = 0;
@@ -40,13 +40,14 @@ protected:
 	bool m_quit;
 
 	//Resources
-	std::vector<sf::Texture> m_testures;
+	std::map<const std::string, sf::Texture*> m_textures;
 
 	//Functions
 	virtual void init_keybinds() = 0;
 
 private:
-
+	//Support_cleaner
+	void delete_textures();
 };
 } // !namespace cog
 #endif // !STATE_H
