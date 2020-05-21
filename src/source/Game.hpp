@@ -38,13 +38,8 @@ private:
 	std::stack<State*> m_states;
 
 ////////////////////////////////////////////////////////////
-// Tech functions
+// Functions
 ////////////////////////////////////////////////////////////
-	//Init
-	void init_window();
-	void init_supported_keys();
-	void init_states();
-
 	//Update
 	void update_delta_time();
 	void update_sf_events();
@@ -54,6 +49,14 @@ private:
 
 	//Render
 	void render();
+
+////////////////////////////////////////////////////////////
+// Tech functions
+////////////////////////////////////////////////////////////
+	//Init
+	void init_window();
+	void init_supported_keys();
+	void init_states();
 
 	//Print tech
 	void print_dt(); //delta time and frame rate

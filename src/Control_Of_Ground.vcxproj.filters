@@ -60,6 +60,9 @@
     <ClCompile Include="source\Button.cpp">
       <Filter>Source\Global_classes</Filter>
     </ClCompile>
+    <ClCompile Include="source\Player.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -198,6 +201,9 @@
     </ClInclude>
     <ClInclude Include="source\State.hpp">
       <Filter>Source\States</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Player.hpp">
+      <Filter>Source\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

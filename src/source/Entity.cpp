@@ -7,8 +7,9 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Entity::Entity() 
-	: m_shape{ sf::Vector2f(50.f, 50.f) },
+Entity::Entity(sf::Texture* texture)
+	: m_texture(texture),
+	m_sprite{ new sf::Sprite(*texture) },
 	m_movement_speed{ 1000.f }
 {
 }
@@ -21,13 +22,6 @@ Entity::~Entity()
 ////////////////////////////////////////////////////////////
 // Functions
 ////////////////////////////////////////////////////////////
-void Entity::move(const float& dt, const float dir_x, const float dir_y)
-{
-	if (m_sprite)
-	{
-		m_sprite->move(dir_x * m_movement_speed * dt, dir_y * m_movement_speed * dt);
-	}
-}
 
 void Entity::move(const float& dt, const sf::Vector2f& dir_vector_xy)
 {
@@ -37,6 +31,13 @@ void Entity::move(const float& dt, const sf::Vector2f& dir_vector_xy)
 	}
 }
 
+//Modifiers
+void Entity::set_position(const sf::Vector2f& position_xy)
+{
+	m_sprite->setPosition(position_xy);
+}
+
+//Virtual
 void Entity::update(const float& dt)
 {
 }
