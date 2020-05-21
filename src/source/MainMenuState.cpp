@@ -54,13 +54,31 @@ void MainMenuState::init_fonts()
 
 void MainMenuState::init_buttons()
 {
-	m_buttons["GAME_STATE"] = new Button{ sf::Vector2f(100, 100), sf::Vector2f(150, 85),
-								&m_font, "New Game", 26U,
-								sf::Color::Blue, sf::Color::Cyan, sf::Color::Green };
+	unsigned int font_size = 26U;
 
-	m_buttons["EXIT_STATE"] = new Button{ sf::Vector2f(100, 200), sf::Vector2f(150, 85),
-								&m_font, "Exit", 26U,
-								sf::Color::Blue, sf::Color::Cyan, sf::Color::Green };
+	float button_width = 230.f;
+	float button_height = 85.f;
+
+	//m_shape.getPosition().x + (m_shape.getGlobalBounds().width / 2.f) - m_text.getGlobalBounds().width / 2.f
+
+	float default_position_x = (m_window->getSize().x / 2.f) - (button_width / 2.f); // 150.f;
+	float default_position_y = (m_window->getSize().y / 2.f) - (button_height / 2.f); // 350.f;
+	float default_ofset = 120.f;
+
+	m_buttons["GAME_STATE"] = new Button{ sf::Vector2f(default_position_x, default_position_y), 
+								sf::Vector2f(button_width, button_height),
+								&m_font, "New Game", font_size,
+								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
+
+	m_buttons["SETTINGS"] = new Button{ sf::Vector2f(default_position_x, default_position_y + default_ofset),
+								sf::Vector2f(button_width, button_height),
+								&m_font, "Settings", font_size,
+								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
+
+	m_buttons["EXIT_STATE"] = new Button{ sf::Vector2f(default_position_x, default_position_y + default_ofset * 2),
+								sf::Vector2f(button_width, button_height),
+								&m_font, "Exit", font_size,
+								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
 }
 
