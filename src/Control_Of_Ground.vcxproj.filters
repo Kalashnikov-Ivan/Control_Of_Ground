@@ -19,9 +19,6 @@
     <Filter Include="Service\docs">
       <UniqueIdentifier>{6bcae54d-fe4f-4944-acc5-f6d19d5e139f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Global_classes">
-      <UniqueIdentifier>{3b0d71aa-2f60-4630-93cb-dc55f8599dce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Global_classes">
       <UniqueIdentifier>{23b55432-6818-419e-997c-37b9bd76a2e0}</UniqueIdentifier>
     </Filter>
@@ -31,17 +28,11 @@
     <Filter Include="Headers\SFML\Graphics">
       <UniqueIdentifier>{dc4a3be0-d13b-4fa0-9f45-99a5d3dd0ab5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\States">
-      <UniqueIdentifier>{7d0de18b-6503-4835-a01a-416dc0ffb780}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\States">
       <UniqueIdentifier>{771c94ba-368f-4ac5-83f3-ce3dd2fc09cb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Entities">
       <UniqueIdentifier>{3e036da5-f2ef-469f-a9de-875c70a0403a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Entities">
-      <UniqueIdentifier>{87dd7c73-198c-4a31-bcbe-a132c879edd0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\config">
       <UniqueIdentifier>{938baeca-1331-49ed-bdbb-630256dcd2be}</UniqueIdentifier>
@@ -50,9 +41,6 @@
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
       <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Unit.cpp">
-      <Filter>Source\Global_classes</Filter>
     </ClCompile>
     <ClCompile Include="source\Game.cpp">
       <Filter>Source\Global_classes</Filter>
@@ -68,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="source\MainMenuState.cpp">
       <Filter>Source\States</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Button.cpp">
+      <Filter>Source\Global_classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,12 +94,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Unit.hpp">
-      <Filter>Headers\Global_classes</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Game.hpp">
-      <Filter>Headers\Global_classes</Filter>
-    </ClInclude>
     <ClInclude Include="source\stdHeader.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -196,17 +181,23 @@
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\View.hpp">
       <Filter>Headers\SFML\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="source\State.hpp">
-      <Filter>Headers\States</Filter>
+    <ClInclude Include="source\Button.hpp">
+      <Filter>Source\Global_classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\GameState.hpp">
-      <Filter>Headers\States</Filter>
+    <ClInclude Include="source\Game.hpp">
+      <Filter>Source\Global_classes</Filter>
     </ClInclude>
     <ClInclude Include="source\Entity.hpp">
-      <Filter>Headers\Entities</Filter>
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GameState.hpp">
+      <Filter>Source\States</Filter>
     </ClInclude>
     <ClInclude Include="source\MainMenuState.hpp">
-      <Filter>Headers\States</Filter>
+      <Filter>Source\States</Filter>
+    </ClInclude>
+    <ClInclude Include="source\State.hpp">
+      <Filter>Source\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,16 +10,41 @@ using namespace cog;
 // Constructors
 ////////////////////////////////////////////////////////////
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<const std::string, int>* supported_keys) :
-	State(window, supported_keys)
+	State{ window, supported_keys }
 {
+	init_fonts();
+	init_buttons();
 	init_keybinds();
 
 	m_background.setSize(static_cast<sf::Vector2f>(m_window->getSize()));
-	m_background.setFillColor(sf::Color::Magenta);
+	m_background.setFillColor(sf::Color::Black);
 }
 
 MainMenuState::~MainMenuState()
 {
+	for (auto& i : m_buttons)
+		delete i.second;
+}
+
+////////////////////////////////////////////////////////////
+// Init
+////////////////////////////////////////////////////////////
+void MainMenuState::init_fonts()
+{
+	if (!m_font.loadFromFile("resources/fonts/Dosis-Regular.ttf"))
+		throw "ERROR::MainMenuState: init_fonts. Can't open font";
+}
+
+void MainMenuState::init_buttons()
+{
+	m_buttons["GAME_STATE"] = new Button{ sf::Vector2f(100, 100), sf::Vector2f(150, 85),
+								&m_font, "New Game", 26U,
+								sf::Color::Blue, sf::Color::Cyan, sf::Color::Green };
+
+	m_buttons["EXIT_STATE"] = new Button{ sf::Vector2f(100, 200), sf::Vector2f(150, 85),
+								&m_font, "Exit", 26U,
+								sf::Color::Blue, sf::Color::Cyan, sf::Color::Green };
+
 }
 
 void MainMenuState::init_keybinds()
@@ -45,8 +70,6 @@ void MainMenuState::init_keybinds()
 			<< std::endl
 			<< "Using default keys..." << std::endl;
 
-		m_keybinds["CLOSE"] = m_supported_keys->at("Escape");
-
 		m_keybinds["MOVE_LEFT"] = m_supported_keys->at("A");
 		m_keybinds["MOVE_RIGHT"] = m_supported_keys->at("D");
 		m_keybinds["MOVE_TOP"] = m_supported_keys->at("W");
@@ -69,12 +92,33 @@ void MainMenuState::init_keybinds()
 void MainMenuState::update_input(const float& dt)
 {
 	check_for_quit();
+}
 
+void MainMenuState::update_buttons(const float& dt)
+{
+	for (auto& i : m_buttons)
+		i.second->update(m_mouse_pos_view);
+
+	if (m_buttons["GAME_STATE"]->is_pressed())
+		m_quit = true;
+	
+	if (m_buttons["EXIT_STATE"]->is_pressed())
+		m_quit = true;
+}
+
+void MainMenuState::render_buttons(sf::RenderTarget* target)
+{
+	for (auto& i : m_buttons)
+		i.second->render(target);
 }
 
 void MainMenuState::update(const float& dt)
 {
+	update_mouse_pos();
+	print_mouse_pos();
+
 	update_input(dt);
+	update_buttons(dt);
 }
 
 void MainMenuState::render(sf::RenderTarget* target)
@@ -83,6 +127,7 @@ void MainMenuState::render(sf::RenderTarget* target)
 		target = m_window;
 
 	target->draw(m_background);
+	render_buttons(target);
 }
 
 void MainMenuState::end_state()

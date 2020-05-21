@@ -34,3 +34,18 @@ void State::check_for_quit()
 		m_quit = true;
 	}
 }
+
+void State::update_mouse_pos()
+{
+	m_mouse_pos_screen = sf::Mouse::getPosition();
+	m_mouse_pos_window = sf::Mouse::getPosition(*m_window);
+	m_mouse_pos_view = m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window));
+}
+
+void State::print_mouse_pos()
+{
+	system("cls");
+	std::cout << "Pos_view: " << m_mouse_pos_view.x << " " << m_mouse_pos_view.y << std::endl;
+	std::cout << "Pos_window: " << m_mouse_pos_window.x << " " << m_mouse_pos_window.y << std::endl;
+	std::cout << "Pos_screen: " << m_mouse_pos_screen.x << " " << m_mouse_pos_screen.y << "\r";
+}

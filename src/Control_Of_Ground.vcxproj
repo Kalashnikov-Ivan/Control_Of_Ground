@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Button.cpp" />
     <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameState.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\MainMenuState.cpp" />
     <ClCompile Include="source\State.cpp" />
-    <ClCompile Include="source\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitattributes" />
@@ -40,13 +40,13 @@
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Button.hpp" />
     <ClInclude Include="source\Entity.hpp" />
     <ClInclude Include="source\Game.hpp" />
     <ClInclude Include="source\GameState.hpp" />
     <ClInclude Include="source\MainMenuState.hpp" />
     <ClInclude Include="source\State.hpp" />
     <ClInclude Include="source\stdHeader.hpp" />
-    <ClInclude Include="source\Unit.hpp" />
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\BlendMode.hpp" />
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\CircleShape.hpp" />
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Color.hpp" />

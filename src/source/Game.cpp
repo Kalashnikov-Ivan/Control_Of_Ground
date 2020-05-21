@@ -104,7 +104,6 @@ void Game::init_states()
 	std::cout << "\nGame: Start of init_states..." << std::endl;
 #endif // DEBUG
 
-	m_states.push(new GameState(m_window, &m_supported_keys));
 	m_states.push(new MainMenuState(m_window, &m_supported_keys));
 
 #ifdef DEBUG

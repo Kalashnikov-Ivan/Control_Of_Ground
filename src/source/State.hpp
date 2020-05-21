@@ -13,6 +13,9 @@ public:
 	//Functions
 	const bool get_quit() const;
 	virtual void check_for_quit();
+
+	virtual void update_mouse_pos();
+	void print_mouse_pos();
 	
 	//Pure virtual
 	virtual void update_input(const float& dt) = 0;
@@ -26,6 +29,11 @@ protected:
 	std::map<const std::string, int>* m_supported_keys; // -> Game
 	std::map<const std::string, int> m_keybinds; // -> Inherit
 
+	//Mouse
+	sf::Vector2i m_mouse_pos_screen;
+	sf::Vector2i m_mouse_pos_window;
+	sf::Vector2f m_mouse_pos_view;
+	
 	bool m_quit;
 
 	//Resources
