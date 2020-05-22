@@ -22,11 +22,13 @@ public:
 
 protected:
 	//Members
-	sf::Texture* m_texture; // <- States
 	sf::Sprite* m_sprite;
 
 	//Movement
 	float m_movement_speed;
+
+	//Init
+	void set_texture(sf::Texture* texture);
 
 private:
 

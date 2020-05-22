@@ -216,7 +216,7 @@ void Game::application_end()
 
 void Game::render()
 {
-	m_window->clear();
+	m_window->clear(sf::Color::White);
 
 	if (!m_states.empty())
 	{

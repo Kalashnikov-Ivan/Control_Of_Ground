@@ -2,12 +2,10 @@
 #define GAME_STATE_H
 
 #include "State.hpp"
-#include "Entity.hpp"
+#include "Player.hpp"
 
 namespace cog
 {
-//class Entity;
-
 class GameState : 
 	public State
 {
@@ -15,7 +13,8 @@ public:
 	//Constructors
 	GameState() = delete;
 	GameState(sf::RenderWindow* window, 
-		std::map<const std::string, int>* supported_keys, std::stack<State*>* states);
+			  std::map<const std::string, int>* supported_keys, 
+			  std::stack<State*>* states);
 	virtual ~GameState();
 
 	//Virtual override
@@ -25,11 +24,13 @@ public:
 
 private:
 	//Entities
-	Entity m_player;
+	Player* m_player;
 
 	//----Functions
 	//Init
+	virtual void init_textures() override;
 	virtual void init_keybinds() override;
+			void init_players();
 };
 } // !namespace cog
 #endif // !GAME_STATE_H

@@ -26,15 +26,18 @@ public:
 	void render_buttons(sf::RenderTarget* target = nullptr);
 
 private:
+	//Members
 	sf::RectangleShape m_background;
 	sf::Font m_font;
 
 	std::map<std::string, Button*> m_buttons;
 
+	//Init
+	virtual void init_textures() override;
+	virtual void init_keybinds() override; //Delete
 	void init_background();
 	void init_fonts();
 	void init_buttons();
-	virtual void init_keybinds() override; //Delete
 
 	//Support_cleaner
 	void delete_buttons();

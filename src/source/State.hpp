@@ -25,9 +25,16 @@ public:
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;
 
 protected:
+	//Resources
+	virtual void init_textures() = 0;
+	std::map<const std::string, sf::Texture*> m_textures;
+
+	//Members
 	sf::RenderWindow* m_window; //Main render target <- Game
 	std::stack<State*>* m_states; //Global stack of states <- Game
 	std::map<const std::string, int>* m_supported_keys; // <- Game
+
+	virtual void init_keybinds() = 0;
 	std::map<const std::string, int> m_keybinds; // -> Inherit
 
 	//Mouse
@@ -36,12 +43,6 @@ protected:
 	sf::Vector2f m_mouse_pos_view;
 	
 	bool m_quit;
-
-	//Resources
-	std::map<const std::string, sf::Texture*> m_textures;
-
-	//Functions
-	virtual void init_keybinds() = 0;
 
 private:
 	//Support_cleaner

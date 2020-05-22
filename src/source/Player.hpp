@@ -16,7 +16,7 @@ public:
 	~Player();
 
 	//Functions
-
+	void update_input();
 private:
 	//Members
 

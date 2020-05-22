@@ -13,6 +13,7 @@ MainMenuState::MainMenuState(sf::RenderWindow* window,
 	std::map<const std::string, int>* supported_keys, std::stack<State*>* states) 
 	: State{ window, supported_keys, states }
 {
+	init_textures();
 	init_background();
 	init_fonts();
 	init_buttons();
@@ -33,14 +34,16 @@ void MainMenuState::delete_buttons()
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
-void MainMenuState::init_background()
+void MainMenuState::init_textures()
 {
-	m_background.setSize(static_cast<sf::Vector2f>(m_window->getSize()));
-
 	m_textures["BACKGROUND"] = new sf::Texture();
 
 	if (!m_textures["BACKGROUND"]->loadFromFile("resources/textures/MainMenu/Background.jpg"))
 		throw "ERROR::MainMenuState::init_background - failed to load texture";
+}
+void MainMenuState::init_background()
+{
+	m_background.setSize(static_cast<sf::Vector2f>(m_window->getSize()));
 
 	m_background.setTexture(m_textures["BACKGROUND"]);
 }
