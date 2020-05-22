@@ -13,8 +13,9 @@ class MainMenuState :
 public:
 	//Constructors
 	MainMenuState() = delete;
-	MainMenuState(sf::RenderWindow* window,
-		std::map<const std::string, int>* supported_keys, std::stack<State*>* states);
+	MainMenuState(sf::RenderWindow& window,
+				  const std::map<const std::string, int>& supported_keys,
+				  std::stack<State*>& states);
 	~MainMenuState();
 
 	//Virtual override

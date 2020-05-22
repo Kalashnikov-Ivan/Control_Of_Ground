@@ -7,8 +7,8 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Player::Player(sf::Vector2f position_xy, sf::Texture* texture)
-	: Entity(texture)
+Player::Player(sf::Vector2f position_xy, sf::Texture* texture, const float& max_speed)
+	: Entity(texture, max_speed)
 {
 	set_position(position_xy);
 	//m_sprite->setTextureRect(sf::IntRect(0, 0, 200, 200));

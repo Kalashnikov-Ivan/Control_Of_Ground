@@ -8,8 +8,9 @@ class State //Abstract
 public:
 	//Constructors
 	State() = delete;
-	State(sf::RenderWindow* window, 
-		std::map<const std::string, int>* supported_keys, std::stack<State*>* states);
+	State(sf::RenderWindow& window, 
+		  const std::map<const std::string, int>& supported_keys, 
+		  std::stack<State*>& states);
 	virtual ~State();
 
 	//Functions
@@ -32,10 +33,10 @@ protected:
 	virtual void init_fonts() = 0;
 	std::map<const std::string, sf::Font*> m_fonts;
 
-	//Members
-	sf::RenderWindow* m_window; //Main render target <- Game
-	std::stack<State*>* m_states; //Global stack of states <- Game
-	std::map<const std::string, int>* m_supported_keys; // <- Game
+	//Refs
+	sf::RenderWindow& m_window; //Main render target <- Game
+	std::stack<State*>& m_states; //Global stack of states <- Game
+	const std::map<const std::string, int>& m_supported_keys; // <- Game
 
 	virtual void init_keybinds() = 0;
 	std::map<const std::string, int> m_keybinds; // -> Inherit

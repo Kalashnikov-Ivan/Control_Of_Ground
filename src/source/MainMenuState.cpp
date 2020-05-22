@@ -9,8 +9,9 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-MainMenuState::MainMenuState(sf::RenderWindow* window, 
-	std::map<const std::string, int>* supported_keys, std::stack<State*>* states) 
+MainMenuState::MainMenuState(sf::RenderWindow& window,
+							 const std::map<const std::string, int>& supported_keys,
+							 std::stack<State*>& states)
 	: State{ window, supported_keys, states }
 {
 	init_textures();
@@ -51,7 +52,7 @@ void MainMenuState::init_fonts()
 
 void MainMenuState::init_background()
 {
-	m_background.setSize(static_cast<sf::Vector2f>(m_window->getSize()));
+	m_background.setSize(static_cast<sf::Vector2f>(m_window.getSize()));
 
 	m_background.setTexture(m_textures["BACKGROUND"]);
 }
@@ -60,12 +61,12 @@ void MainMenuState::init_buttons()
 {
 	unsigned int font_size = 26U;
 
-	float button_width = 230.f;
-	float button_height = 85.f;
+	const float button_width = 230.f;
+	const float button_height = 85.f;
 
-	float default_position_x = (m_window->getSize().x / 2.f) - (button_width / 2.f); // 150.f;
-	float default_position_y = (m_window->getSize().y / 2.f) - (button_height / 2.f); // 350.f;
-	float default_ofset = 120.f;
+	const float default_position_x = (m_window.getSize().x / 2.f) - (button_width / 2.f); // 150.f;
+	const float default_position_y = (m_window.getSize().y / 2.f) - (button_height / 2.f); // 350.f;
+	const float default_ofset = 120.f;
 
 	m_buttons["GAME_STATE"] = new Button{ sf::Vector2f(default_position_x, default_position_y), 
 								sf::Vector2f(button_width, button_height),
@@ -101,7 +102,7 @@ void MainMenuState::update_buttons(const float& dt)
 		i.second->update(m_mouse_pos_view);
 
 	if (m_buttons["GAME_STATE"]->is_pressed())
-		m_states->push(new GameState{ m_window, m_supported_keys, m_states });
+		m_states.push(new GameState{ m_window, m_supported_keys, m_states });
 	
 	if (m_buttons["EXIT_STATE"]->is_pressed())
 		end_state();
@@ -123,8 +124,8 @@ void MainMenuState::update(const float& dt)
 
 void MainMenuState::render(sf::RenderTarget* target)
 {
-	if (!target)
-		target = m_window;
+	if (target == nullptr)
+		target = &m_window;
 
 	target->draw(m_background);
 	render_buttons(target);

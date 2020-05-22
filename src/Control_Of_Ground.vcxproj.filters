@@ -37,6 +37,9 @@
     <Filter Include="Resources\config">
       <UniqueIdentifier>{938baeca-1331-49ed-bdbb-630256dcd2be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Entities\Components">
+      <UniqueIdentifier>{e866c2e1-93b9-4787-8f8c-12344b8d4376}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -62,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="source\Player.cpp">
       <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MovementComponent.cpp">
+      <Filter>Source\Entities\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +210,9 @@
     </ClInclude>
     <ClInclude Include="source\Player.hpp">
       <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MovementComponent.hpp">
+      <Filter>Source\Entities\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

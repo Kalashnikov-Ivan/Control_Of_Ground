@@ -9,8 +9,9 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-GameState::GameState(sf::RenderWindow* window,
-	std::map<const std::string, int>* supported_keys, std::stack<State*>* states)
+GameState::GameState(sf::RenderWindow& window,
+					 const std::map<const std::string, int>& supported_keys,
+					 std::stack<State*>& states)
 	: State{ window, supported_keys, states }
 {
 	init_textures();
@@ -58,7 +59,7 @@ void GameState::init_keybinds()
 
 		while (keys_ifs >> key >> key_value)
 		{
-			m_keybinds[key] = m_supported_keys->at(key_value);
+			m_keybinds[key] = m_supported_keys.at(key_value);
 		}
 	}
 	else
@@ -67,12 +68,12 @@ void GameState::init_keybinds()
 				  << std::endl
 				  << "Using default keys..." << std::endl;
 
-		m_keybinds["CLOSE"] = m_supported_keys->at("Escape");
+		m_keybinds["CLOSE"] = m_supported_keys.at("Escape");
 
-		m_keybinds["MOVE_LEFT"]  = m_supported_keys->at("A");
-		m_keybinds["MOVE_RIGHT"] = m_supported_keys->at("D");
-		m_keybinds["MOVE_TOP"]   = m_supported_keys->at("W");
-		m_keybinds["MOVE_DOWN"]  = m_supported_keys->at("S");
+		m_keybinds["MOVE_LEFT"]  = m_supported_keys.at("A");
+		m_keybinds["MOVE_RIGHT"] = m_supported_keys.at("D");
+		m_keybinds["MOVE_TOP"]   = m_supported_keys.at("W");
+		m_keybinds["MOVE_DOWN"]  = m_supported_keys.at("S");
 	}
 
 	keys_ifs.close();
@@ -87,7 +88,8 @@ void GameState::init_keybinds()
 
 void GameState::init_players()
 {
-	m_player = new Player(sf::Vector2f(0.f, 0.f), m_textures["PLAYER"]);
+	const float max_speed = 50.f;
+	m_player = new Player(sf::Vector2f(0.f, 0.f), m_textures["PLAYER"], max_speed);
 }
 
 ////////////////////////////////////////////////////////////
@@ -118,8 +120,8 @@ void GameState::update(const float& dt)
 
 void GameState::render(sf::RenderTarget* target)
 {
-	if (!target)
-		target = m_window;
+	if (target == nullptr)
+		target = &m_window;
 		
 	m_player->render(target);
 	target->draw(get_mouse_pos_text(*m_fonts["BASIC"]));

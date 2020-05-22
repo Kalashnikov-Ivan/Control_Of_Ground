@@ -1,17 +1,19 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "MovementComponent.hpp"
+
 namespace cog
 {
 class Entity
 {
 public:
 	//Constructors
-	Entity(sf::Texture* texture);
+	Entity(sf::Texture* texture, const float& max_speed);
 	virtual ~Entity();
 
 	//Functions
-	virtual void move(const float& dt, const sf::Vector2f& dir_vector_xy);
+	virtual void move(const float& dt, const sf::Vector2f& dir_xy);
 
 	//Modifiers
 	virtual void set_position(const sf::Vector2f& position_xy);
@@ -24,8 +26,8 @@ protected:
 	//Members
 	sf::Sprite* m_sprite;
 
-	//Movement
-	float m_movement_speed;
+	//Components
+	MovementComponent* m_movement_component;
 
 	//Init
 	void set_texture(sf::Texture* texture);

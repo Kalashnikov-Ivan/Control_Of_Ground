@@ -25,6 +25,7 @@
     <ClCompile Include="source\GameState.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\MainMenuState.cpp" />
+    <ClCompile Include="source\MovementComponent.cpp" />
     <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\State.cpp" />
   </ItemGroup>
@@ -46,6 +47,7 @@
     <ClInclude Include="source\Game.hpp" />
     <ClInclude Include="source\GameState.hpp" />
     <ClInclude Include="source\MainMenuState.hpp" />
+    <ClInclude Include="source\MovementComponent.hpp" />
     <ClInclude Include="source\Player.hpp" />
     <ClInclude Include="source\State.hpp" />
     <ClInclude Include="source\stdHeader.hpp" />

@@ -7,15 +7,16 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Entity::Entity(sf::Texture* texture)
+Entity::Entity(sf::Texture* texture, const float& max_speed)
 	: m_sprite{ new sf::Sprite(*texture)},
-	m_movement_speed{ 100.f }
+	m_movement_component{ new MovementComponent(*m_sprite, max_speed) }
 {
 }
 
 Entity::~Entity()
 {
 	delete m_sprite;
+	delete m_movement_component;
 }
 
 ////////////////////////////////////////////////////////////
@@ -32,10 +33,11 @@ void Entity::set_texture(sf::Texture* texture)
 // Functions
 ////////////////////////////////////////////////////////////
 
-void Entity::move(const float& dt, const sf::Vector2f& dir_vector_xy)
+void Entity::move(const float& dt, const sf::Vector2f& dir_xy)
 {
 	//m_sprite.move(dir_vector_xy * m_movement_speed * dt);
-	m_sprite->move(dir_vector_xy * m_movement_speed * dt);
+	m_movement_component->move(dir_xy, dt);
+	m_sprite->move(m_movement_component->get_speed() * dt);
 }
 
 //Modifiers

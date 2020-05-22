@@ -20,7 +20,7 @@ private:
 ////////////////////////////////////////////////////////////
 // Property objects
 ////////////////////////////////////////////////////////////
-	//Window, event
+	//Window
 	sf::RenderWindow*          m_window;
 	sf::ContextSettings        m_window_settings;
 	std::vector<sf::VideoMode> m_video_modes;
@@ -28,6 +28,7 @@ private:
 
 	sf::Event                  m_sf_event;
 
+	//All supported keys
 	std::map<const std::string, int> m_supported_keys;
 
 	//Time

@@ -7,12 +7,14 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-State::State(sf::RenderWindow* window,
-	std::map<const std::string, int>* supported_keys, std::stack<State*>* states)
-	: m_window(window), m_supported_keys(supported_keys), m_states(states),
-	  m_quit(false)
+State::State(sf::RenderWindow& window,
+			 const std::map<const std::string, int>& supported_keys, 
+			 std::stack<State*>& states)
+	: m_window(window), 
+	m_supported_keys(supported_keys), 
+	m_states(states),
+	m_quit(false)
 {
-
 }
 State::~State()
 {
@@ -48,8 +50,8 @@ void State::end_state()
 void State::update_mouse_pos()
 {
 	m_mouse_pos_screen = sf::Mouse::getPosition();
-	m_mouse_pos_window = sf::Mouse::getPosition(*m_window);
-	m_mouse_pos_view = m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window));
+	m_mouse_pos_window = sf::Mouse::getPosition(m_window);
+	m_mouse_pos_view = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
 }
 
 sf::Text State::get_mouse_pos_text(const sf::Font& font) const

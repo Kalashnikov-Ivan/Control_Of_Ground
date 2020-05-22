@@ -16,9 +16,9 @@ Game::Game()
 	  m_delta_time         { 0.f },
 	  m_fullscreen_enabled { false }
 {
-	init_window();
+	init_window(); //Dynamic for m_window
 	init_supported_keys();
-	init_states();
+	init_states(); //Dynamic for first state
 }
 
 Game::~Game()
@@ -156,7 +156,7 @@ void Game::init_states()
 	std::cout << "\nGame: Start of init_states..." << std::endl;
 #endif // DEBUG
 
-	m_states.push(new MainMenuState(m_window, &m_supported_keys, &m_states));
+	m_states.push(new MainMenuState(*m_window, m_supported_keys, m_states));
 
 #ifdef DEBUG
 	std::cout << "\nGame: init_states is success!" << std::endl;
