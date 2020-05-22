@@ -14,6 +14,7 @@ GameState::GameState(sf::RenderWindow* window,
 	: State{ window, supported_keys, states }
 {
 	init_textures();
+	init_fonts();
 	init_keybinds();
 	init_players();
 }
@@ -32,7 +33,15 @@ void GameState::init_textures()
 	m_textures["PLAYER"] = new sf::Texture();
 
 	if (!m_textures["PLAYER"]->loadFromFile("resources/textures/default_0.png"))
-		throw "ERROR::GameState::init_textures - failed to load texture PLAYER";
+		throw "ERROR::GameState::init_textures - failed to load texture resources/textures/default_0.png";
+}
+
+void GameState::init_fonts()
+{
+	m_fonts["BASIC"] = new sf::Font();
+
+	if (!m_fonts["BASIC"]->loadFromFile("resources/fonts/Dosis-Regular.ttf"))
+		throw "ERROR::GameState::init_fonts- failed to load font resources/fonts/Dosis-Regular.ttf";
 }
 
 void GameState::init_keybinds()
@@ -113,4 +122,5 @@ void GameState::render(sf::RenderTarget* target)
 		target = m_window;
 		
 	m_player->render(target);
+	target->draw(get_mouse_pos_text(*m_fonts["BASIC"]));
 }

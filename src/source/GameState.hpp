@@ -29,6 +29,7 @@ private:
 	//----Functions
 	//Init
 	virtual void init_textures() override;
+	virtual	void init_fonts()    override;
 	virtual void init_keybinds() override;
 			void init_players();
 };

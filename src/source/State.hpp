@@ -29,6 +29,9 @@ protected:
 	virtual void init_textures() = 0;
 	std::map<const std::string, sf::Texture*> m_textures;
 
+	virtual void init_fonts() = 0;
+	std::map<const std::string, sf::Font*> m_fonts;
+
 	//Members
 	sf::RenderWindow* m_window; //Main render target <- Game
 	std::stack<State*>* m_states; //Global stack of states <- Game
@@ -47,6 +50,7 @@ protected:
 private:
 	//Support_cleaner
 	void delete_textures();
+	void delete_fonts();
 };
 } // !namespace cog
 #endif // !STATE_H

@@ -41,17 +41,19 @@ void MainMenuState::init_textures()
 	if (!m_textures["BACKGROUND"]->loadFromFile("resources/textures/MainMenu/Background.jpg"))
 		throw "ERROR::MainMenuState::init_background - failed to load texture BACKGROUND";
 }
+
+void MainMenuState::init_fonts()
+{
+	m_fonts["BASIC"] = new sf::Font();
+	if (!m_fonts["BASIC"]->loadFromFile("resources/fonts/Dosis-Regular.ttf"))
+		throw "ERROR::MainMenuState: init_fonts. Can't open font";
+}
+
 void MainMenuState::init_background()
 {
 	m_background.setSize(static_cast<sf::Vector2f>(m_window->getSize()));
 
 	m_background.setTexture(m_textures["BACKGROUND"]);
-}
-
-void MainMenuState::init_fonts()
-{
-	if (!m_font.loadFromFile("resources/fonts/Dosis-Regular.ttf"))
-		throw "ERROR::MainMenuState: init_fonts. Can't open font";
 }
 
 void MainMenuState::init_buttons()
@@ -67,17 +69,17 @@ void MainMenuState::init_buttons()
 
 	m_buttons["GAME_STATE"] = new Button{ sf::Vector2f(default_position_x, default_position_y), 
 								sf::Vector2f(button_width, button_height),
-								&m_font, "New Game", font_size,
+								m_fonts["BASIC"], "New Game", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
 	m_buttons["SETTINGS"] = new Button{ sf::Vector2f(default_position_x, default_position_y + default_ofset),
 								sf::Vector2f(button_width, button_height),
-								&m_font, "Settings", font_size,
+								m_fonts["BASIC"], "Settings", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
 	m_buttons["EXIT_STATE"] = new Button{ sf::Vector2f(default_position_x, default_position_y + default_ofset * 2),
 								sf::Vector2f(button_width, button_height),
-								&m_font, "Exit", font_size,
+								m_fonts["BASIC"], "Exit", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
 }
@@ -126,5 +128,5 @@ void MainMenuState::render(sf::RenderTarget* target)
 
 	target->draw(m_background);
 	render_buttons(target);
-	target->draw(get_mouse_pos_text(m_font));
+	target->draw(get_mouse_pos_text(*m_fonts["BASIC"]));
 }

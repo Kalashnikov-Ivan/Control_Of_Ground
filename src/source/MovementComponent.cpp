@@ -1,0 +1,14 @@
+#include "MovementComponent.hpp"
+
+using namespace cog;
+
+////////////////////////////////////////////////////////////
+// Constructors
+////////////////////////////////////////////////////////////
+MovementComponent::MovementComponent()
+{
+}
+
+MovementComponent::~MovementComponent()
+{
+}

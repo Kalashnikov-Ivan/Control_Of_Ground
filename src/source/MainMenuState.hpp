@@ -27,21 +27,19 @@ public:
 
 private:
 	//Members
+	void init_background();
 	sf::RectangleShape m_background;
-	sf::Font m_font;
 
+	void init_buttons();
 	std::map<std::string, Button*> m_buttons;
 
 	//Init
 	virtual void init_textures() override;
+	virtual void init_fonts()    override;
 	virtual void init_keybinds() override; //Delete
-	void init_background();
-	void init_fonts();
-	void init_buttons();
 
 	//Support_cleaner
 	void delete_buttons();
-
 };
 } // !namespace cog
 #endif // !MAIN_MENU_H

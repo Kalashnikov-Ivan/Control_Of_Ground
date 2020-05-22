@@ -17,12 +17,18 @@ State::State(sf::RenderWindow* window,
 State::~State()
 {
 	delete_textures();
+	delete_fonts();
 }
 
 //Support_cleaner
 void State::delete_textures()
 {
 	for (auto& i : m_textures)
+		delete i.second;
+}
+void State::delete_fonts()
+{
+	for (auto& i : m_fonts)
 		delete i.second;
 }
 
@@ -48,7 +54,7 @@ void State::update_mouse_pos()
 
 sf::Text State::get_mouse_pos_text(const sf::Font& font) const
 {
-	std::stringstream ss; 
+	std::stringstream ss;
 	ss << "x: " << m_mouse_pos_view.x << " " << "y: " << m_mouse_pos_view.y << std::endl;
 	
 	sf::Text mouse_text{ ss.str(), font, 12U };
