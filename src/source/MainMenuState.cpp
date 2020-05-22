@@ -39,7 +39,7 @@ void MainMenuState::init_textures()
 	m_textures["BACKGROUND"] = new sf::Texture();
 
 	if (!m_textures["BACKGROUND"]->loadFromFile("resources/textures/MainMenu/Background.jpg"))
-		throw "ERROR::MainMenuState::init_background - failed to load texture";
+		throw "ERROR::MainMenuState::init_background - failed to load texture BACKGROUND";
 }
 void MainMenuState::init_background()
 {

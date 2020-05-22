@@ -32,7 +32,7 @@ void GameState::init_textures()
 	m_textures["PLAYER"] = new sf::Texture();
 
 	if (!m_textures["PLAYER"]->loadFromFile("resources/textures/default_0.png"))
-		throw "ERROR::MainMenuState::init_background - failed to load texture";
+		throw "ERROR::GameState::init_textures - failed to load texture PLAYER";
 }
 
 void GameState::init_keybinds()
