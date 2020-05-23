@@ -10,13 +10,13 @@ using namespace cog;
 // Constructors
 ////////////////////////////////////////////////////////////
 MainMenuState::MainMenuState(sf::RenderWindow& window,
-							 const std::map<const std::string, int>& supported_keys,
-							 std::stack<State*>& states)
-	: State{ window, supported_keys, states }
+							 std::map<const std::string, sf::Font*>& fonts,
+							 std::stack<State*>& states,
+							 const std::map<const std::string, int>& supported_keys)
+	: State{ window, fonts, states, supported_keys }
 {
 	init_textures();
 	init_background();
-	init_fonts();
 	init_buttons();
 }
 
@@ -41,13 +41,6 @@ void MainMenuState::init_textures()
 
 	if (!m_textures["BACKGROUND"]->loadFromFile("resources/textures/MainMenu/Background.jpg"))
 		throw "ERROR::MainMenuState::init_background - failed to load texture BACKGROUND";
-}
-
-void MainMenuState::init_fonts()
-{
-	m_fonts["BASIC"] = new sf::Font();
-	if (!m_fonts["BASIC"]->loadFromFile("resources/fonts/Dosis-Regular.ttf"))
-		throw "ERROR::MainMenuState: init_fonts. Can't open font";
 }
 
 void MainMenuState::init_background()
@@ -92,7 +85,7 @@ void MainMenuState::init_keybinds()
 ////////////////////////////////////////////////////////////
 // Virtual override
 ////////////////////////////////////////////////////////////
-void MainMenuState::update_input(const float& dt)
+void MainMenuState::update_keyboard_input(const float& dt)
 {
 }
 
@@ -102,7 +95,7 @@ void MainMenuState::update_buttons(const float& dt)
 		i.second->update(m_mouse_pos_view);
 
 	if (m_buttons["GAME_STATE"]->is_pressed())
-		m_states.push(new GameState{ m_window, m_supported_keys, m_states });
+		m_states.push(new GameState{ m_window, m_fonts, m_states, m_supported_keys });
 	
 	if (m_buttons["EXIT_STATE"]->is_pressed())
 		end_state();
@@ -118,8 +111,10 @@ void MainMenuState::update(const float& dt)
 {
 	update_mouse_pos();
 
-	update_input(dt);
+	update_keyboard_input(dt);
+
 	update_buttons(dt);
+
 }
 
 void MainMenuState::render(sf::RenderTarget* target)

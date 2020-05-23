@@ -9,32 +9,30 @@ public:
 	//Constructors
 	State() = delete;
 	State(sf::RenderWindow& window, 
-		  const std::map<const std::string, int>& supported_keys, 
-		  std::stack<State*>& states);
+		  std::map<const std::string, sf::Font*>& fonts,
+		  std::stack<State*>& states, 
+		  const std::map<const std::string, int>& supported_keys);
 	virtual ~State();
 
-	//Functions
+	//Getters
 	const bool get_quit() const;
-	virtual void end_state();
-
-	virtual void update_mouse_pos();
 	sf::Text get_mouse_pos_text(const sf::Font& font) const;
 	
-	//Pure virtual
-	virtual void update_input(const float& dt) = 0;
+	//Update
+	virtual void update_mouse_pos();
+	virtual void update_keyboard_input(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;
 
+	virtual void end_state();
 protected:
 	//Resources
 	virtual void init_textures() = 0;
 	std::map<const std::string, sf::Texture*> m_textures;
 
-	virtual void init_fonts() = 0;
-	std::map<const std::string, sf::Font*> m_fonts;
-
 	//Refs
 	sf::RenderWindow& m_window; //Main render target <- Game
+	std::map<const std::string, sf::Font*>& m_fonts;
 	std::stack<State*>& m_states; //Global stack of states <- Game
 	const std::map<const std::string, int>& m_supported_keys; // <- Game
 

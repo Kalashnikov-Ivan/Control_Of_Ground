@@ -18,6 +18,7 @@ Game::Game()
 {
 	init_window(); //Dynamic for m_window
 	init_supported_keys();
+	init_fonts();
 	init_states(); //Dynamic for first state
 }
 
@@ -150,13 +151,20 @@ void Game::init_supported_keys()
 #endif // DEBUG
 }
 
+void Game::init_fonts()
+{
+	m_fonts["BASIC"] = new sf::Font();
+	if (!m_fonts["BASIC"]->loadFromFile("resources/fonts/Dosis-Regular.ttf"))
+		throw "ERROR::MainMenuState: init_fonts. Can't open font";
+}
+
 void Game::init_states()
 {
 #ifdef DEBUG
 	std::cout << "\nGame: Start of init_states..." << std::endl;
 #endif // DEBUG
 
-	m_states.push(new MainMenuState(*m_window, m_supported_keys, m_states));
+	m_states.push(new MainMenuState(*m_window, m_fonts, m_states, m_supported_keys));
 
 #ifdef DEBUG
 	std::cout << "\nGame: init_states is success!" << std::endl;

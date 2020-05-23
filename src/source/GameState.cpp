@@ -10,12 +10,12 @@ using namespace cog;
 // Constructors
 ////////////////////////////////////////////////////////////
 GameState::GameState(sf::RenderWindow& window,
-					 const std::map<const std::string, int>& supported_keys,
-					 std::stack<State*>& states)
-	: State{ window, supported_keys, states }
+					 std::map<const std::string, sf::Font*>& fonts,
+					 std::stack<State*>& states,
+					 const std::map<const std::string, int>& supported_keys)
+	: State{ window, fonts, states, supported_keys }
 {
 	init_textures();
-	init_fonts();
 	init_keybinds();
 	init_players();
 }
@@ -35,14 +35,6 @@ void GameState::init_textures()
 
 	if (!m_textures["PLAYER"]->loadFromFile("resources/textures/default_0.png"))
 		throw "ERROR::GameState::init_textures - failed to load texture resources/textures/default_0.png";
-}
-
-void GameState::init_fonts()
-{
-	m_fonts["BASIC"] = new sf::Font();
-
-	if (!m_fonts["BASIC"]->loadFromFile("resources/fonts/Dosis-Regular.ttf"))
-		throw "ERROR::GameState::init_fonts- failed to load font resources/fonts/Dosis-Regular.ttf";
 }
 
 void GameState::init_keybinds()
@@ -95,7 +87,7 @@ void GameState::init_players()
 ////////////////////////////////////////////////////////////
 // Virtual override
 ////////////////////////////////////////////////////////////
-void GameState::update_input(const float& dt)
+void GameState::update_keyboard_input(const float& dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
 		end_state();
@@ -113,7 +105,7 @@ void GameState::update_input(const float& dt)
 void GameState::update(const float& dt)
 {
 	update_mouse_pos();
-	update_input(dt);
+	update_keyboard_input(dt);
 
 	m_player->update(dt);
 }
