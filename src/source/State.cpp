@@ -8,31 +8,25 @@ using namespace cog;
 // Constructors
 ////////////////////////////////////////////////////////////
 State::State(sf::RenderWindow& window,
-			 std::map<const std::string, sf::Font*>& fonts,
 			 std::stack<State*>& states,
+			 std::map<const std::string, sf::Font*>& supported_fonts,
 			 const std::map<const std::string, int>& supported_keys)
-	: m_window(window), 
-	m_fonts(fonts),
-	m_supported_keys(supported_keys), 
-	m_states(states),
-	m_quit(false)
+	: m_window		 { window },
+	m_states         { states },
+	m_supported_fonts{ supported_fonts },
+	m_supported_keys { supported_keys },
+	m_quit           { false }
 {
 }
 State::~State()
 {
 	delete_textures();
-	delete_fonts();
 }
 
 //Support_cleaner
 void State::delete_textures()
 {
 	for (auto& i : m_textures)
-		delete i.second;
-}
-void State::delete_fonts()
-{
-	for (auto& i : m_fonts)
 		delete i.second;
 }
 

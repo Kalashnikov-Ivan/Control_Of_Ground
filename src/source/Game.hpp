@@ -39,14 +39,14 @@ private:
 	std::stack<State*> m_states;
 
 	//Fonts
-	std::map<const std::string, sf::Font*> m_fonts;
+	std::map<const std::string, sf::Font*> m_supported_fonts;
 
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
 	void init_window();
 	void init_supported_keys();
-	void init_fonts();
+	void init_supported_fonts();
 	void init_states();
 
 ////////////////////////////////////////////////////////////
@@ -70,6 +70,7 @@ private:
 
 	//Support_cleaner
 	void delete_states();
+	void delete_fonts();
 };
 } // !namespace my
 #endif // !GAME_H

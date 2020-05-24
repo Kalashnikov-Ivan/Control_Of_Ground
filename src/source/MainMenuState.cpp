@@ -10,10 +10,10 @@ using namespace cog;
 // Constructors
 ////////////////////////////////////////////////////////////
 MainMenuState::MainMenuState(sf::RenderWindow& window,
-							 std::map<const std::string, sf::Font*>& fonts,
 							 std::stack<State*>& states,
+							 std::map<const std::string, sf::Font*>& supported_fonts,
 							 const std::map<const std::string, int>& supported_keys)
-	: State{ window, fonts, states, supported_keys }
+	: State{ window, states, supported_fonts, supported_keys }
 {
 	init_textures();
 	init_background();
@@ -63,17 +63,17 @@ void MainMenuState::init_buttons()
 
 	m_buttons["GAME_STATE"] = new Button{ sf::Vector2f(default_position_x, default_position_y), 
 								sf::Vector2f(button_width, button_height),
-								m_fonts["BASIC"], "New Game", font_size,
+								*m_supported_fonts["BASIC"], "New Game", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
 	m_buttons["SETTINGS"] = new Button{ sf::Vector2f(default_position_x, default_position_y + default_ofset),
 								sf::Vector2f(button_width, button_height),
-								m_fonts["BASIC"], "Settings", font_size,
+								*m_supported_fonts["BASIC"], "Settings", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
 	m_buttons["EXIT_STATE"] = new Button{ sf::Vector2f(default_position_x, default_position_y + default_ofset * 2),
 								sf::Vector2f(button_width, button_height),
-								m_fonts["BASIC"], "Exit", font_size,
+								*m_supported_fonts["BASIC"], "Exit", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
 }
@@ -95,7 +95,7 @@ void MainMenuState::update_buttons(const float& dt)
 		i.second->update(m_mouse_pos_view);
 
 	if (m_buttons["GAME_STATE"]->is_pressed())
-		m_states.push(new GameState{ m_window, m_fonts, m_states, m_supported_keys });
+		m_states.push(new GameState{ m_window, m_states, m_supported_fonts, m_supported_keys });
 	
 	if (m_buttons["EXIT_STATE"]->is_pressed())
 		end_state();
@@ -124,5 +124,5 @@ void MainMenuState::render(sf::RenderTarget* target)
 
 	target->draw(m_background);
 	render_buttons(target);
-	target->draw(get_mouse_pos_text(*m_fonts["BASIC"]));
+	target->draw(get_mouse_pos_text(*m_supported_fonts["BASIC"]));
 }

@@ -8,7 +8,7 @@ class Button
 public:
 	//Constructors
 	Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
-	sf::Font* font, const std::string& text, uint32_t ch_size,
+	sf::Font& font, const std::string& text, uint32_t ch_size,
 	const sf::Color& color_idle, 
 	const sf::Color& color_hover, 
 	const sf::Color& color_active);
@@ -25,7 +25,7 @@ private:
 	//Members
 	sf::RectangleShape m_shape;
 
-	sf::Font* m_font; // <- From Child of State
+	sf::Font& m_font; // <- From Child of State
 	sf::Text m_text;
 
 	//Colors

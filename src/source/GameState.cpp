@@ -10,10 +10,10 @@ using namespace cog;
 // Constructors
 ////////////////////////////////////////////////////////////
 GameState::GameState(sf::RenderWindow& window,
-					 std::map<const std::string, sf::Font*>& fonts,
 					 std::stack<State*>& states,
+					 std::map<const std::string, sf::Font*>& supported_fonts,
 					 const std::map<const std::string, int>& supported_keys)
-	: State{ window, fonts, states, supported_keys }
+	: State{ window, states, supported_fonts, supported_keys }
 {
 	init_textures();
 	init_keybinds();
@@ -116,5 +116,5 @@ void GameState::render(sf::RenderTarget* target)
 		target = &m_window;
 		
 	m_player->render(target);
-	target->draw(get_mouse_pos_text(*m_fonts["BASIC"]));
+	target->draw(get_mouse_pos_text(*m_supported_fonts["BASIC"]));
 }

@@ -13,8 +13,8 @@ public:
 	//Constructors
 	GameState() = delete;
 	GameState(sf::RenderWindow& window,
-			  std::map<const std::string, sf::Font*>& fonts,
 			  std::stack<State*>& states,
+			  std::map<const std::string, sf::Font*>& supported_fonts,
 			  const std::map<const std::string, int>& supported_keys);
 	virtual ~GameState();
 

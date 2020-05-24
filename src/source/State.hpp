@@ -9,8 +9,8 @@ public:
 	//Constructors
 	State() = delete;
 	State(sf::RenderWindow& window, 
-		  std::map<const std::string, sf::Font*>& fonts,
-		  std::stack<State*>& states, 
+		  std::stack<State*>& states,
+		  std::map<const std::string, sf::Font*>& supported_fonts,
 		  const std::map<const std::string, int>& supported_keys);
 	virtual ~State();
 
@@ -32,8 +32,9 @@ protected:
 
 	//Refs
 	sf::RenderWindow& m_window; //Main render target <- Game
-	std::map<const std::string, sf::Font*>& m_fonts;
 	std::stack<State*>& m_states; //Global stack of states <- Game
+
+	std::map<const std::string, sf::Font*>& m_supported_fonts; // <- Game
 	const std::map<const std::string, int>& m_supported_keys; // <- Game
 
 	virtual void init_keybinds() = 0;
@@ -49,7 +50,6 @@ protected:
 private:
 	//Support_cleaner
 	void delete_textures();
-	void delete_fonts();
 };
 } // !namespace cog
 #endif // !STATE_H
