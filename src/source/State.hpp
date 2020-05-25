@@ -26,16 +26,22 @@ public:
 
 	virtual void end_state();
 protected:
-	//Resources
-	virtual void init_textures() = 0;
-	std::map<const std::string, sf::Texture*> m_textures;
-
-	//Refs
+////////////////////////////////////////////////////////////
+// Refs
+////////////////////////////////////////////////////////////
 	sf::RenderWindow& m_window; //Main render target <- Game
 	std::stack<State*>& m_states; //Global stack of states <- Game
 
 	std::map<const std::string, sf::Font*>& m_supported_fonts; // <- Game
 	const std::map<const std::string, int>& m_supported_keys; // <- Game
+
+
+////////////////////////////////////////////////////////////
+// Member
+////////////////////////////////////////////////////////////
+	//Resources
+	virtual void init_textures() = 0;
+	std::map<const std::string, sf::Texture*> m_textures;
 
 	virtual void init_keybinds() = 0;
 	std::map<const std::string, int> m_keybinds; // -> Inherit

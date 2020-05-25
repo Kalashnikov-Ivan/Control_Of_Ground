@@ -24,10 +24,10 @@ Game::Game()
 
 Game::~Game()
 {
-	delete m_window;
-
 	delete_states();
 	delete_fonts();
+
+	delete m_window;
 }
 
 //Support_cleaner
