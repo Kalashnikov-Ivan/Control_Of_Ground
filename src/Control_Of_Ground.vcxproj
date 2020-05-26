@@ -32,8 +32,7 @@
   <ItemGroup>
     <None Include="..\.gitattributes" />
     <None Include="..\.gitignore" />
-    <None Include="..\docs\ClassDiagram.cd" />
-    <None Include="..\README.rst" />
+    <None Include="..\README.md" />
     <None Include="config\GameState_keybinds.ini" />
     <None Include="config\MainMenuState_keybinds.ini" />
     <None Include="config\supported_keys.ini" />
@@ -79,6 +78,9 @@
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\VertexArray.hpp" />
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\VertexBuffer.hpp" />
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\View.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\docs\Architecture\CoG_classDiagram.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

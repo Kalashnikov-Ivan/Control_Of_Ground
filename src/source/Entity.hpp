@@ -9,11 +9,11 @@ class Entity
 {
 public:
 	//Constructors
-	Entity(sf::Texture* texture, const float& max_speed);
+	Entity(sf::Texture& texture, const float& max_speed, float acceleration, float deceleration);
 	virtual ~Entity();
 
 	//Functions
-	virtual void move(const float& dt, const sf::Vector2f& dir_xy);
+	virtual void move(const sf::Vector2f& dir_xy, const float& dt);
 
 	//Modifiers
 	virtual void set_position(const sf::Vector2f& position_xy);

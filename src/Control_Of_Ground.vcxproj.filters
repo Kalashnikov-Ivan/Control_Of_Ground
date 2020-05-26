@@ -74,14 +74,8 @@
     <None Include="..\.gitignore">
       <Filter>Service</Filter>
     </None>
-    <None Include="..\README.rst">
-      <Filter>Service</Filter>
-    </None>
     <None Include="..\.gitattributes">
       <Filter>Service</Filter>
-    </None>
-    <None Include="..\docs\ClassDiagram.cd">
-      <Filter>Service\docs</Filter>
     </None>
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Glsl.inl">
       <Filter>Headers\SFML\Graphics</Filter>
@@ -100,6 +94,9 @@
     </None>
     <None Include="config\MainMenuState_keybinds.ini">
       <Filter>Resources\config</Filter>
+    </None>
+    <None Include="..\README.md">
+      <Filter>Service</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -214,5 +211,10 @@
     <ClInclude Include="source\MovementComponent.hpp">
       <Filter>Source\Entities\Components</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\docs\Architecture\CoG_classDiagram.png">
+      <Filter>Service\docs</Filter>
+    </Image>
   </ItemGroup>
 </Project>

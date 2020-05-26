@@ -12,7 +12,7 @@ class Player :
 {
 public:
 	//Constructors
-	Player(sf::Vector2f position_xy, sf::Texture* texture, const float& max_speed);
+	Player(sf::Vector2f&& position_xy, sf::Texture& texture, const float& max_speed, float acceleration, float deceleration);
 	~Player();
 
 	//Functions

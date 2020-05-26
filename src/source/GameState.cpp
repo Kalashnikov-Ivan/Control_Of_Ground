@@ -80,8 +80,8 @@ void GameState::init_keybinds()
 
 void GameState::init_players()
 {
-	const float max_speed = 50.f;
-	m_player = new Player(sf::Vector2f(0.f, 0.f), m_textures["PLAYER"], max_speed);
+	const float max_speed = 200.f;
+	m_player = new Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER"], max_speed, 5.f, 2.f);
 }
 
 ////////////////////////////////////////////////////////////
@@ -93,13 +93,13 @@ void GameState::update_keyboard_input(const float& dt)
 		end_state();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_LEFT"])))
-		m_player->move(dt, sf::Vector2f(-1.f, 0.f));
+		m_player->move(sf::Vector2f(-1.f, 0.f), dt);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_RIGHT"])))
-		m_player->move(dt, sf::Vector2f(1.f, 0.f));
+		m_player->move(sf::Vector2f(1.f, 0.f), dt);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_TOP"])))
-		m_player->move(dt, sf::Vector2f(0.f, -1.f));
+		m_player->move(sf::Vector2f(0.f, -1.f), dt);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_DOWN"])))
-		m_player->move(dt, sf::Vector2f(0.f, 1.f));
+		m_player->move(sf::Vector2f(0.f, 1.f), dt);
 }
 
 void GameState::update(const float& dt)
