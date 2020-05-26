@@ -35,6 +35,8 @@ private:
 	void init_buttons();
 	std::map<std::string, Button*> m_buttons;
 
+	sf::Text m_title;
+
 	//Init
 	virtual void init_textures() override;
 	virtual void init_keybinds() override; //Delete

@@ -81,7 +81,7 @@ void GameState::init_keybinds()
 void GameState::init_players()
 {
 	const float max_speed = 200.f;
-	m_player = new Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER"], max_speed, 5.f, 2.f);
+	m_player = new Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER"], max_speed, 10.f, 4.f);
 }
 
 ////////////////////////////////////////////////////////////
@@ -116,5 +116,5 @@ void GameState::render(sf::RenderTarget* target)
 		target = &m_window;
 		
 	m_player->render(target);
-	target->draw(get_mouse_pos_text(*m_supported_fonts["BASIC"]));
+	target->draw(get_mouse_pos_text(*m_supported_fonts["DOSIS"]));
 }

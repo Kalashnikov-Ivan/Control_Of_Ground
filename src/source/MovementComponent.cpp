@@ -36,6 +36,7 @@ void MovementComponent::update(const float& dt)
 {
 	max_speed_check();
 	deceleration();
+
 	m_sprite.move(m_speed * dt);
 }
 

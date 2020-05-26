@@ -159,9 +159,18 @@ void Game::init_supported_keys()
 
 void Game::init_supported_fonts()
 {
-	m_supported_fonts["BASIC"] = new sf::Font();
-	if (!m_supported_fonts["BASIC"]->loadFromFile("resources/fonts/Dosis-Regular.ttf"))
-		throw "ERROR::MainMenuState: init_fonts. Can't open font";
+	m_supported_fonts["DOSIS"] = new sf::Font();
+	if (!m_supported_fonts["DOSIS"]->loadFromFile("resources/fonts/Dosis-Regular.ttf"))
+		throw "ERROR::MainMenuState: init_fonts. Can't open font fonts/Dosis-Regular.ttf";
+
+	m_supported_fonts["OSWALD"] = new sf::Font();
+	if (!m_supported_fonts["OSWALD"]->loadFromFile("resources/fonts/Oswald-SemiBold.ttf"))
+		throw "ERROR::MainMenuState: init_fonts. Can't open font fonts/Oswald-SemiBold.ttf";
+
+	m_supported_fonts["MAJOR"] = new sf::Font();
+	if (!m_supported_fonts["MAJOR"]->loadFromFile("resources/fonts/MajorMonoDisplay-Regular.ttf"))
+		throw "ERROR::MainMenuState: init_fonts. Can't open font fonts/MajorMonoDisplay-Regular.ttf";
+
 }
 
 void Game::init_states()
