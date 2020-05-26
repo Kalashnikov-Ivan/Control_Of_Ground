@@ -1,0 +1,16 @@
+#include "AnimationComponent.hpp"
+
+using namespace cog;
+
+////////////////////////////////////////////////////////////
+// Constructors
+////////////////////////////////////////////////////////////
+
+AnimationComponent::AnimationComponent()
+{
+}
+
+AnimationComponent::~AnimationComponent()
+{
+
+}

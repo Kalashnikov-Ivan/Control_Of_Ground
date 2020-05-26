@@ -10,7 +10,7 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Game::Game() 
+Game::Game()
 	: m_window             { nullptr }, 
 	  m_video_modes        { sf::VideoMode::getFullscreenModes() }, 
 	  m_delta_time         { 0.f },
@@ -104,7 +104,7 @@ void Game::init_window()
 	if (m_window == nullptr)
 	{
 		std::cerr << "Fault of init_window! Is nullptr..." << std::endl;
-		throw std::runtime_error("Fault of init_window!Is nullptr...");
+		throw std::runtime_error("Fault of init_window! Is nullptr...");
 	}
 
 	m_window->setFramerateLimit(framerate_limit);
@@ -195,10 +195,15 @@ void Game::update_delta_time()
 }
 
 // ^ Tech for update_delta_time ^
-void Game::print_dt() //delta time
+sf::Text Game::get_text_dt() //delta time
 {
-	system("cls");
-	std::cout << "Delta time: " << m_delta_time << " sec" << std::endl;
+	std::stringstream ss;
+	ss << "Delta time: " << m_delta_time << " sec";
+
+	sf::Text delta_time_text{ ss.str(), *m_supported_fonts["DOSIS"], 16U };
+	delta_time_text.setPosition(20.f, 20.f);
+
+	return delta_time_text;
 }
 
 void Game::update_sf_events()
@@ -246,6 +251,8 @@ void Game::render()
 		m_states.top()->render(m_window);
 	}
 
+	m_window->draw(get_text_dt());
+
 	m_window->display();
 }
 
@@ -258,7 +265,6 @@ void Game::run()
 	while (m_window->isOpen())
 	{
 		update_delta_time();
-		//print_dt();
 
 		update_game();
 		render();

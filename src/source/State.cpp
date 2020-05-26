@@ -53,7 +53,7 @@ void State::update_mouse_pos()
 sf::Text State::get_mouse_pos_text(const sf::Font& font) const
 {
 	std::stringstream ss;
-	ss << "x: " << m_mouse_pos_view.x << " " << "y: " << m_mouse_pos_view.y << std::endl;
+	ss << "x: " << m_mouse_pos_view.x << " " << "y: " << m_mouse_pos_view.y;
 	
 	sf::Text mouse_text{ ss.str(), font, 12U };
 	mouse_text.setPosition(m_mouse_pos_view.x + 10.f, m_mouse_pos_view.y - 10.f);

@@ -18,7 +18,7 @@ public:
 
 private:
 ////////////////////////////////////////////////////////////
-// Property objects
+// Members objects
 ////////////////////////////////////////////////////////////
 	//Window
 	sf::RenderWindow*          m_window;
@@ -66,11 +66,11 @@ private:
 // Tech functions
 ////////////////////////////////////////////////////////////
 	//Print tech
-	void print_dt(); //delta time and frame rate
+	sf::Text get_text_dt(); //delta time and frame rate
 
 	//Support_cleaner
 	void delete_states();
 	void delete_fonts();
 };
-} // !namespace my
+} // !namespace cog
 #endif // !GAME_H

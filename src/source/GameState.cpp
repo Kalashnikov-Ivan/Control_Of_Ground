@@ -80,7 +80,7 @@ void GameState::init_keybinds()
 
 void GameState::init_players()
 {
-	const float max_speed = 200.f;
+	const float max_speed = 500.f;
 	m_player = new Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER"], max_speed, 10.f, 4.f);
 }
 
