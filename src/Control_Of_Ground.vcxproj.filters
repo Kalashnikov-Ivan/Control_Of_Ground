@@ -19,17 +19,11 @@
     <Filter Include="Service\docs">
       <UniqueIdentifier>{6bcae54d-fe4f-4944-acc5-f6d19d5e139f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Global_classes">
-      <UniqueIdentifier>{23b55432-6818-419e-997c-37b9bd76a2e0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers\SFML">
       <UniqueIdentifier>{4afecf1c-4e71-474f-bdbb-30cba976e090}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\SFML\Graphics">
       <UniqueIdentifier>{dc4a3be0-d13b-4fa0-9f45-99a5d3dd0ab5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\States">
-      <UniqueIdentifier>{771c94ba-368f-4ac5-83f3-ce3dd2fc09cb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Entities">
       <UniqueIdentifier>{3e036da5-f2ef-469f-a9de-875c70a0403a}</UniqueIdentifier>
@@ -40,34 +34,46 @@
     <Filter Include="Source\Entities\Components">
       <UniqueIdentifier>{e866c2e1-93b9-4787-8f8c-12344b8d4376}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{cdda5616-4b78-4c3a-96db-cb033dd612dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\States">
+      <UniqueIdentifier>{771c94ba-368f-4ac5-83f3-ce3dd2fc09cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Global_classes">
+      <UniqueIdentifier>{23b55432-6818-419e-997c-37b9bd76a2e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="source\Game.cpp">
-      <Filter>Source\Global_classes</Filter>
+      <Filter>Source\Core\Global_classes</Filter>
     </ClCompile>
     <ClCompile Include="source\State.cpp">
-      <Filter>Source\States</Filter>
+      <Filter>Source\Core\States</Filter>
     </ClCompile>
     <ClCompile Include="source\GameState.cpp">
-      <Filter>Source\States</Filter>
+      <Filter>Source\Core\States</Filter>
     </ClCompile>
     <ClCompile Include="source\Entity.cpp">
       <Filter>Source\Entities</Filter>
     </ClCompile>
     <ClCompile Include="source\MainMenuState.cpp">
-      <Filter>Source\States</Filter>
+      <Filter>Source\Core\States</Filter>
     </ClCompile>
     <ClCompile Include="source\Button.cpp">
-      <Filter>Source\Global_classes</Filter>
+      <Filter>Source\Core\Global_classes</Filter>
     </ClCompile>
     <ClCompile Include="source\Player.cpp">
       <Filter>Source\Entities</Filter>
     </ClCompile>
     <ClCompile Include="source\MovementComponent.cpp">
       <Filter>Source\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AnimationComponent.cpp">
+      <Filter>Source\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,27 +194,30 @@
       <Filter>Headers\SFML\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="source\Button.hpp">
-      <Filter>Source\Global_classes</Filter>
+      <Filter>Source\Core\Global_classes</Filter>
     </ClInclude>
     <ClInclude Include="source\Game.hpp">
-      <Filter>Source\Global_classes</Filter>
+      <Filter>Source\Core\Global_classes</Filter>
     </ClInclude>
     <ClInclude Include="source\Entity.hpp">
       <Filter>Source\Entities</Filter>
     </ClInclude>
     <ClInclude Include="source\GameState.hpp">
-      <Filter>Source\States</Filter>
+      <Filter>Source\Core\States</Filter>
     </ClInclude>
     <ClInclude Include="source\MainMenuState.hpp">
-      <Filter>Source\States</Filter>
+      <Filter>Source\Core\States</Filter>
     </ClInclude>
     <ClInclude Include="source\State.hpp">
-      <Filter>Source\States</Filter>
+      <Filter>Source\Core\States</Filter>
     </ClInclude>
     <ClInclude Include="source\Player.hpp">
       <Filter>Source\Entities</Filter>
     </ClInclude>
     <ClInclude Include="source\MovementComponent.hpp">
+      <Filter>Source\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AnimationComponent.hpp">
       <Filter>Source\Entities\Components</Filter>
     </ClInclude>
   </ItemGroup>

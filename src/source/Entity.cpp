@@ -7,7 +7,7 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Entity::Entity(sf::Texture& texture, const float& max_speed, float acceleration, float deceleration)
+Entity::Entity(sf::Texture& texture, const float& max_speed, const float& acceleration, const float& deceleration)
 	: m_sprite{ new sf::Sprite(texture)},
 	m_movement_component{ new MovementComponent(*m_sprite, max_speed, acceleration, deceleration) }
 {
@@ -19,33 +19,46 @@ Entity::~Entity()
 	delete m_movement_component;
 }
 
-////////////////////////////////////////////////////////////
-// Init
-////////////////////////////////////////////////////////////
 
-void Entity::set_texture(sf::Texture* texture)
+////////////////////////////////////////////////////////////
+// Modifiers
+////////////////////////////////////////////////////////////
+//Accessors
+sf::Vector2f Entity::get_speed() const
 {
-	//m_sprite.setTexture(*texture);
-	m_sprite->setTexture(*texture);
+	if (m_movement_component != nullptr)
+		return m_movement_component->get_speed();
+	else
+		return sf::Vector2f(0.f, 0.f);
 }
 
-////////////////////////////////////////////////////////////
-// Functions
-////////////////////////////////////////////////////////////
 
-void Entity::move(const sf::Vector2f& dir_xy, const float& dt)
-{
-	m_movement_component->move(dir_xy, dt);
-}
-
-//Modifiers
+////////////////////////////////////////////////////////////
+// Modifiers
+////////////////////////////////////////////////////////////
 void Entity::set_position(const sf::Vector2f& position_xy)
 {
 	//m_sprite.setPosition(position_xy);
 	m_sprite->setPosition(position_xy);
 }
 
-//Virtual
+void Entity::set_texture(const sf::Texture& texture)
+{
+	//m_sprite.setTexture(*texture);
+	m_sprite->setTexture(texture);
+}
+
+////////////////////////////////////////////////////////////
+// Functions
+////////////////////////////////////////////////////////////
+void Entity::move(const sf::Vector2f& dir_xy, const float& dt)
+{
+	m_movement_component->move(dir_xy, dt);
+}
+
+////////////////////////////////////////////////////////////
+// Virtual
+////////////////////////////////////////////////////////////
 void Entity::update(const float& dt)
 {
 	if (m_movement_component != nullptr)

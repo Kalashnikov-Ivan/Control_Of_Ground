@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\AnimationComponent.cpp" />
     <ClCompile Include="source\Button.cpp" />
     <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\Game.cpp" />
@@ -41,6 +42,7 @@
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\AnimationComponent.hpp" />
     <ClInclude Include="source\Button.hpp" />
     <ClInclude Include="source\Entity.hpp" />
     <ClInclude Include="source\Game.hpp" />

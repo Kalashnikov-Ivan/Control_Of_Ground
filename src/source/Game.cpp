@@ -194,18 +194,6 @@ void Game::update_delta_time()
 	m_delta_time = m_delta_time_clock.restart().asSeconds();
 }
 
-// ^ Tech for update_delta_time ^
-sf::Text Game::get_text_dt() //delta time
-{
-	std::stringstream ss;
-	ss << "Delta time: " << m_delta_time << " sec";
-
-	sf::Text delta_time_text{ ss.str(), *m_supported_fonts["DOSIS"], 16U };
-	delta_time_text.setPosition(20.f, 20.f);
-
-	return delta_time_text;
-}
-
 void Game::update_sf_events()
 {
 	while (m_window->pollEvent(m_sf_event))
@@ -218,10 +206,14 @@ void Game::update_sf_events()
 void Game::update_game()
 {
 	update_sf_events();
+	update_info();
 
 	if (!m_states.empty())
 	{
 		m_states.top()->update(m_delta_time);
+
+		//Info
+		m_tech_info << m_states.top()->get_string_info();
 
 		if (m_states.top()->get_quit())
 		{
@@ -251,11 +243,48 @@ void Game::render()
 		m_states.top()->render(m_window);
 	}
 
-	m_window->draw(get_text_dt());
+	m_window->draw(get_text_info(*m_supported_fonts["DOSIS"]));
 
 	m_window->display();
 }
 
+////////////////////////////////////////////////////////////
+// Tech functions
+////////////////////////////////////////////////////////////
+//Info
+void Game::update_info()
+{
+	m_tech_info.str(std::string());
+
+	m_tech_info << get_string_dt();
+}
+
+sf::Text Game::get_text_info(const sf::Font& font)
+{
+	sf::Text info_text{ m_tech_info.str(), font, 16U };
+	info_text.setPosition(20.f, 20.f);
+
+	return info_text;
+}
+
+std::string Game::get_string_dt()
+{
+	std::stringstream dt_info;
+	dt_info << "Delta time: " << m_delta_time << " sec" << '\n';
+
+	return dt_info.str();
+}
+
+sf::Text Game::get_text_dt(const sf::Font& font) //delta time
+{
+	std::stringstream ss;
+	ss << "Delta time: " << m_delta_time << " sec";
+
+	sf::Text delta_time_text{ ss.str(), font, 16U };
+	delta_time_text.setPosition(20.f, 20.f);
+
+	return delta_time_text;
+}
 
 ////////////////////////////////////////////////////////////
 // Core

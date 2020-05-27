@@ -19,6 +19,9 @@ public:
 				  const std::map<const std::string, int>& supported_keys);
 	~MainMenuState();
 
+	//Tech info
+	virtual std::string get_string_info() override;
+
 	//Update
 	virtual void update_keyboard_input(const float& dt) override; //Delete
 	void update_buttons(const float& dt);
@@ -29,15 +32,16 @@ public:
 
 private:
 	//Members
-	void init_background();
 	sf::RectangleShape m_background;
 
-	void init_buttons();
 	std::map<std::string, Button*> m_buttons;
 
 	sf::Text m_title;
 
 	//Init
+	void init_background();
+	void init_buttons();
+
 	virtual void init_textures() override;
 	virtual void init_keybinds() override; //Delete
 

@@ -31,12 +31,30 @@ void State::delete_textures()
 }
 
 ////////////////////////////////////////////////////////////
-// Functions
+// Accessors
 ////////////////////////////////////////////////////////////
 const bool State::get_quit() const
 {
 	return m_quit;
 }
+
+////////////////////////////////////////////////////////////
+// Tech info
+////////////////////////////////////////////////////////////
+sf::Text State::get_mouse_pos_text(const sf::Font& font) const
+{
+	std::stringstream ss;
+	ss << "x: " << m_mouse_pos_view.x << " " << "y: " << m_mouse_pos_view.y;
+
+	sf::Text mouse_text{ ss.str(), font, 12U };
+	mouse_text.setPosition(m_mouse_pos_view.x + 10.f, m_mouse_pos_view.y - 10.f);
+
+	return mouse_text;
+}
+
+////////////////////////////////////////////////////////////
+// Functions
+////////////////////////////////////////////////////////////
 
 void State::end_state()
 {
@@ -48,15 +66,4 @@ void State::update_mouse_pos()
 	m_mouse_pos_screen = sf::Mouse::getPosition();
 	m_mouse_pos_window = sf::Mouse::getPosition(m_window);
 	m_mouse_pos_view = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
-}
-
-sf::Text State::get_mouse_pos_text(const sf::Font& font) const
-{
-	std::stringstream ss;
-	ss << "x: " << m_mouse_pos_view.x << " " << "y: " << m_mouse_pos_view.y;
-	
-	sf::Text mouse_text{ ss.str(), font, 12U };
-	mouse_text.setPosition(m_mouse_pos_view.x + 10.f, m_mouse_pos_view.y - 10.f);
-
-	return mouse_text;
 }

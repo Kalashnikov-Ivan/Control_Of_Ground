@@ -18,7 +18,7 @@ public:
 
 private:
 ////////////////////////////////////////////////////////////
-// Members objects
+// Members
 ////////////////////////////////////////////////////////////
 	//Window
 	sf::RenderWindow*          m_window;
@@ -40,6 +40,9 @@ private:
 
 	//Fonts
 	std::map<const std::string, sf::Font*> m_supported_fonts;
+
+	//Info
+	std::stringstream m_tech_info;
 
 ////////////////////////////////////////////////////////////
 // Init
@@ -65,8 +68,12 @@ private:
 ////////////////////////////////////////////////////////////
 // Tech functions
 ////////////////////////////////////////////////////////////
-	//Print tech
-	sf::Text get_text_dt(); //delta time and frame rate
+	//Info
+	void update_info();
+	sf::Text get_text_info(const sf::Font& font);
+
+	std::string get_string_dt();
+	sf::Text get_text_dt(const sf::Font& font); //delta time and frame rate
 
 	//Support_cleaner
 	void delete_states();

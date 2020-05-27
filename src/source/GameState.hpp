@@ -18,12 +18,16 @@ public:
 			  const std::map<const std::string, int>& supported_keys);
 	virtual ~GameState();
 
+	//Tech info
+	virtual std::string get_string_info() override;
+	std::string get_player_speed_string() const;
+
+
 	//Update
 	virtual void update_keyboard_input(const float& dt) override;
 	virtual void update(const float& dt) override;
 
 	virtual void render(sf::RenderTarget* target = nullptr) override;
-
 private:
 	//Entities
 	Player* m_player;

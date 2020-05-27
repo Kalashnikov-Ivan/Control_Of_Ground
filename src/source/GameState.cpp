@@ -85,7 +85,7 @@ void GameState::init_players()
 }
 
 ////////////////////////////////////////////////////////////
-// Virtual override
+// Update
 ////////////////////////////////////////////////////////////
 void GameState::update_keyboard_input(const float& dt)
 {
@@ -117,4 +117,23 @@ void GameState::render(sf::RenderTarget* target)
 		
 	m_player->render(target);
 	target->draw(get_mouse_pos_text(*m_supported_fonts["DOSIS"]));
+}
+
+////////////////////////////////////////////////////////////
+// Tech info
+////////////////////////////////////////////////////////////
+std::string GameState::get_string_info()
+{
+	std::stringstream result;
+
+	result << get_player_speed_string();
+
+	return result.str();
+}
+std::string GameState::get_player_speed_string() const
+{
+	std::stringstream speed_info;
+	speed_info << "p_speed: x = " << m_player->get_speed().x << " y =" << m_player->get_speed().y << '\n';
+
+	return speed_info.str();
 }

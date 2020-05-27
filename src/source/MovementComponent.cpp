@@ -58,7 +58,7 @@ inline void MovementComponent::deceleration()
 		if (m_speed.x < 0.f)
 			m_speed.x = 0.f;
 	}
-	else //Negative position
+	else if (m_speed.x < 0.f) //Negative position
 	{
 		m_speed.x += m_deceleration;
 		if (abs(m_speed.x) < 0.f)
@@ -72,7 +72,7 @@ inline void MovementComponent::deceleration()
 		if (m_speed.y < 0.f)
 			m_speed.y = 0.f;
 	}
-	else //Negative position
+	else if (m_speed.y < 0.f) //Negative position
 	{
 		m_speed.y += m_deceleration;
 		if (abs(m_speed.y) < 0.f)

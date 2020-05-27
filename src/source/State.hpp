@@ -13,11 +13,14 @@ public:
 		  std::map<const std::string, sf::Font*>& supported_fonts,
 		  const std::map<const std::string, int>& supported_keys);
 	virtual ~State();
-
-	//Getters
-	const bool get_quit() const;
-	sf::Text get_mouse_pos_text(const sf::Font& font) const;
 	
+	//Accessors
+	const bool get_quit() const;
+
+	//Tech info
+	virtual std::string get_string_info() = 0;
+	sf::Text get_mouse_pos_text(const sf::Font& font) const;
+
 	//Update
 	virtual void update_mouse_pos();
 	virtual void update_keyboard_input(const float& dt) = 0;
@@ -25,6 +28,7 @@ public:
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;
 
 	virtual void end_state();
+
 protected:
 ////////////////////////////////////////////////////////////
 // Refs
