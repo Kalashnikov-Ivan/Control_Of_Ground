@@ -16,10 +16,14 @@ public:
 		   const float& max_speed, const float& acceleration, const float& deceleration);
 	~Player();
 
-	//Functions
-	void update_input();
+	//Update
+	void update(const float& dt);
 private:
 	//Members
+
+	//Update
+	void update_animations(const float& dt);
+	void update_input();
 
 	//Init
 	void inline init_animations();

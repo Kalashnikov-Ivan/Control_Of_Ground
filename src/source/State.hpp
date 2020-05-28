@@ -5,6 +5,7 @@ namespace cog
 {
 class State //Abstract
 {
+//__________________________PUBLIC______________________________
 public:
 	//Constructors
 	State() = delete;
@@ -22,13 +23,14 @@ public:
 	sf::Text get_mouse_pos_text(const sf::Font& font) const;
 
 	//Update
-	virtual void update_mouse_pos();
-	virtual void update_keyboard_input(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;
+
+	//Render
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;
 
 	virtual void end_state();
 
+//__________________________PROTECTED_____________________________
 protected:
 ////////////////////////////////////////////////////////////
 // Refs
@@ -57,6 +59,13 @@ protected:
 	
 	bool m_quit;
 
+////////////////////////////////////////////////////////////
+// Update
+////////////////////////////////////////////////////////////
+	virtual void update_mouse_pos();
+	virtual void update_keyboard_input(const float& dt) = 0;
+
+//__________________________PRIVATE_____________________________
 private:
 	//Support_cleaner
 	void delete_textures();

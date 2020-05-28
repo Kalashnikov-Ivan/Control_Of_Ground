@@ -10,6 +10,7 @@ namespace cog
 class MainMenuState :
 	public State
 {
+//__________________________PUBLIC______________________________
 public:
 	//Constructors
 	MainMenuState() = delete;
@@ -23,16 +24,12 @@ public:
 	virtual std::string get_string_info() override;
 
 	//Update
-	virtual void update_keyboard_input(const float& dt) override; //Delete
-	void update_buttons(const float& dt);
-	virtual void update(const float& dt) override; //Main_update
+	virtual void update(const float& dt) override;
 
 	//Render
-	void render_buttons(sf::RenderTarget* target = nullptr);
 	virtual void render(sf::RenderTarget* target = nullptr) override;
-
+//__________________________PRIVATE_____________________________
 private:
-	//---------------------------------------------
 	//Members
 	sf::RectangleShape m_background;
 	std::map<std::string, Button*> m_buttons;
@@ -40,11 +37,18 @@ private:
 
 	//---------------------------------------------
 	//Init
-	void init_background();
-	void init_buttons();
+	void inline init_background();
+	void inline init_buttons();
 
 	virtual void init_textures() override;
 	virtual void init_keybinds() override; //Delete
+
+	//Update
+	virtual void update_keyboard_input(const float& dt) override; //Delete
+			void update_buttons(const float& dt);
+
+	//Render
+	void render_buttons(sf::RenderTarget* target = nullptr);
 
 	//Support_cleaner
 	void delete_buttons();

@@ -56,20 +56,20 @@ private:
 // Functions
 ////////////////////////////////////////////////////////////
 	//Update
-	void inline update_delta_time();
-	void inline update_sf_events();
-	void inline update_game();
+	void update_delta_time();
+	void update_sf_events();
+	void update_game();
 
-	void inline application_end();
+	void application_end();
 
 	//Render
-	void inline render();
+	void render();
 
 ////////////////////////////////////////////////////////////
 // Tech functions
 ////////////////////////////////////////////////////////////
 	//Info
-	void inline update_info();
+	void update_info();
 	sf::Text get_text_info(const sf::Font& font);
 
 	std::string get_string_dt();

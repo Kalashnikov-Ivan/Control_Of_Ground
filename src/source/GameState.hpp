@@ -24,10 +24,10 @@ public:
 
 
 	//Update
-	virtual void update_keyboard_input(const float& dt) override;
 	virtual void update(const float& dt) override;
 
 	virtual void render(sf::RenderTarget* target = nullptr) override;
+
 private:
 	//Entities
 	Player* m_player;
@@ -37,6 +37,9 @@ private:
 	virtual void init_textures() override;
 	virtual void init_keybinds() override;
 			void init_players();
+
+	//Update
+	virtual void update_keyboard_input(const float& dt) override;
 };
 } // !namespace cog
 #endif // !GAME_STATE_H
