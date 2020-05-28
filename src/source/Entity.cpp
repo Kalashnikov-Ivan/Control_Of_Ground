@@ -7,16 +7,19 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Entity::Entity(sf::Texture& texture, const float& max_speed, const float& acceleration, const float& deceleration)
-	: m_sprite{ new sf::Sprite(texture)},
-	m_movement_component{ new MovementComponent(*m_sprite, max_speed, acceleration, deceleration) }
+Entity::Entity(sf::Texture& texture, 
+			   const float& max_speed, const float& acceleration, const float& deceleration)
+	: m_sprite           { new sf::Sprite(texture) },
+	m_animation_component{ new AnimationComponent(*m_sprite, texture) },
+	m_movement_component { new MovementComponent(*m_sprite, max_speed, acceleration, deceleration) }
 {
 }
 
 Entity::~Entity()
 {
-	delete m_sprite;
 	delete m_movement_component;
+	delete m_animation_component;
+	delete m_sprite;
 }
 
 

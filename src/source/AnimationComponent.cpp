@@ -8,12 +8,14 @@ using namespace cog;
 
 //Constructors
 AnimationComponent::Animation::Animation(sf::Sprite& sprite, sf::Texture& texture_sheet, const float& animation_timer,
-	sf::Vector2i& start_xy, sf::Vector2i& end_xy, sf::Vector2i& size_rect)
+										 const int start_x, const int start_y, int frames_x, int frames_y,
+										 const int width, const int height)
 	: m_sprite       { sprite },
 	m_texture_sheet  { texture_sheet },
-	m_start_rect     { start_xy,  size_rect },
+	m_width          { width }, m_height{ height },
+	m_start_rect     { start_x * width, start_y * height, width, height },
 	m_current_rect   { m_start_rect },
-	m_end_rect       { end_xy, size_rect },
+	m_end_rect       { frames_x * width, frames_y * height, width, height },
 	m_animation_timer{ animation_timer }, m_timer{ 0.f } //Timer
 {
 	m_sprite.setTexture(texture_sheet, true);
@@ -26,7 +28,7 @@ AnimationComponent::Animation::~Animation()
 
 
 //Functions
-void AnimationComponent::Animation::update(const float& dt)
+void AnimationComponent::Animation::play(const float& dt)
 {
 	//Update timer
 	m_timer = 10.f * dt;
@@ -39,15 +41,21 @@ void AnimationComponent::Animation::update(const float& dt)
 		//Animate
 		if (m_current_rect != m_end_rect)
 		{
-			m_current_rect.left += m_size_rect.x;
+			m_current_rect.left += m_width;
 		}
 		else //Reset
 		{
 			m_current_rect.left = m_start_rect.left;
 		}
+
+		m_sprite.setTextureRect(m_current_rect);
 	}
 }
 
+void AnimationComponent::Animation::reset()
+{
+
+}
 
 ////////////////////////////////////////////////////////////
 // AnimationComponent
@@ -62,20 +70,20 @@ AnimationComponent::AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_
 
 AnimationComponent::~AnimationComponent()
 {
-
+	//Delete animations
+	for (auto& i : m_animations)
+		delete i.second;
 }
 
 //Functions
-void AnimationComponent::update(const float& dt)
+void AnimationComponent::add_animation(const std::string& key, const float& animation_timer,
+							const int start_x, const int start_y, const int frames_x, const int frames_y,
+							const int width, const int height)
 {
+	m_animations[key] = new Animation{ m_sprite, m_texture_sheet, animation_timer, start_x, start_y, frames_x, frames_y, width, height };
 }
 
-void AnimationComponent::start_animation(const std::string& animation)
+void AnimationComponent::play(const std::string& key, const float& dt)
 {
-}
-void AnimationComponent::pause_animation(const std::string& animation)
-{
-}
-void AnimationComponent::reset_animation(const std::string& animation)
-{
+	m_animations[key]->play(dt);
 }

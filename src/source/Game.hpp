@@ -47,37 +47,37 @@ private:
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
-	void init_window();
-	void init_supported_keys();
-	void init_supported_fonts();
-	void init_states();
+	void inline init_window();
+	void inline init_supported_keys();
+	void inline init_supported_fonts();
+	void inline init_states();
 
 ////////////////////////////////////////////////////////////
 // Functions
 ////////////////////////////////////////////////////////////
 	//Update
-	void update_delta_time();
-	void update_sf_events();
-	void update_game();
+	void inline update_delta_time();
+	void inline update_sf_events();
+	void inline update_game();
 
-	void application_end();
+	void inline application_end();
 
 	//Render
-	void render();
+	void inline render();
 
 ////////////////////////////////////////////////////////////
 // Tech functions
 ////////////////////////////////////////////////////////////
 	//Info
-	void update_info();
+	void inline update_info();
 	sf::Text get_text_info(const sf::Font& font);
 
 	std::string get_string_dt();
 	sf::Text get_text_dt(const sf::Font& font); //delta time and frame rate
 
 	//Support_cleaner
-	void delete_states();
-	void delete_fonts();
+	void inline delete_states();
+	void inline delete_fonts();
 };
 } // !namespace cog
 #endif // !GAME_H

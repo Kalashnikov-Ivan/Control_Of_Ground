@@ -212,7 +212,7 @@ void Game::update_game()
 	{
 		m_states.top()->update(m_delta_time);
 
-		//Info
+		//Geting info
 		m_tech_info << m_states.top()->get_string_info();
 
 		if (m_states.top()->get_quit())
@@ -254,7 +254,7 @@ void Game::render()
 //Info
 void Game::update_info()
 {
-	m_tech_info.str(std::string());
+	m_tech_info.str(std::string()); //Clearing
 
 	m_tech_info << get_string_dt();
 }

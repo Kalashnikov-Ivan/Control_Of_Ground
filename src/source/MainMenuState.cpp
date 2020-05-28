@@ -96,7 +96,7 @@ void MainMenuState::init_keybinds()
 
 
 ////////////////////////////////////////////////////////////
-// Init
+// Tech info
 ////////////////////////////////////////////////////////////
 std::string MainMenuState::get_string_info()
 {
@@ -122,20 +122,20 @@ void MainMenuState::update_buttons(const float& dt)
 		end_state();
 }
 
+void MainMenuState::update(const float& dt)
+{
+	update_mouse_pos();
+	update_keyboard_input(dt);
+	update_buttons(dt);
+}
+
+////////////////////////////////////////////////////////////
+// Render
+////////////////////////////////////////////////////////////
 void MainMenuState::render_buttons(sf::RenderTarget* target)
 {
 	for (auto& i : m_buttons)
 		i.second->render(target);
-}
-
-void MainMenuState::update(const float& dt)
-{
-	update_mouse_pos();
-
-	update_keyboard_input(dt);
-
-	update_buttons(dt);
-
 }
 
 void MainMenuState::render(sf::RenderTarget* target)

@@ -7,11 +7,11 @@ using namespace cog;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Player::Player(sf::Vector2f&& position_xy, sf::Texture& texture, const float& max_speed, float acceleration, float deceleration)
+Player::Player(const sf::Vector2f& position_xy, sf::Texture& texture, 
+			   const float& max_speed, const float& acceleration, const float& deceleration)
 	: Entity(texture, max_speed, acceleration, deceleration)
 {
 	set_position(position_xy);
-	//m_sprite->setTextureRect(sf::IntRect(0, 0, 200, 200));
 	m_sprite->setScale(sf::Vector2f(0.12f, 0.15f));
 }
 

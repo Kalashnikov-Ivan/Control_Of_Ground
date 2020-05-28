@@ -27,17 +27,18 @@ public:
 	void update_buttons(const float& dt);
 	virtual void update(const float& dt) override; //Main_update
 
+	//Render
 	void render_buttons(sf::RenderTarget* target = nullptr);
 	virtual void render(sf::RenderTarget* target = nullptr) override;
 
 private:
+	//---------------------------------------------
 	//Members
 	sf::RectangleShape m_background;
-
 	std::map<std::string, Button*> m_buttons;
-
 	sf::Text m_title;
 
+	//---------------------------------------------
 	//Init
 	void init_background();
 	void init_buttons();

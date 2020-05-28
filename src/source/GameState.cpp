@@ -126,11 +126,11 @@ std::string GameState::get_string_info()
 {
 	std::stringstream result;
 
-	result << get_player_speed_string();
+	result << get_string_player_speed();
 
 	return result.str();
 }
-std::string GameState::get_player_speed_string() const
+std::string GameState::get_string_player_speed() const
 {
 	std::stringstream speed_info;
 	speed_info << "p_speed: x = " << m_player->get_speed().x << " y =" << m_player->get_speed().y << '\n';

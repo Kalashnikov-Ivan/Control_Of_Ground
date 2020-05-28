@@ -20,7 +20,7 @@ public:
 
 	//Tech info
 	virtual std::string get_string_info() override;
-	std::string get_player_speed_string() const;
+	std::string get_string_player_speed() const;
 
 
 	//Update

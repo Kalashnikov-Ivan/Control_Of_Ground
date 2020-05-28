@@ -12,7 +12,8 @@ class Player :
 {
 public:
 	//Constructors
-	Player(sf::Vector2f&& position_xy, sf::Texture& texture, const float& max_speed, float acceleration, float deceleration);
+	Player(const sf::Vector2f& position_xy, sf::Texture& texture, 
+		   const float& max_speed, const float& acceleration, const float& deceleration);
 	~Player();
 
 	//Functions
@@ -20,6 +21,8 @@ public:
 private:
 	//Members
 
+	//Init
+	void inline init_animations();
 };
 } // !namespace cog
 #endif // !PLAYER_H

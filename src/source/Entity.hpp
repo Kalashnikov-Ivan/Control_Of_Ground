@@ -10,7 +10,8 @@ class Entity
 {
 public:
 	//Constructors
-	Entity(sf::Texture& texture, const float& max_speed, const float& acceleration, const float& deceleration);
+	Entity(sf::Texture& texture, 
+		   const float& max_speed, const float& acceleration, const float& deceleration);
 	virtual ~Entity();
 
 	//Accessors
