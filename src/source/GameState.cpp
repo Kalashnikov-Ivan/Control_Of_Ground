@@ -31,10 +31,10 @@ GameState::~GameState()
 ////////////////////////////////////////////////////////////
 void GameState::initTextures()
 {
-	m_textures["PLAYER"] = new sf::Texture();
+	m_textures["PLAYER_SHEET"] = new sf::Texture();
 
-	if (!m_textures["PLAYER"]->loadFromFile("resources/textures/default_0.png"))
-		throw "ERROR::GameState::init_textures - failed to load texture resources/textures/default_0.png";
+	if (!m_textures["PLAYER_SHEET"]->loadFromFile("resources/textures/Player/adventurer_Sheet.png"))
+		throw "ERROR::GameState::init_textures::PLAYER_SHEET - failed to load texture resources/textures/Player/adventurer_Sheet.png";
 }
 
 void GameState::initKeybinds()
@@ -81,7 +81,7 @@ void GameState::initKeybinds()
 void GameState::initPlayers()
 {
 	const float max_speed = 500.f;
-	m_player = new Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER"], max_speed, 10.f, 4.f);
+	m_player = new Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER_SHEET"], max_speed, 10.f, 4.f);
 }
 
 ////////////////////////////////////////////////////////////

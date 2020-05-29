@@ -31,7 +31,7 @@ AnimationComponent::Animation::~Animation()
 void AnimationComponent::Animation::play(const float& dt)
 {
 	//Update timer
-	m_timer = 10.f * dt;
+	m_timer += dt; //Old value: 100.f * dt
 
 	if (m_timer >= m_animation_timer)
 	{
