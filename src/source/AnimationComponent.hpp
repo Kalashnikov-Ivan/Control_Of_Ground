@@ -15,7 +15,7 @@ public:
 	//Accessors
 
 	//Functions
-	void add_animation(const std::string& key, const float& animation_timer,
+	void addAnimation(const std::string& key, const float& animation_timer,
 					   const int start_x, const int start_y, const int frames_x, const int frames_y,
 					   const int width, const int height);
 

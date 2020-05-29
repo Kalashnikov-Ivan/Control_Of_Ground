@@ -20,11 +20,11 @@ State::State(sf::RenderWindow& window,
 }
 State::~State()
 {
-	delete_textures();
+	deleteTextures();
 }
 
 //Support_cleaner
-void State::delete_textures()
+void State::deleteTextures()
 {
 	for (auto& i : m_textures)
 		delete i.second;
@@ -33,7 +33,7 @@ void State::delete_textures()
 ////////////////////////////////////////////////////////////
 // Accessors
 ////////////////////////////////////////////////////////////
-const bool State::get_quit() const
+const bool State::getQuit() const
 {
 	return m_quit;
 }
@@ -41,7 +41,7 @@ const bool State::get_quit() const
 ////////////////////////////////////////////////////////////
 // Tech info
 ////////////////////////////////////////////////////////////
-sf::Text State::get_mouse_pos_text(const sf::Font& font) const
+sf::Text State::getMousePosText(const sf::Font& font) const
 {
 	std::stringstream ss;
 	ss << "x: " << m_mouse_pos_view.x << " " << "y: " << m_mouse_pos_view.y;
@@ -56,12 +56,12 @@ sf::Text State::get_mouse_pos_text(const sf::Font& font) const
 // Functions
 ////////////////////////////////////////////////////////////
 
-void State::end_state()
+void State::endState()
 {
 	m_quit = true;
 }
 
-void State::update_mouse_pos()
+void State::updateMousePos()
 {
 	m_mouse_pos_screen = sf::Mouse::getPosition();
 	m_mouse_pos_window = sf::Mouse::getPosition(m_window);

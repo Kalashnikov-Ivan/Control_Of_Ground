@@ -15,9 +15,9 @@ GameState::GameState(sf::RenderWindow& window,
 					 const std::map<const std::string, int>& supported_keys)
 	: State{ window, states, supported_fonts, supported_keys }
 {
-	init_textures();
-	init_keybinds();
-	init_players();
+	initTextures();
+	initKeybinds();
+	initPlayers();
 }
 
 GameState::~GameState()
@@ -29,7 +29,7 @@ GameState::~GameState()
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
-void GameState::init_textures()
+void GameState::initTextures()
 {
 	m_textures["PLAYER"] = new sf::Texture();
 
@@ -37,7 +37,7 @@ void GameState::init_textures()
 		throw "ERROR::GameState::init_textures - failed to load texture resources/textures/default_0.png";
 }
 
-void GameState::init_keybinds()
+void GameState::initKeybinds()
 {
 #ifdef DEBUG
 	std::cout << "\nGameState: Start of init_keybinds..." << std::endl;
@@ -78,7 +78,7 @@ void GameState::init_keybinds()
 #endif // DEBUG
 }
 
-void GameState::init_players()
+void GameState::initPlayers()
 {
 	const float max_speed = 500.f;
 	m_player = new Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER"], max_speed, 10.f, 4.f);
@@ -87,10 +87,10 @@ void GameState::init_players()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void GameState::update_keyboard_input(const float& dt)
+void GameState::updateKeyboardInput(const float& dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
-		end_state();
+		endState();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_LEFT"])))
 		m_player->move(sf::Vector2f(-1.f, 0.f), dt);
@@ -104,8 +104,8 @@ void GameState::update_keyboard_input(const float& dt)
 
 void GameState::update(const float& dt)
 {
-	update_mouse_pos();
-	update_keyboard_input(dt);
+	updateMousePos();
+	updateKeyboardInput(dt);
 
 	m_player->update(dt);
 }
@@ -116,24 +116,24 @@ void GameState::render(sf::RenderTarget* target)
 		target = &m_window;
 		
 	m_player->render(target);
-	target->draw(get_mouse_pos_text(*m_supported_fonts["DOSIS"]));
+	target->draw(getMousePosText(*m_supported_fonts["DOSIS"]));
 }
 
 ////////////////////////////////////////////////////////////
 // Tech info
 ////////////////////////////////////////////////////////////
-std::string GameState::get_string_info()
+std::string GameState::getStringInfo()
 {
 	std::stringstream result;
 
-	result << get_string_player_speed();
+	result << getStringPlayerSpeed();
 
 	return result.str();
 }
-std::string GameState::get_string_player_speed() const
+std::string GameState::getStringPlayerSpeed() const
 {
 	std::stringstream speed_info;
-	speed_info << "p_speed: x = " << m_player->get_speed().x << " y =" << m_player->get_speed().y << '\n';
+	speed_info << "p_speed: x = " << m_player->getSpeed().x << " y =" << m_player->getSpeed().y << '\n';
 
 	return speed_info.str();
 }

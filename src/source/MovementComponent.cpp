@@ -19,7 +19,7 @@ MovementComponent::~MovementComponent()
 ////////////////////////////////////////////////////////////
 // Accessors
 ////////////////////////////////////////////////////////////
-const sf::Vector2f& cog::MovementComponent::get_speed() const
+const sf::Vector2f& cog::MovementComponent::getSpeed() const
 {
 	return m_speed;
 }
@@ -34,7 +34,7 @@ void MovementComponent::move(const sf::Vector2f& dir_xy, const float& dt)
 
 void MovementComponent::update(const float& dt)
 {
-	max_speed_check();
+	maxSpeedCheck();
 	deceleration();
 
 	m_sprite.move(m_speed * dt);
@@ -80,7 +80,7 @@ inline void MovementComponent::deceleration()
 	}
 }
 
-inline void MovementComponent::max_speed_check()
+inline void MovementComponent::maxSpeedCheck()
 {
 	// x
 	if (m_speed.x > 0.f)

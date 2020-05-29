@@ -16,11 +16,11 @@ public:
 	virtual ~State();
 	
 	//Accessors
-	const bool get_quit() const;
+	const bool getQuit() const;
 
 	//Tech info
-	virtual std::string get_string_info() = 0;
-	sf::Text get_mouse_pos_text(const sf::Font& font) const;
+	virtual std::string getStringInfo() = 0;
+	sf::Text getMousePosText(const sf::Font& font) const;
 
 	//Update
 	virtual void update(const float& dt) = 0;
@@ -28,7 +28,7 @@ public:
 	//Render
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;
 
-	virtual void end_state();
+	virtual void endState();
 
 //__________________________PROTECTED_____________________________
 protected:
@@ -46,10 +46,8 @@ protected:
 // Member
 ////////////////////////////////////////////////////////////
 	//Resources
-	virtual void init_textures() = 0;
 	std::map<const std::string, sf::Texture*> m_textures;
 
-	virtual void init_keybinds() = 0;
 	std::map<const std::string, int> m_keybinds; // -> Inherit
 
 	//Mouse
@@ -60,15 +58,21 @@ protected:
 	bool m_quit;
 
 ////////////////////////////////////////////////////////////
+// Init
+////////////////////////////////////////////////////////////
+	virtual void initTextures() = 0;
+	virtual void initKeybinds() = 0;
+
+////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-	virtual void update_mouse_pos();
-	virtual void update_keyboard_input(const float& dt) = 0;
+	virtual void updateMousePos();
+	virtual void updateKeyboardInput(const float& dt) = 0;
 
 //__________________________PRIVATE_____________________________
 private:
 	//Support_cleaner
-	void delete_textures();
+	void deleteTextures();
 };
 } // !namespace cog
 #endif // !STATE_H

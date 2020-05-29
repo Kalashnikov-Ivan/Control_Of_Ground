@@ -19,7 +19,7 @@ public:
 	void render(sf::RenderTarget* target);
 
 	//Accessors
-	const bool is_pressed() const;
+	const bool isPressed() const;
 
 private:
 	//Members

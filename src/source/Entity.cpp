@@ -27,10 +27,10 @@ Entity::~Entity()
 // Modifiers
 ////////////////////////////////////////////////////////////
 //Accessors
-sf::Vector2f Entity::get_speed() const
+sf::Vector2f Entity::getSpeed() const
 {
 	if (m_movement_component != nullptr)
-		return m_movement_component->get_speed();
+		return m_movement_component->getSpeed();
 	else
 		return sf::Vector2f(0.f, 0.f);
 }
@@ -39,13 +39,13 @@ sf::Vector2f Entity::get_speed() const
 ////////////////////////////////////////////////////////////
 // Modifiers
 ////////////////////////////////////////////////////////////
-void Entity::set_position(const sf::Vector2f& position_xy)
+void Entity::setPosition(const sf::Vector2f& position_xy)
 {
 	//m_sprite.setPosition(position_xy);
 	m_sprite->setPosition(position_xy);
 }
 
-void Entity::set_texture(const sf::Texture& texture)
+void Entity::setTexture(const sf::Texture& texture)
 {
 	//m_sprite.setTexture(*texture);
 	m_sprite->setTexture(texture);

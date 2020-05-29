@@ -13,7 +13,7 @@ public:
 	virtual ~MovementComponent();
 
 	//Accessors
-	const sf::Vector2f& get_speed() const;
+	const sf::Vector2f& getSpeed() const;
 
 	//Functions
 	void move(const sf::Vector2f& dir_xy, const float& dt);
@@ -32,7 +32,7 @@ private:
 	inline void acceleration(const sf::Vector2f& dir_xy);
 	inline void deceleration();
 
-	inline void max_speed_check();
+	inline void maxSpeedCheck();
 };
 } // !namespace cog
 

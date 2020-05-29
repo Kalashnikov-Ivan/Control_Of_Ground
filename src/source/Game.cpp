@@ -16,10 +16,10 @@ Game::Game()
 	  m_delta_time         { 0.f },
 	  m_fullscreen_enabled { false }
 {
-	init_window(); //Dynamic for m_window
-	init_supported_keys();
-	init_supported_fonts();
-	init_states(); //Dynamic for first state
+	initWindow(); //Dynamic for m_window
+	initSupportedKeys();
+	initSupportedFonts();
+	initStates(); //Dynamic for first state
 }
 
 Game::~Game()
@@ -48,7 +48,7 @@ void Game::delete_fonts()
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
-void Game::init_window()
+void Game::initWindow()
 {
 #ifdef DEBUG
 	std::cout << "Game: Start of init_window..." << std::endl;
@@ -116,7 +116,7 @@ void Game::init_window()
 #endif // DEBUG
 }
 
-void Game::init_supported_keys()
+void Game::initSupportedKeys()
 {
 #ifdef DEBUG
 	std::cout << "Game: Start of init_supported_keys..." << std::endl;
@@ -157,7 +157,7 @@ void Game::init_supported_keys()
 #endif // DEBUG
 }
 
-void Game::init_supported_fonts()
+void Game::initSupportedFonts()
 {
 	m_supported_fonts["DOSIS"] = new sf::Font();
 	if (!m_supported_fonts["DOSIS"]->loadFromFile("resources/fonts/Dosis-Regular.ttf"))
@@ -173,7 +173,7 @@ void Game::init_supported_fonts()
 
 }
 
-void Game::init_states()
+void Game::initStates()
 {
 #ifdef DEBUG
 	std::cout << "\nGame: Start of init_states..." << std::endl;
@@ -189,12 +189,12 @@ void Game::init_states()
 ////////////////////////////////////////////////////////////
 // Update and render
 ////////////////////////////////////////////////////////////
-void Game::update_delta_time()
+void Game::updateDeltaTime()
 {
 	m_delta_time = m_delta_time_clock.restart().asSeconds();
 }
 
-void Game::update_sf_events()
+void Game::updateSfEvents()
 {
 	while (m_window->pollEvent(m_sf_event))
 	{
@@ -203,33 +203,33 @@ void Game::update_sf_events()
 	}
 }
 
-void Game::update_game()
+void Game::updateGame()
 {
-	update_sf_events();
-	update_info();
+	updateSfEvents();
+	updateInfo();
 
 	if (!m_states.empty())
 	{
 		m_states.top()->update(m_delta_time);
 
 		//Geting info
-		m_tech_info << m_states.top()->get_string_info();
+		m_tech_info << m_states.top()->getStringInfo();
 
-		if (m_states.top()->get_quit())
+		if (m_states.top()->getQuit())
 		{
-			m_states.top()->end_state();
+			m_states.top()->endState();
 			delete m_states.top();
 			m_states.pop();
 		}
 	}
 	else //Application end
 	{
-		application_end();
+		applicationEnd();
 		m_window->close();
 	}
 }
 
-void Game::application_end()
+void Game::applicationEnd()
 {
 	std::cout << "Application: Control of Ground is end..." << std::endl;
 }
@@ -243,7 +243,7 @@ void Game::render()
 		m_states.top()->render(m_window);
 	}
 
-	m_window->draw(get_text_info(*m_supported_fonts["DOSIS"]));
+	m_window->draw(getTextInfo(*m_supported_fonts["DOSIS"]));
 
 	m_window->display();
 }
@@ -252,14 +252,14 @@ void Game::render()
 // Tech functions
 ////////////////////////////////////////////////////////////
 //Info
-void Game::update_info()
+void Game::updateInfo()
 {
 	m_tech_info.str(std::string()); //Clearing
 
-	m_tech_info << get_string_dt();
+	m_tech_info << getStringDt();
 }
 
-sf::Text Game::get_text_info(const sf::Font& font)
+sf::Text Game::getTextInfo(const sf::Font& font)
 {
 	sf::Text info_text{ m_tech_info.str(), font, 16U };
 	info_text.setPosition(20.f, 20.f);
@@ -267,7 +267,7 @@ sf::Text Game::get_text_info(const sf::Font& font)
 	return info_text;
 }
 
-std::string Game::get_string_dt()
+std::string Game::getStringDt()
 {
 	std::stringstream dt_info;
 	dt_info << "Delta time: " << m_delta_time << " sec" << '\n';
@@ -275,7 +275,7 @@ std::string Game::get_string_dt()
 	return dt_info.str();
 }
 
-sf::Text Game::get_text_dt(const sf::Font& font) //delta time
+sf::Text Game::getTextDt(const sf::Font& font) //delta time
 {
 	std::stringstream ss;
 	ss << "Delta time: " << m_delta_time << " sec";
@@ -293,9 +293,9 @@ void Game::run()
 {
 	while (m_window->isOpen())
 	{
-		update_delta_time();
+		updateDeltaTime();
 
-		update_game();
+		updateGame();
 		render();
 	}
 }

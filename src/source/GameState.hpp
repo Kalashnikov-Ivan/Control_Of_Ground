@@ -19,8 +19,8 @@ public:
 	virtual ~GameState();
 
 	//Tech info
-	virtual std::string get_string_info() override;
-	std::string get_string_player_speed() const;
+	virtual std::string getStringInfo() override;
+	std::string getStringPlayerSpeed() const;
 
 
 	//Update
@@ -34,12 +34,12 @@ private:
 
 	//----Functions
 	//Init
-	virtual void init_textures() override;
-	virtual void init_keybinds() override;
-			void init_players();
+	virtual void initTextures() override;
+	virtual void initKeybinds() override;
+			void initPlayers();
 
 	//Update
-	virtual void update_keyboard_input(const float& dt) override;
+	virtual void updateKeyboardInput(const float& dt) override;
 };
 } // !namespace cog
 #endif // !GAME_STATE_H

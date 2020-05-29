@@ -16,18 +16,18 @@ MainMenuState::MainMenuState(sf::RenderWindow& window,
 	: State{ window, states, supported_fonts, supported_keys },
 	m_title{ "controL of GrounD", *supported_fonts["MAJOR"], 78U }
 {
-	init_textures();
-	init_background();
-	init_buttons();
+	initTextures();
+	initBackground();
+	initButtons();
 }
 
 MainMenuState::~MainMenuState()
 {
-	delete_buttons();
+	deleteButtons();
 }
 
 //Support_cleaner
-void MainMenuState::delete_buttons()
+void MainMenuState::deleteButtons()
 {
 	for (auto& i : m_buttons)
 		delete i.second;
@@ -36,7 +36,7 @@ void MainMenuState::delete_buttons()
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
-void MainMenuState::init_textures()
+void MainMenuState::initTextures()
 {
 	m_textures["BACKGROUND"] = new sf::Texture();
 
@@ -44,7 +44,7 @@ void MainMenuState::init_textures()
 		throw "ERROR::MainMenuState::init_background - failed to load texture BACKGROUND";
 }
 
-void MainMenuState::init_background()
+void MainMenuState::initBackground()
 {
 	m_background.setSize(static_cast<sf::Vector2f>(m_window.getSize()));
 
@@ -62,7 +62,7 @@ void MainMenuState::init_background()
 	m_title.setPosition(default_position_x - 20, default_position_y - default_offset);
 }
 
-void MainMenuState::init_buttons()
+void MainMenuState::initButtons()
 {
 	unsigned int font_size = 26U;
 
@@ -90,7 +90,7 @@ void MainMenuState::init_buttons()
 
 }
 
-void MainMenuState::init_keybinds()
+void MainMenuState::initKeybinds()
 {
 }
 
@@ -98,7 +98,7 @@ void MainMenuState::init_keybinds()
 ////////////////////////////////////////////////////////////
 // Tech info
 ////////////////////////////////////////////////////////////
-std::string MainMenuState::get_string_info()
+std::string MainMenuState::getStringInfo()
 {
 	return "";
 }
@@ -106,33 +106,33 @@ std::string MainMenuState::get_string_info()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void MainMenuState::update_keyboard_input(const float& dt)
+void MainMenuState::updateKeyboardInput(const float& dt)
 {
 }
 
-void MainMenuState::update_buttons(const float& dt)
+void MainMenuState::updateButtons(const float& dt)
 {
 	for (auto& i : m_buttons)
 		i.second->update(m_mouse_pos_view);
 
-	if (m_buttons["GAME_STATE"]->is_pressed())
+	if (m_buttons["GAME_STATE"]->isPressed())
 		m_states.push(new GameState{ m_window, m_states, m_supported_fonts, m_supported_keys });
 	
-	if (m_buttons["EXIT_STATE"]->is_pressed())
-		end_state();
+	if (m_buttons["EXIT_STATE"]->isPressed())
+		endState();
 }
 
 void MainMenuState::update(const float& dt)
 {
-	update_mouse_pos();
-	update_keyboard_input(dt);
-	update_buttons(dt);
+	updateMousePos();
+	updateKeyboardInput(dt);
+	updateButtons(dt);
 }
 
 ////////////////////////////////////////////////////////////
 // Render
 ////////////////////////////////////////////////////////////
-void MainMenuState::render_buttons(sf::RenderTarget* target)
+void MainMenuState::renderButtons(sf::RenderTarget* target)
 {
 	for (auto& i : m_buttons)
 		i.second->render(target);
@@ -146,6 +146,6 @@ void MainMenuState::render(sf::RenderTarget* target)
 	target->draw(m_background);
 	target->draw(m_title);
 
-	render_buttons(target);
-	target->draw(get_mouse_pos_text(*m_supported_fonts["DOSIS"]));
+	renderButtons(target);
+	target->draw(getMousePosText(*m_supported_fonts["DOSIS"]));
 }

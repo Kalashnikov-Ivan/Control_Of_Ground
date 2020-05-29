@@ -74,7 +74,7 @@ void Button::render(sf::RenderTarget* target)
 }
 
 //Accessors
-const bool Button::is_pressed() const
+const bool Button::isPressed() const
 {
 	if (m_state == ACTIVE)
 		return true;

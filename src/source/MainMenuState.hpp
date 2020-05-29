@@ -21,7 +21,7 @@ public:
 	~MainMenuState();
 
 	//Tech info
-	virtual std::string get_string_info() override;
+	virtual std::string getStringInfo() override;
 
 	//Update
 	virtual void update(const float& dt) override;
@@ -37,21 +37,21 @@ private:
 
 	//---------------------------------------------
 	//Init
-	void inline init_background();
-	void inline init_buttons();
+	void inline initBackground();
+	void inline initButtons();
 
-	virtual void init_textures() override;
-	virtual void init_keybinds() override; //Delete
+	virtual void initTextures() override;
+	virtual void initKeybinds() override; //Delete
 
 	//Update
-	virtual void update_keyboard_input(const float& dt) override; //Delete
-			void update_buttons(const float& dt);
+	virtual void updateKeyboardInput(const float& dt) override; //Delete
+			void updateButtons(const float& dt);
 
 	//Render
-	void render_buttons(sf::RenderTarget* target = nullptr);
+	void renderButtons(sf::RenderTarget* target = nullptr);
 
 	//Support_cleaner
-	void delete_buttons();
+	void deleteButtons();
 };
 } // !namespace cog
 #endif // !MAIN_MENU_H

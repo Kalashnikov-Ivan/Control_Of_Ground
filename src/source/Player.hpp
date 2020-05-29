@@ -22,11 +22,11 @@ private:
 	//Members
 
 	//Update
-	void update_animations(const float& dt);
-	void update_input();
+	void updateAnimations(const float& dt);
+	void updateInput();
 
 	//Init
-	void inline init_animations();
+	void inline initAnimations();
 };
 } // !namespace cog
 #endif // !PLAYER_H

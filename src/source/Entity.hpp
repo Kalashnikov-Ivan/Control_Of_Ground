@@ -15,11 +15,11 @@ public:
 	virtual ~Entity();
 
 	//Accessors
-	sf::Vector2f get_speed() const;
+	sf::Vector2f getSpeed() const;
 
 	//Modifiers
-	virtual void set_position(const sf::Vector2f& position_xy);
-	virtual void set_texture(const sf::Texture& texture);
+	virtual void setPosition(const sf::Vector2f& position_xy);
+	virtual void setTexture(const sf::Texture& texture);
 
 	//Functions
 	virtual void move(const sf::Vector2f& dir_xy, const float& dt);
