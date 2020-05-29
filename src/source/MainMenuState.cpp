@@ -4,7 +4,7 @@
 
 #define DEBUG
 
-using namespace cog;
+using namespace States;
 
 ////////////////////////////////////////////////////////////
 // Constructors
@@ -73,17 +73,17 @@ void MainMenuState::initButtons()
 	const float default_position_y = (m_window.getSize().y / 2.f) - (button_height / 2.f); // 350.f;
 	const float default_offset_between = 120.f;
 
-	m_buttons["GAME_STATE"] = new Button{ sf::Vector2f(default_position_x, default_position_y), 
+	m_buttons["GAME_STATE"] = new Core::Button{ sf::Vector2f(default_position_x, default_position_y),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "New Game", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
-	m_buttons["SETTINGS"] = new Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between),
+	m_buttons["SETTINGS"] = new Core::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "Settings", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
-	m_buttons["EXIT_STATE"] = new Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2),
+	m_buttons["EXIT_STATE"] = new Core::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "Exit", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };

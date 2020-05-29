@@ -4,7 +4,7 @@
 #include "MovementComponent.hpp"
 #include "AnimationComponent.hpp"
 
-namespace cog
+namespace Entities
 {
 class Entity
 {
@@ -33,8 +33,8 @@ protected:
 	sf::Sprite* m_sprite;
 
 	//Components
-	MovementComponent*  m_movement_component;
-	AnimationComponent* m_animation_component;
+	Components::MovementComponent*  m_movement_component;
+	Components::AnimationComponent* m_animation_component;
 
 private:
 

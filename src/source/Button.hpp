@@ -1,7 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-namespace cog
+namespace Core
 {
 class Button
 {

@@ -3,17 +3,20 @@
 
 #include "stdHeader.hpp"
 
-namespace cog
+namespace Components
 {
 class MovementComponent
 {
 public:
+	enum class States { IDLE = 0, MOVING_RIGHT };
+
 	//Constructors
 	MovementComponent(sf::Sprite& sprite, const float& max_speed, float acceleration, float deceleration);
 	virtual ~MovementComponent();
 
 	//Accessors
 	const sf::Vector2f& getSpeed() const;
+	const bool checkState(const States state) const;
 
 	//Functions
 	void move(const sf::Vector2f& dir_xy, const float& dt);

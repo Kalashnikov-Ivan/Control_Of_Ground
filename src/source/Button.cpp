@@ -2,8 +2,7 @@
 
 #include "Button.hpp"
 
-using namespace cog;
-
+using namespace Core;
 
 ////////////////////////////////////////////////////////////
 // Constructors

@@ -5,7 +5,7 @@
 
 #include "Entity.hpp"
 
-namespace cog
+namespace Entities
 {
 class Player :
 	public Entity

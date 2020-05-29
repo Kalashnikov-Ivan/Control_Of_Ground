@@ -4,7 +4,7 @@
 #include "State.hpp"
 #include "GameState.hpp"
 
-namespace cog
+namespace Core
 {
 class Game final
 {
@@ -36,7 +36,7 @@ private:
 	float m_delta_time;
 
 	//States
-	std::stack<State*> m_states;
+	std::stack<States::State*> m_states;
 
 	//Fonts
 	std::map<const std::string, sf::Font*> m_supported_fonts;

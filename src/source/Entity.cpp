@@ -2,7 +2,7 @@
 
 #include "Entity.hpp"
 
-using namespace cog;
+using namespace Entities;
 
 ////////////////////////////////////////////////////////////
 // Constructors
@@ -10,8 +10,8 @@ using namespace cog;
 Entity::Entity(sf::Texture& texture, 
 			   const float& max_speed, const float& acceleration, const float& deceleration)
 	: m_sprite           { new sf::Sprite(texture) },
-	m_animation_component{ new AnimationComponent(*m_sprite, texture) },
-	m_movement_component { new MovementComponent(*m_sprite, max_speed, acceleration, deceleration) }
+	m_animation_component{ new Components::AnimationComponent(*m_sprite, texture) },
+	m_movement_component { new Components::MovementComponent(*m_sprite, max_speed, acceleration, deceleration) }
 {
 }
 

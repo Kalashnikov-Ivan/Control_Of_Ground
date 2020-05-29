@@ -1,6 +1,6 @@
 #include "AnimationComponent.hpp"
 
-using namespace cog;
+using namespace Components;
 
 ////////////////////////////////////////////////////////////
 // Animation

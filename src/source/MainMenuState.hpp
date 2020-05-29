@@ -5,7 +5,7 @@
 #include "GameState.hpp"
 #include "Button.hpp"
 
-namespace cog
+namespace States
 {
 class MainMenuState :
 	public State
@@ -32,7 +32,7 @@ public:
 private:
 	//Members
 	sf::RectangleShape m_background;
-	std::map<std::string, Button*> m_buttons;
+	std::map<std::string, Core::Button*> m_buttons;
 	sf::Text m_title;
 
 	//---------------------------------------------

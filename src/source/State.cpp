@@ -2,7 +2,7 @@
 
 #include "State.hpp"
 
-using namespace cog;
+using namespace States;
 
 ////////////////////////////////////////////////////////////
 // Constructors

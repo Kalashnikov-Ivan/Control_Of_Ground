@@ -5,7 +5,7 @@
 
 #define DEBUG
 
-using namespace cog;
+using namespace Core;
 
 ////////////////////////////////////////////////////////////
 // Constructors
@@ -179,7 +179,7 @@ void Game::initStates()
 	std::cout << "\nGame: Start of init_states..." << std::endl;
 #endif // DEBUG
 
-	m_states.push(new MainMenuState(*m_window, m_states, m_supported_fonts, m_supported_keys));
+	m_states.push(new States::MainMenuState(*m_window, m_states, m_supported_fonts, m_supported_keys));
 
 #ifdef DEBUG
 	std::cout << "\nGame: init_states is success!" << std::endl;

@@ -1,6 +1,6 @@
 #include "MovementComponent.hpp"
 
-using namespace cog;
+using namespace Components;
 
 ////////////////////////////////////////////////////////////
 // Constructors
@@ -19,9 +19,24 @@ MovementComponent::~MovementComponent()
 ////////////////////////////////////////////////////////////
 // Accessors
 ////////////////////////////////////////////////////////////
-const sf::Vector2f& cog::MovementComponent::getSpeed() const
+const sf::Vector2f& MovementComponent::getSpeed() const
 {
 	return m_speed;
+}
+
+const bool MovementComponent::checkState(const States state) const
+{
+	switch (state)
+	{
+	case States::IDLE:
+		if (m_speed.x == 0.f && m_speed.y == 0.f)
+			return true;
+		break;
+	case States::MOVING_RIGHT:
+		if (m_speed.x > 0.f)
+			return true;
+		break;
+	}
 }
 
 ////////////////////////////////////////////////////////////

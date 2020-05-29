@@ -4,7 +4,7 @@
 
 #define DEBUG
 
-using namespace cog;
+using namespace States;
 
 ////////////////////////////////////////////////////////////
 // Constructors
@@ -81,7 +81,7 @@ void GameState::initKeybinds()
 void GameState::initPlayers()
 {
 	const float max_speed = 500.f;
-	m_player = new Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER_SHEET"], max_speed, 10.f, 4.f);
+	m_player = new Entities::Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER_SHEET"], max_speed, 10.f, 4.f);
 }
 
 ////////////////////////////////////////////////////////////

@@ -3,7 +3,7 @@
 
 #include "stdHeader.hpp"
 
-namespace cog
+namespace Components
 {
 class AnimationComponent
 {

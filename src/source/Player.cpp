@@ -2,7 +2,7 @@
 
 #include "Player.hpp"
 
-using namespace cog;
+using namespace Entities;
 
 ////////////////////////////////////////////////////////////
 // Constructors
@@ -46,5 +46,7 @@ void Player::updateInput()
 ////////////////////////////////////////////////////////////
 void Player::initAnimations()
 {
+	//addAnimation(NAME, TIME_OF_ANIM (sec), START_X, START_Y, FRAMES_X, FRAMES_Y, WIDTH, HEIGHT)
 	m_animation_component->addAnimation("IDLE", 0.35f, 0, 0, 3, 0, 50, 37);
+	m_animation_component->addAnimation("WALK_RIGHT", 0.35f, 1, 5, 0, 0, 50, 37);
 }

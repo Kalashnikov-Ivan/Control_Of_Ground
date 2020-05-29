@@ -4,7 +4,7 @@
 #include "State.hpp"
 #include "Player.hpp"
 
-namespace cog
+namespace States
 {
 class GameState : 
 	public State
@@ -30,7 +30,7 @@ public:
 
 private:
 	//Entities
-	Player* m_player;
+	Entities::Player* m_player;
 
 	//----Functions
 	//Init
