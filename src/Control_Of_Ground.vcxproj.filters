@@ -107,6 +107,9 @@
     <None Include="..\README.md">
       <Filter>Service</Filter>
     </None>
+    <None Include="config\EditorState_keybinds.ini">
+      <Filter>Resources\config</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\stdHeader.hpp">

@@ -12,7 +12,10 @@ class EditorState :
 //__________________________PUBLIC______________________________
 public:
 	//Constructors
-	EditorState();
+	EditorState(sf::RenderWindow& window,
+				std::stack<State*>& states,
+				std::map<const std::string, sf::Font*>& supported_fonts,
+				const std::map<const std::string, int>& supported_keys);
 	~EditorState();
 
 	//Tech info
@@ -28,24 +31,18 @@ public:
 private:
 	//Members
 
-	std::map<std::string, Core::Button*> m_buttons;
 
 	//---------------------------------------------
 	//Init
-	void inline initButtons();
-
 	virtual void initTextures() override;
 	virtual void initKeybinds() override;
 
 	//Update
 	virtual void updateKeyboardInput(const float& dt) override;
-	void updateButtons(const float& dt);
 
 	//Render
-	void renderButtons(sf::RenderTarget* target = nullptr);
 
 	//Support_cleaner
-	void deleteButtons();
 };
 } // !namespace States
 #endif // !EDITOR_STATE_H

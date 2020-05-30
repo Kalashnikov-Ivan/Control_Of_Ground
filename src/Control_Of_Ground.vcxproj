@@ -35,6 +35,7 @@
     <None Include="..\.gitattributes" />
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
+    <None Include="config\EditorState_keybinds.ini" />
     <None Include="config\GameState_keybinds.ini" />
     <None Include="config\MainMenuState_keybinds.ini" />
     <None Include="config\supported_keys.ini" />

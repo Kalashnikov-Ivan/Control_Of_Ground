@@ -1,6 +1,7 @@
 #include "stdHeader.hpp"
 
 #include "MainMenuState.hpp"
+#include "EditorState.hpp"
 
 #define DEBUG
 
@@ -135,6 +136,9 @@ void MainMenuState::updateButtons(const float& dt)
 
 	if (m_buttons["GAME_STATE"]->isPressed())
 		m_states.push(new GameState{ m_window, m_states, m_supported_fonts, m_supported_keys });
+
+	if (m_buttons["EDITOR_STATE"]->isPressed())
+		m_states.push(new EditorState{ m_window, m_states, m_supported_fonts, m_supported_keys });
 	
 	if (m_buttons["EXIT_STATE"]->isPressed())
 		endState();
