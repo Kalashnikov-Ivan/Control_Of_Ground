@@ -75,6 +75,9 @@
     <ClCompile Include="source\main.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="source\EditorState.cpp">
+      <Filter>Source\Core\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -219,6 +222,9 @@
     </ClInclude>
     <ClInclude Include="source\AnimationComponent.hpp">
       <Filter>Source\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EditorState.hpp">
+      <Filter>Source\Core\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

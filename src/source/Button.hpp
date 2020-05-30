@@ -6,6 +6,9 @@ namespace Core
 class Button
 {
 public:
+	//States of button
+	enum class States { NONE = -1, IDLE = 0, HOVER, ACTIVE };
+
 	//Constructors
 	Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
 			sf::Font& font, const std::string& text, uint32_t ch_size,
@@ -19,11 +22,16 @@ public:
 	void render(sf::RenderTarget* target);
 
 	//Accessors
+	const States getState() const;
+	const sf::RectangleShape getShape() const;
+	const sf::Vector2f getPosition() const;
+	const sf::Vector2f getSize() const;
 	const bool isPressed() const;
 
 private:
 	//Members
 	sf::RectangleShape m_shape;
+	States m_state;
 
 	sf::Text m_text;
 
@@ -31,10 +39,6 @@ private:
 	sf::Color m_color_idle;
 	sf::Color m_color_hover;
 	sf::Color m_color_active;
-
-	//States of button
-	enum m_states { IDLE = 0, HOVER, ACTIVE };
-	unsigned short m_state;
 };
 } // !namespace cog
 

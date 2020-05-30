@@ -38,6 +38,15 @@ const bool State::getQuit() const
 	return m_quit;
 }
 
+std::string States::State::getStringMousePos() const
+{
+	std::stringstream result;
+
+	result << "mouse x = " << m_mouse_pos_view.x << " " << "y = " << m_mouse_pos_view.y << '\n';
+
+	return result.str();
+}
+
 ////////////////////////////////////////////////////////////
 // Tech info
 ////////////////////////////////////////////////////////////

@@ -20,6 +20,7 @@ public:
 
 	//Tech info
 	virtual std::string getStringInfo() = 0;
+	std::string getStringMousePos() const;
 	sf::Text getMousePosText(const sf::Font& font) const;
 
 	//Update

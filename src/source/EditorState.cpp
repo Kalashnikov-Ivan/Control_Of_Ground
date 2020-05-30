@@ -9,6 +9,7 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
+/*
 EditorState::EditorState(sf::RenderWindow& window,
 	std::stack<State*>& states,
 	std::map<const std::string, sf::Font*>& supported_fonts,
@@ -19,6 +20,7 @@ EditorState::EditorState(sf::RenderWindow& window,
 	initTextures();
 	initButtons();
 }
+*/
 
 EditorState::~EditorState()
 {
@@ -97,7 +99,7 @@ void EditorState::updateButtons(const float& dt)
 		i.second->update(m_mouse_pos_view);
 
 	if (m_buttons["GAME_STATE"]->isPressed())
-		m_states.push(new GameState{ m_window, m_states, m_supported_fonts, m_supported_keys });
+		//m_states.push(new GameState{ m_window, m_states, m_supported_fonts, m_supported_keys });
 
 	if (m_buttons["EXIT_STATE"]->isPressed())
 		endState();

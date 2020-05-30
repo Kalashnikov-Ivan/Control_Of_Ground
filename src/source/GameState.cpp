@@ -126,6 +126,7 @@ std::string GameState::getStringInfo()
 {
 	std::stringstream result;
 
+	result << getStringMousePos();
 	result << getStringPlayerSpeed();
 
 	return result.str();
