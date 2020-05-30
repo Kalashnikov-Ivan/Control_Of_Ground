@@ -48,7 +48,6 @@ private:
 		sf::IntRect m_start_rect;
 		sf::IntRect m_current_rect;
 		sf::IntRect m_end_rect;
-
 	private:
 	};
 

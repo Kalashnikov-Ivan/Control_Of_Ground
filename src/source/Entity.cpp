@@ -11,12 +11,14 @@ Entity::Entity(sf::Texture& texture,
 			   const float& max_speed, const float& acceleration, const float& deceleration)
 	: m_sprite           { new sf::Sprite(texture) },
 	m_animation_component{ new Components::AnimationComponent(*m_sprite, texture) },
-	m_movement_component { new Components::MovementComponent(*m_sprite, max_speed, acceleration, deceleration) }
+	m_movement_component { new Components::MovementComponent(*m_sprite, max_speed, acceleration, deceleration) },
+	m_hitbox_component   { new Components::HitboxComponent() }
 {
 }
 
 Entity::~Entity()
 {
+	delete m_hitbox_component;
 	delete m_movement_component;
 	delete m_animation_component;
 	delete m_sprite;

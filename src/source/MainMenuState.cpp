@@ -74,7 +74,7 @@ void MainMenuState::initButtons()
 	const float default_position_y = (m_window.getSize().y / 2.5f) - (button_height / 2.f); // 350.f;
 	const float default_offset_between = 120.f;
 
-	m_buttons["GAME_STATE"] =	new Core::Button{ sf::Vector2f(default_position_x, default_position_y),
+	m_buttons["GAME_STATE"]   =	new Core::Button{ sf::Vector2f(default_position_x, default_position_y),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "New Game", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
@@ -84,12 +84,12 @@ void MainMenuState::initButtons()
 								*m_supported_fonts["DOSIS"], "Editor", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
-	m_buttons["SETTINGS"] =		new Core::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2),
+	m_buttons["SETTINGS"]     =	new Core::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "Settings", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
-	m_buttons["EXIT_STATE"] =	new Core::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.5f),
+	m_buttons["EXIT_STATE"]   =	new Core::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.5f),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "Exit", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
@@ -139,6 +139,9 @@ void MainMenuState::updateButtons(const float& dt)
 
 	if (m_buttons["EDITOR_STATE"]->isPressed())
 		m_states.push(new EditorState{ m_window, m_states, m_supported_fonts, m_supported_keys });
+
+	if (m_buttons["SETTINGS"]->isPressed())
+		//m_states.push(new EditorState{ m_window, m_states, m_supported_fonts, m_supported_keys });
 	
 	if (m_buttons["EXIT_STATE"]->isPressed())
 		endState();

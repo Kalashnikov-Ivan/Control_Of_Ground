@@ -3,6 +3,7 @@
 
 #include "MovementComponent.hpp"
 #include "AnimationComponent.hpp"
+#include "HitboxComponent.hpp"
 
 namespace Entities
 {
@@ -35,6 +36,7 @@ protected:
 	//Components
 	Components::MovementComponent*  m_movement_component;
 	Components::AnimationComponent* m_animation_component;
+	Components::HitboxComponent*    m_hitbox_component;
 
 private:
 
