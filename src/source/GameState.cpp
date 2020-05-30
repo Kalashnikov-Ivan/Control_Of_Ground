@@ -80,8 +80,8 @@ void GameState::initKeybinds()
 
 void GameState::initPlayers()
 {
-	const float max_speed = 500.f;
-	m_player = new Entities::Player(sf::Vector2f(0.f, 0.f), *m_textures["PLAYER_SHEET"], max_speed, 10.f, 4.f);
+	const float max_speed = 200.f;
+	m_player = new Entities::Player(sf::Vector2f(10.f, 100.f), *m_textures["PLAYER_SHEET"], max_speed, 3.f, 2.f);
 }
 
 ////////////////////////////////////////////////////////////
@@ -133,7 +133,8 @@ std::string GameState::getStringInfo()
 std::string GameState::getStringPlayerSpeed() const
 {
 	std::stringstream speed_info;
-	speed_info << "p_speed: x = " << m_player->getSpeed().x << " y =" << m_player->getSpeed().y << '\n';
+	speed_info << "p_speed: x = " << m_player->getSpeed().x << " y = " << m_player->getSpeed().y << '\n';
+	speed_info << "p_speed_stage: x = " << m_player->getValueSpeedStageX() << " y = " << "0" << '\n';
 
 	return speed_info.str();
 }

@@ -16,6 +16,9 @@ public:
 		   const float& max_speed, const float& acceleration, const float& deceleration);
 	~Player();
 
+	//Accessors
+	float getValueSpeedStageX() const;
+
 	//Update
 	void update(const float& dt);
 private:

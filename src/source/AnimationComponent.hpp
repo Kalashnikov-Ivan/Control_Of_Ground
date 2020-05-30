@@ -19,7 +19,7 @@ public:
 					   const int start_x, const int start_y, const int frames_x, const int frames_y,
 					   const int width, const int height);
 
-	void play(const std::string& key, const float& dt);
+	void play(const std::string& key, const float& dt, const float& grow_speed_anim = 0.f);
 
 private:
 	class Animation
@@ -31,7 +31,7 @@ private:
 		~Animation();
 
 		//Functions
-		void play(const float& dt);
+		void play(const float& dt, const float& grow_speed_anim = 0.f);
 		void reset();
 
 		//------------------------------------------------
@@ -57,6 +57,7 @@ private:
 	sf::Texture& m_texture_sheet;
 
 	std::map<std::string, Animation*> m_animations;
+	Animation* m_last_animation;
 };
 } // !namespace cog
 

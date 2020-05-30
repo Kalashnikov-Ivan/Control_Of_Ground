@@ -28,12 +28,12 @@ AnimationComponent::Animation::~Animation()
 
 
 //Functions
-void AnimationComponent::Animation::play(const float& dt)
+void AnimationComponent::Animation::play(const float& dt, const float& grow_speed_anim)
 {
 	//Update timer
 	m_timer += dt; //Old value: 100.f * dt
 
-	if (m_timer >= m_animation_timer)
+	if (m_timer >= m_animation_timer - grow_speed_anim)
 	{
 		//Reset timer
 		m_timer = 0.f;
@@ -54,7 +54,8 @@ void AnimationComponent::Animation::play(const float& dt)
 
 void AnimationComponent::Animation::reset()
 {
-
+	m_timer = m_animation_timer;
+	m_current_rect = m_start_rect;
 }
 
 ////////////////////////////////////////////////////////////
@@ -64,7 +65,8 @@ void AnimationComponent::Animation::reset()
 //Constructors
 AnimationComponent::AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet)
 	: m_sprite{ sprite },
-	m_texture_sheet{ texture_sheet }
+	m_texture_sheet{ texture_sheet },
+	m_last_animation{ nullptr }
 {
 }
 
@@ -83,7 +85,18 @@ void AnimationComponent::addAnimation(const std::string& key, const float& anima
 	m_animations[key] = new Animation{ m_sprite, m_texture_sheet, animation_timer, start_x, start_y, frames_x, frames_y, width, height };
 }
 
-void AnimationComponent::play(const std::string& key, const float& dt)
+void AnimationComponent::play(const std::string& key, const float& dt, const float& grow_speed_anim)
 {
-	m_animations[key]->play(dt);
+	if (m_last_animation != m_animations[key])
+	{
+		if (m_last_animation == nullptr)
+			m_last_animation = m_animations[key];
+		else
+		{
+			m_last_animation->reset();
+			m_last_animation = m_animations[key];
+		}
+	}
+
+	m_animations[key]->play(dt, grow_speed_anim);
 }

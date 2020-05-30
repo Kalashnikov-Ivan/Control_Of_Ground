@@ -25,7 +25,6 @@ private:
 	//Members
 	sf::RectangleShape m_shape;
 
-	sf::Font& m_font; // <- From Child of State
 	sf::Text m_text;
 
 	//Colors
