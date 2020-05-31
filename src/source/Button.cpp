@@ -66,10 +66,10 @@ void Button::update(const sf::Vector2f& mouse_pos)
 	}
 }
 
-void Button::render(sf::RenderTarget* target)
+void Button::render(sf::RenderTarget& target)
 {
-	target->draw(m_shape);
-	target->draw(m_text);
+	target.draw(m_shape);
+	target.draw(m_text);
 }
 
 const Button::States Button::getState() const

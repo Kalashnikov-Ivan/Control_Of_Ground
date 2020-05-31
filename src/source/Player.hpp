@@ -21,6 +21,9 @@ public:
 
 	//Update
 	void update(const float& dt);
+
+	//Render
+	void render(sf::RenderTarget& target);
 private:
 	//Members
 

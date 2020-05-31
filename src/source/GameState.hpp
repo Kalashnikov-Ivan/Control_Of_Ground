@@ -26,7 +26,7 @@ public:
 	//Update
 	virtual void update(const float& dt) override;
 
-	virtual void render(sf::RenderTarget* target = nullptr) override;
+	virtual void render(sf::RenderTarget& target) override;
 
 private:
 	//Entities

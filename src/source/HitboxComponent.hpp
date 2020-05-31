@@ -17,7 +17,7 @@ public:
 	//Functions
 	bool checkIntersect(const sf::FloatRect& f_rect);
 
-	void update();
+	void update(const float& dt);
 
 	void render(sf::RenderTarget& target);
 private:

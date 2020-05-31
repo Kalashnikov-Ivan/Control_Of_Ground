@@ -25,7 +25,7 @@ public:
 	virtual void update(const float& dt) override;
 
 	//Render
-	virtual void render(sf::RenderTarget* target = nullptr) override;
+	virtual void render(sf::RenderTarget& target) override;
 
 //__________________________PRIVATE_____________________________
 private:

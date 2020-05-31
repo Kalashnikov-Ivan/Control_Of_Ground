@@ -42,7 +42,7 @@ void Entity::createAnimationComponent(sf::Sprite& sprite, sf::Texture& texture_s
 	m_animation_component = new Components::AnimationComponent(sprite, texture_sheet);
 }
 
-void Entity::createHitboxComponent(const sf::Sprite& sprite, const sf::Vector2f& offset_xy, const sf::Vector2f& size_xy)
+void Entity::createHitboxComponent(sf::Sprite& sprite, const sf::Vector2f& offset_xy, const sf::Vector2f& size_xy)
 {
 	m_hitbox_component = new Components::HitboxComponent(sprite, offset_xy, size_xy);
 }
@@ -95,8 +95,8 @@ void Entity::update(const float& dt)
 	}
 }
 
-void Entity::render(sf::RenderTarget* target)
+void Entity::render(sf::RenderTarget& target)
 {
 	//target->draw(m_sprite);
-	target->draw(*m_sprite);
+	target.draw(*m_sprite);
 }

@@ -27,7 +27,7 @@ public:
 	virtual void update(const float& dt) = 0;
 
 	//Render
-	virtual void render(sf::RenderTarget* target = nullptr) = 0;
+	virtual void render(sf::RenderTarget& target) = 0;
 
 	virtual void endState();
 

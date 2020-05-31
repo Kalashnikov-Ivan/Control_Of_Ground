@@ -159,20 +159,17 @@ void MainMenuState::update(const float& dt)
 ////////////////////////////////////////////////////////////
 // Render
 ////////////////////////////////////////////////////////////
-void MainMenuState::renderButtons(sf::RenderTarget* target)
+void MainMenuState::renderButtons(sf::RenderTarget& target)
 {
 	for (auto& i : m_buttons)
 		i.second->render(target);
 }
 
-void MainMenuState::render(sf::RenderTarget* target)
+void MainMenuState::render(sf::RenderTarget& target)
 {
-	if (target == nullptr)
-		target = &m_window;
-
-	target->draw(m_background);
-	target->draw(m_title);
+	target.draw(m_background);
+	target.draw(m_title);
 
 	renderButtons(target);
-	target->draw(getMousePosText(*m_supported_fonts["DOSIS"]));
+	target.draw(getMousePosText(*m_supported_fonts["DOSIS"]));
 }

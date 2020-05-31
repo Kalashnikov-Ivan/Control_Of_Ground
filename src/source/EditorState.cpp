@@ -98,10 +98,7 @@ void EditorState::update(const float& dt)
 ////////////////////////////////////////////////////////////
 // Render
 ////////////////////////////////////////////////////////////
-void EditorState::render(sf::RenderTarget* target)
+void EditorState::render(sf::RenderTarget& target)
 {
-	if (target == nullptr)
-		target = &m_window;
-
-	target->draw(getMousePosText(*m_supported_fonts["DOSIS"]));
+	target.draw(getMousePosText(*m_supported_fonts["DOSIS"]));
 }

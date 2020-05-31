@@ -9,7 +9,7 @@ MovementComponent::MovementComponent(sf::Sprite& sprite, const float& max_speed,
 	: m_sprite { sprite },
 	m_max_speed{ max_speed },
 	m_acceleration{ acceleration }, m_deceleration{ deceleration },
-	m_first_speed_stage {m_max_speed / 3.f }, m_second_speed_stage{ m_max_speed / 2.f }, m_third_speed_stage{ m_max_speed / 1.25f }
+	m_first_speed_stage {m_max_speed / 3.f }, m_second_speed_stage{ m_max_speed / 2.f }, m_third_speed_stage{ m_max_speed / 1.1f }
 {
 }
 
@@ -33,7 +33,7 @@ const sf::Vector2f& MovementComponent::getSpeed() const
 const float Components::MovementComponent::getSpeedStageX() const
 {
 	if (abs(m_speed.x) >= m_third_speed_stage)
-		return 0.2f;
+		return 0.18f;
 	if (abs(m_speed.x) >= m_second_speed_stage)
 		return 0.15f;
 	if (abs(m_speed.x) >= m_first_speed_stage)

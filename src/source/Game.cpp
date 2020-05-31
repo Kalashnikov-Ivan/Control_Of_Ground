@@ -240,7 +240,7 @@ void Game::render()
 
 	if (!m_states.empty())
 	{
-		m_states.top()->render(m_window);
+		m_states.top()->render(*m_window);
 	}
 
 	m_window->draw(getTextInfo(*m_supported_fonts["DOSIS"]));

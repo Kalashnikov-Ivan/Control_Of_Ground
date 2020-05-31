@@ -26,7 +26,7 @@ public:
 
 	//Virtual
 	virtual void update(const float& dt);
-	virtual void render(sf::RenderTarget* target);
+	virtual void render(sf::RenderTarget& target);
 
 protected:
 	//Members
@@ -40,7 +40,7 @@ protected:
 	//Creators
 	void createMovementComponent (sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration);
 	void createAnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet);
-	void createHitboxComponent   (const sf::Sprite& sprite, const sf::Vector2f& offset_xy, const sf::Vector2f& size_xy);
+	void createHitboxComponent   (sf::Sprite& sprite, const sf::Vector2f& offset_xy, const sf::Vector2f& size_xy);
 
 private:
 

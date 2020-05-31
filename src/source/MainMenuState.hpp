@@ -27,7 +27,7 @@ public:
 	virtual void update(const float& dt) override;
 
 	//Render
-	virtual void render(sf::RenderTarget* target = nullptr) override;
+	virtual void render(sf::RenderTarget& target) override;
 //__________________________PRIVATE_____________________________
 private:
 	//Members
@@ -48,7 +48,7 @@ private:
 			void updateButtons(const float& dt);
 
 	//Render
-	void renderButtons(sf::RenderTarget* target = nullptr);
+	void renderButtons(sf::RenderTarget& target);
 
 	//Support_cleaner
 	void deleteButtons();
