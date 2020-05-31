@@ -11,7 +11,7 @@ public:
 	enum class States { NONE = -1, IDLE = 0, MOVING_RIGHT, MOVING_LEFT, MOVING_DOWN, MOVING_UP };
 
 	//Constructors
-	MovementComponent(sf::Sprite& sprite, const float& max_speed, float acceleration, float deceleration);
+	MovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration);
 	virtual ~MovementComponent();
 
 	//Accessors

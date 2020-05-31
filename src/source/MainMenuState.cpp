@@ -141,7 +141,9 @@ void MainMenuState::updateButtons(const float& dt)
 		m_states.push(new EditorState{ m_window, m_states, m_supported_fonts, m_supported_keys });
 
 	if (m_buttons["SETTINGS"]->isPressed())
+	{
 		//m_states.push(new EditorState{ m_window, m_states, m_supported_fonts, m_supported_keys });
+	}
 	
 	if (m_buttons["EXIT_STATE"]->isPressed())
 		endState();

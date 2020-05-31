@@ -5,7 +5,7 @@ using namespace Components;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-MovementComponent::MovementComponent(sf::Sprite& sprite, const float& max_speed, float acceleration, float deceleration)
+MovementComponent::MovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration)
 	: m_sprite { sprite },
 	m_max_speed{ max_speed },
 	m_acceleration{ acceleration }, m_deceleration{ deceleration },

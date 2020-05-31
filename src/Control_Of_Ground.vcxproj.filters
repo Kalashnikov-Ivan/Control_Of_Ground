@@ -78,6 +78,9 @@
     <ClCompile Include="source\EditorState.cpp">
       <Filter>Source\Core\States</Filter>
     </ClCompile>
+    <ClCompile Include="source\HitboxComponent.cpp">
+      <Filter>Source\Entities\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -228,6 +231,9 @@
     </ClInclude>
     <ClInclude Include="source\EditorState.hpp">
       <Filter>Source\Core\States</Filter>
+    </ClInclude>
+    <ClInclude Include="source\HitboxComponent.hpp">
+      <Filter>Source\Entities\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

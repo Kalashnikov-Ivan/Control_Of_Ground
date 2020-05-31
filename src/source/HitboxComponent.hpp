@@ -9,19 +9,20 @@ class HitboxComponent
 {
 public:
 	//Constructors
-	HitboxComponent(const sf::Sprite& sprite,
-					const sf::Vector2f&& offset_xy, const sf::Vector2f&& size_xy);
+	HitboxComponent(sf::Sprite& sprite,
+					const sf::Vector2f& offset_xy, 
+					const sf::Vector2f& size_xy);
 	virtual ~HitboxComponent();
 
 	//Functions
-	bool checkIntersect(const sf::FloatRect f_rect);
+	bool checkIntersect(const sf::FloatRect& f_rect);
 
 	void update();
 
 	void render(sf::RenderTarget& target);
 private:
 	//Members
-	sf::Sprite m_sprite;
+	sf::Sprite& m_sprite;
 	sf::RectangleShape m_hitbox;
 
 	sf::Vector2f m_offset_xy;

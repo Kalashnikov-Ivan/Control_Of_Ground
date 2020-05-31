@@ -5,11 +5,12 @@ using namespace Components;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-HitboxComponent::HitboxComponent(const sf::Sprite& sprite,
-								 const sf::Vector2f&& offset_xy, const sf::Vector2f&& size_xy)
-	: m_sprite(sprite),
-	m_offset_xy(offset_xy),
-	m_hitbox(size_xy)
+HitboxComponent::HitboxComponent(sf::Sprite& sprite,
+								 const sf::Vector2f& offset_xy, 
+								 const sf::Vector2f& size_xy)
+	: m_sprite{ sprite },
+	m_offset_xy{ offset_xy },
+	m_hitbox{ size_xy }
 {
 	m_hitbox.setPosition(m_sprite.getPosition() + m_offset_xy);
 

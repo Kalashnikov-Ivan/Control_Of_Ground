@@ -9,8 +9,14 @@ using namespace Entities;
 ////////////////////////////////////////////////////////////
 Player::Player(const sf::Vector2f& position_xy, sf::Texture& texture, 
 			   const float& max_speed, const float& acceleration, const float& deceleration)
-	: Entity(texture, max_speed, acceleration, deceleration)
+	: Entity(texture)
 {
+	//Creating components
+	createMovementComponent (*m_sprite, max_speed, acceleration, deceleration);
+	createAnimationComponent(*m_sprite, texture);
+	sf::Vector2f hitbox_size{ m_sprite->getGlobalBounds().width, m_sprite->getGlobalBounds().height };
+	createHitboxComponent   (*m_sprite, sf::Vector2f(0.f, 0.f), hitbox_size);
+
 	initAnimations();
 
 	setPosition(position_xy);

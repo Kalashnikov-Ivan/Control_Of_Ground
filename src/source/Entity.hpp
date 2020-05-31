@@ -11,8 +11,7 @@ class Entity
 {
 public:
 	//Constructors
-	Entity(sf::Texture& texture, 
-		   const float& max_speed, const float& acceleration, const float& deceleration);
+	Entity(sf::Texture& texture);
 	virtual ~Entity();
 
 	//Accessors
@@ -36,7 +35,12 @@ protected:
 	//Components
 	Components::MovementComponent*  m_movement_component;
 	Components::AnimationComponent* m_animation_component;
-	Components::HitboxComponent*    m_hitbox_component;
+	Components::HitboxComponent* m_hitbox_component;
+
+	//Creators
+	void createMovementComponent (sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration);
+	void createAnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet);
+	void createHitboxComponent   (const sf::Sprite& sprite, const sf::Vector2f& offset_xy, const sf::Vector2f& size_xy);
 
 private:
 
