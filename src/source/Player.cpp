@@ -10,7 +10,7 @@ using namespace Entities;
 Player::Player(const sf::Vector2f& position_xy, sf::Texture& texture,
 			   const float& max_speed, const float& acceleration, const float& deceleration,
 			   const sf::Vector2f& scale)
-	: Entity(texture, scale)
+	: Entity{ texture, scale }, m_scale_x { scale.x }, m_scale_y{ scale.y }
 {
 	//Creating components
 	createMovementComponent (*m_sprite, max_speed, acceleration, deceleration);
@@ -33,7 +33,7 @@ Player::~Player()
 void Player::initAnimations()
 {
 	//addAnimation(NAME, TIME_OF_ANIM (sec), START_X, START_Y, FRAMES_X, FRAMES_Y, WIDTH, HEIGHT)
-	m_animation_component->addAnimation("WALK_RIGHT", 0.35f, 1, 1, 5, 1, 50, 37);
+	m_animation_component->addAnimation("WALK", 0.35f, 1, 1, 5, 1, 50, 37);
 
 	m_animation_component->addAnimation("IDLE", 0.35f, 0, 0, 3, 0, 50, 37); //Need last, because it's a start Rect
 }
@@ -71,12 +71,23 @@ void Player::updateAnimations(const float& dt)
 	switch (movement_state)
 	{
 	case MoveState::IDLE:
+		m_hitbox_component->setOffsetMove(sf::Vector2f(0.f, 0.f));
+		m_hitbox_component->setRotation(0.f);
 		m_animation_component->play("IDLE", dt);
 		break;
 	case MoveState::MOVING_RIGHT:
-		m_animation_component->play("WALK_RIGHT", dt, m_movement_component->getSpeedStageX());
+		m_sprite->setOrigin(0.f, 0.f);
+		m_sprite->setScale(m_scale_x, m_scale_y);
+		m_hitbox_component->setOffsetMove(sf::Vector2f(23.f, 0.f));
+		m_hitbox_component->setRotation(7.f);
+		m_animation_component->play("WALK", dt, m_movement_component->getSpeedStageX());
 		break;
 	case MoveState::MOVING_LEFT:
+		m_sprite->setOrigin(50.f, 0.f);
+		m_sprite->setScale(-m_scale_x, m_scale_y);
+		m_hitbox_component->setOffsetMove(sf::Vector2f(-23.f, 0.f));
+		m_hitbox_component->setRotation(-7.f);
+		m_animation_component->play("WALK", dt, m_movement_component->getSpeedStageX());
 		break;
 	case MoveState::MOVING_UP:
 		break;

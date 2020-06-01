@@ -27,6 +27,8 @@ public:
 	void render(sf::RenderTarget& target);
 private:
 	//Members
+	float m_scale_x;
+	float m_scale_y;
 
 	//Update
 	void updateAnimations(const float& dt);
