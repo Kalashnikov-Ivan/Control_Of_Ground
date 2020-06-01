@@ -7,12 +7,13 @@ using namespace Entities;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Entity::Entity(sf::Texture& texture)
+Entity::Entity(sf::Texture& texture, const sf::Vector2f& scale)
 	: m_sprite           { new sf::Sprite(texture) },
 	m_movement_component { nullptr }, 
 	m_animation_component{ nullptr },
 	m_hitbox_component   { nullptr }
 {
+	m_sprite->setScale(scale);
 }
 
 Entity::~Entity()
@@ -42,9 +43,9 @@ void Entity::createAnimationComponent(sf::Sprite& sprite, sf::Texture& texture_s
 	m_animation_component = new Components::AnimationComponent(sprite, texture_sheet);
 }
 
-void Entity::createHitboxComponent(sf::Sprite& sprite, const sf::Vector2f& offset_xy, const sf::Vector2f& size_xy)
+void Entity::createHitboxComponent(sf::Sprite& sprite, const sf::Vector2f& offset_xy, const sf::Vector2f& size_xy, const sf::Vector2f& scale)
 {
-	m_hitbox_component = new Components::HitboxComponent(sprite, offset_xy, size_xy);
+	m_hitbox_component = new Components::HitboxComponent(sprite, offset_xy, size_xy, scale);
 }
 
 

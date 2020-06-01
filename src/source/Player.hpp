@@ -12,8 +12,9 @@ class Player :
 {
 public:
 	//Constructors
-	Player(const sf::Vector2f& position_xy, sf::Texture& texture, 
-		   const float& max_speed, const float& acceleration, const float& deceleration);
+	Player(const sf::Vector2f& position_xy, sf::Texture& texture,
+		   const float& max_speed, const float& acceleration, const float& deceleration,
+		   const sf::Vector2f& scale = sf::Vector2f(1.f, 1.f));
 	~Player();
 
 	//Accessors

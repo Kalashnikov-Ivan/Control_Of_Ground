@@ -7,16 +7,18 @@ using namespace Components;
 ////////////////////////////////////////////////////////////
 HitboxComponent::HitboxComponent(sf::Sprite& sprite,
 								 const sf::Vector2f& offset_xy, 
-								 const sf::Vector2f& size_xy)
+								 const sf::Vector2f& size_xy,
+								 const sf::Vector2f& scale)
 	: m_sprite{ sprite },
 	m_offset_xy{ offset_xy },
 	m_hitbox{ size_xy }
 {
 	m_hitbox.setPosition(m_sprite.getPosition() + m_offset_xy);
+	m_hitbox.setScale(scale);
 
 	//Debug
 	m_hitbox.setFillColor(sf::Color::Transparent);
-	m_hitbox.setOutlineThickness(1.f);
+	m_hitbox.setOutlineThickness(0.5f);
 	m_hitbox.setOutlineColor(sf::Color::Green);
 }
 

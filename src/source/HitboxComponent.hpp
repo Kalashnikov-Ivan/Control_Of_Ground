@@ -11,7 +11,8 @@ public:
 	//Constructors
 	HitboxComponent(sf::Sprite& sprite,
 					const sf::Vector2f& offset_xy, 
-					const sf::Vector2f& size_xy);
+					const sf::Vector2f& size_xy,
+					const sf::Vector2f& scale = sf::Vector2f(1.f, 1.f));
 	virtual ~HitboxComponent();
 
 	//Functions

@@ -8,10 +8,10 @@ using namespace Core;
 // Constructors
 ////////////////////////////////////////////////////////////
 Button::Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
-	sf::Font& font, const std::string& text, uint32_t ch_size,
-	const sf::Color& color_idle, 
-	const sf::Color& color_hover,
-	const sf::Color& color_active)
+			   sf::Font& font, const std::string& text, uint32_t ch_size,
+			   const sf::Color& color_idle, 
+			   const sf::Color& color_hover,
+			   const sf::Color& color_active)
 	: m_shape{size_wh},
 	  m_text{ text,  font, ch_size },
 	  m_color_idle {color_idle}, 

@@ -7,20 +7,20 @@ using namespace Entities;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Player::Player(const sf::Vector2f& position_xy, sf::Texture& texture, 
-			   const float& max_speed, const float& acceleration, const float& deceleration)
-	: Entity(texture)
+Player::Player(const sf::Vector2f& position_xy, sf::Texture& texture,
+			   const float& max_speed, const float& acceleration, const float& deceleration,
+			   const sf::Vector2f& scale)
+	: Entity(texture, scale)
 {
 	//Creating components
 	createMovementComponent (*m_sprite, max_speed, acceleration, deceleration);
 	createAnimationComponent(*m_sprite, texture);
-	sf::Vector2f hitbox_size{ 50, 50 };
-	createHitboxComponent   (*m_sprite, sf::Vector2f(0.f, 0.f), hitbox_size);
+	sf::Vector2f hitbox_size{ 11.f, 29.f };
+	createHitboxComponent   (*m_sprite, sf::Vector2f(80.f, 30.f), hitbox_size, scale);
 
 	initAnimations();
 
 	setPosition(position_xy);
-	m_sprite->setScale(sf::Vector2f(4.f, 4.f));
 }
 
 Player::~Player()
@@ -56,7 +56,7 @@ void Player::update(const float& dt)
 	m_hitbox_component->update(dt);
 }
 
-void Entities::Player::render(sf::RenderTarget& target)
+void Player::render(sf::RenderTarget& target)
 {
 	target.draw(*m_sprite);
 	m_hitbox_component->render(target);
