@@ -11,7 +11,7 @@ HitboxComponent::HitboxComponent(sf::Sprite& sprite,
 								 const sf::Vector2f& scale)
 	: m_sprite{ sprite },
 	m_offset_basic{ offset_basic }, m_offset_move{ sf::Vector2f(0.f, 0.f) },
-	m_hitbox{ size_xy }
+	m_hitbox{ size_xy }, m_default_size{ size_xy }
 {
 	m_hitbox.setPosition(m_sprite.getPosition() + m_offset_basic);
 	m_hitbox.setScale(scale);
@@ -27,6 +27,14 @@ HitboxComponent::~HitboxComponent()
 }
 
 ////////////////////////////////////////////////////////////
+// Accessors
+////////////////////////////////////////////////////////////
+sf::Vector2f HitboxComponent::getDefaultSize() const
+{
+	return m_default_size;
+}
+
+////////////////////////////////////////////////////////////
 // Modificators
 ////////////////////////////////////////////////////////////
 void HitboxComponent::setOffsetMove(const sf::Vector2f& offset)
@@ -37,6 +45,11 @@ void HitboxComponent::setOffsetMove(const sf::Vector2f& offset)
 void HitboxComponent::setRotation(const float& rotation)
 {
 	m_hitbox.setRotation(rotation);
+}
+
+void Components::HitboxComponent::setSize(const sf::Vector2f& size)
+{
+	m_hitbox.setSize(size);
 }
 
 ////////////////////////////////////////////////////////////

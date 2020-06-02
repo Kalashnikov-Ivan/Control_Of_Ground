@@ -7,7 +7,7 @@ using namespace Components;
 ////////////////////////////////////////////////////////////
 MovementComponent::MovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration)
 	: m_sprite { sprite },
-	m_max_speed{ max_speed },
+	m_max_speed{ max_speed }, m_state{ States::IDLE },
 	m_acceleration{ acceleration }, m_deceleration{ deceleration },
 	m_first_speed_stage {m_max_speed / 3.f }, m_second_speed_stage{ m_max_speed / 2.f }, m_third_speed_stage{ m_max_speed / 1.1f }
 {
@@ -25,9 +25,14 @@ const float Components::MovementComponent::getMaxSpeed() const
 	return m_max_speed;
 }
 
-const sf::Vector2f& MovementComponent::getSpeed() const
+const sf::Vector2f MovementComponent::getSpeed() const
 {
 	return m_speed;
+}
+
+const sf::Vector2f Components::MovementComponent::getDirMove() const
+{
+	return m_dir_xy;
 }
 
 const float Components::MovementComponent::getSpeedStageX() const
@@ -44,39 +49,7 @@ const float Components::MovementComponent::getSpeedStageX() const
 
 const MovementComponent::States MovementComponent::getState() const
 {
-	if (m_speed.x == 0.f && m_speed.y == 0.f)
-		return States::IDLE;
-	else if (m_speed.x > 0.f)
-		return States::MOVING_RIGHT;
-	else if (m_speed.x < 0.f)
-		return States::MOVING_LEFT;
-	else if (m_speed.y > 0.f)
-		return States::MOVING_DOWN;
-	else if (m_speed.y < 0.f)
-		return States::MOVING_UP;
-
-	return States::NONE;
-}
-
-const bool MovementComponent::checkState(const States state) const
-{
-	switch (state)
-	{
-	case States::IDLE:
-		if (m_speed.x == 0.f && m_speed.y == 0.f)
-			return true;
-		break;
-	case States::MOVING_RIGHT:
-		if (m_speed.x > 0.f)
-			return true;
-		break;
-	case States::MOVING_LEFT:
-		if (m_speed.x < 0.f)
-			return true;
-		break;
-	}
-
-	return false;
+	return m_state;
 }
 
 ////////////////////////////////////////////////////////////
@@ -84,15 +57,38 @@ const bool MovementComponent::checkState(const States state) const
 ////////////////////////////////////////////////////////////
 void MovementComponent::move(const sf::Vector2f& dir_xy, const float& dt)
 {
-	acceleration(dir_xy);
+	if (m_dir_xy.x == -1 && m_speed.x > 0)
+	{
+		m_state = States::BREAKING;
+	}
+
+	m_dir_xy = dir_xy;
+	m_speed += m_acceleration * m_dir_xy;
 }
 
 void MovementComponent::update(const float& dt)
 {
 	maxSpeedCheck();
+	updateState();
 	deceleration();
 
 	m_sprite.move(m_speed * dt);
+}
+
+inline void MovementComponent::updateState()
+{
+	if (m_speed.x == 0.f && m_speed.y == 0.f)
+		m_state = States::IDLE;
+	else if (m_speed.x > 0.f)
+		m_state = States::MOVING_RIGHT;
+	else if (m_speed.x < 0.f)
+		m_state = States::MOVING_LEFT;
+	else if (m_speed.y > 0.f)
+		m_state = States::MOVING_DOWN;
+	else if (m_speed.y < 0.f)
+		m_state = States::MOVING_UP;
+	else
+		m_state = States::NONE;
 }
 
 ////////////////////////////////////////////////////////////
@@ -126,11 +122,12 @@ inline void MovementComponent::maxSpeedCheck()
 	}
 }
 
+/*
 inline void MovementComponent::acceleration(const sf::Vector2f& dir_xy)
 {
 	m_speed += m_acceleration * dir_xy;
 }
-
+*/
 inline void MovementComponent::deceleration()
 {
 	// x

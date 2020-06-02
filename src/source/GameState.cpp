@@ -80,7 +80,7 @@ void GameState::initKeybinds()
 
 void GameState::initPlayers()
 {
-	const float max_speed = 200.f;
+	const float max_speed = 500.f;
 	m_player = new Entities::Player(sf::Vector2f(10.f, 100.f), *m_textures["PLAYER_SHEET"], max_speed, 5.f, 2.f, sf::Vector2f(4.f, 4.f));
 }
 
@@ -92,14 +92,31 @@ void GameState::updateKeyboardInput(const float& dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
 		endState();
 
+	bool key_pressed{ false };
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_LEFT"])))
+	{
+		key_pressed = true;
 		m_player->move(sf::Vector2f(-1.f, 0.f), dt);
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_RIGHT"])))
+	{
+		key_pressed = true;
 		m_player->move(sf::Vector2f(1.f, 0.f), dt);
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_TOP"])))
+	{
+		key_pressed = true;
 		m_player->move(sf::Vector2f(0.f, -1.f), dt);
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_DOWN"])))
+	{
+		key_pressed = true;
 		m_player->move(sf::Vector2f(0.f, 1.f), dt);
+	}
+
+	if(!key_pressed)
+		m_player->move(sf::Vector2f(0.f, 0.f), dt);
 }
 
 void GameState::update(const float& dt)
@@ -131,6 +148,7 @@ std::string GameState::getStringInfo()
 std::string GameState::getStringPlayerSpeed() const
 {
 	std::stringstream speed_info;
+	speed_info << "p_dir: x = " << m_player->getDirMove().x << " y = " << m_player->getDirMove().y << '\n';
 	speed_info << "p_speed: x = " << m_player->getSpeed().x << " y = " << m_player->getSpeed().y << '\n';
 	speed_info << "p_speed_stage: x = " << m_player->getValueSpeedStageX() << " y = " << "0" << '\n';
 

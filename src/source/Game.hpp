@@ -58,7 +58,7 @@ private:
 	//Update
 	void updateDeltaTime();
 	void updateSfEvents();
-	void updateGame();
+	void update();
 
 	void applicationEnd();
 
@@ -73,7 +73,6 @@ private:
 	sf::Text getTextInfo(const sf::Font& font);
 
 	std::string getStringDt();
-	sf::Text getTextDt(const sf::Font& font); //delta time and frame rate
 
 	//Support_cleaner
 	void inline delete_states();

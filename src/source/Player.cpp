@@ -33,18 +33,14 @@ Player::~Player()
 void Player::initAnimations()
 {
 	//addAnimation(NAME, TIME_OF_ANIM (sec), START_X, START_Y, FRAMES_X, FRAMES_Y, WIDTH, HEIGHT)
+	m_animation_component->addAnimation("BREAKING", 0.35f, 3, 3, 4, 1, 50, 37);
 	m_animation_component->addAnimation("WALK", 0.35f, 1, 1, 5, 1, 50, 37);
-
 	m_animation_component->addAnimation("IDLE", 0.35f, 0, 0, 3, 0, 50, 37); //Need last, because it's a start Rect
 }
 
 ////////////////////////////////////////////////////////////
 // Accessors
 ////////////////////////////////////////////////////////////
-float Player::getValueSpeedStageX() const
-{
-	return m_movement_component->getSpeedStageX();
-}
 
 ////////////////////////////////////////////////////////////
 // Update
@@ -90,8 +86,24 @@ void Player::updateAnimations(const float& dt)
 		m_animation_component->play("WALK", dt, m_movement_component->getSpeedStageX());
 		break;
 	case MoveState::MOVING_UP:
+		m_sprite->setOrigin(0.f, 0.f);
+		m_sprite->setScale(m_scale_x, m_scale_y);
+		m_hitbox_component->setOffsetMove(sf::Vector2f(23.f, 0.f));
+		m_hitbox_component->setRotation(7.f);
+		m_animation_component->play("WALK", dt, m_movement_component->getSpeedStageX());
 		break;
 	case MoveState::MOVING_DOWN:
+		m_sprite->setOrigin(0.f, 0.f);
+		m_sprite->setScale(m_scale_x, m_scale_y);
+		m_hitbox_component->setOffsetMove(sf::Vector2f(23.f, 0.f));
+		m_hitbox_component->setRotation(7.f);
+		m_animation_component->play("WALK", dt, m_movement_component->getSpeedStageX());
+		break;
+	case MoveState::BREAKING:
+		m_hitbox_component->setOffsetMove(sf::Vector2f(0.f, 0.f));
+		m_hitbox_component->setRotation(0.f);
+		//m_hitbox_component->setSize(sf::Vector2f(29.f, 11.f));
+		m_animation_component->play("BREAKING", dt, m_movement_component->getSpeedStageX());
 		break;
 	}		
 }

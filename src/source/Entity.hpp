@@ -15,7 +15,9 @@ public:
 	virtual ~Entity();
 
 	//Accessors
-	sf::Vector2f getSpeed() const;
+	const sf::Vector2f getSpeed() const;
+	const sf::Vector2f getDirMove() const;
+	const float getValueSpeedStageX() const;
 
 	//Modifiers
 	virtual void setPosition(const sf::Vector2f& position_xy);
@@ -35,7 +37,7 @@ protected:
 	//Components
 	Components::MovementComponent*  m_movement_component;
 	Components::AnimationComponent* m_animation_component;
-	Components::HitboxComponent* m_hitbox_component;
+	Components::HitboxComponent*    m_hitbox_component;
 
 	//Creators
 	void createMovementComponent (sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration);

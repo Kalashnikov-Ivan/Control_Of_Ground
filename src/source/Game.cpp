@@ -203,7 +203,7 @@ void Game::updateSfEvents()
 	}
 }
 
-void Game::updateGame()
+void Game::update()
 {
 	updateSfEvents();
 	updateInfo();
@@ -275,17 +275,6 @@ std::string Game::getStringDt()
 	return dt_info.str();
 }
 
-sf::Text Game::getTextDt(const sf::Font& font) //delta time
-{
-	std::stringstream ss;
-	ss << "Delta time: " << m_delta_time << " sec";
-
-	sf::Text delta_time_text{ ss.str(), font, 16U };
-	delta_time_text.setPosition(20.f, 20.f);
-
-	return delta_time_text;
-}
-
 ////////////////////////////////////////////////////////////
 // Core
 ////////////////////////////////////////////////////////////
@@ -295,7 +284,7 @@ void Game::run()
 	{
 		updateDeltaTime();
 
-		updateGame();
+		update();
 		render();
 	}
 }

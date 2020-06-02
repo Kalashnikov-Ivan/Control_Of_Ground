@@ -15,9 +15,13 @@ public:
 					const sf::Vector2f& scale = sf::Vector2f(1.f, 1.f));
 	virtual ~HitboxComponent();
 
+	//Accessors
+	sf::Vector2f getDefaultSize() const;
+
 	//Modificators
 	void setOffsetMove(const sf::Vector2f& offset);
 	void setRotation(const float& rotation);
+	void setSize(const sf::Vector2f& size);
 
 	//Functions
 	bool checkIntersect(const sf::FloatRect& f_rect);
@@ -29,6 +33,7 @@ private:
 	//Members
 	sf::Sprite& m_sprite;
 	sf::RectangleShape m_hitbox;
+	sf::Vector2f m_default_size;
 
 	sf::Vector2f m_offset_basic;
 	sf::Vector2f m_offset_move;

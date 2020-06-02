@@ -18,7 +18,6 @@ public:
 	~Player();
 
 	//Accessors
-	float getValueSpeedStageX() const;
 
 	//Update
 	void update(const float& dt);

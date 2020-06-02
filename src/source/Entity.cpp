@@ -50,10 +50,9 @@ void Entity::createHitboxComponent(sf::Sprite& sprite, const sf::Vector2f& offse
 
 
 ////////////////////////////////////////////////////////////
-// Modifiers
+// Accessors
 ////////////////////////////////////////////////////////////
-//Accessors
-sf::Vector2f Entity::getSpeed() const
+const sf::Vector2f Entity::getSpeed() const
 {
 	if (m_movement_component != nullptr)
 		return m_movement_component->getSpeed();
@@ -61,6 +60,18 @@ sf::Vector2f Entity::getSpeed() const
 		return sf::Vector2f(0.f, 0.f);
 }
 
+const sf::Vector2f Entity::getDirMove() const
+{
+	return m_movement_component->getDirMove();
+}
+
+const float Entity::getValueSpeedStageX() const
+{
+	if (m_movement_component != nullptr)
+		return m_movement_component->getSpeedStageX();
+	else
+		return 0.f;
+}
 
 ////////////////////////////////////////////////////////////
 // Modifiers
