@@ -9,6 +9,7 @@ class MovementComponent
 {
 public:
 	enum class MovingStates { NONE = -1, IDLE = 0, RIGHT, LEFT, DOWN, UP, BREAKING };
+	enum class SpeedStages  { NONE = 0, FIRST, SECOND, THIRD };
 
 	//Constructors
 	MovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration);
@@ -19,7 +20,7 @@ public:
 			const float        getMaxSpeed() const;
 			const sf::Vector2f getSpeed() const;
 			const sf::Vector2f getSpeedDir() const;
-			const float		   getSpeedStageX() const;
+			const SpeedStages  getSpeedStage() const;
 		//State
 			const MovingStates getMovingState() const;
 
@@ -42,6 +43,7 @@ private:
 		sf::Vector2f m_dir_xy;
 		sf::Vector2f m_speed;
 		sf::Vector2f m_speed_dir;
+		SpeedStages  m_speed_stage;
 		MovingStates m_moving_state;
 
 		float m_first_speed_stage;
@@ -49,6 +51,8 @@ private:
 		float m_third_speed_stage;
 
 	//Functions
+		inline void updateSpeedDir();
+		inline void updateSpeedStage();
 		inline void updateState();
 
 	//Support functions
@@ -56,7 +60,7 @@ private:
 		inline void deceleration();
 
 		inline void maxSpeedCheck();
-		void updateSpeedDir();
+		
 };
 } // !namespace Components
 

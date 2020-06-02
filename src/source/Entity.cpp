@@ -68,14 +68,6 @@ const sf::Vector2f Entity::getSpeedDir() const
 		return sf::Vector2f(0.f, 0.f);
 }
 
-const float Entity::getValueSpeedStageX() const
-{
-	if (m_movement_component != nullptr)
-		return m_movement_component->getSpeedStageX();
-	else
-		return 0.f;
-}
-
 ////////////////////////////////////////////////////////////
 // Modifiers
 ////////////////////////////////////////////////////////////

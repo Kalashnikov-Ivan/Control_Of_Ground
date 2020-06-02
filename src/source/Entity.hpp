@@ -17,7 +17,6 @@ public:
 	//Accessors
 		const sf::Vector2f getSpeed() const;
 		const sf::Vector2f getSpeedDir() const;
-		const float getValueSpeedStageX() const;
 
 	//Modifiers
 		void setPosition(const sf::Vector2f& position_xy);
