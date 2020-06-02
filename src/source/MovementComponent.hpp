@@ -8,7 +8,7 @@ namespace Components
 class MovementComponent
 {
 public:
-	enum class States { NONE = -1, IDLE = 0, MOVING_RIGHT, MOVING_LEFT, MOVING_DOWN, MOVING_UP, BREAKING };
+	enum class MovingStates { NONE = -1, IDLE = 0, RIGHT, LEFT, DOWN, UP, BREAKING };
 
 	//Constructors
 	MovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration);
@@ -21,7 +21,7 @@ public:
 			const sf::Vector2f getSpeedDir() const;
 			const float		   getSpeedStageX() const;
 		//State
-			const States getState() const;
+			const MovingStates getMovingState() const;
 
 	//Info
 		std::string getStringInfo();
@@ -42,7 +42,7 @@ private:
 		sf::Vector2f m_dir_xy;
 		sf::Vector2f m_speed;
 		sf::Vector2f m_speed_dir;
-		States m_state;
+		MovingStates m_moving_state;
 
 		float m_first_speed_stage;
 		float m_second_speed_stage;

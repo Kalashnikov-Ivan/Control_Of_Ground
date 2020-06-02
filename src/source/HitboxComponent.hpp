@@ -19,6 +19,7 @@ public:
 	sf::Vector2f getDefaultSize() const;
 
 	//Modificators
+	void setPosition(const sf::Vector2f& position);
 	void setOffsetMove(const sf::Vector2f& offset);
 	void setRotation(const float& rotation);
 	void setSize(const sf::Vector2f& size);

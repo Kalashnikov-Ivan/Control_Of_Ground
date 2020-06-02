@@ -37,6 +37,12 @@ sf::Vector2f HitboxComponent::getDefaultSize() const
 ////////////////////////////////////////////////////////////
 // Modificators
 ////////////////////////////////////////////////////////////
+void HitboxComponent::setPosition(const sf::Vector2f& position)
+{
+	m_hitbox.setPosition(position + m_offset_basic);
+}
+
+
 void HitboxComponent::setOffsetMove(const sf::Vector2f& offset)
 {
 	m_offset_move = offset;

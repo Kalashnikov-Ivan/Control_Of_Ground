@@ -7,7 +7,7 @@ using namespace Components;
 ////////////////////////////////////////////////////////////
 MovementComponent::MovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration)
 	: m_sprite { sprite },
-	m_max_speed{ max_speed }, m_state{ States::IDLE }, m_dir_xy{ sf::Vector2f(0.f, 0.f)}, m_speed_dir{ sf::Vector2f(0.f, 0.f) },
+	m_max_speed{ max_speed }, m_moving_state{ MovingStates::IDLE }, m_dir_xy{ sf::Vector2f(0.f, 0.f)}, m_speed_dir{ sf::Vector2f(0.f, 0.f) },
 	m_acceleration{ acceleration }, m_deceleration{ deceleration },
 	m_first_speed_stage {m_max_speed / 3.f }, m_second_speed_stage{ m_max_speed / 2.f }, m_third_speed_stage{ m_max_speed / 1.1f }
 {
@@ -47,9 +47,9 @@ const float Components::MovementComponent::getSpeedStageX() const
 	return 0.0f;
 }
 
-const MovementComponent::States MovementComponent::getState() const
+const MovementComponent::MovingStates MovementComponent::getMovingState() const
 {
-	return m_state;
+	return m_moving_state;
 }
 
 ////////////////////////////////////////////////////////////
@@ -64,28 +64,28 @@ std::string MovementComponent::getStringInfo()
 	result << "speed: x = " << m_speed.x << " y = " << m_speed.y << '\n';
 	result << "speed_stage: x = " << getSpeedStageX() << " y = " << "0" << '\n';
 
-	switch (m_state)
+	switch (m_moving_state)
 	{
-	case Components::MovementComponent::States::NONE:
-		result << "state: NONE" << '\n';
+	case MovingStates::NONE:
+		result << "MovingState: NONE" << '\n';
 		break;
-	case Components::MovementComponent::States::IDLE:
-		result << "state: IDLE" << '\n';
+	case MovingStates::IDLE:
+		result << "MovingState: IDLE" << '\n';
 		break;
-	case Components::MovementComponent::States::MOVING_RIGHT:
-		result << "state: MOVING_RIGHT" << '\n';
+	case MovingStates::RIGHT:
+		result << "MovingState: RIGHT" << '\n';
 		break;
-	case Components::MovementComponent::States::MOVING_LEFT:
-		result << "state: MOVING_LEFT" << '\n';
+	case MovingStates::LEFT:
+		result << "MovingState: LEFT" << '\n';
 		break;
-	case Components::MovementComponent::States::MOVING_DOWN:
-		result << "state: MOVING_DOWN" << '\n';
+	case Components::MovementComponent::MovingStates::DOWN:
+		result << "MovingState: DOWN" << '\n';
 		break;
-	case Components::MovementComponent::States::MOVING_UP:
-		result << "state: MOVING_UP" << '\n';
+	case Components::MovementComponent::MovingStates::UP:
+		result << "MovingState: UP" << '\n';
 		break;
-	case Components::MovementComponent::States::BREAKING:
-		result << "state: BREAKING" << '\n';
+	case Components::MovementComponent::MovingStates::BREAKING:
+		result << "MovingState: BREAKING" << '\n';
 		break;
 	}
 
@@ -104,19 +104,19 @@ void MovementComponent::move(const sf::Vector2f& dir_xy, const float& dt)
 inline void MovementComponent::updateState()
 {
 	if (m_speed_dir.x == 0.f && m_speed_dir.y == 0.f)
-		m_state = States::IDLE;
+		m_moving_state = MovingStates::IDLE;
 	else if ((m_dir_xy.x != 0 && m_dir_xy.x != m_speed_dir.x) || (m_dir_xy.y != 0 && m_dir_xy.y != m_speed_dir.y))
-		m_state = States::BREAKING;
+		m_moving_state = MovingStates::BREAKING;
 	else if (m_speed_dir.x > 0.f)
-		m_state = States::MOVING_RIGHT;
+		m_moving_state = MovingStates::RIGHT;
 	else if (m_speed_dir.x < 0.f)
-		m_state = States::MOVING_LEFT;
+		m_moving_state = MovingStates::LEFT;
 	else if (m_speed_dir.y > 0.f)
-		m_state = States::MOVING_DOWN;
+		m_moving_state = MovingStates::DOWN;
 	else if (m_speed_dir.y < 0.f)
-		m_state = States::MOVING_UP;
+		m_moving_state = MovingStates::UP;
 	else
-		m_state = States::NONE;
+		m_moving_state = MovingStates::NONE;
 }
 
 void MovementComponent::updateSpeedDir()
