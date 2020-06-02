@@ -30,6 +30,8 @@ public:
 	virtual void update(const float& dt);
 	virtual void render(sf::RenderTarget& target);
 
+	//Info
+	virtual std::string getStringInfo() = 0;
 protected:
 	//Members
 	sf::Sprite* m_sprite;

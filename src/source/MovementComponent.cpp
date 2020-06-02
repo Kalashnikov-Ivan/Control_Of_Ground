@@ -94,7 +94,6 @@ inline void MovementComponent::updateState()
 ////////////////////////////////////////////////////////////
 // Support functions
 ////////////////////////////////////////////////////////////
-
 inline void MovementComponent::maxSpeedCheck()
 {
 	// x
@@ -157,4 +156,43 @@ inline void MovementComponent::deceleration()
 		if (abs(m_speed.y) < 0.f)
 			m_speed.y = 0.f;
 	}
+}
+
+////////////////////////////////////////////////////////////
+// Info
+////////////////////////////////////////////////////////////
+std::string MovementComponent::getStringInfo()
+{
+	std::stringstream result;
+
+	result << "dir: x = " << m_dir_xy.x << " y = " << m_dir_xy.y << '\n';
+	result << "speed: x = " << m_speed.x << " y = " << m_speed.y << '\n';
+	result << "speed_stage: x = " << getSpeedStageX() << " y = " << "0" << '\n';
+
+	switch (m_state)
+	{
+	case Components::MovementComponent::States::NONE:
+		result << "state: NONE" << '\n';
+		break;
+	case Components::MovementComponent::States::IDLE:
+		result << "state: IDLE" << '\n';
+		break;
+	case Components::MovementComponent::States::MOVING_RIGHT:
+		result << "state: MOVING_RIGHT" << '\n';
+		break;
+	case Components::MovementComponent::States::MOVING_LEFT:
+		result << "state: MOVING_LEFT" << '\n';
+		break;
+	case Components::MovementComponent::States::MOVING_DOWN:
+		result << "state: MOVING_DOWN" << '\n';
+		break;
+	case Components::MovementComponent::States::MOVING_UP:
+		result << "state: MOVING_UP" << '\n';
+		break;
+	case Components::MovementComponent::States::BREAKING:
+		result << "state: BREAKING" << '\n';
+		break;
+	}
+
+	return result.str();
 }

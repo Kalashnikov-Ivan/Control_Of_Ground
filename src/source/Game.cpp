@@ -210,11 +210,13 @@ void Game::update()
 
 	if (!m_states.empty())
 	{
+		//Update the top state
 		m_states.top()->update(m_delta_time);
 
-		//Geting info
+		//Getting info
 		m_tech_info << m_states.top()->getStringInfo();
 
+		//Check quit
 		if (m_states.top()->getQuit())
 		{
 			m_states.top()->endState();

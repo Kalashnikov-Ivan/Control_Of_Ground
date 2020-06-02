@@ -100,28 +100,6 @@ void MainMenuState::initKeybinds()
 {
 }
 
-
-////////////////////////////////////////////////////////////
-// Tech info
-////////////////////////////////////////////////////////////
-std::string MainMenuState::getStringInfo()
-{
-	std::stringstream result;
-
-	result << getStringMousePos();
-
-	for (auto& i : m_buttons)
-	{
-		if (i.second->getState() == Core::Button::States::HOVER)
-		{
-			result << "b_position x = " << i.second->getShape().getPosition().x << " " << "y = " << i.second->getShape().getPosition().y << '\n';
-			result << "b_size x = " << i.second->getShape().getSize().x << " " << "y = " << i.second->getShape().getSize().y << '\n';
-		}
-	}
-
-	return result.str();
-}
-
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
@@ -172,4 +150,21 @@ void MainMenuState::render(sf::RenderTarget& target)
 
 	renderButtons(target);
 	target.draw(getMousePosText(*m_supported_fonts["DOSIS"]));
+}
+
+////////////////////////////////////////////////////////////
+// Tech info
+////////////////////////////////////////////////////////////
+std::string MainMenuState::getStringInfo()
+{
+	std::stringstream result;
+
+	result << getStringMousePos();
+
+	//Getting info from buttons
+	for (auto& i : m_buttons)
+		if (i.second->getState() == Core::Button::States::HOVER)
+			result << i.second->getStringInfo();
+
+	return result.str();
 }

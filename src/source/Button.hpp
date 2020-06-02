@@ -28,6 +28,9 @@ public:
 	const sf::Vector2f getSize() const;
 	const bool isPressed() const;
 
+	//Info
+	std::string getStringInfo() const;
+
 private:
 	//Members
 	sf::RectangleShape m_shape;

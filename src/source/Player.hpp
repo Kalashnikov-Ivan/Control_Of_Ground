@@ -24,6 +24,9 @@ public:
 
 	//Render
 	void render(sf::RenderTarget& target);
+
+	//Info
+	virtual std::string getStringInfo() override;
 private:
 	//Members
 	float m_scale_x;

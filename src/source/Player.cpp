@@ -52,12 +52,6 @@ void Player::update(const float& dt)
 	m_hitbox_component->update(dt);
 }
 
-void Player::render(sf::RenderTarget& target)
-{
-	target.draw(*m_sprite);
-	m_hitbox_component->render(target);
-}
-
 void Player::updateAnimations(const float& dt)
 {
 	using MoveState = Components::MovementComponent::States;
@@ -110,4 +104,23 @@ void Player::updateAnimations(const float& dt)
 
 void Player::updateInput()
 {
+}
+
+void Player::render(sf::RenderTarget& target)
+{
+	target.draw(*m_sprite);
+	m_hitbox_component->render(target);
+}
+
+////////////////////////////////////////////////////////////
+// Info
+////////////////////////////////////////////////////////////
+std::string Player::getStringInfo()
+{
+	std::stringstream result;
+	
+	result << "MovementComponent:\n";
+	result << m_movement_component->getStringInfo();
+
+	return result.str();
 }

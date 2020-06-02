@@ -141,16 +141,7 @@ std::string GameState::getStringInfo()
 	std::stringstream result;
 
 	result << getStringMousePos();
-	result << getStringPlayerSpeed();
+	result << m_player->getStringInfo();
 
 	return result.str();
-}
-std::string GameState::getStringPlayerSpeed() const
-{
-	std::stringstream speed_info;
-	speed_info << "p_dir: x = " << m_player->getDirMove().x << " y = " << m_player->getDirMove().y << '\n';
-	speed_info << "p_speed: x = " << m_player->getSpeed().x << " y = " << m_player->getSpeed().y << '\n';
-	speed_info << "p_speed_stage: x = " << m_player->getValueSpeedStageX() << " y = " << "0" << '\n';
-
-	return speed_info.str();
 }

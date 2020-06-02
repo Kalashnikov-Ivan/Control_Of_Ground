@@ -100,3 +100,14 @@ const bool Button::isPressed() const
 
 	return false;
 }
+
+//Info
+std::string Core::Button::getStringInfo() const
+{
+	std::stringstream result;
+
+	result << "b_position x = " << m_shape.getPosition().x << " " << "y = " << m_shape.getPosition().y << '\n';
+	result << "b_size x = " << m_shape.getSize().x << " " << "y = " << m_shape.getSize().y << '\n';
+
+	return result.str();
+}

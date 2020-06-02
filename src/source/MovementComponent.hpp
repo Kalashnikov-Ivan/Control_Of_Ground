@@ -28,7 +28,7 @@ public:
 	void update(const float& dt);
 
 	//Info
-	std::string 
+	std::string getStringInfo();
 private:
 	//Members
 	sf::Sprite& m_sprite;

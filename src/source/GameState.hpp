@@ -20,8 +20,6 @@ public:
 
 	//Tech info
 	virtual std::string getStringInfo() override;
-	std::string getStringPlayerSpeed() const;
-
 
 	//Update
 	virtual void update(const float& dt) override;
