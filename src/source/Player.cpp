@@ -45,6 +45,7 @@ std::string Player::getStringInfo()
 {
 	std::stringstream result;
 
+	result << "Player_pos: " << m_sprite->getPosition().x << ' ' << m_sprite->getPosition().y << '\n';
 	result << "MovementComponent:\n";
 	result << m_movement_component->getStringInfo();
 
@@ -125,9 +126,8 @@ void Player::updateAnimations(const float& dt)
 		m_animation_component->play("WALK", dt, grow_speed_anim);
 		break;
 	case MoveState::BREAKING:
-		m_hitbox_component->setPosition(sf::Vector2f(0.f, 330.f));
-		m_hitbox_component->setSize(sf::Vector2f(29.f, 11.f));
-		m_hitbox_component->setOffsetMove(sf::Vector2f(0.f, 0.f));
+		m_hitbox_component->setSize(sf::Vector2f(29.f, 13.f));
+		m_hitbox_component->setOffsetMove(sf::Vector2f(-34.f, 65.f));
 		m_hitbox_component->setRotation(0.f);
 		m_animation_component->play("BREAKING", dt, grow_speed_anim);
 		break;
