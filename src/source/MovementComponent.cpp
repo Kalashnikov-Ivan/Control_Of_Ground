@@ -7,7 +7,7 @@ using namespace Components;
 ////////////////////////////////////////////////////////////
 MovementComponent::MovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration)
 	: m_sprite { sprite },
-	m_max_speed{ max_speed }, m_state{ States::IDLE },
+	m_max_speed{ max_speed }, m_state{ States::IDLE }, m_dir_xy{ sf::Vector2f(0.f, 0.f)}, m_speed_dir{ sf::Vector2f(0.f, 0.f) },
 	m_acceleration{ acceleration }, m_deceleration{ deceleration },
 	m_first_speed_stage {m_max_speed / 3.f }, m_second_speed_stage{ m_max_speed / 2.f }, m_third_speed_stage{ m_max_speed / 1.1f }
 {
@@ -30,9 +30,9 @@ const sf::Vector2f MovementComponent::getSpeed() const
 	return m_speed;
 }
 
-const sf::Vector2f Components::MovementComponent::getDirMove() const
+const sf::Vector2f Components::MovementComponent::getSpeedDir() const
 {
-	return m_dir_xy;
+	return m_speed_dir;
 }
 
 const float Components::MovementComponent::getSpeedStageX() const
@@ -60,6 +60,7 @@ std::string MovementComponent::getStringInfo()
 	std::stringstream result;
 
 	result << "dir: x = " << m_dir_xy.x << " y = " << m_dir_xy.y << '\n';
+	result << "speed_dir: x = " << m_speed_dir.x << " y = " << m_speed_dir.y << '\n';
 	result << "speed: x = " << m_speed.x << " y = " << m_speed.y << '\n';
 	result << "speed_stage: x = " << getSpeedStageX() << " y = " << "0" << '\n';
 
@@ -96,38 +97,53 @@ std::string MovementComponent::getStringInfo()
 ////////////////////////////////////////////////////////////
 void MovementComponent::move(const sf::Vector2f& dir_xy, const float& dt)
 {
-	if (m_dir_xy.x == -1 && m_speed.x > 0)
-	{
-		m_state = States::BREAKING;
-	}
-
 	m_dir_xy = dir_xy;
-	m_speed += m_acceleration * m_dir_xy;
+	m_speed += m_acceleration * dir_xy;
+}
+
+inline void MovementComponent::updateState()
+{
+	if (m_speed_dir.x == 0.f && m_speed_dir.y == 0.f)
+		m_state = States::IDLE;
+	else if ((m_dir_xy.x != 0 && m_dir_xy.x != m_speed_dir.x) || (m_dir_xy.y != 0 && m_dir_xy.y != m_speed_dir.y))
+		m_state = States::BREAKING;
+	else if (m_speed_dir.x > 0.f)
+		m_state = States::MOVING_RIGHT;
+	else if (m_speed_dir.x < 0.f)
+		m_state = States::MOVING_LEFT;
+	else if (m_speed_dir.y > 0.f)
+		m_state = States::MOVING_DOWN;
+	else if (m_speed_dir.y < 0.f)
+		m_state = States::MOVING_UP;
+	else
+		m_state = States::NONE;
+}
+
+void MovementComponent::updateSpeedDir()
+{
+	if (m_speed.x > 0.f)
+		m_speed_dir.x = 1.f;
+	else if (m_speed.x < 0.f)
+		m_speed_dir.x = -1.f;
+	else
+		m_speed_dir.x = 0.f;
+
+	if (m_speed.y > 0.f)
+		m_speed_dir.y = 1.f;
+	else if (m_speed.y < 0.f)
+		m_speed_dir.y = -1.f;
+	else 
+		m_speed_dir.y = 0.f;
 }
 
 void MovementComponent::update(const float& dt)
 {
 	maxSpeedCheck();
 	updateState();
+	updateSpeedDir();
 	deceleration();
 
 	m_sprite.move(m_speed * dt);
-}
-
-inline void MovementComponent::updateState()
-{
-	if (m_speed.x == 0.f && m_speed.y == 0.f)
-		m_state = States::IDLE;
-	else if (m_speed.x > 0.f)
-		m_state = States::MOVING_RIGHT;
-	else if (m_speed.x < 0.f)
-		m_state = States::MOVING_LEFT;
-	else if (m_speed.y > 0.f)
-		m_state = States::MOVING_DOWN;
-	else if (m_speed.y < 0.f)
-		m_state = States::MOVING_UP;
-	else
-		m_state = States::NONE;
 }
 
 ////////////////////////////////////////////////////////////

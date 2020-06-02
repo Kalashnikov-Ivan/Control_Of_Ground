@@ -81,7 +81,7 @@ void GameState::initKeybinds()
 void GameState::initPlayers()
 {
 	const float max_speed = 500.f;
-	m_player = new Entities::Player(sf::Vector2f(10.f, 100.f), *m_textures["PLAYER_SHEET"], max_speed, 5.f, 2.f, sf::Vector2f(4.f, 4.f));
+	m_player = new Entities::Player(sf::Vector2f(10.f, 100.f), *m_textures["PLAYER_SHEET"], max_speed, 5.f, 3.f, sf::Vector2f(4.f, 4.f));
 }
 
 ////////////////////////////////////////////////////////////

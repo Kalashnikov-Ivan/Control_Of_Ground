@@ -60,10 +60,10 @@ const sf::Vector2f Entity::getSpeed() const
 		return sf::Vector2f(0.f, 0.f);
 }
 
-const sf::Vector2f Entity::getDirMove() const
+const sf::Vector2f Entity::getSpeedDir() const
 {
 	if (m_movement_component != nullptr)
-		return m_movement_component->getDirMove();
+		return m_movement_component->getSpeedDir();
 	else
 		return sf::Vector2f(0.f, 0.f);
 }

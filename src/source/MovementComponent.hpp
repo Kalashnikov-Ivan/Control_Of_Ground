@@ -16,10 +16,10 @@ public:
 
 	//Accessors
 		//Speed
-			const float getMaxSpeed() const;
+			const float        getMaxSpeed() const;
 			const sf::Vector2f getSpeed() const;
-			const sf::Vector2f getDirMove() const;
-			const float getSpeedStageX() const;
+			const sf::Vector2f getSpeedDir() const;
+			const float		   getSpeedStageX() const;
 		//State
 			const States getState() const;
 
@@ -41,6 +41,7 @@ private:
 
 		sf::Vector2f m_dir_xy;
 		sf::Vector2f m_speed;
+		sf::Vector2f m_speed_dir;
 		States m_state;
 
 		float m_first_speed_stage;
@@ -55,6 +56,7 @@ private:
 		inline void deceleration();
 
 		inline void maxSpeedCheck();
+		void updateSpeedDir();
 };
 } // !namespace Components
 
