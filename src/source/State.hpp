@@ -18,18 +18,16 @@ public:
 	//Accessors
 	const bool getQuit() const;
 
-	//Tech info
+	//Info
 	virtual std::string getStringInfo() = 0;
 	std::string getStringMousePos() const;
-	sf::Text getMousePosText(const sf::Font& font) const;
 
-	//Update
-	virtual void update(const float& dt) = 0;
-
-	//Render
-	virtual void render(sf::RenderTarget& target) = 0;
-
+	//Functions
 	virtual void endState();
+
+	//Update and render
+	virtual void update(const float& dt) = 0;
+	virtual void render(sf::RenderTarget& target) = 0;
 
 //__________________________PROTECTED_____________________________
 protected:

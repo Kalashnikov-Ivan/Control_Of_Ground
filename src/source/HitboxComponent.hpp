@@ -26,8 +26,8 @@ public:
 	//Functions
 	bool checkIntersect(const sf::FloatRect& f_rect);
 
+	//Update and render
 	void update(const float& dt);
-
 	void render(sf::RenderTarget& target);
 private:
 	//Members

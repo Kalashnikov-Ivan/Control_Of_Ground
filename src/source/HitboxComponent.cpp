@@ -60,6 +60,9 @@ bool HitboxComponent::checkIntersect(const sf::FloatRect& f_rect)
 	return m_hitbox.getGlobalBounds().intersects(f_rect);
 }
 
+////////////////////////////////////////////////////////////
+// Update and render
+////////////////////////////////////////////////////////////
 void HitboxComponent::update(const float& dt)
 {
 	m_hitbox.setPosition(m_sprite.getPosition() + m_offset_basic + m_offset_move);

@@ -48,7 +48,6 @@ private:
 		sf::IntRect m_start_rect;
 		sf::IntRect m_current_rect;
 		sf::IntRect m_end_rect;
-	private:
 	};
 
 	//Members
@@ -58,6 +57,6 @@ private:
 	std::map<std::string, Animation*> m_animations;
 	Animation* m_last_animation;
 };
-} // !namespace cog
+} // !namespace Components
 
 #endif // !ANIMATION_COMPONENT_H

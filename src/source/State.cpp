@@ -38,6 +38,9 @@ const bool State::getQuit() const
 	return m_quit;
 }
 
+////////////////////////////////////////////////////////////
+// Info
+////////////////////////////////////////////////////////////
 std::string States::State::getStringMousePos() const
 {
 	std::stringstream result;
@@ -45,20 +48,6 @@ std::string States::State::getStringMousePos() const
 	result << "mouse x = " << m_mouse_pos_view.x << " " << "y = " << m_mouse_pos_view.y << '\n';
 
 	return result.str();
-}
-
-////////////////////////////////////////////////////////////
-// Tech info
-////////////////////////////////////////////////////////////
-sf::Text State::getMousePosText(const sf::Font& font) const
-{
-	std::stringstream ss;
-	ss << "x: " << m_mouse_pos_view.x << " " << "y: " << m_mouse_pos_view.y;
-
-	sf::Text mouse_text{ ss.str(), font, 12U };
-	mouse_text.setPosition(m_mouse_pos_view.x + 10.f, m_mouse_pos_view.y - 10.f);
-
-	return mouse_text;
 }
 
 ////////////////////////////////////////////////////////////

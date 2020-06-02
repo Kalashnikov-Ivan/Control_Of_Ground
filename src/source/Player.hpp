@@ -19,14 +19,16 @@ public:
 
 	//Accessors
 
-	//Update
-	void update(const float& dt);
-
-	//Render
-	void render(sf::RenderTarget& target);
-
 	//Info
 	virtual std::string getStringInfo() override;
+
+	//Functions
+	virtual void move(const sf::Vector2f& dir_xy, const float& dt) override;
+
+	//Update and render
+	virtual void update(const float& dt) override;
+	virtual void render(sf::RenderTarget& target) override;
+
 private:
 	//Members
 	float m_scale_x;

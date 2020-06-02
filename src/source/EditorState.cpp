@@ -100,5 +100,4 @@ void EditorState::update(const float& dt)
 ////////////////////////////////////////////////////////////
 void EditorState::render(sf::RenderTarget& target)
 {
-	target.draw(getMousePosText(*m_supported_fonts["DOSIS"]));
 }

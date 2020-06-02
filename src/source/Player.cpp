@@ -39,19 +39,30 @@ void Player::initAnimations()
 }
 
 ////////////////////////////////////////////////////////////
-// Accessors
+// Info
 ////////////////////////////////////////////////////////////
+std::string Player::getStringInfo()
+{
+	std::stringstream result;
+
+	result << "MovementComponent:\n";
+	result << m_movement_component->getStringInfo();
+
+	return result.str();
+}
+
+////////////////////////////////////////////////////////////
+// Functions
+////////////////////////////////////////////////////////////
+
+void Player::move(const sf::Vector2f& dir_xy, const float& dt)
+{
+	m_movement_component->move(dir_xy, dt);
+}
 
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void Player::update(const float& dt)
-{
-	m_movement_component->update(dt);
-	updateAnimations(dt);
-	m_hitbox_component->update(dt);
-}
-
 void Player::updateAnimations(const float& dt)
 {
 	using MoveState = Components::MovementComponent::States;
@@ -106,21 +117,15 @@ void Player::updateInput()
 {
 }
 
+void Player::update(const float& dt)
+{
+	m_movement_component->update(dt);
+	updateAnimations(dt);
+	m_hitbox_component->update(dt);
+}
+
 void Player::render(sf::RenderTarget& target)
 {
 	target.draw(*m_sprite);
 	m_hitbox_component->render(target);
-}
-
-////////////////////////////////////////////////////////////
-// Info
-////////////////////////////////////////////////////////////
-std::string Player::getStringInfo()
-{
-	std::stringstream result;
-	
-	result << "MovementComponent:\n";
-	result << m_movement_component->getStringInfo();
-
-	return result.str();
 }

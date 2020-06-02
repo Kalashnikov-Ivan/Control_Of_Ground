@@ -62,7 +62,10 @@ const sf::Vector2f Entity::getSpeed() const
 
 const sf::Vector2f Entity::getDirMove() const
 {
-	return m_movement_component->getDirMove();
+	if (m_movement_component != nullptr)
+		return m_movement_component->getDirMove();
+	else
+		return sf::Vector2f(0.f, 0.f);
 }
 
 const float Entity::getValueSpeedStageX() const
@@ -86,29 +89,4 @@ void Entity::setTexture(const sf::Texture& texture)
 {
 	//m_sprite.setTexture(*texture);
 	m_sprite->setTexture(texture);
-}
-
-////////////////////////////////////////////////////////////
-// Functions
-////////////////////////////////////////////////////////////
-void Entity::move(const sf::Vector2f& dir_xy, const float& dt)
-{
-	m_movement_component->move(dir_xy, dt);
-}
-
-////////////////////////////////////////////////////////////
-// Virtual
-////////////////////////////////////////////////////////////
-void Entity::update(const float& dt)
-{
-	if (m_movement_component != nullptr)
-	{
-		m_movement_component->update(dt);
-	}
-}
-
-void Entity::render(sf::RenderTarget& target)
-{
-	//target->draw(m_sprite);
-	target.draw(*m_sprite);
 }

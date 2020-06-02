@@ -33,6 +33,43 @@ Button::~Button()
 }
 
 ////////////////////////////////////////////////////////////
+// Accessors
+////////////////////////////////////////////////////////////
+const Button::States Button::getState() const
+{
+	return m_state;
+}
+
+const sf::RectangleShape Core::Button::getShape() const
+{
+	return m_shape;
+}
+
+const sf::Vector2f Button::getPosition() const
+{
+	return m_shape.getPosition();
+}
+
+const sf::Vector2f Core::Button::getSize() const
+{
+	return m_shape.getSize();
+}
+
+////////////////////////////////////////////////////////////
+// Info
+////////////////////////////////////////////////////////////
+std::string Button::getStringInfo() const
+{
+	std::stringstream result;
+
+	result << "b_position x = " << m_shape.getPosition().x << " " << "y = " << m_shape.getPosition().y << '\n';
+	result << "b_size x = " << m_shape.getSize().x << " " << "y = " << m_shape.getSize().y << '\n';
+
+	return result.str();
+}
+
+
+////////////////////////////////////////////////////////////
 // Functions
 ////////////////////////////////////////////////////////////
 void Button::update(const sf::Vector2f& mouse_pos)
@@ -72,42 +109,10 @@ void Button::render(sf::RenderTarget& target)
 	target.draw(m_text);
 }
 
-const Button::States Button::getState() const
-{
-	return m_state;
-}
-
-const sf::RectangleShape Core::Button::getShape() const
-{
-	return m_shape;
-}
-
-const sf::Vector2f Button::getPosition() const
-{
-	return m_shape.getPosition();
-}
-
-const sf::Vector2f Core::Button::getSize() const
-{
-	return m_shape.getSize();
-}
-
-//Accessors
 const bool Button::isPressed() const
 {
 	if (m_state == States::ACTIVE)
 		return true;
 
 	return false;
-}
-
-//Info
-std::string Core::Button::getStringInfo() const
-{
-	std::stringstream result;
-
-	result << "b_position x = " << m_shape.getPosition().x << " " << "y = " << m_shape.getPosition().y << '\n';
-	result << "b_size x = " << m_shape.getSize().x << " " << "y = " << m_shape.getSize().y << '\n';
-
-	return result.str();
 }

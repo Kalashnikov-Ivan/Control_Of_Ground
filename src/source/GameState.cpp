@@ -130,7 +130,6 @@ void GameState::update(const float& dt)
 void GameState::render(sf::RenderTarget& target)
 {		
 	m_player->render(target);
-	target.draw(getMousePosText(*m_supported_fonts["DOSIS"]));
 }
 
 ////////////////////////////////////////////////////////////

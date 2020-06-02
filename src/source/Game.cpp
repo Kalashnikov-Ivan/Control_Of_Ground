@@ -187,6 +187,24 @@ void Game::initStates()
 }
 
 ////////////////////////////////////////////////////////////
+// Info
+////////////////////////////////////////////////////////////
+void Game::updateInfo()
+{
+	m_tech_info.str(std::string()); //Clearing
+
+	m_tech_info << "Delta time: " << m_delta_time << " sec" << '\n';
+}
+
+sf::Text Game::getTextInfo(const sf::Font& font)
+{
+	sf::Text info_text{ m_tech_info.str(), font, 16U };
+	info_text.setPosition(20.f, 20.f);
+
+	return info_text;
+}
+
+////////////////////////////////////////////////////////////
 // Update and render
 ////////////////////////////////////////////////////////////
 void Game::updateDeltaTime()
@@ -248,33 +266,6 @@ void Game::render()
 	m_window->draw(getTextInfo(*m_supported_fonts["DOSIS"]));
 
 	m_window->display();
-}
-
-////////////////////////////////////////////////////////////
-// Tech functions
-////////////////////////////////////////////////////////////
-//Info
-void Game::updateInfo()
-{
-	m_tech_info.str(std::string()); //Clearing
-
-	m_tech_info << getStringDt();
-}
-
-sf::Text Game::getTextInfo(const sf::Font& font)
-{
-	sf::Text info_text{ m_tech_info.str(), font, 16U };
-	info_text.setPosition(20.f, 20.f);
-
-	return info_text;
-}
-
-std::string Game::getStringDt()
-{
-	std::stringstream dt_info;
-	dt_info << "Delta time: " << m_delta_time << " sec" << '\n';
-
-	return dt_info.str();
 }
 
 ////////////////////////////////////////////////////////////

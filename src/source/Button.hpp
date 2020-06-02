@@ -17,20 +17,20 @@ public:
 			const sf::Color& color_active);
 	~Button();
 
-	//Functions
-	void update(const sf::Vector2f& mouse_pos);
-	void render(sf::RenderTarget& target);
-
 	//Accessors
-	const States getState() const;
-	const sf::RectangleShape getShape() const;
-	const sf::Vector2f getPosition() const;
-	const sf::Vector2f getSize() const;
-	const bool isPressed() const;
+		const States getState() const;
+		const sf::RectangleShape getShape() const;
+		const sf::Vector2f getPosition() const;
+		const sf::Vector2f getSize() const;
 
 	//Info
-	std::string getStringInfo() const;
+		std::string getStringInfo() const;
 
+	//Functions
+		void update(const sf::Vector2f& mouse_pos);
+		void render(sf::RenderTarget& target);
+
+		const bool isPressed() const;
 private:
 	//Members
 	sf::RectangleShape m_shape;

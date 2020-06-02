@@ -15,23 +15,24 @@ public:
 	virtual ~Entity();
 
 	//Accessors
-	const sf::Vector2f getSpeed() const;
-	const sf::Vector2f getDirMove() const;
-	const float getValueSpeedStageX() const;
+		const sf::Vector2f getSpeed() const;
+		const sf::Vector2f getDirMove() const;
+		const float getValueSpeedStageX() const;
 
 	//Modifiers
-	virtual void setPosition(const sf::Vector2f& position_xy);
-	virtual void setTexture(const sf::Texture& texture);
-
-	//Functions
-	virtual void move(const sf::Vector2f& dir_xy, const float& dt);
-
-	//Virtual
-	virtual void update(const float& dt);
-	virtual void render(sf::RenderTarget& target);
+		void setPosition(const sf::Vector2f& position_xy);
+		void setTexture(const sf::Texture& texture);
 
 	//Info
-	virtual std::string getStringInfo() = 0;
+		virtual std::string getStringInfo() = 0;
+
+	//Functions
+		virtual void move(const sf::Vector2f& dir_xy, const float& dt) = 0;
+
+	//Update and render
+		virtual void update(const float& dt) = 0;
+		virtual void render(sf::RenderTarget& target) = 0;
+
 protected:
 	//Members
 	sf::Sprite* m_sprite;
@@ -49,5 +50,5 @@ protected:
 private:
 
 };
-} // !namespace cog
+} // !namespace Entities
 #endif // !ENTITY_H

@@ -149,7 +149,6 @@ void MainMenuState::render(sf::RenderTarget& target)
 	target.draw(m_title);
 
 	renderButtons(target);
-	target.draw(getMousePosText(*m_supported_fonts["DOSIS"]));
 }
 
 ////////////////////////////////////////////////////////////
