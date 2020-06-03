@@ -14,7 +14,7 @@ Game::Game()
 	: m_window             { nullptr }, 
 	  m_video_modes        { sf::VideoMode::getFullscreenModes() }, 
 	  m_delta_time         { 0.f },
-	  m_fullscreen_enabled { false }
+	  m_fullscreen_enabled { false }, m_enable_info{ false }
 {
 	initWindow(); //Dynamic for m_window
 	initSupportedKeys();
@@ -109,6 +109,7 @@ void Game::initWindow()
 
 	m_window->setFramerateLimit(framerate_limit);
 	m_window->setVerticalSyncEnabled(vertical_sync_enabled);
+	m_window->setKeyRepeatEnabled(false);
 
 #ifdef DEBUG
 	std::cout << "Init_window successful!\nVideo mode: " << video_mode.width << ", " << video_mode.height << std::endl;
@@ -140,6 +141,7 @@ void Game::initSupportedKeys()
 			<< "Using default keys..." << std::endl;
 
 		m_supported_keys["Escape"] = sf::Keyboard::Escape;
+		m_supported_keys["F3"] = sf::Keyboard::F3;
 
 		m_supported_keys["A"] = sf::Keyboard::A;
 		m_supported_keys["D"] = sf::Keyboard::D;
@@ -212,18 +214,26 @@ void Game::updateDeltaTime()
 	m_delta_time = m_delta_time_clock.restart().asSeconds();
 }
 
-void Game::updateSfEvents()
+void Game::updateEvents()
 {
 	while (m_window->pollEvent(m_sf_event))
 	{
 		if (m_sf_event.type == sf::Event::Closed)
 			m_window->close();
+
+		if (m_sf_event.type == sf::Event::KeyPressed)
+		{
+			if (m_sf_event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])) && m_enable_info == true)
+				m_enable_info = false;
+			else if (m_sf_event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])) && m_enable_info == false)
+				m_enable_info = true;
+		}
 	}
 }
 
 void Game::update()
 {
-	updateSfEvents();
+	updateEvents();
 	updateInfo();
 
 	if (!m_states.empty())
@@ -263,7 +273,8 @@ void Game::render()
 		m_states.top()->render(*m_window);
 	}
 
-	m_window->draw(getTextInfo(*m_supported_fonts["DOSIS"]));
+	if (m_enable_info)
+		m_window->draw(getTextInfo(*m_supported_fonts["DOSIS"]));
 
 	m_window->display();
 }

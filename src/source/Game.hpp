@@ -44,6 +44,7 @@ private:
 
 	//Info
 		std::stringstream m_tech_info;
+		bool m_enable_info;
 
 ////////////////////////////////////////////////////////////
 // Init
@@ -64,7 +65,7 @@ private:
 ////////////////////////////////////////////////////////////
 	//Update
 		void updateDeltaTime();
-		void updateSfEvents();
+		void updateEvents();
 		void update();
 
 		void applicationEnd();
