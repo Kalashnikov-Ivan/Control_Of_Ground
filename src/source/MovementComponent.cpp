@@ -10,7 +10,7 @@ MovementComponent::MovementComponent(sf::Sprite& sprite, const float& max_speed,
 	m_max_speed{ max_speed }, m_speed_stage{ SpeedStages::NONE }, m_moving_state{ MovingStates::IDLE },
 	m_dir_xy{ sf::Vector2f(0.f, 0.f)}, m_speed_dir{ sf::Vector2f(0.f, 0.f) },
 	m_acceleration{ acceleration }, m_deceleration{ deceleration },
-	m_first_speed_stage {m_max_speed / 3.f }, m_second_speed_stage{ m_max_speed / 2.f }, m_third_speed_stage{ m_max_speed / 1.1f }
+	m_first_speed_stage {m_max_speed / 3.f }, m_second_speed_stage{ m_max_speed / 1.7f }, m_third_speed_stage{ m_max_speed / 1.1f }
 {
 }
 
@@ -87,14 +87,17 @@ std::string MovementComponent::getStringInfo()
 	case MovingStates::LEFT:
 		result << "MovingState: LEFT" << '\n';
 		break;
-	case Components::MovementComponent::MovingStates::DOWN:
+	case MovingStates::DOWN:
 		result << "MovingState: DOWN" << '\n';
 		break;
-	case Components::MovementComponent::MovingStates::UP:
+	case MovingStates::UP:
 		result << "MovingState: UP" << '\n';
 		break;
-	case Components::MovementComponent::MovingStates::BREAKING:
-		result << "MovingState: BREAKING" << '\n';
+	case MovingStates::BREAKING_RIGHT:
+		result << "MovingState: BREAKING_RIGHT" << '\n';
+		break;
+	case MovingStates::BREAKING_LEFT:
+		result << "MovingState: BREAKING_LEFT" << '\n';
 		break;
 	}
 
@@ -141,12 +144,16 @@ inline void Components::MovementComponent::updateSpeedStage()
 
 inline void MovementComponent::updateState()
 {
-	bool is_opposite_dir = (m_dir_xy.x != 0 && m_dir_xy.x != m_speed_dir.x) || (m_dir_xy.y != 0 && m_dir_xy.y != m_speed_dir.y);
+	bool is_breaking_right = (m_dir_xy.x == -1.f && m_speed_dir.x == 1.f);
+	bool is_breaking_left = (m_dir_xy.x == 1.f && m_speed_dir.x == -1.f);
+	//bool is_opposite_dir = (m_dir_xy.x != 0 && m_dir_xy.x != m_speed_dir.x) || (m_dir_xy.y != 0 && m_dir_xy.y != m_speed_dir.y);
 
 	if (m_speed_dir.x == 0.f && m_speed_dir.y == 0.f)
 		m_moving_state = MovingStates::IDLE;
-	else if (is_opposite_dir && m_speed_stage >= SpeedStages::FIRST)
-		m_moving_state = MovingStates::BREAKING;
+	else if (is_breaking_right && m_speed_stage > SpeedStages::FIRST)
+		m_moving_state = MovingStates::BREAKING_RIGHT;
+	else if (is_breaking_left && m_speed_stage > SpeedStages::FIRST)
+		m_moving_state = MovingStates::BREAKING_LEFT;
 	else if (m_speed_dir.x > 0.f)
 		m_moving_state = MovingStates::RIGHT;
 	else if (m_speed_dir.x < 0.f)

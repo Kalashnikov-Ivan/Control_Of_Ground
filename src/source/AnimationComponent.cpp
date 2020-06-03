@@ -28,15 +28,17 @@ AnimationComponent::Animation::~Animation()
 
 
 //Functions
-void AnimationComponent::Animation::play(const float& dt, const float& grow_speed_anim)
+void AnimationComponent::Animation::play(const float& dt, const float& modifier, const float& max_modifier)
 {
 	//Update timer
-	m_timer += dt; //Old value: 100.f * dt
+	m_timer += (abs(modifier) / max_modifier) * 100.f * dt; //Old value: (modifier / max_modifier) * 100.f * dt
 
-	if (m_timer >= m_animation_timer - grow_speed_anim)
+	if (m_timer >= m_animation_timer)
 	{
 		//Reset timer
 		m_timer = 0.f;
+
+		m_sprite.setTextureRect(m_current_rect);
 
 		//Animate
 		if (m_current_rect != m_end_rect)
@@ -47,8 +49,6 @@ void AnimationComponent::Animation::play(const float& dt, const float& grow_spee
 		{
 			m_current_rect.left = m_start_rect.left;
 		}
-
-		m_sprite.setTextureRect(m_current_rect);
 	}
 }
 
@@ -85,7 +85,7 @@ void AnimationComponent::addAnimation(const std::string& key, const float& anima
 	m_animations[key] = new Animation{ m_sprite, m_texture_sheet, animation_timer, start_x, start_y, frames_x, frames_y, width, height };
 }
 
-void AnimationComponent::play(const std::string& key, const float& dt, const float& grow_speed_anim)
+void AnimationComponent::play(const std::string& key, const float& dt, const float& modifier, const float& max_modifier)
 {
 	if (m_last_animation != m_animations[key])
 	{
@@ -98,5 +98,5 @@ void AnimationComponent::play(const std::string& key, const float& dt, const flo
 		}
 	}
 
-	m_animations[key]->play(dt, grow_speed_anim);
+	m_animations[key]->play(dt, modifier, max_modifier);
 }

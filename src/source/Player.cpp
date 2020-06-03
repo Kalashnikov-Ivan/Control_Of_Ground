@@ -32,10 +32,10 @@ Player::~Player()
 ////////////////////////////////////////////////////////////
 void Player::initAnimations()
 {
-	//addAnimation(NAME, TIME_OF_ANIM (sec), START_X, START_Y, FRAMES_X, FRAMES_Y, WIDTH, HEIGHT)
-	m_animation_component->addAnimation("BREAKING", 0.35f, 3, 3, 4, 1, 50, 37);
-	m_animation_component->addAnimation("WALK", 0.35f, 1, 1, 5, 1, 50, 37);
-	m_animation_component->addAnimation("IDLE", 0.35f, 0, 0, 3, 0, 50, 37); //Need last, because it's a start Rect
+	//addAnimation                      (NAME, TIME_OF_ANIM (sec), START_X, START_Y, FRAMES_X, FRAMES_Y, WIDTH, HEIGHT)
+	m_animation_component->addAnimation("BREAKING", 15.f, 0, 2, 4, 1, 50, 37);
+	m_animation_component->addAnimation("WALK",     10.f, 0, 1, 5, 1, 50, 37);
+	m_animation_component->addAnimation("IDLE",     20.f, 0, 0, 3, 0, 50, 37); //Need last, because it's a start Rect
 }
 
 ////////////////////////////////////////////////////////////
@@ -72,13 +72,17 @@ void Player::updateAnimations(const float& dt)
 	MoveState movement_state = m_movement_component->getMovingState();
 	SpeedStage speed_stage   = m_movement_component->getSpeedStage();
 
-	float grow_speed_anim = 0.f;
+	float modifier_speed_anim = m_movement_component->getSpeed().x;
+	float modifier_max        = m_movement_component->getMaxSpeed();
+	/*
+	float modifier_speed_anim = 0.f;
 	if (speed_stage == SpeedStage::FIRST)
-		grow_speed_anim = 0.1f;
+		modifier_speed_anim = 0.01f;
 	else if (speed_stage == SpeedStage::SECOND)
-		grow_speed_anim = 0.15f;
+		modifier_speed_anim = 0.02f;
 	else if (speed_stage == SpeedStage::THIRD)
-		grow_speed_anim = 0.18f;
+		modifier_speed_anim = 0.03f;
+	*/
 
 	switch (movement_state)
 	{
@@ -87,49 +91,43 @@ void Player::updateAnimations(const float& dt)
 		m_hitbox_component->setSize(sf::Vector2f(11.f, 29.f));
 		m_hitbox_component->setOffsetMove(sf::Vector2f(0.f, 0.f));
 		m_hitbox_component->setRotation(0.f);
-		m_animation_component->play("IDLE", dt);
+		m_animation_component->play("IDLE", dt, 1.f, 1.f);
 		break;
 	case MoveState::RIGHT:
 		m_sprite->setOrigin(0.f, 0.f);
 		m_sprite->setScale(m_scale_x, m_scale_y);
 		m_hitbox_component->setPosition(sf::Vector2f(0.f, 0.f));
 		m_hitbox_component->setSize(sf::Vector2f(11.f, 29.f));
-		m_hitbox_component->setOffsetMove(sf::Vector2f(23.f, 0.f));
+		m_hitbox_component->setOffsetMove(sf::Vector2f(7.f, 0.f));
 		m_hitbox_component->setRotation(7.f);
-		m_animation_component->play("WALK", dt, grow_speed_anim);
+		m_animation_component->play("WALK", dt, modifier_speed_anim, modifier_max);
 		break;
 	case MoveState::LEFT:
 		m_sprite->setOrigin(50.f, 0.f);
 		m_sprite->setScale(-m_scale_x, m_scale_y);
 		m_hitbox_component->setPosition(sf::Vector2f(0.f, 0.f));
 		m_hitbox_component->setSize(sf::Vector2f(11.f, 29.f));
-		m_hitbox_component->setOffsetMove(sf::Vector2f(-23.f, 0.f));
+		m_hitbox_component->setOffsetMove(sf::Vector2f(-7.f, 0.f));
 		m_hitbox_component->setRotation(-7.f);
-		m_animation_component->play("WALK", dt, grow_speed_anim);
+		m_animation_component->play("WALK", dt, modifier_speed_anim, modifier_max);
 		break;
 	case MoveState::UP:
-		m_sprite->setOrigin(0.f, 0.f);
-		m_sprite->setScale(m_scale_x, m_scale_y);
-		m_hitbox_component->setPosition(sf::Vector2f(0.f, 0.f));
-		m_hitbox_component->setSize(sf::Vector2f(11.f, 29.f));
-		m_hitbox_component->setOffsetMove(sf::Vector2f(23.f, 0.f));
-		m_hitbox_component->setRotation(7.f);
-		m_animation_component->play("WALK", dt, grow_speed_anim);
+		m_animation_component->play("WALK", dt, modifier_speed_anim, modifier_max);
 		break;
 	case MoveState::DOWN:
-		m_sprite->setOrigin(0.f, 0.f);
-		m_sprite->setScale(m_scale_x, m_scale_y);
-		m_hitbox_component->setPosition(sf::Vector2f(0.f, 0.f));
-		m_hitbox_component->setSize(sf::Vector2f(11.f, 29.f));
-		m_hitbox_component->setOffsetMove(sf::Vector2f(23.f, 0.f));
-		m_hitbox_component->setRotation(7.f);
-		m_animation_component->play("WALK", dt, grow_speed_anim);
+		m_animation_component->play("WALK", dt, modifier_speed_anim, modifier_max);
 		break;
-	case MoveState::BREAKING:
-		m_hitbox_component->setSize(sf::Vector2f(29.f, 13.f));
-		m_hitbox_component->setOffsetMove(sf::Vector2f(-34.f, 65.f));
+	case MoveState::BREAKING_RIGHT:
+		m_hitbox_component->setSize(sf::Vector2f(25.f, 13.f));
+		m_hitbox_component->setOffsetMove(sf::Vector2f(-13.f, 53.f));
 		m_hitbox_component->setRotation(0.f);
-		m_animation_component->play("BREAKING", dt, grow_speed_anim);
+		m_animation_component->play("BREAKING", dt, modifier_speed_anim, modifier_max);
+		break;
+	case MoveState::BREAKING_LEFT:
+		m_hitbox_component->setSize(sf::Vector2f(25.f, 13.f));
+		m_hitbox_component->setOffsetMove(sf::Vector2f(-44.f, 53.f));
+		m_hitbox_component->setRotation(0.f);
+		m_animation_component->play("BREAKING", dt, modifier_speed_anim, modifier_max);
 		break;
 	}		
 }

@@ -33,8 +33,8 @@ void GameState::initTextures()
 {
 	m_textures["PLAYER_SHEET"] = new sf::Texture();
 
-	if (!m_textures["PLAYER_SHEET"]->loadFromFile("resources/textures/Player/adventurer_Sheet.png"))
-		throw "ERROR::GameState::init_textures::PLAYER_SHEET - failed to load texture resources/textures/Player/adventurer_Sheet.png";
+	if (!m_textures["PLAYER_SHEET"]->loadFromFile("resources/textures/Player/Player_sheet.png"))
+		throw "ERROR::GameState::init_textures::PLAYER_SHEET - failed to load texture resources/textures/Player/Player_sheet.png";
 }
 
 void GameState::initKeybinds()

@@ -8,7 +8,7 @@ namespace Components
 class MovementComponent
 {
 public:
-	enum class MovingStates { NONE = -1, IDLE = 0, RIGHT, LEFT, DOWN, UP, BREAKING };
+	enum class MovingStates { NONE = -1, IDLE = 0, RIGHT, LEFT, DOWN, UP, BREAKING_RIGHT, BREAKING_LEFT};
 	enum class SpeedStages  { NONE = 0, FIRST, SECOND, THIRD };
 
 	//Constructors
