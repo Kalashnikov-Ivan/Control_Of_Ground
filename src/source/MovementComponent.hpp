@@ -13,7 +13,7 @@ public:
 
 	//Constructors
 	MovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration);
-	virtual ~MovementComponent();
+	~MovementComponent();
 
 	//Accessors
 		//Speed

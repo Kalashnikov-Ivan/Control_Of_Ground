@@ -16,7 +16,7 @@ public:
 				std::stack<State*>& states,
 				std::map<const std::string, sf::Font*>& supported_fonts,
 				const std::map<const std::string, int>& supported_keys);
-	~EditorState();
+	virtual ~EditorState();
 
 	//Tech info
 	virtual std::string getStringInfo() override;

@@ -24,6 +24,7 @@ GameState::~GameState()
 {
 	//State delete all textures
 	delete m_player;
+	std::cout << "GAME STATE DEAD";
 }
 
 ////////////////////////////////////////////////////////////
@@ -81,7 +82,7 @@ void GameState::initKeybinds()
 void GameState::initPlayers()
 {
 	const float max_speed = 500.f;
-	m_player = new Entities::Player(sf::Vector2f(10.f, 100.f), *m_textures["PLAYER_SHEET"], max_speed, 3.f, 1.f, sf::Vector2f(4.f, 4.f));
+	m_player = new Entities::Player(sf::Vector2f(10.f, 100.f), *m_textures["PLAYER_SHEET"], max_speed, 2.f, 1.f, sf::Vector2f(4.f, 4.f));
 }
 
 ////////////////////////////////////////////////////////////
@@ -115,7 +116,7 @@ void GameState::updateKeyboardInput(const float& dt)
 		m_player->move(sf::Vector2f(0.f, 1.f), dt);
 	}
 
-	if(!key_pressed)
+	if (!key_pressed)
 		m_player->move(sf::Vector2f(0.f, 0.f), dt);
 }
 

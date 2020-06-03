@@ -21,6 +21,7 @@ State::State(sf::RenderWindow& window,
 State::~State()
 {
 	deleteTextures();
+	std::cout << "STATE DEAD";
 }
 
 //Support_cleaner

@@ -15,7 +15,7 @@ public:
 	Player(const sf::Vector2f& position_xy, sf::Texture& texture,
 		   const float& max_speed, const float& acceleration, const float& deceleration,
 		   const sf::Vector2f& scale = sf::Vector2f(1.f, 1.f));
-	~Player();
+	virtual ~Player();
 
 	//Accessors
 
@@ -24,6 +24,7 @@ public:
 
 	//Functions
 	virtual void move(const sf::Vector2f& dir_xy, const float& dt) override;
+	void attack(const float& dt);
 
 	//Update and render
 	virtual void update(const float& dt) override;

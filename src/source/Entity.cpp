@@ -20,6 +20,8 @@ Entity::~Entity()
 {
 	/*??? Idea: put possession of components (delete heap memory) in children classes ???*/
 
+	std::cout << "PIRD!!!";
+
 	if (m_hitbox_component)
 		delete m_hitbox_component;
 	if (m_movement_component)

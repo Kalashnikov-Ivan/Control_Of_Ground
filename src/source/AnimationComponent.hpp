@@ -19,7 +19,7 @@ public:
 					   const int start_x, const int start_y, const int frames_x, const int frames_y,
 					   const int width, const int height);
 
-	void play(const std::string& key, const float& dt, const float& modifier = 0.f, const float& max_modifier = 10.f);
+	void play(const std::string& key, const float& dt, const float& modifier = 1.f, const float& max_modifier = 1.f);
 
 private:
 	class Animation
@@ -31,7 +31,7 @@ private:
 		~Animation();
 
 		//Functions
-		void play(const float& dt, const float& modifier = 0.f, const float& max_modifier = 10.f);
+		void play(const float& dt, const float& modifier = 1.f, const float& max_modifier = 1.f);
 		void reset();
 
 		//------------------------------------------------

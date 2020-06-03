@@ -13,7 +13,7 @@ public:
 					const sf::Vector2f& m_offset_basic,
 					const sf::Vector2f& size_xy,
 					const sf::Vector2f& scale = sf::Vector2f(1.f, 1.f));
-	virtual ~HitboxComponent();
+	~HitboxComponent();
 
 	//Accessors
 	sf::Vector2f getDefaultSize() const;
