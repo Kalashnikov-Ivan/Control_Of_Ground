@@ -10,7 +10,7 @@ class AnimationComponent
 public:
 	//Constructors
 	AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet);
-	virtual ~AnimationComponent();
+	~AnimationComponent();
 
 	//Accessors
 
