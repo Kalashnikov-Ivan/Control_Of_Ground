@@ -24,7 +24,6 @@ public:
 
 	//Functions
 	virtual void move(const sf::Vector2f& dir_xy, const float& dt) override;
-	void attack(const float& dt);
 
 	//Update and render
 	virtual void update(const float& dt) override;
@@ -34,6 +33,8 @@ private:
 	//Members
 	float m_scale_x;
 	float m_scale_y;
+
+	bool m_is_attacking;
 
 	//Update
 	void updateAnimations(const float& dt);

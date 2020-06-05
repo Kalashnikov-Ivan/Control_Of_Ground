@@ -16,7 +16,7 @@ AnimationComponent::Animation::Animation(sf::Sprite& sprite, sf::Texture& textur
 	m_start_rect     { start_x * width, start_y * height, width, height },
 	m_current_rect   { m_start_rect },
 	m_end_rect       { frames_x * width, frames_y * height, width, height },
-	m_animation_timer{ animation_timer }, m_timer{ 0.f } //Timer
+	m_animation_timer{ animation_timer }, m_timer{ 0.f }, m_is_done{ false } //Timer
 {
 	m_sprite.setTexture(texture_sheet, true);
 	m_sprite.setTextureRect(m_start_rect);
@@ -26,12 +26,22 @@ AnimationComponent::Animation::~Animation()
 {
 }
 
+//Accessors
+bool AnimationComponent::Animation::isDone() const
+{
+	return m_is_done;
+}
+
 
 //Functions
-void AnimationComponent::Animation::play(const float& dt, const float& modifier, const float& max_modifier)
+bool AnimationComponent::Animation::play(const float& dt, float modif_percent, const bool is_priority)
 {
+	if (modif_percent < 0.5f)
+		modif_percent = 0.5f;
+
+	m_is_done = false;
 	//Update timer
-	m_timer += (abs(modifier) / max_modifier) * 100.f * dt; //Old value: (modifier / max_modifier) * 100.f * dt
+	m_timer += modif_percent * 100.f * dt; //Old value: (modifier / max_modifier) * 100.f * dt
 
 	if (m_timer >= m_animation_timer)
 	{
@@ -48,8 +58,11 @@ void AnimationComponent::Animation::play(const float& dt, const float& modifier,
 		else //Reset
 		{
 			m_current_rect.left = m_start_rect.left;
+			m_is_done = true;
 		}
 	}
+
+	return m_is_done;
 }
 
 void AnimationComponent::Animation::reset()
@@ -58,6 +71,7 @@ void AnimationComponent::Animation::reset()
 	m_current_rect = m_start_rect;
 }
 
+//------------------------------------------------------------------------------------------------------------------------------
 ////////////////////////////////////////////////////////////
 // AnimationComponent
 ////////////////////////////////////////////////////////////
@@ -66,7 +80,7 @@ void AnimationComponent::Animation::reset()
 AnimationComponent::AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet)
 	: m_sprite{ sprite },
 	m_texture_sheet{ texture_sheet },
-	m_last_animation{ nullptr }
+	m_last_animation{ nullptr }, m_priority_animation{ nullptr }
 {
 }
 
@@ -77,6 +91,12 @@ AnimationComponent::~AnimationComponent()
 		delete i.second;
 }
 
+//Accessors
+bool Components::AnimationComponent::isDone(const std::string& key)
+{
+	return m_animations[key]->isDone();
+}
+
 //Functions
 void AnimationComponent::addAnimation(const std::string& key, const float& animation_timer,
 							const int start_x, const int start_y, const int frames_x, const int frames_y,
@@ -85,18 +105,45 @@ void AnimationComponent::addAnimation(const std::string& key, const float& anima
 	m_animations[key] = new Animation{ m_sprite, m_texture_sheet, animation_timer, start_x, start_y, frames_x, frames_y, width, height };
 }
 
-void AnimationComponent::play(const std::string& key, const float& dt, const float& modifier, const float& max_modifier)
+bool AnimationComponent::play(const std::string& key, const float& dt, const float& modifier, const float& max_modifier, const bool is_priority)
 {
-	if (m_last_animation != m_animations[key])
+	if (m_priority_animation)
 	{
-		if (m_last_animation == nullptr)
-			m_last_animation = m_animations[key];
-		else
+		if (m_priority_animation == m_animations[key])
 		{
-			m_last_animation->reset();
-			m_last_animation = m_animations[key];
+			if (m_last_animation != m_animations[key])
+			{
+				if (m_last_animation == nullptr)
+					m_last_animation = m_animations[key];
+				else
+				{
+					m_last_animation->reset();
+					m_last_animation = m_animations[key];
+				}
+			}
+
+			if (m_animations[key]->play(dt, abs(modifier / max_modifier)))
+				m_priority_animation = nullptr;
 		}
 	}
+	else
+	{
+		if (is_priority)
+			m_priority_animation = m_animations[key];
 
-	m_animations[key]->play(dt, modifier, max_modifier);
+		if (m_last_animation != m_animations[key])
+		{
+			if (m_last_animation == nullptr)
+				m_last_animation = m_animations[key];
+			else
+			{
+				m_last_animation->reset();
+				m_last_animation = m_animations[key];
+			}
+		}
+
+		m_animations[key]->play(dt, abs(modifier / max_modifier));
+	}
+
+	return m_animations[key]->isDone();
 }

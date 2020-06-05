@@ -10,7 +10,8 @@ using namespace Entities;
 Player::Player(const sf::Vector2f& position_xy, sf::Texture& texture,
 			   const float& max_speed, const float& acceleration, const float& deceleration,
 			   const sf::Vector2f& scale)
-	: Entity{ texture, scale }, m_scale_x { scale.x }, m_scale_y{ scale.y }
+	: Entity{ texture, scale }, m_scale_x { scale.x }, m_scale_y{ scale.y },
+	m_is_attacking{ false }
 {
 	//Creating components
 	createMovementComponent (*m_sprite, max_speed, acceleration, deceleration);
@@ -25,8 +26,6 @@ Player::Player(const sf::Vector2f& position_xy, sf::Texture& texture,
 
 Player::~Player()
 {
-	system("cls");
-	std::cout << "LOH!!!";
 }
 
 ////////////////////////////////////////////////////////////
@@ -38,7 +37,7 @@ void Player::initAnimations()
 	m_animation_component->addAnimation("ATTACK_1",  8.f, 0, 3, 5, 3, 50, 37);
 	m_animation_component->addAnimation("BREAKING", 15.f, 0, 2, 4, 2, 50, 37);
 	m_animation_component->addAnimation("WALK",     10.f, 0, 1, 5, 1, 50, 37);
-	m_animation_component->addAnimation("IDLE",     20.f, 0, 0, 3, 0, 50, 37); //Need last, because it's a start Rect
+	m_animation_component->addAnimation("IDLE",     25.f, 0, 0, 3, 0, 50, 37); //Need last, because it's a start Rect
 }
 
 ////////////////////////////////////////////////////////////
@@ -64,33 +63,23 @@ void Player::move(const sf::Vector2f& dir_xy, const float& dt)
 	m_movement_component->move(dir_xy, dt);
 }
 
-void Player::attack(const float& dt)
-{
-	m_animation_component->play("ATTACK_1", dt, 1.f, 1.f);
-}
-
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
 void Player::updateAnimations(const float& dt)
 {
 	using MoveState  = Components::MovementComponent::MovingStates;
-	using SpeedStage = Components::MovementComponent::SpeedStages;
 
 	MoveState movement_state = m_movement_component->getMovingState();
-	SpeedStage speed_stage   = m_movement_component->getSpeedStage();
 
 	float modifier_speed_anim = m_movement_component->getSpeed().x;
 	float modifier_max        = m_movement_component->getMaxSpeed();
-	/*
-	float modifier_speed_anim = 0.f;
-	if (speed_stage == SpeedStage::FIRST)
-		modifier_speed_anim = 0.01f;
-	else if (speed_stage == SpeedStage::SECOND)
-		modifier_speed_anim = 0.02f;
-	else if (speed_stage == SpeedStage::THIRD)
-		modifier_speed_anim = 0.03f;
-	*/
+
+	if (m_is_attacking)
+	{
+		if (m_animation_component->play("ATTACK_1", dt, 1.f, 1.f, true))
+			m_is_attacking = false;
+	}
 
 	switch (movement_state)
 	{
@@ -99,7 +88,7 @@ void Player::updateAnimations(const float& dt)
 		m_hitbox_component->setSize(sf::Vector2f(11.f, 29.f));
 		m_hitbox_component->setOffsetMove(sf::Vector2f(0.f, 0.f));
 		m_hitbox_component->setRotation(0.f);
-		m_animation_component->play("ATTACK_1", dt, 1.f, 1.f);
+		m_animation_component->play("IDLE", dt, 1.f, 1.f);
 		break;
 	case MoveState::RIGHT:
 		m_sprite->setOrigin(0.f, 0.f);
@@ -142,12 +131,18 @@ void Player::updateAnimations(const float& dt)
 
 void Player::updateInput()
 {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		m_is_attacking = true;
 }
 
 void Player::update(const float& dt)
 {
+	updateInput();
+
 	m_movement_component->update(dt);
+
 	updateAnimations(dt);
+
 	m_hitbox_component->update(dt);
 }
 
