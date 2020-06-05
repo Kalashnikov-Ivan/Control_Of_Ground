@@ -14,12 +14,12 @@ Game::Game()
 	: m_window             { nullptr }, 
 	  m_video_modes        { sf::VideoMode::getFullscreenModes() }, 
 	  m_delta_time         { 0.f },
-	  m_fullscreen_enabled { false }, m_enable_info{ false }
+	  m_fullscreen_enabled { false }, m_enable_info{ true }
 {
 	initWindow(); //Dynamic for m_window
 	initSupportedKeys();
 	initSupportedFonts();
-	initStates(); //Dynamic for first state
+	initFirstState(); //Dynamic for first state
 }
 
 Game::~Game()
@@ -109,7 +109,7 @@ void Game::initWindow()
 
 	m_window->setFramerateLimit(framerate_limit);
 	m_window->setVerticalSyncEnabled(vertical_sync_enabled);
-	m_window->setKeyRepeatEnabled(false);
+	//m_window->setKeyRepeatEnabled(false);
 
 #ifdef DEBUG
 	std::cout << "Init_window successful!\nVideo mode: " << video_mode.width << ", " << video_mode.height << std::endl;
@@ -175,7 +175,7 @@ void Game::initSupportedFonts()
 
 }
 
-void Game::initStates()
+void Game::initFirstState()
 {
 #ifdef DEBUG
 	std::cout << "\nGame: Start of init_states..." << std::endl;
@@ -242,7 +242,8 @@ void Game::update()
 		m_states.top()->update(m_delta_time);
 
 		//Getting info
-		m_tech_info << m_states.top()->getStringInfo();
+		if (m_enable_info)
+			m_tech_info << m_states.top()->getStringInfo();
 
 		//Check quit
 		if (m_states.top()->getQuit())

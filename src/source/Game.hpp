@@ -52,7 +52,7 @@ private:
 	void inline initWindow();
 	void inline initSupportedKeys();
 	void inline initSupportedFonts();
-	void inline initStates();
+	void inline initFirstState();
 
 ////////////////////////////////////////////////////////////
 // Info

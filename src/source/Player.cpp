@@ -34,7 +34,7 @@ Player::~Player()
 void Player::initAnimations()
 {
 	//addAnimation                      (NAME, TIME_OF_ANIM (sec), START_X, START_Y, FRAMES_X, FRAMES_Y, WIDTH, HEIGHT)
-	m_animation_component->addAnimation("ATTACK_1",  8.f, 0, 3, 5, 3, 50, 37);
+	m_animation_component->addAnimation("ATTACK_1",  10.f, 0, 3, 5, 3, 50, 37);
 	m_animation_component->addAnimation("BREAKING", 15.f, 0, 2, 4, 2, 50, 37);
 	m_animation_component->addAnimation("WALK",     10.f, 0, 1, 5, 1, 50, 37);
 	m_animation_component->addAnimation("IDLE",     25.f, 0, 0, 3, 0, 50, 37); //Need last, because it's a start Rect
@@ -50,6 +50,9 @@ std::string Player::getStringInfo()
 	result << "Player_pos: " << m_sprite->getPosition().x << ' ' << m_sprite->getPosition().y << '\n';
 	result << "MovementComponent:\n";
 	result << m_movement_component->getStringInfo();
+
+	result << std::boolalpha;
+	result << "ATTACKING: " << m_is_attacking << '\n';
 
 	return result.str();
 }
