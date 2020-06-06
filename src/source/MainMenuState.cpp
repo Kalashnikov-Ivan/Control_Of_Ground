@@ -1,6 +1,5 @@
-#include "stdHeader.hpp"
-
 #include "MainMenuState.hpp"
+#include "GameState.hpp"
 #include "EditorState.hpp"
 
 #define DEBUG
@@ -14,7 +13,7 @@ MainMenuState::MainMenuState(sf::RenderWindow& window,
 							 std::stack<State*>& states,
 							 std::map<const std::string, sf::Font*>& supported_fonts,
 							 const std::map<const std::string, int>& supported_keys)
-	: State{ window, states, supported_fonts, supported_keys },
+	: State{ window, states, supported_fonts, supported_keys }, GUI::Menu{ static_cast<sf::Vector2f>(m_window.getSize()) },
 	m_title{ "controL of GrounD", *supported_fonts["MAJOR"], 78U }
 {
 	initTextures();
@@ -24,14 +23,6 @@ MainMenuState::MainMenuState(sf::RenderWindow& window,
 
 MainMenuState::~MainMenuState()
 {
-	deleteButtons();
-}
-
-//Support_cleaner
-void MainMenuState::deleteButtons()
-{
-	for (auto& i : m_buttons)
-		delete i.second;
 }
 
 ////////////////////////////////////////////////////////////
@@ -47,8 +38,6 @@ void MainMenuState::initTextures()
 
 void MainMenuState::initBackground()
 {
-	m_background.setSize(static_cast<sf::Vector2f>(m_window.getSize()));
-
 	m_background.setTexture(m_textures["BACKGROUND"]);
 
 	//Title
@@ -74,22 +63,22 @@ void MainMenuState::initButtons()
 	const float default_position_y = (m_window.getSize().y / 2.5f) - (button_height / 2.f); // 350.f;
 	const float default_offset_between = 120.f;
 
-	m_buttons["GAME_STATE"]   =	new Core::Button{ sf::Vector2f(default_position_x, default_position_y),
+	m_buttons["GAME_STATE"]   =	new GUI::Button{ sf::Vector2f(default_position_x, default_position_y),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "New Game", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
-	m_buttons["EDITOR_STATE"] = new Core::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between),
+	m_buttons["EDITOR_STATE"] = new GUI::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "Editor", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
-	m_buttons["SETTINGS"]     =	new Core::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2),
+	m_buttons["SETTINGS"]     =	new GUI::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "Settings", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
 
-	m_buttons["EXIT_STATE"]   =	new Core::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.5f),
+	m_buttons["EXIT_STATE"]   =	new GUI::Button{ sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.5f),
 								sf::Vector2f(button_width, button_height),
 								*m_supported_fonts["DOSIS"], "Exit", font_size,
 								sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20,20,20,200) };
@@ -107,7 +96,7 @@ void MainMenuState::updateKeyboardInput(const float& dt)
 {
 }
 
-void MainMenuState::updateButtons(const float& dt)
+void MainMenuState::updateButtons(const sf::Vector2f& mouse_pos)
 {
 	for (auto& i : m_buttons)
 		i.second->update(m_mouse_pos_view);
@@ -124,25 +113,19 @@ void MainMenuState::updateButtons(const float& dt)
 	}
 	
 	if (m_buttons["EXIT_STATE"]->isPressed())
-		endState();
+		quitState();
 }
 
 void MainMenuState::update(const float& dt)
 {
 	updateMousePos();
-	updateKeyboardInput(dt);
-	updateButtons(dt);
+	//updateKeyboardInput(dt);
+	updateButtons(m_mouse_pos_view);
 }
 
 ////////////////////////////////////////////////////////////
 // Render
 ////////////////////////////////////////////////////////////
-void MainMenuState::renderButtons(sf::RenderTarget& target)
-{
-	for (auto& i : m_buttons)
-		i.second->render(target);
-}
-
 void MainMenuState::render(sf::RenderTarget& target)
 {
 	target.draw(m_background);
@@ -161,9 +144,7 @@ std::string MainMenuState::getStringInfo()
 	result << getStringMousePos();
 
 	//Getting info from buttons
-	for (auto& i : m_buttons)
-		if (i.second->getState() == Core::Button::States::HOVER)
-			result << i.second->getStringInfo();
+	result << Menu::getStringInfo();
 
 	return result.str();
 }

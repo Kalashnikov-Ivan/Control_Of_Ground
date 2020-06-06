@@ -1,6 +1,8 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
+#include "PauseMenu.hpp"
+
 #include "State.hpp"
 #include "Player.hpp"
 
@@ -27,6 +29,9 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 
 private:
+	//GUI
+	GUI::PauseMenu m_pause_menu;
+
 	//Entities
 	Entities::Player* m_player;
 

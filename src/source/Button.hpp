@@ -1,7 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-namespace Core
+namespace GUI
 {
 class Button
 {

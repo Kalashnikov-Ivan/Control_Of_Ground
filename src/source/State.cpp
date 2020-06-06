@@ -15,7 +15,8 @@ State::State(sf::RenderWindow& window,
 	m_states         { states },
 	m_supported_fonts{ supported_fonts },
 	m_supported_keys { supported_keys },
-	m_quit           { false }
+	m_quit           { false },
+	m_paused         { false }
 {
 }
 State::~State()
@@ -55,7 +56,17 @@ std::string States::State::getStringMousePos() const
 // Functions
 ////////////////////////////////////////////////////////////
 
-void State::endState()
+void States::State::pause()
+{
+	m_paused = true;
+}
+
+void States::State::unpause()
+{
+	m_paused = false;
+}
+
+void State::quitState()
 {
 	m_quit = true;
 }

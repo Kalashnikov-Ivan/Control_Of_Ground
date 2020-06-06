@@ -248,7 +248,7 @@ void Game::update()
 		//Check quit
 		if (m_states.top()->getQuit())
 		{
-			m_states.top()->endState();
+			m_states.top()->quitState();
 			delete m_states.top();
 			m_states.pop();
 		}

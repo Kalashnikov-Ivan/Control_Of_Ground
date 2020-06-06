@@ -3,7 +3,7 @@
 
 namespace States
 {
-class State //Abstract
+class State //Base
 {
 //__________________________PUBLIC______________________________
 public:
@@ -23,7 +23,9 @@ public:
 	std::string getStringMousePos() const;
 
 	//Functions
-	virtual void endState();
+	void pause();
+	void unpause();
+	virtual void quitState();
 
 	//Update and render
 	virtual void update(const float& dt) = 0;
@@ -54,13 +56,15 @@ protected:
 	sf::Vector2i m_mouse_pos_window;
 	sf::Vector2f m_mouse_pos_view;
 	
+	//State
+	bool m_paused;
 	bool m_quit;
 
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
-	virtual void initTextures() = 0;
-	virtual void initKeybinds() = 0;
+	virtual void inline initTextures() = 0;
+	virtual void inline initKeybinds() = 0;
 
 ////////////////////////////////////////////////////////////
 // Update

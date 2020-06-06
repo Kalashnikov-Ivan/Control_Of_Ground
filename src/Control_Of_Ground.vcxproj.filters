@@ -43,6 +43,12 @@
     <Filter Include="Source\Core\Global_classes">
       <UniqueIdentifier>{23b55432-6818-419e-997c-37b9bd76a2e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Tiles">
+      <UniqueIdentifier>{37df1077-5244-4b9e-9ad2-2b4646ecaf58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Global_classes\GUI">
+      <UniqueIdentifier>{e1ad0dea-e9ca-4e89-8fa7-9b47a4e750f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Game.cpp">
@@ -59,9 +65,6 @@
     </ClCompile>
     <ClCompile Include="source\MainMenuState.cpp">
       <Filter>Source\Core\States</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Button.cpp">
-      <Filter>Source\Core\Global_classes</Filter>
     </ClCompile>
     <ClCompile Include="source\Player.cpp">
       <Filter>Source\Entities</Filter>
@@ -80,6 +83,18 @@
     </ClCompile>
     <ClCompile Include="source\HitboxComponent.cpp">
       <Filter>Source\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Tile.cpp">
+      <Filter>Source\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Button.cpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PauseMenu.cpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Menu.cpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,9 +217,6 @@
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\View.hpp">
       <Filter>Headers\SFML\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="source\Button.hpp">
-      <Filter>Source\Core\Global_classes</Filter>
-    </ClInclude>
     <ClInclude Include="source\Game.hpp">
       <Filter>Source\Core\Global_classes</Filter>
     </ClInclude>
@@ -234,6 +246,18 @@
     </ClInclude>
     <ClInclude Include="source\HitboxComponent.hpp">
       <Filter>Source\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Tile.hpp">
+      <Filter>Source\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Button.hpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PauseMenu.hpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Menu.hpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

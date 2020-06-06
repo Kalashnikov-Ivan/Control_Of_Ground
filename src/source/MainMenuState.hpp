@@ -1,14 +1,16 @@
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
 
+#include "stdHeader.hpp"
+
+#include "Menu.hpp"
 #include "State.hpp"
-#include "GameState.hpp"
 #include "Button.hpp"
 
 namespace States
 {
 class MainMenuState :
-	public State
+	public State, public GUI::Menu
 {
 //__________________________PUBLIC______________________________
 public:
@@ -23,6 +25,10 @@ public:
 	//Tech info
 	virtual std::string getStringInfo() override;
 
+	//Functions
+	void pause()   = delete;
+	void unpause() = delete;
+
 	//Update
 	virtual void update(const float& dt) override;
 
@@ -31,27 +37,19 @@ public:
 //__________________________PRIVATE_____________________________
 private:
 	//Members
-	sf::RectangleShape m_background;
-	std::map<std::string, Core::Button*> m_buttons;
 	sf::Text m_title;
 
 	//---------------------------------------------
 	//Init
-	void inline initBackground();
-	void inline initButtons();
+	virtual void inline initTextures() override;
+	virtual void inline initKeybinds() override; //Delete
 
-	virtual void initTextures() override;
-	virtual void initKeybinds() override; //Delete
+	virtual void inline initBackground()     override;
+	virtual void inline initButtons()        override;
 
 	//Update
 	virtual void updateKeyboardInput(const float& dt) override; //Delete
-			void updateButtons(const float& dt);
-
-	//Render
-	void renderButtons(sf::RenderTarget& target);
-
-	//Support_cleaner
-	void deleteButtons();
+	virtual	void updateButtons(const sf::Vector2f& mouse_pos) override;
 };
 } // !namespace cog
 #endif // !MAIN_MENU_H

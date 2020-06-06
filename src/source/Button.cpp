@@ -2,7 +2,7 @@
 
 #include "Button.hpp"
 
-using namespace Core;
+using namespace GUI;
 
 ////////////////////////////////////////////////////////////
 // Constructors
@@ -40,7 +40,7 @@ const Button::States Button::getState() const
 	return m_state;
 }
 
-const sf::RectangleShape Core::Button::getShape() const
+const sf::RectangleShape Button::getShape() const
 {
 	return m_shape;
 }
@@ -50,7 +50,7 @@ const sf::Vector2f Button::getPosition() const
 	return m_shape.getPosition();
 }
 
-const sf::Vector2f Core::Button::getSize() const
+const sf::Vector2f Button::getSize() const
 {
 	return m_shape.getSize();
 }

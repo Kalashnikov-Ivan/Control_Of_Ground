@@ -13,7 +13,7 @@ GameState::GameState(sf::RenderWindow& window,
 					 std::stack<State*>& states,
 					 std::map<const std::string, sf::Font*>& supported_fonts,
 					 const std::map<const std::string, int>& supported_keys)
-	: State{ window, states, supported_fonts, supported_keys }
+	: State{ window, states, supported_fonts, supported_keys }, m_pause_menu { window }
 {
 	initTextures();
 	initKeybinds();
@@ -90,8 +90,29 @@ void GameState::initPlayers()
 ////////////////////////////////////////////////////////////
 void GameState::updateKeyboardInput(const float& dt)
 {
+	/*
+	sf::Event event;
+	while (m_window.pollEvent(event))
+	{
+		if (event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])) && m_paused == true)
+				m_paused = false;
+			else if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])) && m_paused == false)
+				m_paused = true;
+		}
+	}
+	*/
+
+	/*
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])) && m_paused == true)
+		m_paused = false;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])) && m_paused == false)
+		m_paused = true;
+	*/
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
-		endState();
+		quitState();
 
 	bool key_pressed{ false };
 
@@ -122,15 +143,29 @@ void GameState::updateKeyboardInput(const float& dt)
 
 void GameState::update(const float& dt)
 {
-	updateMousePos();
-	updateKeyboardInput(dt);
+	if (!m_paused)
+	{
+		updateMousePos();
+		updateKeyboardInput(dt);
 
-	m_player->update(dt);
+		m_player->update(dt);
+	}
+	else
+	{
+		updateMousePos();
+
+		m_pause_menu.update(m_mouse_pos_view);
+	}
 }
 
 void GameState::render(sf::RenderTarget& target)
 {		
 	m_player->render(target);
+
+	if (m_paused)
+	{
+		m_pause_menu.render(target);
+	}
 }
 
 ////////////////////////////////////////////////////////////

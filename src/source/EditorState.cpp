@@ -86,7 +86,7 @@ std::string EditorState::getStringInfo()
 void EditorState::updateKeyboardInput(const float& dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
-		endState();
+		quitState();
 }
 
 void EditorState::update(const float& dt)
