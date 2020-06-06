@@ -88,27 +88,59 @@ void GameState::initPlayers()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void GameState::updateKeyboardInput(const float& dt)
+void States::GameState::updateInput(const float& dt)
 {
 	/*
 	sf::Event event;
-	while (m_window.pollEvent(event))
+	m_window.pollEvent(event);
+	if (event.type == sf::Event::KeyPressed)
 	{
-		if (event.type == sf::Event::KeyPressed)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
 		{
-			if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])) && m_paused == true)
+			if (m_paused)
 				m_paused = false;
-			else if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])) && m_paused == false)
+			else
 				m_paused = true;
 		}
 	}
 	*/
 
 	/*
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])) && m_paused == true)
-		m_paused = false;
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])) && m_paused == false)
-		m_paused = true;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
+	{
+		if (m_paused)
+			pause();
+		else
+			unpause();
+	}
+	*/
+}
+
+void GameState::updatePlayerInput(const float& dt)
+{
+	/*
+	sf::Event event;
+	m_window.pollEvent(event);
+	if (event.type == sf::Event::KeyPressed)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
+		{
+			if (m_paused)
+				m_paused = false;
+			else
+				m_paused = true;
+		}
+	}
+	*/
+
+	/*
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
+	{
+		if (m_paused)
+			pause();
+		else
+			unpause();
+	}
 	*/
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
@@ -143,17 +175,17 @@ void GameState::updateKeyboardInput(const float& dt)
 
 void GameState::update(const float& dt)
 {
+	updateMousePos();
+	updateInput(dt);
+
 	if (!m_paused)
 	{
-		updateMousePos();
-		updateKeyboardInput(dt);
+		updatePlayerInput(dt);
 
 		m_player->update(dt);
 	}
 	else
 	{
-		updateMousePos();
-
 		m_pause_menu.update(m_mouse_pos_view);
 	}
 }
@@ -177,6 +209,7 @@ std::string GameState::getStringInfo()
 
 	result << getStringMousePos();
 	result << m_player->getStringInfo();
+	result << m_pause_menu.getStringInfo();
 
 	return result.str();
 }

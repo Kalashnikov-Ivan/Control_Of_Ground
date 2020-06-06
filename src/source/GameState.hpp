@@ -42,7 +42,8 @@ private:
 			void initPlayers();
 
 	//Update
-	virtual void updateKeyboardInput(const float& dt) override;
+	virtual void updateInput(const float& dt) override;
+			void updatePlayerInput(const float& dt);
 };
 } // !namespace cog
 #endif // !GAME_STATE_H

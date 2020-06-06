@@ -223,10 +223,13 @@ void Game::updateEvents()
 
 		if (m_sf_event.type == sf::Event::KeyPressed)
 		{
-			if (m_sf_event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])) && m_enable_info == true)
-				m_enable_info = false;
-			else if (m_sf_event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])) && m_enable_info == false)
-				m_enable_info = true;
+			if (m_sf_event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])))
+			{
+				if (m_enable_info)
+					m_enable_info = false;
+				else
+					m_enable_info = true;
+			}
 		}
 	}
 }

@@ -48,7 +48,7 @@ private:
 	virtual void inline initButtons()        override;
 
 	//Update
-	virtual void updateKeyboardInput(const float& dt) override; //Delete
+	virtual void updateInput(const float& dt) override; //Delete
 	virtual	void updateButtons(const sf::Vector2f& mouse_pos) override;
 };
 } // !namespace cog

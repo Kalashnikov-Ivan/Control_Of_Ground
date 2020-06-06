@@ -83,7 +83,7 @@ std::string EditorState::getStringInfo()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void EditorState::updateKeyboardInput(const float& dt)
+void EditorState::updateInput(const float& dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
 		quitState();
@@ -92,7 +92,7 @@ void EditorState::updateKeyboardInput(const float& dt)
 void EditorState::update(const float& dt)
 {
 	updateMousePos();
-	updateKeyboardInput(dt);
+	updateInput(dt);
 }
 
 ////////////////////////////////////////////////////////////

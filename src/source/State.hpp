@@ -70,7 +70,7 @@ protected:
 // Update
 ////////////////////////////////////////////////////////////
 	virtual void updateMousePos();
-	virtual void updateKeyboardInput(const float& dt) = 0;
+	virtual void updateInput(const float& dt) = 0;
 
 //__________________________PRIVATE_____________________________
 private:

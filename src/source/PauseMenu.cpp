@@ -10,9 +10,9 @@ PauseMenu::PauseMenu(sf::RenderWindow& window)
 						          static_cast<float>(window.getSize().y)) 
 				   }
 {
-	m_background.setFillColor(sf::Color(192, 192, 192, 100));
+	m_background.setFillColor(sf::Color(20, 20, 20, 100));
 
-	m_container.setFillColor(sf::Color(192, 192, 192, 200));
+	m_container.setFillColor(sf::Color(20, 20, 20, 200));
 	m_container.setPosition((window.getSize().x / 2.f) - (m_container.getSize().x / 2.f), 0.f);
 }
 
