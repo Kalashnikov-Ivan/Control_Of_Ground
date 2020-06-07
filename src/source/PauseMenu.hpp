@@ -13,7 +13,7 @@ class PauseMenu :
 {
 public:
 	//Constructors
-	PauseMenu(sf::RenderWindow& window);
+	PauseMenu(sf::RenderWindow& window, std::map<const std::string, sf::Font*>& supported_fonts);
 	~PauseMenu();
 
 	//Update
@@ -24,10 +24,11 @@ public:
 
 private:
 	//Members
+	sf::RectangleShape m_background;
 	sf::RectangleShape m_container;
 
-	virtual void initBackground() override;
-	virtual void initButtons()	  override;
+	void initBackground();
+	virtual void initButtons() override;
 
 	//Update
 	virtual void updateButtons(const sf::Vector2f& mouse_pos) override;

@@ -96,6 +96,9 @@
     <ClCompile Include="source\Menu.cpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="source\MainMenu.cpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -257,6 +260,9 @@
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
     <ClInclude Include="source\Menu.hpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MainMenu.hpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
   </ItemGroup>

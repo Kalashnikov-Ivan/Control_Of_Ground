@@ -11,25 +11,46 @@ class Menu
 {
 public:
 	//Constructors
-	Menu(sf::Vector2f background_size = sf::Vector2f(0.f,  0.f));
+	Menu(sf::RenderWindow& window, 
+		 std::map<const std::string, sf::Font*>& supported_fonts);
+
 	virtual ~Menu();
+
+	//Accessors
+	const bool isButtonPressed(const std::string key);
+
+	//Modificators
+	void addButton(const std::string key,
+				   const sf::Vector2f& pos, const sf::Vector2f& size_wh,
+				   sf::Font& font, const std::string& text, uint32_t ch_size,
+				   const sf::Color& color_idle,
+				   const sf::Color& color_hover,
+				   const sf::Color& color_active);
 
 	//Info
 	virtual std::string getStringInfo();
 
+	//Update
+	virtual void update(const sf::Vector2f& mouse_pos_window) = 0;
+
+	//Render
+	virtual void render(sf::RenderTarget& target) = 0;
+
 //__________________________PROTECTED_____________________________
 protected:
+	//Refs
+	sf::RenderWindow& m_window; //Main render target <- Game
+	std::map<const std::string, sf::Font*>& m_supported_fonts;
+
 	//Members
-	sf::RectangleShape m_background;
 	std::map<std::string, Button*> m_buttons;
 
 //---------------------------------------------
 	//Init
-	virtual void initBackground() = 0;
 	virtual void initButtons()    = 0;
 
 	//Update
-	virtual void updateButtons(const sf::Vector2f& mouse_pos) = 0;
+	virtual void updateButtons(const sf::Vector2f& mouse_pos);
 
 	//Render
 	void renderButtons(sf::RenderTarget& target);

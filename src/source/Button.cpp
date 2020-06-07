@@ -12,15 +12,15 @@ Button::Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
 			   const sf::Color& color_idle, 
 			   const sf::Color& color_hover,
 			   const sf::Color& color_active)
-	: m_shape{size_wh},
-	  m_text{ text,  font, ch_size },
-	  m_color_idle {color_idle}, 
-	  m_color_hover {color_hover}, 
-	  m_color_active {color_active}
+	: m_shape        { size_wh },
+	  m_text         { text,  font, ch_size },
+	  m_color_idle   { color_idle   }, 
+	  m_color_hover  { color_hover  }, 
+	  m_color_active { color_active },
+	  m_state        { States::IDLE }
 {
 	m_shape.setPosition(pos);
 	m_shape.setFillColor(m_color_idle);
-	m_state = States::IDLE;
 
 	m_text.setPosition(
 		m_shape.getPosition().x + (m_shape.getGlobalBounds().width / 2.f) - m_text.getGlobalBounds().width / 2.f,

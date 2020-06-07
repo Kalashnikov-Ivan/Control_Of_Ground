@@ -1,16 +1,16 @@
-#ifndef MAIN_MENU_H
-#define MAIN_MENU_H
+#ifndef MAIN_MENU_STATE_H
+#define MAIN_MENU_STATE_H
 
 #include "stdHeader.hpp"
 
-#include "Menu.hpp"
 #include "State.hpp"
 #include "Button.hpp"
+#include "MainMenu.hpp"
 
 namespace States
 {
 class MainMenuState :
-	public State, public GUI::Menu
+	public State
 {
 //__________________________PUBLIC______________________________
 public:
@@ -37,19 +37,18 @@ public:
 //__________________________PRIVATE_____________________________
 private:
 	//Members
+	GUI::MainMenu m_main_menu;
+	sf::RectangleShape m_background;
 	sf::Text m_title;
 
 	//---------------------------------------------
 	//Init
 	virtual void inline initTextures() override;
 	virtual void inline initKeybinds() override; //Delete
-
-	virtual void inline initBackground()     override;
-	virtual void inline initButtons()        override;
+	void inline initBackground();
 
 	//Update
 	virtual void updateInput(const float& dt) override; //Delete
-	virtual	void updateButtons(const sf::Vector2f& mouse_pos) override;
 };
-} // !namespace cog
-#endif // !MAIN_MENU_H
+} // !namespace States
+#endif // !MAIN_MENU_STATE_H

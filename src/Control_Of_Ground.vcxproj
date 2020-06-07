@@ -27,6 +27,7 @@
     <ClCompile Include="source\GameState.cpp" />
     <ClCompile Include="source\HitboxComponent.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\MainMenu.cpp" />
     <ClCompile Include="source\MainMenuState.cpp" />
     <ClCompile Include="source\Menu.cpp" />
     <ClCompile Include="source\MovementComponent.cpp" />
@@ -55,6 +56,7 @@
     <ClInclude Include="source\Game.hpp" />
     <ClInclude Include="source\GameState.hpp" />
     <ClInclude Include="source\HitboxComponent.hpp" />
+    <ClInclude Include="source\MainMenu.hpp" />
     <ClInclude Include="source\MainMenuState.hpp" />
     <ClInclude Include="source\Menu.hpp" />
     <ClInclude Include="source\MovementComponent.hpp" />

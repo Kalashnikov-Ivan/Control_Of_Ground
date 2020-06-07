@@ -13,7 +13,8 @@ GameState::GameState(sf::RenderWindow& window,
 					 std::stack<State*>& states,
 					 std::map<const std::string, sf::Font*>& supported_fonts,
 					 const std::map<const std::string, int>& supported_keys)
-	: State{ window, states, supported_fonts, supported_keys }, m_pause_menu { window }
+	: State      { window, states, supported_fonts, supported_keys }, 
+	m_pause_menu { window, supported_fonts }
 {
 	initTextures();
 	initKeybinds();
