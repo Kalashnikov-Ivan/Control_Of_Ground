@@ -70,6 +70,7 @@ protected:
 // Update
 ////////////////////////////////////////////////////////////
 	virtual void updateMousePos();
+	virtual	void updateEvents() = 0;
 	virtual void updateInput(const float& dt) = 0;
 
 //__________________________PRIVATE_____________________________

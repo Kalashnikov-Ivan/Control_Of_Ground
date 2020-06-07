@@ -47,7 +47,7 @@ protected:
 
 //---------------------------------------------
 	//Init
-	virtual void initButtons()    = 0;
+	virtual void initButtons() = 0;
 
 	//Update
 	virtual void updateButtons(const sf::Vector2f& mouse_pos);

@@ -38,6 +38,7 @@ private:
 	virtual void initKeybinds() override;
 
 	//Update
+	virtual	void updateEvents() override;
 	virtual void updateInput(const float& dt) override;
 
 	//Render

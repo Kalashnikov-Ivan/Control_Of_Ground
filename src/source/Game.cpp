@@ -214,29 +214,8 @@ void Game::updateDeltaTime()
 	m_delta_time = m_delta_time_clock.restart().asSeconds();
 }
 
-void Game::updateEvents()
-{
-	while (m_window->pollEvent(m_sf_event))
-	{
-		if (m_sf_event.type == sf::Event::Closed)
-			m_window->close();
-
-		if (m_sf_event.type == sf::Event::KeyPressed)
-		{
-			if (m_sf_event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])))
-			{
-				if (m_enable_info)
-					m_enable_info = false;
-				else
-					m_enable_info = true;
-			}
-		}
-	}
-}
-
 void Game::update()
 {
-	updateEvents();
 	updateInfo();
 
 	if (!m_states.empty())

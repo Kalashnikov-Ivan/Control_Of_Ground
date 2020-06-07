@@ -26,9 +26,6 @@ private:
 		std::vector<sf::VideoMode> m_video_modes;
 		bool m_fullscreen_enabled;
 
-	//Events
-		sf::Event m_sf_event;
-
 	//Supported keys
 		std::map<const std::string, int> m_supported_keys;
 
@@ -65,7 +62,6 @@ private:
 ////////////////////////////////////////////////////////////
 	//Update
 		void updateDeltaTime();
-		void updateEvents();
 		void update();
 
 		void applicationEnd();

@@ -48,6 +48,7 @@ private:
 	void inline initBackground();
 
 	//Update
+	virtual	void updateEvents() override;
 	virtual void updateInput(const float& dt) override; //Delete
 };
 } // !namespace States

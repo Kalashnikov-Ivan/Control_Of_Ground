@@ -43,6 +43,8 @@ private:
 
 	//Update
 	virtual void updateInput(const float& dt) override;
+	virtual void updateEvents() override;
+			void updatePauseInput(const float& dt);
 			void updatePlayerInput(const float& dt);
 };
 } // !namespace cog

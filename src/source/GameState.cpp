@@ -89,64 +89,50 @@ void GameState::initPlayers()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void States::GameState::updateInput(const float& dt)
+void GameState::updateEvents()
 {
-	/*
 	sf::Event event;
-	m_window.pollEvent(event);
-	if (event.type == sf::Event::KeyPressed)
+	while (m_window.pollEvent(event))
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
+		if (event.type == sf::Event::Closed)
+			m_window.close();
+
+		if (event.type == sf::Event::KeyPressed)
 		{
-			if (m_paused)
-				m_paused = false;
-			else
-				m_paused = true;
+			/*
+			if (event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])))
+			{
+				if (m_enable_info)
+					m_enable_info = false;
+				else
+					m_enable_info = true;
+			}
+			*/
+
+			if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])))
+			{
+				if (!m_paused)
+					pause();
+				else
+					unpause();
+			}
+
 		}
 	}
-	*/
+}
 
-	/*
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
-	{
-		if (m_paused)
-			pause();
-		else
-			unpause();
-	}
-	*/
+void GameState::updateInput(const float& dt)
+{
+}
+
+void GameState::updatePauseInput(const float& dt)
+{
+	if (m_pause_menu.isButtonPressed("EXIT"))
+		quitState();
 }
 
 void GameState::updatePlayerInput(const float& dt)
 {
-	/*
-	sf::Event event;
-	m_window.pollEvent(event);
-	if (event.type == sf::Event::KeyPressed)
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
-		{
-			if (m_paused)
-				m_paused = false;
-			else
-				m_paused = true;
-		}
-	}
-	*/
-
-	/*
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
-	{
-		if (m_paused)
-			pause();
-		else
-			unpause();
-	}
-	*/
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
-		quitState();
-
 	bool key_pressed{ false };
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["MOVE_LEFT"])))
@@ -176,8 +162,8 @@ void GameState::updatePlayerInput(const float& dt)
 
 void GameState::update(const float& dt)
 {
+	updateEvents();
 	updateMousePos();
-	updateInput(dt);
 
 	if (!m_paused)
 	{
@@ -187,6 +173,8 @@ void GameState::update(const float& dt)
 	}
 	else
 	{
+		updatePauseInput(dt);
+
 		m_pause_menu.update(m_mouse_pos_view);
 	}
 }
