@@ -13,7 +13,7 @@ class SettingsMenu :
 public:
 	//Constructors
 	SettingsMenu(sf::RenderWindow& window,
-				 std::map<const std::string, sf::Font*>& supported_fonts);
+				 sf::Font& main_font);
 	virtual ~SettingsMenu();
 
 

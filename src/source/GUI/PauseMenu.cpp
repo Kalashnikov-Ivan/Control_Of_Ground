@@ -3,14 +3,16 @@
 using namespace GUI;
 
 //Constructors
-PauseMenu::PauseMenu(sf::RenderWindow& window, std::map<const std::string, sf::Font*>& supported_fonts)
-	: Menu         { window, supported_fonts },
-	m_background   { static_cast<sf::Vector2f>(window.getSize()) },
-	m_container    { 
-					 sf::Vector2f(static_cast<float>(window.getSize().x) / 4.f, 
-						          static_cast<float>(window.getSize().y)) 
-				   },
-	m_title        { "paused", *supported_fonts["MAJOR"], 48U }
+PauseMenu::PauseMenu(sf::RenderWindow& window, sf::Font& main_font,
+					 std::map<const std::string, sf::Font*>& supported_fonts)
+	: Menu            { window, main_font },
+	m_supported_fonts { supported_fonts },
+	m_background      { static_cast<sf::Vector2f>(window.getSize()) },
+	m_container       { 
+					    sf::Vector2f(static_cast<float>(window.getSize().x) / 4.f, 
+						             static_cast<float>(window.getSize().y)) 
+				      },
+	m_title           { "paused", *supported_fonts["MAJOR"], 48U }
 {
 	initBackground();
 	initButtons();
@@ -53,7 +55,7 @@ void PauseMenu::initButtons()
 
 	addButton("EXIT", sf::Vector2f(default_position_x, default_position_y * 2.f),
 					  sf::Vector2f(button_width, button_height),
-					  *m_supported_fonts["DOSIS"], "Exit", font_size,
+					  m_main_font, "Exit", font_size,
 					  sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 }
 

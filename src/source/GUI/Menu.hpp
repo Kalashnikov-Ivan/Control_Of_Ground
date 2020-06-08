@@ -11,8 +11,8 @@ class Menu
 {
 public:
 	//Constructors
-	Menu(sf::RenderWindow& window, 
-		 std::map<const std::string, sf::Font*>& supported_fonts);
+	Menu(sf::RenderWindow& window,
+		 sf::Font& main_font);
 
 	virtual ~Menu();
 
@@ -40,7 +40,7 @@ public:
 protected:
 	//Refs
 	sf::RenderWindow& m_window; //Main render target <- Game
-	std::map<const std::string, sf::Font*>& m_supported_fonts;
+	sf::Font& m_main_font;
 
 	//Members
 	std::map<std::string, Button*> m_buttons;

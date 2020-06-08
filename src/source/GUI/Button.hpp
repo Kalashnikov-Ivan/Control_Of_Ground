@@ -39,7 +39,7 @@ private:
 	sf::Text m_text;
 
 	static float m_press_time;
-	static constexpr float m_max_press_time{ 0.3f };
+	static constexpr float m_max_press_time{ 0.4f };
 
 	//Colors
 	sf::Color m_color_idle;

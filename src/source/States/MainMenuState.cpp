@@ -16,7 +16,7 @@ MainMenuState::MainMenuState(sf::RenderWindow& window,
 							 std::map<const std::string, sf::Font*>& supported_fonts,
 							 const std::map<const std::string, int>& supported_keys)
 	: State{ window, states, supported_fonts, supported_keys }, 
-	m_main_menu{ window, supported_fonts },
+	m_main_menu{ window, *supported_fonts["DOSIS"] },
 	m_title{ "controL of GrounD", *supported_fonts["MAJOR"], 78U }
 {
 	initTextures();

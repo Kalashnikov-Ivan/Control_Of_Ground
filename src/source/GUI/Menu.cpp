@@ -6,9 +6,9 @@ using namespace GUI;
 // Constructors
 ////////////////////////////////////////////////////////////
 Menu::Menu(sf::RenderWindow& window,
-		   std::map<const std::string, sf::Font*>& supported_fonts)
-	: m_window       { window          },
-	m_supported_fonts{ supported_fonts }
+		   sf::Font& main_font)
+	: m_window       { window    },
+	  m_main_font    { main_font }
 {
 }
 

@@ -11,7 +11,7 @@ class MainMenu :
 public:
 	//Constructors
 	MainMenu(sf::RenderWindow& window,
-			 std::map<const std::string, sf::Font*>& supported_fonts);
+			 sf::Font& main_font);
 	~MainMenu();
 
 	//Update

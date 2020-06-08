@@ -49,6 +49,9 @@
     <Filter Include="Source\Core\Global_classes\GUI">
       <UniqueIdentifier>{e1ad0dea-e9ca-4e89-8fa7-9b47a4e750f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Core\Global_classes\GUI\Menu">
+      <UniqueIdentifier>{5f8366bb-9c3c-4196-beb5-4c3a1a5a0e18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Game.cpp">
@@ -61,21 +64,6 @@
       <Filter>Source\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\Button.cpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GUI\DropDownList.cpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GUI\MainMenu.cpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GUI\Menu.cpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GUI\PauseMenu.cpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GUI\SettingsMenu.cpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
     <ClCompile Include="source\States\EditorState.cpp">
@@ -107,6 +95,21 @@
     </ClCompile>
     <ClCompile Include="source\Entities\Player.cpp">
       <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\SettingsMenu.cpp">
+      <Filter>Source\Core\Global_classes\GUI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\PauseMenu.cpp">
+      <Filter>Source\Core\Global_classes\GUI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\Menu.cpp">
+      <Filter>Source\Core\Global_classes\GUI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\MainMenu.cpp">
+      <Filter>Source\Core\Global_classes\GUI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\DropDownList.cpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,21 +241,6 @@
     <ClInclude Include="source\GUI\Button.hpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="source\GUI\DropDownList.hpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GUI\MainMenu.hpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GUI\Menu.hpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GUI\PauseMenu.hpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GUI\SettingsMenu.hpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="source\States\EditorState.hpp">
       <Filter>Source\Core\States</Filter>
     </ClInclude>
@@ -282,6 +270,21 @@
     </ClInclude>
     <ClInclude Include="source\Entities\Player.hpp">
       <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\SettingsMenu.hpp">
+      <Filter>Source\Core\Global_classes\GUI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\PauseMenu.hpp">
+      <Filter>Source\Core\Global_classes\GUI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\Menu.hpp">
+      <Filter>Source\Core\Global_classes\GUI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\MainMenu.hpp">
+      <Filter>Source\Core\Global_classes\GUI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\DropDownList.hpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
