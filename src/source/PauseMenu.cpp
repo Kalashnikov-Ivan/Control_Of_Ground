@@ -9,7 +9,8 @@ PauseMenu::PauseMenu(sf::RenderWindow& window, std::map<const std::string, sf::F
 	m_container    { 
 					 sf::Vector2f(static_cast<float>(window.getSize().x) / 4.f, 
 						          static_cast<float>(window.getSize().y)) 
-				   }
+				   },
+	m_title        { "paused", *supported_fonts["MAJOR"], 48U }
 {
 	initBackground();
 	initButtons();
@@ -23,10 +24,20 @@ PauseMenu::~PauseMenu()
 //Init
 void PauseMenu::initBackground()
 {
+	//Background
 	m_background.setFillColor(sf::Color(20, 20, 20, 100));
 
 	m_container.setFillColor(sf::Color(20, 20, 20, 200));
 	m_container.setPosition((m_window.getSize().x / 2.f) - (m_container.getSize().x / 2.f), 0.f);
+
+	//Title
+	m_title.setStyle(sf::Text::Bold);
+
+	const float default_position_x = (m_window.getSize().x / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float default_position_y = (m_window.getSize().y / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
+	const float default_offset_y = -350.f;
+
+	m_title.setPosition(default_position_x - 10, default_position_y + default_offset_y);
 }
 
 void PauseMenu::initButtons()
@@ -63,6 +74,7 @@ void PauseMenu::render(sf::RenderTarget& target)
 {
 	target.draw(m_background);
 	target.draw(m_container);
+	target.draw(m_title);
 
 	renderButtons(target);
 }

@@ -99,6 +99,12 @@
     <ClCompile Include="source\MainMenu.cpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="source\SettingsState.cpp">
+      <Filter>Source\Core\States</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SettingsMenu.cpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -263,6 +269,12 @@
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
     <ClInclude Include="source\MainMenu.hpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SettingsState.hpp">
+      <Filter>Source\Core\States</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SettingsMenu.hpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
   </ItemGroup>

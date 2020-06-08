@@ -1,7 +1,3 @@
-#include "MainMenuState.hpp"
-
-#include "GameState.hpp"
-#include "EditorState.hpp"
 #include "SettingsState.hpp"
 
 #define DEBUG
@@ -11,26 +7,26 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-MainMenuState::MainMenuState(sf::RenderWindow& window,
+SettingsState::SettingsState(sf::RenderWindow& window,
 							 std::stack<State*>& states,
 							 std::map<const std::string, sf::Font*>& supported_fonts,
 							 const std::map<const std::string, int>& supported_keys)
-	: State{ window, states, supported_fonts, supported_keys }, 
-	m_main_menu{ window, supported_fonts },
-	m_title{ "controL of GrounD", *supported_fonts["MAJOR"], 78U }
+	: State{ window, states, supported_fonts, supported_keys },
+	m_settings_menu{ window, supported_fonts },
+	m_title{ "settings", *supported_fonts["MAJOR"], 78U }
 {
 	initTextures();
 	initBackground();
 }
 
-MainMenuState::~MainMenuState()
+SettingsState::~SettingsState()
 {
 }
 
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
-void MainMenuState::initTextures()
+void SettingsState::initTextures()
 {
 	m_textures["BACKGROUND"] = new sf::Texture();
 
@@ -38,7 +34,7 @@ void MainMenuState::initTextures()
 		throw "ERROR::MainMenuState::init_background - failed to load texture BACKGROUND";
 }
 
-void MainMenuState::initBackground()
+void SettingsState::initBackground()
 {
 	//Background
 	m_background.setSize(static_cast<sf::Vector2f>(m_window.getSize()));
@@ -55,14 +51,14 @@ void MainMenuState::initBackground()
 	m_title.setPosition(default_position_x - 20, default_position_y + default_offset_y);
 }
 
-void MainMenuState::initKeybinds()
+void SettingsState::initKeybinds()
 {
 }
 
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void MainMenuState::updateEvents()
+void SettingsState::updateEvents()
 {
 	sf::Event event;
 	while (m_window.pollEvent(event))
@@ -85,26 +81,17 @@ void MainMenuState::updateEvents()
 	}
 }
 
-void MainMenuState::updateInput(const float& dt)
+void SettingsState::updateInput(const float& dt)
 {
-	if (m_main_menu.isButtonPressed("GAME_STATE"))
-		m_states.push(new GameState{ m_window, m_states, m_supported_fonts, m_supported_keys });
-
-	if (m_main_menu.isButtonPressed("EDITOR_STATE"))
-		m_states.push(new EditorState{ m_window, m_states, m_supported_fonts, m_supported_keys });
-
-	if (m_main_menu.isButtonPressed("SETTINGS_STATE"))
-		m_states.push(new SettingsState{ m_window, m_states, m_supported_fonts, m_supported_keys });
-
-	if (m_main_menu.isButtonPressed("EXIT"))
+	if (m_settings_menu.isButtonPressed("EXIT"))
 		quitState();
 }
 
-void MainMenuState::update(const float& dt)
+void SettingsState::update(const float& dt)
 {
 	updateEvents();
 	updateMousePos();
-	m_main_menu.update(m_mouse_pos_view);
+	m_settings_menu.update(m_mouse_pos_view);
 
 	//updateKeyboardInput(dt);
 	updateInput(dt);
@@ -113,25 +100,25 @@ void MainMenuState::update(const float& dt)
 ////////////////////////////////////////////////////////////
 // Render
 ////////////////////////////////////////////////////////////
-void MainMenuState::render(sf::RenderTarget& target)
+void SettingsState::render(sf::RenderTarget& target)
 {
 	target.draw(m_background);
 	target.draw(m_title);
 
-	m_main_menu.render(target);
+	m_settings_menu.render(target);
 }
 
 ////////////////////////////////////////////////////////////
 // Tech info
 ////////////////////////////////////////////////////////////
-std::string MainMenuState::getStringInfo()
+std::string SettingsState::getStringInfo()
 {
 	std::stringstream result;
 
 	result << getStringMousePos();
 
 	//Getting info from buttons
-	result << m_main_menu.getStringInfo();
+	result << m_settings_menu.getStringInfo();
 
 	return result.str();
 }

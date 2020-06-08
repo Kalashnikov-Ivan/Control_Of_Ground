@@ -41,12 +41,12 @@ void MainMenu::initButtons()
 							  *m_supported_fonts["DOSIS"], "Editor", font_size,
 							  sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 
-	addButton("SETTINGS",     sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2),
+	addButton("SETTINGS_STATE",     sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2),
 							  sf::Vector2f(button_width, button_height),
 							  *m_supported_fonts["DOSIS"], "Settings", font_size,
 							  sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 
-	addButton("EXIT_STATE",   sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.5f),
+	addButton("EXIT",   sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.5f),
 							  sf::Vector2f(button_width, button_height),
 							  *m_supported_fonts["DOSIS"], "Exit", font_size,
 							  sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));

@@ -33,9 +33,9 @@ void Menu::addButton(const std::string key,
 				const sf::Color& color_active)
 {
 	m_buttons[key] = new GUI::Button{ pos, size_wh, font, text, ch_size,
-									  sf::Color(105, 105, 105, 200), 
-									  sf::Color(192, 192, 192, 255), 
-									  sf::Color(20,20,20,200) };
+									  color_idle,
+									  color_hover,
+									  color_active };
 }
 
 //Support_cleaner
