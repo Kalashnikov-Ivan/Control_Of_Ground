@@ -1,7 +1,7 @@
 #ifndef STD_HEADER
 #define STD_HEADER
 
-//Core
+//STD
 #include <iostream>
 #include <sstream>
 #include <fstream>

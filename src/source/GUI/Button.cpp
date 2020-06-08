@@ -80,6 +80,7 @@ void Button::updateTimer(const float& dt)
 {
 	m_press_time += dt;
 }
+
 const bool Button::isTime()
 {
 	if (m_press_time >= m_max_press_time)

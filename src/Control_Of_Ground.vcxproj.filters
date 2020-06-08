@@ -54,56 +54,59 @@
     <ClCompile Include="source\Game.cpp">
       <Filter>Source\Core\Global_classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\State.cpp">
-      <Filter>Source\Core\States</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GameState.cpp">
-      <Filter>Source\Core\States</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Entity.cpp">
-      <Filter>Source\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="source\MainMenuState.cpp">
-      <Filter>Source\Core\States</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Player.cpp">
-      <Filter>Source\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="source\MovementComponent.cpp">
-      <Filter>Source\Entities\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="source\AnimationComponent.cpp">
-      <Filter>Source\Entities\Components</Filter>
-    </ClCompile>
     <ClCompile Include="source\main.cpp">
       <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="source\EditorState.cpp">
-      <Filter>Source\Core\States</Filter>
-    </ClCompile>
-    <ClCompile Include="source\HitboxComponent.cpp">
-      <Filter>Source\Entities\Components</Filter>
     </ClCompile>
     <ClCompile Include="source\Tile.cpp">
       <Filter>Source\Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="source\Button.cpp">
+    <ClCompile Include="source\GUI\Button.cpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="source\PauseMenu.cpp">
+    <ClCompile Include="source\GUI\DropDownList.cpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="source\Menu.cpp">
+    <ClCompile Include="source\GUI\MainMenu.cpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="source\MainMenu.cpp">
+    <ClCompile Include="source\GUI\Menu.cpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="source\SettingsState.cpp">
+    <ClCompile Include="source\GUI\PauseMenu.cpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\SettingsMenu.cpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\States\EditorState.cpp">
       <Filter>Source\Core\States</Filter>
     </ClCompile>
-    <ClCompile Include="source\SettingsMenu.cpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
+    <ClCompile Include="source\States\GameState.cpp">
+      <Filter>Source\Core\States</Filter>
+    </ClCompile>
+    <ClCompile Include="source\States\MainMenuState.cpp">
+      <Filter>Source\Core\States</Filter>
+    </ClCompile>
+    <ClCompile Include="source\States\SettingsState.cpp">
+      <Filter>Source\Core\States</Filter>
+    </ClCompile>
+    <ClCompile Include="source\States\State.cpp">
+      <Filter>Source\Core\States</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Entities\AnimationComponent.cpp">
+      <Filter>Source\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Entities\HitboxComponent.cpp">
+      <Filter>Source\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Entities\MovementComponent.cpp">
+      <Filter>Source\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Entities\Entity.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Entities\Player.cpp">
+      <Filter>Source\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,53 +232,56 @@
     <ClInclude Include="source\Game.hpp">
       <Filter>Source\Core\Global_classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\Entity.hpp">
-      <Filter>Source\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GameState.hpp">
-      <Filter>Source\Core\States</Filter>
-    </ClInclude>
-    <ClInclude Include="source\MainMenuState.hpp">
-      <Filter>Source\Core\States</Filter>
-    </ClInclude>
-    <ClInclude Include="source\State.hpp">
-      <Filter>Source\Core\States</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Player.hpp">
-      <Filter>Source\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="source\MovementComponent.hpp">
-      <Filter>Source\Entities\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="source\AnimationComponent.hpp">
-      <Filter>Source\Entities\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="source\EditorState.hpp">
-      <Filter>Source\Core\States</Filter>
-    </ClInclude>
-    <ClInclude Include="source\HitboxComponent.hpp">
-      <Filter>Source\Entities\Components</Filter>
-    </ClInclude>
     <ClInclude Include="source\Tile.hpp">
       <Filter>Source\Tiles</Filter>
     </ClInclude>
-    <ClInclude Include="source\Button.hpp">
+    <ClInclude Include="source\GUI\Button.hpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="source\PauseMenu.hpp">
+    <ClInclude Include="source\GUI\DropDownList.hpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="source\Menu.hpp">
+    <ClInclude Include="source\GUI\MainMenu.hpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="source\MainMenu.hpp">
+    <ClInclude Include="source\GUI\Menu.hpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="source\SettingsState.hpp">
+    <ClInclude Include="source\GUI\PauseMenu.hpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\SettingsMenu.hpp">
+      <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\States\EditorState.hpp">
       <Filter>Source\Core\States</Filter>
     </ClInclude>
-    <ClInclude Include="source\SettingsMenu.hpp">
-      <Filter>Source\Core\Global_classes\GUI</Filter>
+    <ClInclude Include="source\States\GameState.hpp">
+      <Filter>Source\Core\States</Filter>
+    </ClInclude>
+    <ClInclude Include="source\States\MainMenuState.hpp">
+      <Filter>Source\Core\States</Filter>
+    </ClInclude>
+    <ClInclude Include="source\States\SettingsState.hpp">
+      <Filter>Source\Core\States</Filter>
+    </ClInclude>
+    <ClInclude Include="source\States\State.hpp">
+      <Filter>Source\Core\States</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Entities\AnimationComponent.hpp">
+      <Filter>Source\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Entities\HitboxComponent.hpp">
+      <Filter>Source\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Entities\MovementComponent.hpp">
+      <Filter>Source\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Entities\Entity.hpp">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Entities\Player.hpp">
+      <Filter>Source\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

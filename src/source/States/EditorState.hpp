@@ -2,7 +2,7 @@
 #define EDITOR_STATE_H
 
 #include "State.hpp"
-#include "Button.hpp"
+#include "GUI/Button.hpp"
 
 namespace States
 {

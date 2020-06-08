@@ -4,7 +4,7 @@
 #include "stdHeader.hpp"
 
 #include "State.hpp"
-#include "SettingsMenu.hpp"
+#include "GUI/SettingsMenu.hpp"
 
 
 namespace States

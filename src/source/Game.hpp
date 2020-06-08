@@ -1,8 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "State.hpp"
-#include "GameState.hpp"
+#include "States/State.hpp"
 
 namespace Core
 {

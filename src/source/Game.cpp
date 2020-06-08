@@ -1,7 +1,8 @@
 #include "stdHeader.hpp"
 
 #include "Game.hpp"
-#include "MainMenuState.hpp"
+#include "States/GameState.hpp"
+#include "States/MainMenuState.hpp"
 
 #define DEBUG
 

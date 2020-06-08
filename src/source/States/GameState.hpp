@@ -1,10 +1,10 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
-#include "PauseMenu.hpp"
-
 #include "State.hpp"
-#include "Player.hpp"
+#include "GUI/PauseMenu.hpp"
+
+#include "Entities/Player.hpp"
 
 namespace States
 {
