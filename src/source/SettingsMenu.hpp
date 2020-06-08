@@ -18,7 +18,7 @@ public:
 
 
 	//Update
-	virtual void update(const sf::Vector2f& mouse_pos_window) override;
+	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
 
 	//Render
 	virtual void render(sf::RenderTarget& target) override;

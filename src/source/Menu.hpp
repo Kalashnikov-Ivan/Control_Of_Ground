@@ -31,7 +31,7 @@ public:
 	virtual std::string getStringInfo();
 
 	//Update
-	virtual void update(const sf::Vector2f& mouse_pos_window) = 0;
+	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) = 0;
 
 	//Render
 	virtual void render(sf::RenderTarget& target) = 0;
@@ -44,13 +44,13 @@ protected:
 
 	//Members
 	std::map<std::string, Button*> m_buttons;
-
+	
 //---------------------------------------------
 	//Init
 	virtual void initButtons() = 0;
 
 	//Update
-	virtual void updateButtons(const sf::Vector2f& mouse_pos);
+	virtual void updateButtons(const sf::Vector2f& mouse_pos, const float& dt);
 
 	//Render
 	void renderButtons(sf::RenderTarget& target);

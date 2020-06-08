@@ -4,6 +4,9 @@
 
 using namespace GUI;
 
+//Static members
+float Button::m_press_time { 0.f };
+
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
@@ -73,17 +76,33 @@ std::string Button::getStringInfo() const
 ////////////////////////////////////////////////////////////
 // Functions
 ////////////////////////////////////////////////////////////
-void Button::update(const sf::Vector2f& mouse_pos)
+void Button::updateTimer(const float& dt)
+{
+	m_press_time += dt;
+}
+const bool Button::isTime()
+{
+	if (m_press_time >= m_max_press_time)
+	{
+		m_press_time = 0.f;
+		return true;
+	}
+
+	return false;
+}
+
+void Button::update(const sf::Vector2f& mouse_pos, const float& dt)
 {
 	/*Update the booleans for hover and pressed*/
 
+	updateTimer(dt);
 	m_state = States::IDLE;
 
 	if (m_shape.getGlobalBounds().contains(mouse_pos))
 	{
 		m_state = States::HOVER;
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && isTime())
 			m_state = States::ACTIVE;
 	}
 

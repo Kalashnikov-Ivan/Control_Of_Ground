@@ -175,7 +175,7 @@ void GameState::update(const float& dt)
 	{
 		updatePauseInput(dt);
 
-		m_pause_menu.update(m_mouse_pos_view);
+		m_pause_menu.update(m_mouse_pos_view, dt);
 	}
 }
 

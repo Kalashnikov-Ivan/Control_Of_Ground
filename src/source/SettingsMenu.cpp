@@ -31,6 +31,11 @@ void SettingsMenu::initButtons()
 	const float default_position_y = (m_window.getSize().y / 2.5f) - (button_height / 2.f); // 350.f;
 	const float default_offset_between = 120.f;
 
+	addButton("APPLY", sf::Vector2f(default_position_x + 300.f, default_position_y + default_offset_between * 3.5f),
+		sf::Vector2f(button_width, button_height),
+		*m_supported_fonts["DOSIS"], "Apply", font_size,
+		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
+
 	addButton("EXIT", sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.5f),
 		sf::Vector2f(button_width, button_height),
 		*m_supported_fonts["DOSIS"], "Exit", font_size,
@@ -40,9 +45,9 @@ void SettingsMenu::initButtons()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void SettingsMenu::update(const sf::Vector2f& mouse_pos_window)
+void SettingsMenu::update(const sf::Vector2f& mouse_pos, const float& dt)
 {
-	updateButtons(mouse_pos_window);
+	updateButtons(mouse_pos, dt);
 }
 
 ////////////////////////////////////////////////////////////

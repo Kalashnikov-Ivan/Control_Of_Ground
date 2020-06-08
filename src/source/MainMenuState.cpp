@@ -104,7 +104,7 @@ void MainMenuState::update(const float& dt)
 {
 	updateEvents();
 	updateMousePos();
-	m_main_menu.update(m_mouse_pos_view);
+	m_main_menu.update(m_mouse_pos_view, dt);
 
 	//updateKeyboardInput(dt);
 	updateInput(dt);

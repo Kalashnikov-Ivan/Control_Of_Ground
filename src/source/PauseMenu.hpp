@@ -18,7 +18,7 @@ public:
 	~PauseMenu();
 
 	//Update
-	void update(const sf::Vector2f& mouse_pos_window);
+	void update(const sf::Vector2f& mouse_pos, const float& dt);
 
 	//Render
 	void render(sf::RenderTarget& target);
@@ -34,7 +34,7 @@ private:
 	virtual void initButtons() override;
 
 	//Update
-	virtual void updateButtons(const sf::Vector2f& mouse_pos) override;
+	virtual void updateButtons(const sf::Vector2f& mouse_pos, const float& dt) override;
 };
 } // !namespace GUI
 #endif // !PAUSE_MENU_H

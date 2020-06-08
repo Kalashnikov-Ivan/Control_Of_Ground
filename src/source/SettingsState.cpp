@@ -91,7 +91,7 @@ void SettingsState::update(const float& dt)
 {
 	updateEvents();
 	updateMousePos();
-	m_settings_menu.update(m_mouse_pos_view);
+	m_settings_menu.update(m_mouse_pos_view, dt);
 
 	//updateKeyboardInput(dt);
 	updateInput(dt);

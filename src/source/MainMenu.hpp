@@ -15,7 +15,7 @@ public:
 	~MainMenu();
 
 	//Update
-	void update(const sf::Vector2f& mouse_pos_window);
+	void update(const sf::Vector2f& mouse_pos, const float& dt);
 
 	//Render
 	void render(sf::RenderTarget& target);

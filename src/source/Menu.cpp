@@ -10,7 +10,6 @@ Menu::Menu(sf::RenderWindow& window,
 	: m_window       { window          },
 	m_supported_fonts{ supported_fonts }
 {
-
 }
 
 Menu::~Menu()
@@ -62,10 +61,10 @@ std::string Menu::getStringInfo()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void Menu::updateButtons(const sf::Vector2f& mouse_pos)
+void Menu::updateButtons(const sf::Vector2f& mouse_pos, const float& dt)
 {
 	for (auto& i : m_buttons)
-		i.second->update(mouse_pos);
+		i.second->update(mouse_pos, dt);
 }
 
 ////////////////////////////////////////////////////////////

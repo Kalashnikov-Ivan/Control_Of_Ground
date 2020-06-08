@@ -27,7 +27,7 @@ public:
 		std::string getStringInfo() const;
 
 	//Functions
-		void update(const sf::Vector2f& mouse_pos);
+		void update(const sf::Vector2f& mouse_pos, const float& dt);
 		void render(sf::RenderTarget& target);
 
 		const bool isPressed() const;
@@ -38,10 +38,17 @@ private:
 
 	sf::Text m_text;
 
+	static float m_press_time;
+	static constexpr float m_max_press_time{ 0.3f };
+
 	//Colors
 	sf::Color m_color_idle;
 	sf::Color m_color_hover;
 	sf::Color m_color_active;
+
+	//Functions
+	void updateTimer(const float& dt);
+	const bool isTime();
 };
 } // !namespace cog
 

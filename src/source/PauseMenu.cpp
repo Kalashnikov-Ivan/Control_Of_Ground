@@ -58,15 +58,15 @@ void PauseMenu::initButtons()
 }
 
 //Update
-void PauseMenu::updateButtons(const sf::Vector2f& mouse_pos)
+void PauseMenu::updateButtons(const sf::Vector2f& mouse_pos, const float& dt)
 {
-	Menu::updateButtons(mouse_pos);
+	Menu::updateButtons(mouse_pos, dt);
 	/*...*/
 }
 
-void PauseMenu::update(const sf::Vector2f& mouse_pos_window)
+void PauseMenu::update(const sf::Vector2f& mouse_pos, const float& dt)
 {
-	updateButtons(mouse_pos_window);
+	updateButtons(mouse_pos, dt);
 }
 
 //Render
