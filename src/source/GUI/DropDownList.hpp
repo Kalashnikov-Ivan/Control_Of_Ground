@@ -1,6 +1,7 @@
 #ifndef DROPDOWN_LIST_H
 #define DROPDOWN_LIST_H
 
+#include "Button.hpp"
 #include "Menu.hpp"
 
 namespace GUI
@@ -11,7 +12,7 @@ class DropDownList :
 public:
 	//Constructors
 	DropDownList(sf::RenderWindow& window,
-				 std::map<const std::string, sf::Font*>& supported_fonts);
+				 sf::Font& main_font);
 
 	virtual ~DropDownList();
 
@@ -23,6 +24,8 @@ public:
 
 private:
 	Button* m_active_element;
+
+	bool m_is_open;
 
 	//Init
 	virtual void initButtons() override;
