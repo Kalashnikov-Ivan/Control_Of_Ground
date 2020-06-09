@@ -1,3 +1,5 @@
+#include "stdHeader.hpp"
+
 #include "MainMenuState.hpp"
 
 #include "GameState.hpp"

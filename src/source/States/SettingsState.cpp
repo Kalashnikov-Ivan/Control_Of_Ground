@@ -1,3 +1,5 @@
+#include "stdHeader.hpp"
+
 #include "SettingsState.hpp"
 
 #define DEBUG

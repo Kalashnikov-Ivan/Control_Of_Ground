@@ -1,3 +1,5 @@
+#include "stdHeader.hpp"
+
 #include "HitboxComponent.hpp"
 
 using namespace Components;

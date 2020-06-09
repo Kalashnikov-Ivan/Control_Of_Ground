@@ -1,8 +1,6 @@
 #ifndef HITBOX_COMPONENT_H
 #define HITBOX_COMPONENT_H
 
-#include "stdHeader.hpp"
-
 namespace Components
 {
 class HitboxComponent

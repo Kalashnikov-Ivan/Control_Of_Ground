@@ -1,3 +1,5 @@
+#include "stdHeader.hpp"
+
 #include "SettingsMenu.hpp"
 
 using namespace GUI;

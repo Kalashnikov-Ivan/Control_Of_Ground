@@ -1,3 +1,5 @@
+#include "stdHeader.hpp"
+
 #include "AnimationComponent.hpp"
 
 using namespace Components;

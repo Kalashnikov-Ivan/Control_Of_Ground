@@ -1,8 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "stdHeader.hpp"
-
 #include "Entity.hpp"
 
 namespace Entities

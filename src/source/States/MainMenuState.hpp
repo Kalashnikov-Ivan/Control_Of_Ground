@@ -1,8 +1,6 @@
 #ifndef MAIN_MENU_STATE_H
 #define MAIN_MENU_STATE_H
 
-#include "stdHeader.hpp"
-
 #include "State.hpp"
 #include "GUI/MainMenu.hpp"
 

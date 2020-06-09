@@ -1,8 +1,6 @@
 #ifndef ANIMATION_COMPONENT_H
 #define ANIMATION_COMPONENT_H
 
-#include "stdHeader.hpp"
-
 namespace Components
 {
 class AnimationComponent

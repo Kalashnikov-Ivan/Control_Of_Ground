@@ -1,3 +1,5 @@
+#include "stdHeader.hpp"
+
 #include "MainMenu.hpp"
 
 using namespace GUI;

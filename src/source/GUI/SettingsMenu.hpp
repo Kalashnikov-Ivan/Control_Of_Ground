@@ -1,8 +1,6 @@
 #ifndef SETTINGS_MENU
 #define SETTINGS_MENU
 
-#include "stdHeader.hpp"
-
 #include "Menu.hpp"
 #include "DropDownList.hpp"
 

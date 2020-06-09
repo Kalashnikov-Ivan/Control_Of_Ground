@@ -1,3 +1,5 @@
+#include "stdHeader.hpp"
+
 #include "MovementComponent.hpp"
 
 using namespace Components;

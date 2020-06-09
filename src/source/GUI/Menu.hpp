@@ -1,8 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "stdHeader.hpp"
-
 #include "Button.hpp"
 
 namespace GUI

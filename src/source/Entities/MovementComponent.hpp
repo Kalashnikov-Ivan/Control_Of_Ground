@@ -1,8 +1,6 @@
 #ifndef MOVEMENT_COMPONENT_H
 #define MOVEMENT_COMPONENT_H
 
-#include "stdHeader.hpp"
-
 namespace Components
 {
 class MovementComponent

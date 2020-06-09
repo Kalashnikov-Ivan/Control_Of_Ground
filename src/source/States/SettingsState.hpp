@@ -1,8 +1,6 @@
 #ifndef SETTINGS_STATE_H
 #define SETTINGS_STATE_H
 
-#include "stdHeader.hpp"
-
 #include "State.hpp"
 #include "GUI/SettingsMenu.hpp"
 #include "GUI/DropDownList.hpp"

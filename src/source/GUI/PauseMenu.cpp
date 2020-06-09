@@ -1,3 +1,5 @@
+#include "stdHeader.hpp"
+
 #include "PauseMenu.hpp"
 
 using namespace GUI;

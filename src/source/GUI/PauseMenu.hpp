@@ -1,8 +1,6 @@
 #ifndef PAUSE_MENU_H
 #define PAUSE_MENU_H
 
-#include "stdHeader.hpp"
-
 #include "Button.hpp"
 #include "Menu.hpp"
 

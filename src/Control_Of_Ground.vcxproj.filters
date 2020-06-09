@@ -111,6 +111,9 @@
     <ClCompile Include="source\GUI\DropDownList.cpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="source\stdHeader.cpp">
+      <Filter>Headers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
