@@ -26,13 +26,30 @@ DropDownList::DropDownList(sf::Font& main_font,
 DropDownList::~DropDownList()
 {
 	delete m_active_element;
+
+	deleteList();
+}
+
+//Support func
+void DropDownList::deleteList()
+{
+	for (auto& i : m_list)
+		delete i;
 }
 
 //Update
 void DropDownList::updateList(const sf::Vector2f& mouse_pos, const float& dt)
 {
-	for (auto& i : m_list)
-		i->update(mouse_pos, dt);
+	for (auto& elem : m_list)
+	{
+		elem->update(mouse_pos, dt);
+
+		if (elem->isPressed())
+		{
+			m_is_open = false;
+			m_active_element->setStringText(elem->getStringText());
+		}
+	}
 }
 
 void DropDownList::update(const sf::Vector2f& mouse_pos, const float& dt)
@@ -41,6 +58,14 @@ void DropDownList::update(const sf::Vector2f& mouse_pos, const float& dt)
 
 	if (m_is_open)
 		updateList(mouse_pos, dt);
+
+	if (m_active_element->isPressed())
+	{
+		if (m_is_open)
+			m_is_open = false;
+		else
+			m_is_open = true;
+	}
 }
 
 //Render

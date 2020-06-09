@@ -33,6 +33,9 @@ private:
 
 	//Render
 	void inline renderList(sf::RenderTarget& target);
+
+	//Support func
+	void inline deleteList();
 };
 } // !namespace GUI
 #endif // !DROPDOWN_LIST_H

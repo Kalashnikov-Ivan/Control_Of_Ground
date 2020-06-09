@@ -17,7 +17,6 @@ public:
 				 sf::Font& main_font);
 	virtual ~SettingsMenu();
 
-
 	//Update
 	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
 
@@ -29,7 +28,7 @@ private:
 	DropDownList* m_video_modes;
 
 	//Init
-	virtual void initButtons() override;
+	virtual void inline initButtons() override;
 };
 }
 

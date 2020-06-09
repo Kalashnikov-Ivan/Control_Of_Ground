@@ -47,6 +47,11 @@ const sf::RectangleShape Button::getShape() const
 	return m_shape;
 }
 
+const std::string Button::getStringText() const
+{
+	return m_text.getString();
+}
+
 const sf::Vector2f Button::getPosition() const
 {
 	return m_shape.getPosition();
@@ -60,6 +65,11 @@ const sf::Vector2f Button::getSize() const
 ////////////////////////////////////////////////////////////
 // Modificators
 ////////////////////////////////////////////////////////////
+void Button::setStringText(const std::string& str)
+{
+	m_text.setString(str);
+}
+
 void Button::setPosition(sf::Vector2f pos)
 {
 	m_shape.setPosition(pos);

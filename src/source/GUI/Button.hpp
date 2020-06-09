@@ -22,10 +22,12 @@ public:
 	//Accessors
 		const States getState() const;
 		const sf::RectangleShape getShape() const;
+		const std::string getStringText() const;
 		const sf::Vector2f getPosition() const;
 		const sf::Vector2f getSize() const;
 
 	//Modificators
+	void setStringText(const std::string& str);
 	void setPosition(sf::Vector2f pos);
 	void setSize(sf::Vector2f size);
 
@@ -45,7 +47,7 @@ private:
 	sf::Text m_text;
 
 	static float m_press_time;
-	static constexpr float m_max_press_time{ 0.4f };
+	static constexpr float m_max_press_time{ 0.5f };
 
 	//Colors
 	sf::Color m_color_idle;

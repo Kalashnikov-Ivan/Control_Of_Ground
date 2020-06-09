@@ -12,10 +12,21 @@ SettingsMenu::SettingsMenu(sf::RenderWindow& window,
 {
 	initButtons();
 
-	std::string test_list[] = { "a1", "b2", "c3" };
+	unsigned int font_size = 26U;
+
+	const float button_width = 230.f;
+	const float button_height = 85.f;
+
+	const float default_position_x = (m_window.getSize().x / 2.5f) - (button_width / 2.f); // 150.f;
+	const float default_position_y = (m_window.getSize().y / 2.5f) - (button_height / 2.f); // 350.f;
+	const float default_offset_between = 120.f;
+
+
+	std::string test_list[] = { "1920x1080", "1280x1024", "800x600" };
 
 	m_video_modes = new DropDownList(main_font, 
-									sf::Vector2f(500.f, 500.f), sf::Vector2f(100.f, 100.f), 50U,
+									sf::Vector2f(default_position_x + 300.f, default_position_y), 
+									sf::Vector2f(230.f, 50.f), font_size,
 									test_list, 3, 0);
 }
 SettingsMenu::~SettingsMenu()
