@@ -1,6 +1,8 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#include "stdHeader.hpp"
+
 namespace GUI
 {
 class Button
@@ -22,6 +24,10 @@ public:
 		const sf::RectangleShape getShape() const;
 		const sf::Vector2f getPosition() const;
 		const sf::Vector2f getSize() const;
+
+	//Modificators
+	void setPosition(sf::Vector2f pos);
+	void setSize(sf::Vector2f size);
 
 	//Info
 		std::string getStringInfo() const;

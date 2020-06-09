@@ -1,5 +1,3 @@
-#include "stdHeader.hpp"
-
 #include "Button.hpp"
 
 using namespace GUI;
@@ -58,6 +56,26 @@ const sf::Vector2f Button::getSize() const
 {
 	return m_shape.getSize();
 }
+
+////////////////////////////////////////////////////////////
+// Modificators
+////////////////////////////////////////////////////////////
+void Button::setPosition(sf::Vector2f pos)
+{
+	m_shape.setPosition(pos);
+
+	//Text by center
+	m_text.setPosition(
+		m_shape.getPosition().x + (m_shape.getGlobalBounds().width / 2.f) - m_text.getGlobalBounds().width / 2.f,
+		(m_shape.getPosition().y + (m_shape.getGlobalBounds().height / 2.f) - m_text.getGlobalBounds().height / 2.f)
+	);
+}
+
+void Button::setSize(sf::Vector2f size)
+{
+	m_shape.setScale(size);
+}
+
 
 ////////////////////////////////////////////////////////////
 // Info

@@ -4,6 +4,7 @@
 #include "stdHeader.hpp"
 
 #include "Menu.hpp"
+#include "DropDownList.hpp"
 
 namespace GUI
 {
@@ -24,6 +25,9 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 
 private:
+	//Members
+	DropDownList* m_video_modes;
+
 	//Init
 	virtual void initButtons() override;
 };

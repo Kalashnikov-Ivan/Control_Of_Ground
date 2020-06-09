@@ -12,8 +12,8 @@ SettingsState::SettingsState(sf::RenderWindow& window,
 							 std::map<const std::string, sf::Font*>& supported_fonts,
 							 const std::map<const std::string, int>& supported_keys)
 	: State{ window, states, supported_fonts, supported_keys },
-	m_settings_menu{ window, *supported_fonts["DOSIS"] },
-	m_title{ "settings", *supported_fonts["MAJOR"], 78U }
+	m_title{ "settings", *supported_fonts["MAJOR"], 78U },
+	m_settings_menu{ window, *supported_fonts["DOSIS"] }
 {
 	initTextures();
 	initBackground();
@@ -83,7 +83,7 @@ void SettingsState::updateEvents()
 
 void SettingsState::updateInput(const float& dt)
 {
-	if (m_settings_menu.isButtonPressed("EXIT"))
+	if (m_settings_menu.isButtonPressed("BACK"))
 		quitState();
 }
 
