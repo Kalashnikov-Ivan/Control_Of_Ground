@@ -16,6 +16,9 @@ public:
 
 	virtual ~DropDownList();
 
+	//Modificators
+	void setPosition(const sf::Vector2f& pos);
+
 	//Update
 	void update(const sf::Vector2f& mouse_pos, const float& dt);
 

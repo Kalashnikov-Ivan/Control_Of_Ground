@@ -39,6 +39,17 @@ void DropDownList::deleteList()
 		delete i;
 }
 
+//Modificators
+void DropDownList::setPosition(const sf::Vector2f& pos)
+{
+	m_active_element->setPosition(pos);
+
+	//Update position of elements
+	for (size_t i = 0; i < m_list.size(); i++)
+		m_list[i]->setPosition(sf::Vector2f(pos.x, pos.y + ((i + 1) * m_list[i]->getSize().y)));
+}
+
+
 //Update
 void DropDownList::updateList(const sf::Vector2f& mouse_pos, const float& dt)
 {

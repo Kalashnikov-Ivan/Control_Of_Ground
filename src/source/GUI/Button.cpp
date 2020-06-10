@@ -72,7 +72,7 @@ void Button::setStringText(const std::string& str)
 	m_text.setString(str);
 }
 
-void Button::setPosition(sf::Vector2f pos)
+void Button::setPosition(const sf::Vector2f& pos)
 {
 	m_shape.setPosition(pos);
 
@@ -83,7 +83,7 @@ void Button::setPosition(sf::Vector2f pos)
 	);
 }
 
-void Button::setSize(sf::Vector2f size)
+void Button::setSize(const sf::Vector2f& size)
 {
 	m_shape.setScale(size);
 }

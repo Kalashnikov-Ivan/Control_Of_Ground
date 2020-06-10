@@ -26,8 +26,8 @@ public:
 
 	//Modificators
 	void setStringText(const std::string& str);
-	void setPosition(sf::Vector2f pos);
-	void setSize(sf::Vector2f size);
+	void setPosition(const sf::Vector2f& pos);
+	void setSize(const sf::Vector2f& size);
 
 	//Info
 		std::string getStringInfo() const;
