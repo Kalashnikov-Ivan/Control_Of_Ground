@@ -14,7 +14,8 @@ GameState::GameState(sf::RenderWindow& window,
 					 std::map<const std::string, sf::Font*>& supported_fonts,
 					 const std::map<const std::string, int>& supported_keys)
 	: State      { window, states, supported_fonts, supported_keys }, 
-	m_pause_menu { window, *supported_fonts["DOSIS"], supported_fonts }
+	m_pause_menu { window, *supported_fonts["DOSIS"], supported_fonts },
+	m_tile_map   { sf::Vector2f(100.f, 100.f), sf::Vector2f(100.f, 10.f) }
 {
 	initTextures();
 	initKeybinds();
@@ -181,6 +182,8 @@ void GameState::update(const float& dt)
 
 void GameState::render(sf::RenderTarget& target)
 {		
+	m_tile_map.render(target);
+
 	m_player->render(target);
 
 	if (m_paused)

@@ -4,6 +4,8 @@
 #include "State.hpp"
 #include "GUI/PauseMenu.hpp"
 
+#include "TileMap.hpp"
+
 #include "Entities/Player.hpp"
 
 namespace States
@@ -29,6 +31,9 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 
 private:
+	//TileMap
+	TileMap m_tile_map;
+
 	//GUI
 	GUI::PauseMenu m_pause_menu;
 

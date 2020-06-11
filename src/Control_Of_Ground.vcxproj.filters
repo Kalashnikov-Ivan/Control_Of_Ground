@@ -52,6 +52,9 @@
     <Filter Include="Source\Core\Global_classes\GUI\Menu">
       <UniqueIdentifier>{5f8366bb-9c3c-4196-beb5-4c3a1a5a0e18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Tiles\Map">
+      <UniqueIdentifier>{f950f00c-00d2-44c0-b56a-29e8620a307f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Game.cpp">
@@ -113,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="source\stdHeader.cpp">
       <Filter>Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TileMap.cpp">
+      <Filter>Source\Tiles\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -288,6 +294,9 @@
     </ClInclude>
     <ClInclude Include="source\GUI\DropDownList.hpp">
       <Filter>Source\Core\Global_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TileMap.hpp">
+      <Filter>Source\Tiles\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
