@@ -35,6 +35,9 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 //__________________________PRIVATE_____________________________
 private:
+	//Settings folder
+	std::vector<sf::VideoMode> m_video_modes;
+
 	//Members
 	GUI::SettingsMenu m_settings_menu;
 	sf::RectangleShape m_background;

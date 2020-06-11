@@ -12,9 +12,12 @@ public:
 	//Constructors
 	DropDownList(sf::Font& main_font,
 				 const sf::Vector2f& pos, const sf::Vector2f& size, size_t ch_size,
-				 std::string list[], size_t quantity_elem, size_t cur_elem);
+				 std::vector<std::string>& list, size_t cur_elem);
 
 	virtual ~DropDownList();
+
+	//Accessors
+	size_t getActiveElemIndex() const;
 
 	//Modificators
 	void setPosition(const sf::Vector2f& pos);

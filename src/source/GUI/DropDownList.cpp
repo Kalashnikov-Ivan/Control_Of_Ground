@@ -7,20 +7,20 @@ using namespace GUI;
 //Constructors
 DropDownList::DropDownList(sf::Font& main_font,
 						   const sf::Vector2f& pos, const sf::Vector2f& size, size_t ch_size,
-						   std::string list[], size_t quantity_elem, size_t cur_elem)
+						   std::vector<std::string>& list, size_t cur_elem)
 	: m_active_element { nullptr },
 	m_is_open{ false }
 {
 	m_active_element = new Button{  pos, size, main_font, list[cur_elem], ch_size,
-									sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200) };
+									sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200), cur_elem };
 
 	//Init list
-	for (size_t i = 0; i < quantity_elem; i++)
+	for (size_t i = 0; i < list.size(); i++)
 	{
 		m_list.push_back(
 			new Button(
 				sf::Vector2f(pos.x, pos.y + ((i+1) * size.y)), size, main_font, list[i], ch_size,
-				sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200))
+				sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200), i)
 		);
 	}
 }
@@ -30,6 +30,12 @@ DropDownList::~DropDownList()
 	delete m_active_element;
 
 	deleteList();
+}
+
+//Accessors
+size_t DropDownList::getActiveElemIndex() const
+{
+	return m_active_element->getIndex();
 }
 
 //Support func
@@ -61,6 +67,7 @@ void DropDownList::updateList(const sf::Vector2f& mouse_pos, const float& dt)
 		{
 			m_is_open = false;
 			m_active_element->setStringText(elem->getStringText());
+			m_active_element->setIndex(elem->getIndex());
 		}
 	}
 }

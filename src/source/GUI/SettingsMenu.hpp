@@ -10,10 +10,13 @@ class SettingsMenu :
 	public Menu
 {
 public:
+
 	//Constructors
-	SettingsMenu(sf::RenderWindow& window,
-				 sf::Font& main_font);
+	SettingsMenu(sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes);
 	virtual ~SettingsMenu();
+
+	//Accessors
+	sf::VideoMode getCurrentVM();
 
 	//Update
 	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
@@ -25,9 +28,11 @@ private:
 	class VideoSettingsMenu
 	{
 	public:
-		VideoSettingsMenu(sf::RenderWindow& window, 
-						  sf::Font& main_font);
+		VideoSettingsMenu(sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes);
 		~VideoSettingsMenu();
+
+		//Accessors
+		sf::VideoMode getCurrentVM();
 
 		//Update
 		void inline update(const sf::Vector2f& mouse_pos, const float& dt);
@@ -39,10 +44,13 @@ private:
 		sf::RectangleShape m_background;
 		sf::Vector2f m_rp; //Relative point
 
-		DropDownList* m_video_modes;
+		//GUI
+		std::map<std::string, DropDownList*> m_dropdown_lists;
 
+		std::vector<sf::VideoMode>& m_video_modes;
 		sf::Text m_resolution_text;
 		sf::Text m_vsync_text;
+		sf::Text m_antialising_text;
 	};
 
 	//Sub Menu

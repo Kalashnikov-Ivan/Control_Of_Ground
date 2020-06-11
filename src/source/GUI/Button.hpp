@@ -14,20 +14,25 @@ public:
 			sf::Font& font, const std::string& text, uint32_t ch_size,
 			const sf::Color& color_idle, 
 			const sf::Color& color_hover, 
-			const sf::Color& color_active);
+			const sf::Color& color_active,
+			const size_t index = 0);
 	~Button();
 
 	//Accessors
 		const States getState() const;
+		const size_t getIndex() const;
 		const sf::RectangleShape getShape() const;
-		const std::string getStringText() const;
 		const sf::Vector2f getPosition() const;
 		const sf::Vector2f getSize() const;
 
+		const std::string getStringText() const;
+
 	//Modificators
-	void setStringText(const std::string& str);
-	void setPosition(const sf::Vector2f& pos);
-	void setSize(const sf::Vector2f& size);
+		void setIndex(const size_t index);
+		void setPosition(const sf::Vector2f& pos);
+		void setSize(const sf::Vector2f& size);
+
+		void setStringText(const std::string& str);
 
 	//Info
 		std::string getStringInfo() const;
@@ -41,6 +46,7 @@ private:
 	//Members
 	sf::RectangleShape m_shape;
 	States m_state;
+	size_t m_index;
 
 	sf::Text m_text;
 

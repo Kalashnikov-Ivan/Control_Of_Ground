@@ -15,7 +15,9 @@ SettingsState::SettingsState(sf::RenderWindow& window,
 							 const std::map<const std::string, int>& supported_keys)
 	: State{ window, states, supported_fonts, supported_keys },
 	m_title{ "settings", *supported_fonts["MAJOR"], 78U },
-	m_settings_menu{ window, *supported_fonts["DOSIS"] }
+	m_video_modes { sf::VideoMode(1920, 1080), sf::VideoMode(1600, 900), sf::VideoMode(1280, 1024), 
+					sf::VideoMode(1024, 768), sf::VideoMode(800, 600) },
+	m_settings_menu{ window, *supported_fonts["DOSIS"], m_video_modes }
 {
 	initTextures();
 	initBackground();
@@ -85,6 +87,11 @@ void SettingsState::updateEvents()
 
 void SettingsState::updateInput(const float& dt)
 {
+	if (m_settings_menu.isButtonPressed("APPLY"))
+	{
+		m_window.create(m_settings_menu.getCurrentVM(), "Control Of Ground");
+	}
+
 	if (m_settings_menu.isButtonPressed("BACK"))
 		quitState();
 }

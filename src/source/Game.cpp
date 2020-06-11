@@ -196,7 +196,7 @@ void Game::updateInfo()
 {
 	m_tech_info.str(std::string()); //Clearing
 
-	m_tech_info << "Delta time: " << m_delta_time << " sec" << '\n';
+	m_tech_info << "Delta time: " << m_delta_time << " sec" << ", FPS: " << static_cast<uint32_t>(1 / m_delta_time) << '\n';
 }
 
 sf::Text Game::getTextInfo(const sf::Font& font)

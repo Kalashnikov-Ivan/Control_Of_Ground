@@ -14,13 +14,15 @@ Button::Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
 			   sf::Font& font, const std::string& text, uint32_t ch_size,
 			   const sf::Color& color_idle, 
 			   const sf::Color& color_hover,
-			   const sf::Color& color_active)
+			   const sf::Color& color_active,
+			   const size_t index)
 	: m_shape        { size_wh },
 	  m_text         { text,  font, ch_size },
 	  m_color_idle   { color_idle   }, 
 	  m_color_hover  { color_hover  }, 
 	  m_color_active { color_active },
-	  m_state        { States::IDLE }
+	  m_state        { States::IDLE },
+	  m_index        { index }
 {
 	m_shape.setPosition(pos);
 	m_shape.setFillColor(m_color_idle);
@@ -44,14 +46,14 @@ const Button::States Button::getState() const
 	return m_state;
 }
 
+const size_t Button::getIndex() const
+{
+	return m_index;
+}
+
 const sf::RectangleShape Button::getShape() const
 {
 	return m_shape;
-}
-
-const std::string Button::getStringText() const
-{
-	return m_text.getString();
 }
 
 const sf::Vector2f Button::getPosition() const
@@ -64,12 +66,17 @@ const sf::Vector2f Button::getSize() const
 	return m_shape.getSize();
 }
 
+const std::string Button::getStringText() const
+{
+	return m_text.getString();
+}
+
 ////////////////////////////////////////////////////////////
 // Modificators
 ////////////////////////////////////////////////////////////
-void Button::setStringText(const std::string& str)
+void Button::setIndex(const size_t index)
 {
-	m_text.setString(str);
+	m_index = index;
 }
 
 void Button::setPosition(const sf::Vector2f& pos)
@@ -88,6 +95,10 @@ void Button::setSize(const sf::Vector2f& size)
 	m_shape.setScale(size);
 }
 
+void Button::setStringText(const std::string& str)
+{
+	m_text.setString(str);
+}
 
 ////////////////////////////////////////////////////////////
 // Info
