@@ -62,13 +62,14 @@ private:
 // Functions
 ////////////////////////////////////////////////////////////
 	//Update
-		void updateDeltaTime();
-		void update();
+		void inline updateEvents();
+		void inline updateDeltaTime();
+		void inline update();
 
-		void applicationEnd();
+		void inline applicationEnd();
 
 	//Render
-		void render();
+		void inline render();
 
 ////////////////////////////////////////////////////////////
 // Tech functions

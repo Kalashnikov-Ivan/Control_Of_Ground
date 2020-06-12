@@ -90,39 +90,23 @@ void GameState::initPlayers()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void GameState::updateEvents()
+void GameState::updateEvent(const sf::Event& event)
 {
-	sf::Event event;
-	while (m_window.pollEvent(event))
+	if (event.type == sf::Event::LostFocus)
 	{
-		if (event.type == sf::Event::Closed)
-			m_window.close();
+		if (!m_paused)
+			pause();
+	}
 
-		if (event.type == sf::Event::LostFocus)
+	if (event.type == sf::Event::KeyPressed)
+	{
+
+		if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])))
 		{
 			if (!m_paused)
 				pause();
-		}
-
-		if (event.type == sf::Event::KeyPressed)
-		{
-			/*
-			if (event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])))
-			{
-				if (m_enable_info)
-					m_enable_info = false;
-				else
-					m_enable_info = true;
-			}
-			*/
-
-			if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])))
-			{
-				if (!m_paused)
-					pause();
-				else
-					unpause();
-			}
+			else
+				unpause();
 		}
 	}
 }
@@ -168,7 +152,6 @@ void GameState::updatePlayerInput(const float& dt)
 
 void GameState::update(const float& dt)
 {
-	updateEvents();
 	updateMousePos();
 
 	if (!m_paused)

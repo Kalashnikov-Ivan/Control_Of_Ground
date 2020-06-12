@@ -22,6 +22,7 @@ public:
 	virtual std::string getStringInfo() override;
 
 	//Update
+	virtual void updateEvent(const sf::Event& event) override;
 	virtual void update(const float& dt) override;
 
 	//Render
@@ -38,7 +39,6 @@ private:
 	virtual void initKeybinds() override;
 
 	//Update
-	virtual	void updateEvents() override;
 	virtual void updateInput(const float& dt) override;
 
 	//Render

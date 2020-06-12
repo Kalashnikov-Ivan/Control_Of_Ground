@@ -62,27 +62,8 @@ void SettingsState::initKeybinds()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void SettingsState::updateEvents()
+void SettingsState::updateEvent(const sf::Event& event)
 {
-	sf::Event event;
-	while (m_window.pollEvent(event))
-	{
-		if (event.type == sf::Event::Closed)
-			m_window.close();
-
-		if (event.type == sf::Event::KeyPressed)
-		{
-			/*
-			if (event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])))
-			{
-				if (m_enable_info)
-					m_enable_info = false;
-				else
-					m_enable_info = true;
-			}
-			*/
-		}
-	}
 }
 
 void SettingsState::updateInput(const float& dt)
@@ -98,7 +79,6 @@ void SettingsState::updateInput(const float& dt)
 
 void SettingsState::update(const float& dt)
 {
-	updateEvents();
 	updateMousePos();
 	m_settings_menu.update(m_mouse_pos_view, dt);
 

@@ -26,6 +26,7 @@ public:
 	virtual std::string getStringInfo() override;
 
 	//Update
+	virtual void updateEvent(const sf::Event& event) override;
 	virtual void update(const float& dt) override;
 
 	virtual void render(sf::RenderTarget& target) override;
@@ -48,7 +49,6 @@ private:
 
 	//Update
 	virtual void updateInput(const float& dt) override;
-	virtual void updateEvents() override;
 			void updatePauseInput(const float& dt);
 			void updatePlayerInput(const float& dt);
 };

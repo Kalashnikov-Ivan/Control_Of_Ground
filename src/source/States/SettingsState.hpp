@@ -29,6 +29,7 @@ public:
 	void unpause() = delete;
 
 	//Update
+	virtual void updateEvent(const sf::Event& event) override;
 	virtual void update(const float& dt) override;
 
 	//Render
@@ -50,7 +51,6 @@ private:
 	void inline initBackground();
 
 	//Update
-	virtual	void updateEvents() override;
 	virtual void updateInput(const float& dt) override; //Delete
 };
 } // !namespace States

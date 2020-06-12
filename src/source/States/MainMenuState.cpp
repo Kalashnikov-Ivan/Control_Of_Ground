@@ -64,27 +64,9 @@ void MainMenuState::initKeybinds()
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
-void MainMenuState::updateEvents()
+void MainMenuState::updateEvent(const sf::Event& event)
 {
-	sf::Event event;
-	while (m_window.pollEvent(event))
-	{
-		if (event.type == sf::Event::Closed)
-			m_window.close();
 
-		if (event.type == sf::Event::KeyPressed)
-		{
-			/*
-			if (event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])))
-			{
-				if (m_enable_info)
-					m_enable_info = false;
-				else
-					m_enable_info = true;
-			}
-			*/
-		}
-	}
 }
 
 void MainMenuState::updateInput(const float& dt)
@@ -104,7 +86,6 @@ void MainMenuState::updateInput(const float& dt)
 
 void MainMenuState::update(const float& dt)
 {
-	updateEvents();
 	updateMousePos();
 	m_main_menu.update(m_mouse_pos_view, dt);
 

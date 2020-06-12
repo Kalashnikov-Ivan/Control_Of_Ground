@@ -27,12 +27,15 @@ public:
 	void unpause() = delete;
 
 	//Update
+	virtual void updateEvent(const sf::Event& event) override;
 	virtual void update(const float& dt) override;
 
 	//Render
 	virtual void render(sf::RenderTarget& target) override;
 //__________________________PRIVATE_____________________________
 private:
+	//Refs
+
 	//Members
 	GUI::MainMenu m_main_menu;
 	sf::RectangleShape m_background;
@@ -45,7 +48,6 @@ private:
 	void inline initBackground();
 
 	//Update
-	virtual	void updateEvents() override;
 	virtual void updateInput(const float& dt) override; //Delete
 };
 } // !namespace States

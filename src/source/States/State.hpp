@@ -28,6 +28,7 @@ public:
 	virtual void quitState();
 
 	//Update and render
+	virtual void updateEvent(const sf::Event& event) = 0;
 	virtual void update(const float& dt) = 0;
 	virtual void render(sf::RenderTarget& target) = 0;
 
@@ -70,7 +71,6 @@ protected:
 // Update
 ////////////////////////////////////////////////////////////
 	virtual void updateMousePos();
-	virtual	void updateEvents() = 0;
 	virtual void updateInput(const float& dt) = 0;
 
 //__________________________PRIVATE_____________________________
