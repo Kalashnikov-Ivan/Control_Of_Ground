@@ -98,6 +98,12 @@ void GameState::updateEvents()
 		if (event.type == sf::Event::Closed)
 			m_window.close();
 
+		if (event.type == sf::Event::LostFocus)
+		{
+			if (!m_paused)
+				pause();
+		}
+
 		if (event.type == sf::Event::KeyPressed)
 		{
 			/*
@@ -117,7 +123,6 @@ void GameState::updateEvents()
 				else
 					unpause();
 			}
-
 		}
 	}
 }

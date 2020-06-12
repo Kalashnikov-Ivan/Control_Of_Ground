@@ -55,6 +55,9 @@
     <Filter Include="Source\Tiles\Map">
       <UniqueIdentifier>{f950f00c-00d2-44c0-b56a-29e8620a307f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Core\Global_classes\Settings">
+      <UniqueIdentifier>{f388340d-9680-470b-9ece-30d88a4468f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Game.cpp">
@@ -120,6 +123,12 @@
     <ClCompile Include="source\TileMap.cpp">
       <Filter>Source\Tiles\Map</Filter>
     </ClCompile>
+    <ClCompile Include="source\Settings\GraphicsSettings.cpp">
+      <Filter>Source\Core\Global_classes\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Settings\SettingsContainer.cpp">
+      <Filter>Source\Core\Global_classes\Settings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -137,9 +146,6 @@
     <None Include="config\supported_keys.ini">
       <Filter>Resources\config</Filter>
     </None>
-    <None Include="config\window.ini">
-      <Filter>Resources\config</Filter>
-    </None>
     <None Include="config\GameState_keybinds.ini">
       <Filter>Resources\config</Filter>
     </None>
@@ -150,6 +156,9 @@
       <Filter>Service</Filter>
     </None>
     <None Include="config\EditorState_keybinds.ini">
+      <Filter>Resources\config</Filter>
+    </None>
+    <None Include="config\graphics.ini">
       <Filter>Resources\config</Filter>
     </None>
   </ItemGroup>
@@ -297,6 +306,15 @@
     </ClInclude>
     <ClInclude Include="source\TileMap.hpp">
       <Filter>Source\Tiles\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Settings\GraphicsSettings.h">
+      <Filter>Source\Core\Global_classes\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Settings\ISettings.h">
+      <Filter>Source\Core\Global_classes\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Settings\SettingsContainer.h">
+      <Filter>Source\Core\Global_classes\Settings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

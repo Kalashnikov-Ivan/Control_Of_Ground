@@ -55,6 +55,12 @@ void PauseMenu::initButtons()
 	const float default_position_y = (m_window.getSize().y / 2.5f) - (button_height / 2.f); // 350.f;
 	const float default_offset_between = 120.f;
 
+	addButton("SETTINGS_STATE", sf::Vector2f(default_position_x, default_position_y * 1.f),
+		sf::Vector2f(button_width, button_height),
+		m_main_font, "Settings", font_size,
+		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
+
+
 	addButton("EXIT", sf::Vector2f(default_position_x, default_position_y * 2.f),
 					  sf::Vector2f(button_width, button_height),
 					  m_main_font, "Exit", font_size,

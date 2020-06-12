@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "Settings/SettingsContainer.h"
 #include "States/State.hpp"
 
 namespace Core
@@ -19,11 +20,11 @@ private:
 ////////////////////////////////////////////////////////////
 // Members
 ////////////////////////////////////////////////////////////
+	//Settings
+		Settings::SettingsContainer m_settings;
+
 	//Window
 		sf::RenderWindow*          m_window;
-		sf::ContextSettings        m_window_settings;
-		std::vector<sf::VideoMode> m_video_modes;
-		bool m_fullscreen_enabled;
 
 	//Supported keys
 		std::map<const std::string, int> m_supported_keys;
@@ -45,6 +46,7 @@ private:
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
+	void inline initSettings();
 	void inline initWindow();
 	void inline initSupportedKeys();
 	void inline initSupportedFonts();
@@ -72,8 +74,8 @@ private:
 // Tech functions
 ////////////////////////////////////////////////////////////
 	//Support_cleaner
-		void inline delete_states();
-		void inline delete_fonts();
+		void inline deleteStates();
+		void inline deleteFonts();
 };
 } // !namespace cog
 #endif // !GAME_H

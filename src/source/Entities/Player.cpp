@@ -16,8 +16,8 @@ Player::Player(const sf::Vector2f& position_xy, sf::Texture& texture,
 	//Creating components
 	createMovementComponent (*m_sprite, max_speed, acceleration, deceleration);
 	createAnimationComponent(*m_sprite, texture);
-	sf::Vector2f hitbox_size{ 11.f, 29.f };
-	createHitboxComponent   (*m_sprite, sf::Vector2f(80.f, 30.f), hitbox_size, scale);
+	sf::Vector2f hitbox_size{ 11.f, 26.f };
+	createHitboxComponent   (*m_sprite, sf::Vector2f(80.f, 25.f), hitbox_size, scale);
 
 	initAnimations();
 

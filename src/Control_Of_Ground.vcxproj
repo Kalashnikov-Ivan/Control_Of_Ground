@@ -32,6 +32,8 @@
     <ClCompile Include="source\GUI\PauseMenu.cpp" />
     <ClCompile Include="source\GUI\SettingsMenu.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Settings\GraphicsSettings.cpp" />
+    <ClCompile Include="source\Settings\SettingsContainer.cpp" />
     <ClCompile Include="source\States\EditorState.cpp" />
     <ClCompile Include="source\States\GameState.cpp" />
     <ClCompile Include="source\States\MainMenuState.cpp" />
@@ -54,7 +56,7 @@
     <None Include="config\GameState_keybinds.ini" />
     <None Include="config\MainMenuState_keybinds.ini" />
     <None Include="config\supported_keys.ini" />
-    <None Include="config\window.ini" />
+    <None Include="config\graphics.ini" />
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Glsl.inl" />
     <None Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl" />
   </ItemGroup>
@@ -71,6 +73,9 @@
     <ClInclude Include="source\GUI\Menu.hpp" />
     <ClInclude Include="source\GUI\PauseMenu.hpp" />
     <ClInclude Include="source\GUI\SettingsMenu.hpp" />
+    <ClInclude Include="source\Settings\GraphicsSettings.h" />
+    <ClInclude Include="source\Settings\ISettings.h" />
+    <ClInclude Include="source\Settings\SettingsContainer.h" />
     <ClInclude Include="source\States\EditorState.hpp" />
     <ClInclude Include="source\States\GameState.hpp" />
     <ClInclude Include="source\States\MainMenuState.hpp" />

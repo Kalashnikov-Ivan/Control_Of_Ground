@@ -12,27 +12,27 @@ using namespace Core;
 // Constructors
 ////////////////////////////////////////////////////////////
 Game::Game()
-	: m_window             { nullptr }, 
-	  m_video_modes        { sf::VideoMode::getFullscreenModes() }, 
-	  m_delta_time         { 0.f },
-	  m_fullscreen_enabled { false }, m_enable_info{ true }
+	: m_window{ nullptr },
+	m_delta_time{ 0.f },
+	m_enable_info{ true }
 {
+	initSettings();
 	initWindow(); //Dynamic for m_window
 	initSupportedKeys();
-	initSupportedFonts();
+	initSupportedFonts(); //Dynamic for fonts
 	initFirstState(); //Dynamic for first state
 }
 
 Game::~Game()
 {
-	delete_states();
-	delete_fonts();
+	deleteStates();
+	deleteFonts();
 
 	delete m_window;
 }
 
 //Support_cleaner
-void Game::delete_states()
+void Game::deleteStates()
 {
 	while (!m_states.empty())
 	{
@@ -40,7 +40,7 @@ void Game::delete_states()
 		m_states.pop();
 	}
 }
-void Game::delete_fonts()
+void Game::deleteFonts()
 {
 	for (auto& i : m_supported_fonts)
 		delete i.second;
@@ -49,58 +49,23 @@ void Game::delete_fonts()
 ////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////
+void inline Game::initSettings()
+{
+	m_settings.initGraphics(
+		"config/graphics.ini",
+		{ sf::VideoMode(1920, 1080), sf::VideoMode(1600, 900), sf::VideoMode(1280, 1024),
+		  sf::VideoMode(1024, 768), sf::VideoMode(800, 600) }
+	);
+}
+
 void Game::initWindow()
 {
-#ifdef DEBUG
-	std::cout << "Game: Start of init_window..." << std::endl;
-#endif // DEBUG
-
-	//Default
 	std::string title = "Control of Ground";
-	sf::VideoMode video_mode{ sf::VideoMode::getDesktopMode() };
-	unsigned int framerate_limit = 120U;
 
-	m_window_settings.antialiasingLevel = 0U;
-
-	m_fullscreen_enabled = false;
-	bool vertical_sync_enabled = false;
-
-	//From file
-	std::ifstream window_ini_ifs{ "config/window.ini" }; // window_ini_ifs
-	if (window_ini_ifs.is_open())
-	{
-		std::string option{ "" };
-		while (window_ini_ifs >> option)
-		{
-			if (option == "VIDEO_MODE")
-			{
-				window_ini_ifs >> video_mode.width;
-				window_ini_ifs >> video_mode.height;
-			}
-			else if (option == "TITLE")
-				window_ini_ifs >> title;
-			else if (option == "FRAMERATE")
-				window_ini_ifs >> framerate_limit;
-			else if (option == "ANTIALISING")
-				window_ini_ifs >> m_window_settings.antialiasingLevel;
-			else if (option == "FULLSCREEN")
-				window_ini_ifs >> m_fullscreen_enabled;
-			else if (option == "VERTICAL_SYNC")
-				window_ini_ifs >> vertical_sync_enabled;
-		}
-	}
+	if (m_settings.m_graphics->m_fullscreen)
+		m_window = new sf::RenderWindow{ m_settings.m_graphics->m_resolution, title,  sf::Style::Fullscreen, m_settings.m_graphics->m_context };
 	else
-	{
-		std::cerr << "config/window.ini - cannot open!"
-			<< std::endl
-			<< "Using default settings..." << std::endl;
-	}
-	window_ini_ifs.close(); // !window_ini_ifs
-
-	if (m_fullscreen_enabled)
-		m_window = new sf::RenderWindow{ video_mode, title,  sf::Style::Fullscreen, m_window_settings };
-	else
-		m_window = new sf::RenderWindow{ video_mode, title,  sf::Style::Titlebar | sf::Style::Close, m_window_settings };
+		m_window = new sf::RenderWindow{ m_settings.m_graphics->m_resolution, title,  sf::Style::Titlebar | sf::Style::Close, m_settings.m_graphics->m_context };
 
 	if (m_window == nullptr)
 	{
@@ -108,14 +73,9 @@ void Game::initWindow()
 		throw std::runtime_error("Fault of init_window! Is nullptr...");
 	}
 
-	m_window->setFramerateLimit(framerate_limit);
-	m_window->setVerticalSyncEnabled(vertical_sync_enabled);
+	m_window->setFramerateLimit(m_settings.m_graphics->m_framerate_limit);
+	m_window->setVerticalSyncEnabled(m_settings.m_graphics->m_vsync);
 	//m_window->setKeyRepeatEnabled(false);
-
-#ifdef DEBUG
-	std::cout << "Init_window successful!\nVideo mode: " << video_mode.width << ", " << video_mode.height << std::endl;
-	std::cout << "Frame rate = " << framerate_limit << "\n" << std::endl;
-#endif // DEBUG
 }
 
 void Game::initSupportedKeys()
@@ -162,31 +122,25 @@ void Game::initSupportedKeys()
 
 void Game::initSupportedFonts()
 {
+	const std::string path = "resources/fonts/";
+
 	m_supported_fonts["DOSIS"] = new sf::Font();
-	if (!m_supported_fonts["DOSIS"]->loadFromFile("resources/fonts/Dosis-Regular.ttf"))
+	if (!m_supported_fonts["DOSIS"]->loadFromFile(path + "Dosis-Regular.ttf"))
 		throw "ERROR::MainMenuState: init_fonts. Can't open font fonts/Dosis-Regular.ttf";
 
 	m_supported_fonts["OSWALD"] = new sf::Font();
-	if (!m_supported_fonts["OSWALD"]->loadFromFile("resources/fonts/Oswald-SemiBold.ttf"))
+	if (!m_supported_fonts["OSWALD"]->loadFromFile(path + "Oswald-SemiBold.ttf"))
 		throw "ERROR::MainMenuState: init_fonts. Can't open font fonts/Oswald-SemiBold.ttf";
 
 	m_supported_fonts["MAJOR"] = new sf::Font();
-	if (!m_supported_fonts["MAJOR"]->loadFromFile("resources/fonts/MajorMonoDisplay-Regular.ttf"))
+	if (!m_supported_fonts["MAJOR"]->loadFromFile(path + "MajorMonoDisplay-Regular.ttf"))
 		throw "ERROR::MainMenuState: init_fonts. Can't open font fonts/MajorMonoDisplay-Regular.ttf";
 
 }
 
 void Game::initFirstState()
 {
-#ifdef DEBUG
-	std::cout << "\nGame: Start of init_states..." << std::endl;
-#endif // DEBUG
-
 	m_states.push(new States::MainMenuState(*m_window, m_states, m_supported_fonts, m_supported_keys));
-
-#ifdef DEBUG
-	std::cout << "\nGame: init_states is success!" << std::endl;
-#endif // DEBUG
 }
 
 ////////////////////////////////////////////////////////////
