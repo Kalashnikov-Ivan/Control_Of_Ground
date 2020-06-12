@@ -26,6 +26,8 @@ public:
 	void pause()   = delete;
 	void unpause() = delete;
 
+	virtual void reset() override;
+
 	//Update
 	virtual void updateEvent(const sf::Event& event) override;
 	virtual void update(const float& dt) override;

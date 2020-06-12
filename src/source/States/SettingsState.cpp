@@ -70,10 +70,13 @@ void SettingsState::updateInput(const float& dt)
 {
 	if (m_settings_menu.isButtonPressed("APPLY"))
 	{
-		m_window.create(m_settings_menu.getCurrentVM(), "Control Of Ground");
+		resetSettingsAllStates();
 	}
 
 	if (m_settings_menu.isButtonPressed("BACK"))
+		quitState();
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		quitState();
 }
 
@@ -110,4 +113,24 @@ std::string SettingsState::getStringInfo()
 	result << m_settings_menu.getStringInfo();
 
 	return result.str();
+}
+
+//Functions
+void inline SettingsState::resetSettingsAllStates()
+{
+	m_window.create(m_settings_menu.getCurrentVM(), "Control Of Ground");
+
+	std::vector<State*> all_states;
+
+	while (!m_states.empty())
+	{
+		all_states.push_back(m_states.top());
+		m_states.pop();
+	}
+
+	for (int i = all_states.size() - 1; i >= 0; i--)
+	{
+		all_states[i]->reset();
+		m_states.push(all_states[i]);
+	}
 }

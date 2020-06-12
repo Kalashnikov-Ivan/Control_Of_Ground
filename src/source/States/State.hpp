@@ -25,6 +25,7 @@ public:
 	//Functions
 	void pause();
 	void unpause();
+	virtual void reset();
 	virtual void quitState();
 
 	//Update and render

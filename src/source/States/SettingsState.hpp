@@ -50,6 +50,9 @@ private:
 	virtual void inline initKeybinds() override; //Delete
 	void inline initBackground();
 
+	//Functions
+	void inline resetSettingsAllStates();
+
 	//Update
 	virtual void updateInput(const float& dt) override; //Delete
 };

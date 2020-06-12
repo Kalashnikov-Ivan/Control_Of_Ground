@@ -1,6 +1,7 @@
 #include "stdHeader.hpp"
 
 #include "GameState.hpp"
+#include "SettingsState.hpp"
 
 #define DEBUG
 
@@ -117,6 +118,9 @@ void GameState::updateInput(const float& dt)
 
 void GameState::updatePauseInput(const float& dt)
 {
+	if (m_pause_menu.isButtonPressed("SETTINGS_STATE"))
+		m_states.push(new SettingsState{ m_window, m_states, m_supported_fonts, m_supported_keys });
+
 	if (m_pause_menu.isButtonPressed("EXIT"))
 		quitState();
 }

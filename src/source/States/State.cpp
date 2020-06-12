@@ -66,6 +66,11 @@ void States::State::unpause()
 	m_paused = false;
 }
 
+void State::reset()
+{
+
+}
+
 void State::quitState()
 {
 	m_quit = true;

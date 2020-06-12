@@ -14,6 +14,9 @@ public:
 			 sf::Font& main_font);
 	~MainMenu();
 
+	//Functions
+	void reset();
+
 	//Update
 	void update(const sf::Vector2f& mouse_pos, const float& dt);
 
@@ -22,6 +25,7 @@ public:
 
 private:
 	virtual void inline initButtons()        override;
+			void inline resetButtons();
 };
 } // !namespace GUI
 #endif // !MAIN_MENU_H
