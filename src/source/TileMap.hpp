@@ -6,7 +6,7 @@
 class TileMap
 {
 public:
-	TileMap(const sf::Vector2f& grid_size, const sf::Vector2f& max_size, const size_t layers = 1);
+	TileMap(const sf::Vector2f& grid_size, const sf::Vector2u& max_size, const size_t layers = 1);
 	~TileMap();
 
 	//Update

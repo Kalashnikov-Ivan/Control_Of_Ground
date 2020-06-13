@@ -10,11 +10,8 @@ using namespace States;
 // Constructors
 ////////////////////////////////////////////////////////////
 
-EditorState::EditorState(sf::RenderWindow& window,
-						 std::stack<State*>& states,
-						 std::map<const std::string, sf::Font*>& supported_fonts,
-						 const std::map<const std::string, int>& supported_keys)
-	: State{ window, states, supported_fonts, supported_keys }
+EditorState::EditorState(GeneralValues& ref_GV)
+	: State{ ref_GV }
 {
 	initTextures();
 	initKeybinds();
@@ -45,7 +42,7 @@ void EditorState::initKeybinds()
 
 		while (keys_ifs >> key >> key_value)
 		{
-			m_keybinds[key] = m_supported_keys.at(key_value);
+			m_keybinds[key] = m_ref_GV.supported_keys.at(key_value);
 		}
 	}
 	else
@@ -54,7 +51,7 @@ void EditorState::initKeybinds()
 			<< std::endl
 			<< "Using default keys..." << std::endl;
 
-		m_keybinds["CLOSE"] = m_supported_keys.at("Escape");
+		m_keybinds["CLOSE"] = m_ref_GV.supported_keys.at("Escape");
 	}
 
 	keys_ifs.close();

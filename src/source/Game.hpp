@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Settings/SettingsContainer.h"
+#include "GeneralValues.h"
 #include "States/State.hpp"
 
 namespace Core
@@ -20,24 +20,15 @@ private:
 ////////////////////////////////////////////////////////////
 // Members
 ////////////////////////////////////////////////////////////
-	//Settings
-		Settings::SettingsContainer m_settings;
-
-	//Window
-		sf::RenderWindow*          m_window;
-
-	//Supported keys
-		std::map<const std::string, int> m_supported_keys;
-
-	//Time
-		sf::Clock m_delta_time_clock;
-		float m_delta_time;
+	//All values
+		GeneralValues m_GV;
 
 	//States
 		std::stack<States::State*> m_states;
 
-	//Fonts
-		std::map<const std::string, sf::Font*> m_supported_fonts;
+	//Time
+		sf::Clock m_delta_time_clock;
+		float m_delta_time;
 
 	//Info
 		std::stringstream m_tech_info;

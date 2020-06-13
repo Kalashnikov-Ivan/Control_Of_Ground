@@ -12,10 +12,7 @@ class EditorState :
 //__________________________PUBLIC______________________________
 public:
 	//Constructors
-	EditorState(sf::RenderWindow& window,
-				std::stack<State*>& states,
-				std::map<const std::string, sf::Font*>& supported_fonts,
-				const std::map<const std::string, int>& supported_keys);
+	EditorState(GeneralValues& ref_GV);
 	virtual ~EditorState();
 
 	//Tech info

@@ -10,13 +10,11 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-GameState::GameState(sf::RenderWindow& window,
-					 std::stack<State*>& states,
-					 std::map<const std::string, sf::Font*>& supported_fonts,
-					 const std::map<const std::string, int>& supported_keys)
-	: State      { window, states, supported_fonts, supported_keys }, 
-	m_pause_menu { window, *supported_fonts["DOSIS"], supported_fonts },
-	m_tile_map   { sf::Vector2f(100.f, 100.f), sf::Vector2f(100.f, 10.f) }
+GameState::GameState(GeneralValues& ref_GV, std::stack<States::State*>& states)
+	: State      { ref_GV },
+	m_states     { states },
+	m_pause_menu { *ref_GV.window, *ref_GV.supported_fonts["DOSIS"], ref_GV.supported_fonts },
+	m_tile_map   { sf::Vector2f(100.f, 100.f), sf::Vector2u(100, 10) }
 {
 	initTextures();
 	initKeybinds();
@@ -55,7 +53,7 @@ void GameState::initKeybinds()
 
 		while (keys_ifs >> key >> key_value)
 		{
-			m_keybinds[key] = m_supported_keys.at(key_value);
+			m_keybinds[key] = m_ref_GV.supported_keys.at(key_value);
 		}
 	}
 	else
@@ -64,12 +62,12 @@ void GameState::initKeybinds()
 				  << std::endl
 				  << "Using default keys..." << std::endl;
 
-		m_keybinds["CLOSE"] = m_supported_keys.at("Escape");
+		m_keybinds["CLOSE"] = m_ref_GV.supported_keys.at("Escape");
 
-		m_keybinds["MOVE_LEFT"]  = m_supported_keys.at("A");
-		m_keybinds["MOVE_RIGHT"] = m_supported_keys.at("D");
-		m_keybinds["MOVE_TOP"]   = m_supported_keys.at("W");
-		m_keybinds["MOVE_DOWN"]  = m_supported_keys.at("S");
+		m_keybinds["MOVE_LEFT"]  = m_ref_GV.supported_keys.at("A");
+		m_keybinds["MOVE_RIGHT"] = m_ref_GV.supported_keys.at("D");
+		m_keybinds["MOVE_TOP"]   = m_ref_GV.supported_keys.at("W");
+		m_keybinds["MOVE_DOWN"]  = m_ref_GV.supported_keys.at("S");
 	}
 
 	keys_ifs.close();
@@ -119,7 +117,7 @@ void GameState::updateInput(const float& dt)
 void GameState::updatePauseInput(const float& dt)
 {
 	if (m_pause_menu.isButtonPressed("SETTINGS_STATE"))
-		m_states.push(new SettingsState{ m_window, m_states, m_supported_fonts, m_supported_keys });
+		m_states.push(new SettingsState{ m_ref_GV, m_states });
 
 	if (m_pause_menu.isButtonPressed("EXIT"))
 		quitState();

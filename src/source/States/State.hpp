@@ -1,6 +1,9 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include "GeneralValues.h"
+#include "Settings/SettingsContainer.h"
+
 namespace States
 {
 class State //Base
@@ -9,10 +12,8 @@ class State //Base
 public:
 	//Constructors
 	State() = delete;
-	State(sf::RenderWindow& window, 
-		  std::stack<State*>& states,
-		  std::map<const std::string, sf::Font*>& supported_fonts,
-		  const std::map<const std::string, int>& supported_keys);
+	State(GeneralValues& ref_GV);
+
 	virtual ~State();
 	
 	//Accessors
@@ -38,11 +39,15 @@ protected:
 ////////////////////////////////////////////////////////////
 // Refs
 ////////////////////////////////////////////////////////////
+	GeneralValues& m_ref_GV;
+
+	/*
 	sf::RenderWindow& m_window; //Main render target <- Game
 	std::stack<State*>& m_states; //Global stack of states <- Game
 
 	std::map<const std::string, sf::Font*>& m_supported_fonts; // <- Game
 	const std::map<const std::string, int>& m_supported_keys; // <- Game
+	*/
 
 
 ////////////////////////////////////////////////////////////
@@ -79,5 +84,6 @@ private:
 	//Support_cleaner
 	void deleteTextures();
 };
-} // !namespace cog
+} // !namespace States
+
 #endif // !STATE_H

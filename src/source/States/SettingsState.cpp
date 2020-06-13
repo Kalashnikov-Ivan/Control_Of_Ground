@@ -9,15 +9,11 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-SettingsState::SettingsState(sf::RenderWindow& window,
-							 std::stack<State*>& states,
-							 std::map<const std::string, sf::Font*>& supported_fonts,
-							 const std::map<const std::string, int>& supported_keys)
-	: State{ window, states, supported_fonts, supported_keys },
-	m_title{ "settings", *supported_fonts["MAJOR"], 78U },
-	m_video_modes { sf::VideoMode(1920, 1080), sf::VideoMode(1600, 900), sf::VideoMode(1280, 1024), 
-					sf::VideoMode(1024, 768), sf::VideoMode(800, 600) },
-	m_settings_menu{ window, *supported_fonts["DOSIS"], m_video_modes }
+SettingsState::SettingsState(GeneralValues& ref_GV, std::stack<States::State*>& states)
+	: State{ ref_GV },
+	m_states{ states },
+	m_title{ "settings", *ref_GV.supported_fonts["MAJOR"], 78U },
+	m_settings_menu{ *ref_GV.window, *ref_GV.supported_fonts["DOSIS"], ref_GV.settings.m_graphics->m_video_modes }
 {
 	initTextures();
 	initBackground();
@@ -41,15 +37,15 @@ void SettingsState::initTextures()
 void SettingsState::initBackground()
 {
 	//Background
-	m_background.setSize(static_cast<sf::Vector2f>(m_window.getSize()));
+	m_background.setSize(static_cast<sf::Vector2f>(m_ref_GV.window->getSize()));
 	m_background.setTexture(m_textures["BACKGROUND"]);
 
 	//Title
 	m_title.setLetterSpacing(1.5f);
 	m_title.setStyle(sf::Text::Bold);
 
-	const float default_position_x = (m_window.getSize().x / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
-	const float default_position_y = (m_window.getSize().y / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
+	const float default_position_x = (m_ref_GV.window->getSize().x / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float default_position_y = (m_ref_GV.window->getSize().y / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
 	const float default_offset_y = -300.f;
 
 	m_title.setPosition(default_position_x - 20, default_position_y + default_offset_y);
@@ -118,7 +114,7 @@ std::string SettingsState::getStringInfo()
 //Functions
 void inline SettingsState::resetSettingsAllStates()
 {
-	m_window.create(m_settings_menu.getCurrentVM(), "Control Of Ground");
+	m_ref_GV.window->create(m_settings_menu.getCurrentVM(), "Control Of Ground");
 
 	std::vector<State*> all_states;
 

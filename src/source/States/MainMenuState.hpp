@@ -13,10 +13,7 @@ class MainMenuState :
 public:
 	//Constructors
 	MainMenuState() = delete;
-	MainMenuState(sf::RenderWindow& window,
-				  std::stack<State*>& states,
-				  std::map<const std::string, sf::Font*>& supported_fonts,
-				  const std::map<const std::string, int>& supported_keys);
+	MainMenuState(GeneralValues& ref_GV, std::stack<States::State*>& states);
 	virtual ~MainMenuState();
 
 	//Tech info
@@ -37,6 +34,7 @@ public:
 //__________________________PRIVATE_____________________________
 private:
 	//Refs
+	std::stack<States::State*>& m_states;
 
 	//Members
 	GUI::MainMenu m_main_menu;

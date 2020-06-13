@@ -1,10 +1,10 @@
 #include "stdHeader.hpp"
 
-#include "MainMenuState.hpp"
-
 #include "GameState.hpp"
 #include "EditorState.hpp"
 #include "SettingsState.hpp"
+
+#include "MainMenuState.hpp"
 
 #define DEBUG
 
@@ -13,13 +13,11 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-MainMenuState::MainMenuState(sf::RenderWindow& window,
-							 std::stack<State*>& states,
-							 std::map<const std::string, sf::Font*>& supported_fonts,
-							 const std::map<const std::string, int>& supported_keys)
-	: State{ window, states, supported_fonts, supported_keys }, 
-	m_main_menu{ window, *supported_fonts["DOSIS"] },
-	m_title{ "controL of GrounD", *supported_fonts["MAJOR"], 78U }
+MainMenuState::MainMenuState(GeneralValues& ref_GV, std::stack<States::State*>& states)
+	: State{ ref_GV },
+	m_states{ states },
+	m_main_menu{ *ref_GV.window, *ref_GV.supported_fonts["DOSIS"] },
+	m_title{ "controL of GrounD",  *ref_GV.supported_fonts["MAJOR"], 78U }
 {
 	initTextures();
 	initBackground();
@@ -43,15 +41,15 @@ void MainMenuState::initTextures()
 void MainMenuState::initBackground()
 {
 	//Background
-	m_background.setSize(static_cast<sf::Vector2f>(m_window.getSize()));
+	m_background.setSize(static_cast<sf::Vector2f>(m_ref_GV.window->getSize()));
 	m_background.setTexture(m_textures["BACKGROUND"]);
 
 	//Title
 	m_title.setLetterSpacing(1.5f);
 	m_title.setStyle(sf::Text::Bold);
 
-	const float default_position_x = (m_window.getSize().x / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
-	const float default_position_y = (m_window.getSize().y / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
+	const float default_position_x = (m_ref_GV.window->getSize().x / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float default_position_y = (m_ref_GV.window->getSize().y / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
 	const float default_offset_y = -300.f;
 
 	m_title.setPosition(default_position_x - 20, default_position_y + default_offset_y);
@@ -78,13 +76,13 @@ void MainMenuState::updateEvent(const sf::Event& event)
 void MainMenuState::updateInput(const float& dt)
 {
 	if (m_main_menu.isButtonPressed("GAME_STATE"))
-		m_states.push(new GameState{ m_window, m_states, m_supported_fonts, m_supported_keys });
+		m_states.push(new GameState{ m_ref_GV, m_states });
 
 	if (m_main_menu.isButtonPressed("EDITOR_STATE"))
-		m_states.push(new EditorState{ m_window, m_states, m_supported_fonts, m_supported_keys });
+		m_states.push(new EditorState{ m_ref_GV });
 
 	if (m_main_menu.isButtonPressed("SETTINGS_STATE"))
-		m_states.push(new SettingsState{ m_window, m_states, m_supported_fonts, m_supported_keys });
+		m_states.push(new SettingsState{ m_ref_GV, m_states });
 
 	if (m_main_menu.isButtonPressed("EXIT"))
 		quitState();

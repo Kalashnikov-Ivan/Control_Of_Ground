@@ -2,7 +2,7 @@
 
 #include "TileMap.hpp"
 
-TileMap::TileMap(const sf::Vector2f& grid_size, const sf::Vector2f& max_size, const size_t layers)
+TileMap::TileMap(const sf::Vector2f& grid_size, const sf::Vector2u& max_size, const size_t layers)
 	: m_grid_size_f { grid_size },
 	m_grid_size_u   { static_cast<sf::Vector2u>(grid_size) },
 	m_max_size      { max_size },

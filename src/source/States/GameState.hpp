@@ -2,9 +2,9 @@
 #define GAME_STATE_H
 
 #include "State.hpp"
-#include "GUI/PauseMenu.hpp"
-
 #include "TileMap.hpp"
+
+#include "GUI/PauseMenu.hpp"
 
 #include "Entities/Player.hpp"
 
@@ -16,10 +16,7 @@ class GameState :
 public:
 	//Constructors
 	GameState() = delete;
-	GameState(sf::RenderWindow& window,
-			  std::stack<State*>& states,
-			  std::map<const std::string, sf::Font*>& supported_fonts,
-			  const std::map<const std::string, int>& supported_keys);
+	GameState(GeneralValues& ref_GV, std::stack<States::State*>& states);
 	virtual ~GameState();
 
 	//Tech info
@@ -32,6 +29,9 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 
 private:
+	//Refs
+	std::stack<States::State*>& m_states;
+
 	//TileMap
 	TileMap m_tile_map;
 

@@ -7,14 +7,8 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-State::State(sf::RenderWindow& window,
-			 std::stack<State*>& states,
-			 std::map<const std::string, sf::Font*>& supported_fonts,
-			 const std::map<const std::string, int>& supported_keys)
-	: m_window		 { window },
-	m_states         { states },
-	m_supported_fonts{ supported_fonts },
-	m_supported_keys { supported_keys },
+State::State(GeneralValues& ref_GV)
+	: m_ref_GV		 { ref_GV },
 	m_quit           { false },
 	m_paused         { false }
 {
@@ -79,6 +73,6 @@ void State::quitState()
 void State::updateMousePos()
 {
 	m_mouse_pos_screen = sf::Mouse::getPosition();
-	m_mouse_pos_window = sf::Mouse::getPosition(m_window);
-	m_mouse_pos_view = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+	m_mouse_pos_window = sf::Mouse::getPosition(*m_ref_GV.window);
+	m_mouse_pos_view = m_ref_GV.window->mapPixelToCoords(sf::Mouse::getPosition(*m_ref_GV.window));
 }

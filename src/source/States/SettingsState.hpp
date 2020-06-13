@@ -2,9 +2,9 @@
 #define SETTINGS_STATE_H
 
 #include "State.hpp"
+
 #include "GUI/SettingsMenu.hpp"
 #include "GUI/DropDownList.hpp"
-
 
 namespace States
 {
@@ -15,10 +15,7 @@ class SettingsState :
 public:
 	//Constructors
 	SettingsState() = delete;
-	SettingsState(sf::RenderWindow& window,
-				  std::stack<State*>& states,
-				  std::map<const std::string, sf::Font*>& supported_fonts,
-				  const std::map<const std::string, int>& supported_keys);
+	SettingsState(GeneralValues& ref_GV, std::stack<States::State*>& states);
 	virtual ~SettingsState();
 
 	//Tech info
@@ -36,10 +33,10 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 //__________________________PRIVATE_____________________________
 private:
-	//Settings folder
-	std::vector<sf::VideoMode> m_video_modes;
+	//Refs
+	std::stack<States::State*>& m_states;
 
-	//Members
+	//GUI
 	GUI::SettingsMenu m_settings_menu;
 	sf::RectangleShape m_background;
 	sf::Text m_title;
