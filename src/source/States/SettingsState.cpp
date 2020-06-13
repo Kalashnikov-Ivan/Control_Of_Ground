@@ -9,11 +9,10 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-SettingsState::SettingsState(GeneralValues& ref_GV, std::stack<States::State*>& states)
-	: State{ ref_GV },
-	m_states{ states },
-	m_title{ "settings", *ref_GV.supported_fonts["MAJOR"], 78U },
-	m_settings_menu{ *ref_GV.window, *ref_GV.supported_fonts["DOSIS"], ref_GV.settings.m_graphics->m_video_modes }
+SettingsState::SettingsState(StateData& Sdata)
+	: State{ Sdata },
+	m_title{ "settings", *Sdata.supported_fonts["MAJOR"], 78U },
+	m_settings_menu{ Sdata.window, *Sdata.supported_fonts["DOSIS"], Sdata.settings.m_graphics->m_video_modes }
 {
 	initTextures();
 	initBackground();
@@ -37,15 +36,15 @@ void SettingsState::initTextures()
 void SettingsState::initBackground()
 {
 	//Background
-	m_background.setSize(static_cast<sf::Vector2f>(m_ref_GV.window->getSize()));
+	m_background.setSize(static_cast<sf::Vector2f>(m_Sdata.window.getSize()));
 	m_background.setTexture(m_textures["BACKGROUND"]);
 
 	//Title
 	m_title.setLetterSpacing(1.5f);
 	m_title.setStyle(sf::Text::Bold);
 
-	const float default_position_x = (m_ref_GV.window->getSize().x / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
-	const float default_position_y = (m_ref_GV.window->getSize().y / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
+	const float default_position_x = (m_Sdata.window.getSize().x / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float default_position_y = (m_Sdata.window.getSize().y / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
 	const float default_offset_y = -300.f;
 
 	m_title.setPosition(default_position_x - 20, default_position_y + default_offset_y);
@@ -114,19 +113,19 @@ std::string SettingsState::getStringInfo()
 //Functions
 void inline SettingsState::resetSettingsAllStates()
 {
-	m_ref_GV.window->create(m_settings_menu.getCurrentVM(), "Control Of Ground");
+	m_Sdata.window.create(m_settings_menu.getCurrentVM(), "Control Of Ground");
 
 	std::vector<State*> all_states;
 
-	while (!m_states.empty())
+	while (!m_Sdata.states.empty())
 	{
-		all_states.push_back(m_states.top());
-		m_states.pop();
+		all_states.push_back(m_Sdata.states.top());
+		m_Sdata.states.pop();
 	}
 
 	for (int i = all_states.size() - 1; i >= 0; i--)
 	{
 		all_states[i]->reset();
-		m_states.push(all_states[i]);
+		m_Sdata.states.push(all_states[i]);
 	}
 }

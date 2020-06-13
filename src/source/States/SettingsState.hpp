@@ -15,7 +15,7 @@ class SettingsState :
 public:
 	//Constructors
 	SettingsState() = delete;
-	SettingsState(GeneralValues& ref_GV, std::stack<States::State*>& states);
+	SettingsState(StateData& Sdata);
 	virtual ~SettingsState();
 
 	//Tech info
@@ -33,9 +33,6 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 //__________________________PRIVATE_____________________________
 private:
-	//Refs
-	std::stack<States::State*>& m_states;
-
 	//GUI
 	GUI::SettingsMenu m_settings_menu;
 	sf::RectangleShape m_background;

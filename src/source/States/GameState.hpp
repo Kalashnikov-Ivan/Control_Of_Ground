@@ -16,7 +16,7 @@ class GameState :
 public:
 	//Constructors
 	GameState() = delete;
-	GameState(GeneralValues& ref_GV, std::stack<States::State*>& states);
+	GameState(StateData& Sdata);
 	virtual ~GameState();
 
 	//Tech info
@@ -29,9 +29,6 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 
 private:
-	//Refs
-	std::stack<States::State*>& m_states;
-
 	//TileMap
 	TileMap m_tile_map;
 

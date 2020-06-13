@@ -12,7 +12,7 @@ class EditorState :
 //__________________________PUBLIC______________________________
 public:
 	//Constructors
-	EditorState(GeneralValues& ref_GV);
+	EditorState(StateData& Sdata);
 	virtual ~EditorState();
 
 	//Tech info

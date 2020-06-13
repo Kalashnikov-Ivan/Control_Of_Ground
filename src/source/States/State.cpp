@@ -7,8 +7,8 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-State::State(GeneralValues& ref_GV)
-	: m_ref_GV		 { ref_GV },
+State::State(StateData& Sdata)
+	: m_Sdata		 { Sdata },
 	m_quit           { false },
 	m_paused         { false }
 {
@@ -73,6 +73,6 @@ void State::quitState()
 void State::updateMousePos()
 {
 	m_mouse_pos_screen = sf::Mouse::getPosition();
-	m_mouse_pos_window = sf::Mouse::getPosition(*m_ref_GV.window);
-	m_mouse_pos_view = m_ref_GV.window->mapPixelToCoords(sf::Mouse::getPosition(*m_ref_GV.window));
+	m_mouse_pos_window = sf::Mouse::getPosition(m_Sdata.window);
+	m_mouse_pos_view = m_Sdata.window.mapPixelToCoords(sf::Mouse::getPosition(m_Sdata.window));
 }

@@ -10,8 +10,8 @@ using namespace States;
 // Constructors
 ////////////////////////////////////////////////////////////
 
-EditorState::EditorState(GeneralValues& ref_GV)
-	: State{ ref_GV }
+EditorState::EditorState(StateData& Sdata)
+	: State{ Sdata }
 {
 	initTextures();
 	initKeybinds();
@@ -42,7 +42,7 @@ void EditorState::initKeybinds()
 
 		while (keys_ifs >> key >> key_value)
 		{
-			m_keybinds[key] = m_ref_GV.supported_keys.at(key_value);
+			m_keybinds[key] = m_Sdata.supported_keys.at(key_value);
 		}
 	}
 	else
@@ -51,7 +51,7 @@ void EditorState::initKeybinds()
 			<< std::endl
 			<< "Using default keys..." << std::endl;
 
-		m_keybinds["CLOSE"] = m_ref_GV.supported_keys.at("Escape");
+		m_keybinds["CLOSE"] = m_Sdata.supported_keys.at("Escape");
 	}
 
 	keys_ifs.close();

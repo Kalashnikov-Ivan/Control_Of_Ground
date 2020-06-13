@@ -1,18 +1,41 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include "GeneralValues.h"
+//#include "GeneralValues.h"
 #include "Settings/SettingsContainer.h"
 
 namespace States
 {
+class State;
+
+class StateData
+{
+public:
+	StateData(sf::RenderWindow& window, std::stack<States::State*>& states, Settings::SettingsContainer& settings,
+			  std::map<const std::string, int>& supported_keys, std::map<const std::string, sf::Font*>& supported_fonts)
+		: window{ window }, states{ states }, settings{ settings },
+		supported_keys { supported_keys }, supported_fonts { supported_fonts }
+	{}
+	~StateData()
+	{}
+
+	sf::RenderWindow& window;
+
+	std::stack<States::State*>& states;
+
+	Settings::SettingsContainer& settings;
+
+	std::map<const std::string, int>&       supported_keys;
+	std::map<const std::string, sf::Font*>& supported_fonts;
+};
+
 class State //Base
 {
 //__________________________PUBLIC______________________________
 public:
 	//Constructors
 	State() = delete;
-	State(GeneralValues& ref_GV);
+	State(StateData& sdata);
 
 	virtual ~State();
 	
@@ -39,7 +62,7 @@ protected:
 ////////////////////////////////////////////////////////////
 // Refs
 ////////////////////////////////////////////////////////////
-	GeneralValues& m_ref_GV;
+	StateData& m_Sdata;
 
 	/*
 	sf::RenderWindow& m_window; //Main render target <- Game

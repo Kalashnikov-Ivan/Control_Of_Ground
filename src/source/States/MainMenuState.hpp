@@ -13,7 +13,7 @@ class MainMenuState :
 public:
 	//Constructors
 	MainMenuState() = delete;
-	MainMenuState(GeneralValues& ref_GV, std::stack<States::State*>& states);
+	MainMenuState(StateData& Sdata);
 	virtual ~MainMenuState();
 
 	//Tech info
@@ -33,9 +33,6 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 //__________________________PRIVATE_____________________________
 private:
-	//Refs
-	std::stack<States::State*>& m_states;
-
 	//Members
 	GUI::MainMenu m_main_menu;
 	sf::RectangleShape m_background;
