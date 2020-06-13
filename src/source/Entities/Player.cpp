@@ -14,10 +14,10 @@ Player::Player(const sf::Vector2f& position_xy, sf::Texture& texture,
 	m_is_attacking{ false }
 {
 	//Creating components
-	createMovementComponent (*m_sprite, max_speed, acceleration, deceleration);
-	createAnimationComponent(*m_sprite, texture);
+	createMovementComponent (m_sprite, max_speed, acceleration, deceleration);
+	createAnimationComponent(m_sprite, texture);
 	sf::Vector2f hitbox_size{ 11.f, 26.f };
-	createHitboxComponent   (*m_sprite, sf::Vector2f(80.f, 25.f), hitbox_size, scale);
+	createHitboxComponent   (m_sprite, sf::Vector2f(80.f, 25.f), hitbox_size, scale);
 
 	initAnimations();
 
@@ -47,7 +47,7 @@ std::string Player::getStringInfo()
 {
 	std::stringstream result;
 
-	result << "Player_pos: " << m_sprite->getPosition().x << ' ' << m_sprite->getPosition().y << '\n';
+	result << "Player_pos: " << m_sprite.getPosition().x << ' ' << m_sprite.getPosition().y << '\n';
 	result << "MovementComponent:\n";
 	result << m_movement_component->getStringInfo();
 
@@ -94,8 +94,8 @@ void Player::updateAnimations(const float& dt)
 		m_animation_component->play("IDLE", dt, 1.f, 1.f);
 		break;
 	case MoveState::RIGHT:
-		m_sprite->setOrigin(0.f, 0.f);
-		m_sprite->setScale(m_scale_x, m_scale_y);
+		m_sprite.setOrigin(0.f, 0.f);
+		m_sprite.setScale(m_scale_x, m_scale_y);
 		m_hitbox_component->setPosition(sf::Vector2f(0.f, 0.f));
 		m_hitbox_component->setSize(sf::Vector2f(11.f, 29.f));
 		m_hitbox_component->setOffsetMove(sf::Vector2f(7.f, 0.f));
@@ -103,8 +103,8 @@ void Player::updateAnimations(const float& dt)
 		m_animation_component->play("WALK", dt, modifier_speed_anim, modifier_max);
 		break;
 	case MoveState::LEFT:
-		m_sprite->setOrigin(50.f, 0.f);
-		m_sprite->setScale(-m_scale_x, m_scale_y);
+		m_sprite.setOrigin(50.f, 0.f);
+		m_sprite.setScale(-m_scale_x, m_scale_y);
 		m_hitbox_component->setPosition(sf::Vector2f(0.f, 0.f));
 		m_hitbox_component->setSize(sf::Vector2f(11.f, 29.f));
 		m_hitbox_component->setOffsetMove(sf::Vector2f(-7.f, 0.f));
@@ -151,6 +151,6 @@ void Player::update(const float& dt)
 
 void Player::render(sf::RenderTarget& target)
 {
-	target.draw(*m_sprite);
+	target.draw(m_sprite);
 	m_hitbox_component->render(target);
 }

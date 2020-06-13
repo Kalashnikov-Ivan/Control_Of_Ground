@@ -8,12 +8,12 @@ using namespace Entities;
 // Constructors
 ////////////////////////////////////////////////////////////
 Entity::Entity(sf::Texture& texture, const sf::Vector2f& scale)
-	: m_sprite           { new sf::Sprite(texture) },
+	: m_sprite           { texture },
 	m_movement_component { nullptr }, 
 	m_animation_component{ nullptr },
 	m_hitbox_component   { nullptr }
 {
-	m_sprite->setScale(scale);
+	m_sprite.setScale(scale);
 }
 
 Entity::~Entity()
@@ -26,8 +26,6 @@ Entity::~Entity()
 		delete m_movement_component;
 	if (m_animation_component)
 		delete m_animation_component;
-
-	delete m_sprite;
 }
 
 ////////////////////////////////////////////////////////////
@@ -74,11 +72,11 @@ const sf::Vector2f Entity::getSpeedDir() const
 void Entity::setPosition(const sf::Vector2f& position_xy)
 {
 	//m_sprite.setPosition(position_xy);
-	m_sprite->setPosition(position_xy);
+	m_sprite.setPosition(position_xy);
 }
 
 void Entity::setTexture(const sf::Texture& texture)
 {
 	//m_sprite.setTexture(*texture);
-	m_sprite->setTexture(texture);
+	m_sprite.setTexture(texture);
 }

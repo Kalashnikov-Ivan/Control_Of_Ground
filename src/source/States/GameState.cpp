@@ -98,7 +98,7 @@ void GameState::updateEvent(const sf::Event& event)
 	}
 
 	if (event.type == sf::Event::KeyPressed)
-	{
+	{ 
 
 		if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])))
 		{

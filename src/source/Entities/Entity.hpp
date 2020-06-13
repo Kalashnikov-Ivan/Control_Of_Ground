@@ -34,7 +34,7 @@ public:
 
 protected:
 	//Members
-	sf::Sprite* m_sprite;
+	sf::Sprite m_sprite;
 
 	//Components
 	Components::MovementComponent*  m_movement_component;
