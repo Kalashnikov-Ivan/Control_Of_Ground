@@ -55,6 +55,22 @@ void DropDownList::setPosition(const sf::Vector2f& pos)
 		m_list[i]->setPosition(sf::Vector2f(pos.x, pos.y + ((i + 1) * m_list[i]->getSize().y)));
 }
 
+//Info
+std::string DropDownList::getStringInfo()
+{
+	std::stringstream result;
+
+	if (m_active_element->getState() == Button::States::HOVER)
+		result << m_active_element->getStringInfo();
+	else
+	{
+		for (auto& i : m_list)
+			if (i->getState() == Button::States::HOVER)
+				result << i->getStringInfo();
+	}
+
+	return result.str();
+}
 
 //Update
 void DropDownList::updateList(const sf::Vector2f& mouse_pos, const float& dt)

@@ -70,10 +70,32 @@ SettingsMenu::VideoSettingsMenu::~VideoSettingsMenu()
 		delete i.second;
 }
 
+//Info
+std::string SettingsMenu::VideoSettingsMenu::getStringInfo()
+{
+	std::stringstream result;
+
+	for (auto& i : m_dropdown_lists)
+		result << i.second->getStringInfo();
+
+	return result.str();
+}
+
 //Accessors
 sf::VideoMode SettingsMenu::VideoSettingsMenu::getCurrentVM()
 {
 	return m_video_modes[m_dropdown_lists["RESOLUTION"]->getActiveElemIndex()];
+}
+
+//Info
+std::string SettingsMenu::getStringInfo()
+{
+	std::stringstream result;
+
+	result << Menu::getStringInfo();
+	result << m_video_menu.getStringInfo();
+
+	return result.str();
 }
 
 //Update

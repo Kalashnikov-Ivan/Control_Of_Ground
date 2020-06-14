@@ -18,6 +18,9 @@ public:
 	//Accessors
 	sf::VideoMode getCurrentVM();
 
+	//Info
+	virtual std::string getStringInfo() override;
+
 	//Update
 	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
 
@@ -33,6 +36,9 @@ private:
 
 		//Accessors
 		sf::VideoMode getCurrentVM();
+
+		//Info
+		std::string getStringInfo();
 
 		//Update
 		void inline update(const sf::Vector2f& mouse_pos, const float& dt);

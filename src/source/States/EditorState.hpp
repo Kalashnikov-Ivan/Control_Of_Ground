@@ -2,7 +2,10 @@
 #define EDITOR_STATE_H
 
 #include "State.hpp"
+#include "TileMap.hpp"
+
 #include "GUI/Button.hpp"
+#include "GUI/PauseMenu.hpp"
 
 namespace States
 {
@@ -28,7 +31,9 @@ public:
 //__________________________PRIVATE_____________________________
 private:
 	//Members
+	TileMap m_tile_map;
 
+	GUI::PauseMenu m_pause_menu;
 
 	//---------------------------------------------
 	//Init
@@ -36,6 +41,7 @@ private:
 	virtual void initKeybinds() override;
 
 	//Update
+	void updatePauseInput(const float& dt);
 	virtual void updateInput(const float& dt) override;
 
 	//Render

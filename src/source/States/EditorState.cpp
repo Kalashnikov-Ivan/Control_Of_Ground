@@ -2,6 +2,8 @@
 
 #include "EditorState.hpp"
 
+#include "States/SettingsState.hpp"
+
 #define DEBUG
 
 using namespace States;
@@ -11,7 +13,9 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 
 EditorState::EditorState(StateData& Sdata)
-	: State{ Sdata }
+	: State{ Sdata },
+	m_tile_map { sf::Vector2f(100.f, 100.f), sf::Vector2u(100, 10) },
+	m_pause_menu { m_Sdata.window, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts}
 {
 	initTextures();
 	initKeybinds();
@@ -73,6 +77,7 @@ std::string EditorState::getStringInfo()
 	std::stringstream result;
 
 	result << getStringMousePos();
+	result << m_pause_menu.getStringInfo();
 
 	return result.str();
 }
@@ -82,18 +87,51 @@ std::string EditorState::getStringInfo()
 ////////////////////////////////////////////////////////////
 void EditorState::updateEvent(const sf::Event& event)
 {
+	if (event.type == sf::Event::LostFocus)
+	{
+		if (!m_paused)
+			pause();
+	}
+
+	if (event.type == sf::Event::KeyPressed)
+	{
+
+		if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])))
+		{
+			if (!m_paused)
+				pause();
+			else
+				unpause();
+		}
+	}
 }
 
 void EditorState::updateInput(const float& dt)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(m_keybinds["CLOSE"])))
+}
+
+void EditorState::updatePauseInput(const float& dt)
+{
+	if (m_pause_menu.isButtonPressed("SETTINGS_STATE"))
+		m_Sdata.states.push(new SettingsState{ m_Sdata });
+
+	if (m_pause_menu.isButtonPressed("EXIT"))
 		quitState();
 }
 
 void EditorState::update(const float& dt)
 {
 	updateMousePos();
-	updateInput(dt);
+
+	if (!m_paused)
+	{
+	}
+	else
+	{
+		updatePauseInput(dt);
+
+		m_pause_menu.update(m_mouse_pos_view, dt);
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -101,4 +139,10 @@ void EditorState::update(const float& dt)
 ////////////////////////////////////////////////////////////
 void EditorState::render(sf::RenderTarget& target)
 {
+	m_tile_map.render(target);
+
+	if (m_paused)
+	{
+		m_pause_menu.render(target);
+	}
 }

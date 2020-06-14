@@ -25,7 +25,6 @@
     <ClCompile Include="source\Entities\MovementComponent.cpp" />
     <ClCompile Include="source\Entities\Player.cpp" />
     <ClCompile Include="source\Game.cpp" />
-    <ClCompile Include="source\GeneralValues.cpp" />
     <ClCompile Include="source\GUI\Button.cpp" />
     <ClCompile Include="source\GUI\DropDownList.cpp" />
     <ClCompile Include="source\GUI\MainMenu.cpp" />
@@ -68,7 +67,6 @@
     <ClInclude Include="source\Entities\MovementComponent.hpp" />
     <ClInclude Include="source\Entities\Player.hpp" />
     <ClInclude Include="source\Game.hpp" />
-    <ClInclude Include="source\GeneralValues.h" />
     <ClInclude Include="source\GUI\Button.hpp" />
     <ClInclude Include="source\GUI\DropDownList.hpp" />
     <ClInclude Include="source\GUI\MainMenu.hpp" />

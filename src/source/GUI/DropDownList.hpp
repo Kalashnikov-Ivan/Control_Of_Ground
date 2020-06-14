@@ -22,6 +22,9 @@ public:
 	//Modificators
 	void setPosition(const sf::Vector2f& pos);
 
+	//Info
+	std::string getStringInfo();
+
 	//Update
 	void update(const sf::Vector2f& mouse_pos, const float& dt);
 
