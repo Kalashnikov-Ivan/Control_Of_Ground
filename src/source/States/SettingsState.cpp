@@ -114,6 +114,7 @@ std::string SettingsState::getStringInfo()
 void inline SettingsState::resetSettingsAllStates()
 {
 	m_Sdata.window.create(m_settings_menu.getCurrentVM(), "Control Of Ground");
+	m_Sdata.window.setFramerateLimit(m_Sdata.settings.m_graphics->m_framerate_limit);
 
 	std::vector<State*> all_states;
 

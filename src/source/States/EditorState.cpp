@@ -14,7 +14,7 @@ using namespace States;
 
 EditorState::EditorState(StateData& Sdata)
 	: State{ Sdata },
-	m_tile_map { sf::Vector2f(100.f, 100.f), sf::Vector2u(100, 10) },
+	m_tile_map { sf::Vector2f(100.f, 100.f), sf::Vector2u(3, 3) },
 	m_pause_menu { m_Sdata.window, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts}
 {
 	initTextures();
