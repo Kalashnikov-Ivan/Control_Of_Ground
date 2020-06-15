@@ -39,6 +39,7 @@ private:
 
 	//Info
 		std::stringstream m_tech_info;
+		std::stringstream m_mouse_info;
 		bool m_enable_info;
 
 ////////////////////////////////////////////////////////////
@@ -55,6 +56,7 @@ private:
 ////////////////////////////////////////////////////////////
 	void updateInfo();
 	sf::Text getTextInfo(const sf::Font& font);
+	sf::Text getMouseTextInfo(const sf::Font& font);
 
 ////////////////////////////////////////////////////////////
 // Functions

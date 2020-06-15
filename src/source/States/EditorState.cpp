@@ -14,11 +14,16 @@ using namespace States;
 
 EditorState::EditorState(StateData& Sdata)
 	: State{ Sdata },
-	m_tile_map { sf::Vector2f(100.f, 100.f), sf::Vector2u(3, 3) },
-	m_pause_menu { m_Sdata.window, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts}
+	m_tile_map { sf::Vector2f(100.f, 100.f), sf::Vector2u(50, 50) },
+	m_pause_menu { m_Sdata.window, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts},
+	m_selector   { m_Sdata.grid_size_f }
 {
 	initTextures();
 	initKeybinds();
+
+	m_selector.setOutlineThickness(1.5f);
+	m_selector.setOutlineColor(sf::Color::Green);
+	m_selector.setFillColor(sf::Color::Transparent);
 }
 
 EditorState::~EditorState()
@@ -77,6 +82,7 @@ std::string EditorState::getStringInfo()
 	std::stringstream result;
 
 	result << getStringMousePos();
+	result << "Grid pos: " << m_mouse_pos_grid.x << ' ' << m_mouse_pos_grid.y << '\n';
 	result << m_pause_menu.getStringInfo();
 
 	return result.str();
@@ -116,6 +122,7 @@ void EditorState::updateEvent(const sf::Event& event)
 
 void EditorState::updateInput(const float& dt)
 {
+	m_selector.setPosition(m_mouse_pos_grid.x * m_Sdata.grid_size_f.x, m_mouse_pos_grid.y * m_Sdata.grid_size_f.y);
 }
 
 void EditorState::updatePauseInput(const float& dt)
@@ -133,6 +140,7 @@ void EditorState::update(const float& dt)
 
 	if (!m_paused)
 	{
+		updateInput(dt);
 	}
 	else
 	{
@@ -148,6 +156,7 @@ void EditorState::update(const float& dt)
 void EditorState::render(sf::RenderTarget& target)
 {
 	m_tile_map.render(target);
+	target.draw(m_selector);
 
 	if (m_paused)
 	{

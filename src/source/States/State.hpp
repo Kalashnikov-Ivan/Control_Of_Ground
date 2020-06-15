@@ -12,14 +12,17 @@ class StateData
 {
 public:
 	StateData(sf::RenderWindow& window, std::stack<States::State*>& states, Settings::SettingsContainer& settings,
-			  std::map<const std::string, int>& supported_keys, std::map<const std::string, sf::Font*>& supported_fonts)
+			  std::map<const std::string, int>& supported_keys, std::map<const std::string, sf::Font*>& supported_fonts,
+			  sf::Vector2f grid_size = sf::Vector2f(100.f, 100.f))
 		: window{ window }, states{ states }, settings{ settings },
-		supported_keys { supported_keys }, supported_fonts { supported_fonts }
+		supported_keys { supported_keys }, supported_fonts { supported_fonts },
+		grid_size_f { grid_size }
 	{}
 	~StateData()
 	{}
 
 	sf::RenderWindow& window;
+	sf::Vector2f grid_size_f;
 
 	std::stack<States::State*>& states;
 
@@ -44,6 +47,7 @@ public:
 
 	//Info
 	virtual std::string getStringInfo() = 0;
+	virtual std::string getStringInfoMouse();
 	std::string getStringMousePos() const;
 
 	//Functions
@@ -64,27 +68,19 @@ protected:
 ////////////////////////////////////////////////////////////
 	StateData& m_Sdata;
 
-	/*
-	sf::RenderWindow& m_window; //Main render target <- Game
-	std::stack<State*>& m_states; //Global stack of states <- Game
-
-	std::map<const std::string, sf::Font*>& m_supported_fonts; // <- Game
-	const std::map<const std::string, int>& m_supported_keys; // <- Game
-	*/
-
-
 ////////////////////////////////////////////////////////////
 // Member
 ////////////////////////////////////////////////////////////
 	//Resources
 	std::map<const std::string, sf::Texture*> m_textures;
 
-	std::map<const std::string, int> m_keybinds; // -> Inherit
+	std::map<const std::string, int> m_keybinds;
 
 	//Mouse
 	sf::Vector2i m_mouse_pos_screen;
 	sf::Vector2i m_mouse_pos_window;
 	sf::Vector2f m_mouse_pos_view;
+	sf::Vector2u m_mouse_pos_grid;
 	
 	//State
 	bool m_paused;

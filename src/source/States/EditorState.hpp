@@ -34,6 +34,8 @@ private:
 	TileMap m_tile_map;
 
 	GUI::PauseMenu m_pause_menu;
+	
+	sf::RectangleShape m_selector;
 
 	//---------------------------------------------
 	//Init

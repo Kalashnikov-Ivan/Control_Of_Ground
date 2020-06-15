@@ -4,7 +4,8 @@
 
 //Constructors
 Tile::Tile()
-	: m_shape { sf::Vector2f(0.f, 0.f)}
+	: m_shape { sf::Vector2f(0.f, 0.f)},
+	m_border_visible{ false }
 {
 }
 

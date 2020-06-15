@@ -143,7 +143,9 @@ void Game::initSupportedFonts()
 
 void Game::initFirstState()
 {
-	m_Sdata = new States::StateData{ *m_window, m_states, m_settings, m_supported_keys, m_supported_fonts };
+	sf::Vector2f grid_size{ 100.f, 100.f };
+
+	m_Sdata = new States::StateData{ *m_window, m_states, m_settings, m_supported_keys, m_supported_fonts, grid_size };
 
 	m_states.push(new States::MainMenuState(*m_Sdata));
 }
@@ -154,6 +156,7 @@ void Game::initFirstState()
 void Game::updateInfo()
 {
 	m_tech_info.str(std::string()); //Clearing
+	m_mouse_info.str(std::string()); //Clearing
 
 	m_tech_info << "Delta time: " << m_delta_time << " sec" << ", FPS: " << static_cast<uint32_t>(1 / m_delta_time) << '\n';
 }
@@ -162,6 +165,14 @@ sf::Text Game::getTextInfo(const sf::Font& font)
 {
 	sf::Text info_text{ m_tech_info.str(), font, 16U };
 	info_text.setPosition(20.f, 20.f);
+
+	return info_text;
+}
+
+sf::Text Core::Game::getMouseTextInfo(const sf::Font& font)
+{
+	sf::Text info_text{ m_mouse_info.str(), font, 12U };
+	info_text.setPosition(m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)).x + 15, m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)).y - 15);
 
 	return info_text;
 }
@@ -198,7 +209,8 @@ void Game::updateEvents()
 
 void Game::update()
 {
-	updateInfo();
+	if (m_enable_info)
+		updateInfo();
 
 	if (!m_states.empty())
 	{
@@ -208,7 +220,10 @@ void Game::update()
 
 		//Getting info
 		if (m_enable_info)
+		{
 			m_tech_info << m_states.top()->getStringInfo();
+			m_mouse_info << m_states.top()->getStringInfoMouse();
+		}
 
 		//Check quit
 		if (m_states.top()->getQuit())
@@ -240,7 +255,10 @@ void Game::render()
 	}
 
 	if (m_enable_info)
+	{
 		m_window->draw(getTextInfo(*m_supported_fonts["DOSIS"]));
+		m_window->draw(getMouseTextInfo(*m_supported_fonts["DOSIS"]));
+	}
 
 	m_window->display();
 }
