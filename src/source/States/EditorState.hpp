@@ -15,7 +15,7 @@ class EditorState :
 //__________________________PUBLIC______________________________
 public:
 	//Constructors
-	EditorState(StateData& Sdata);
+	EditorState(StateData& Sdata, const float click_time = 0.07f);
 	virtual ~EditorState();
 
 	//Tech info
@@ -37,6 +37,10 @@ private:
 	
 	sf::RectangleShape m_selector;
 
+	//Timer
+	const float m_click_time;
+	float m_timer;
+
 	//---------------------------------------------
 	//Init
 	virtual void initTextures() override;
@@ -45,6 +49,9 @@ private:
 	//Update
 	void updatePauseInput(const float& dt);
 	virtual void updateInput(const float& dt) override;
+	//Timer
+	void updateTimer(const float& dt);
+	bool isTime();
 
 	//Render
 

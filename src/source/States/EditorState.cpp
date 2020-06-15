@@ -12,11 +12,12 @@ using namespace States;
 // Constructors
 ////////////////////////////////////////////////////////////
 
-EditorState::EditorState(StateData& Sdata)
+EditorState::EditorState(StateData& Sdata, const float click_time)
 	: State{ Sdata },
-	m_tile_map { sf::Vector2f(100.f, 100.f), sf::Vector2u(50, 50) },
+	m_tile_map { Sdata.grid_size_f, sf::Vector2u(50, 50) },
 	m_pause_menu { m_Sdata.window, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts},
-	m_selector   { m_Sdata.grid_size_f }
+	m_selector   { m_Sdata.grid_size_f },
+	m_click_time { click_time }
 {
 	initTextures();
 	initKeybinds();
@@ -124,11 +125,11 @@ void EditorState::updateInput(const float& dt)
 {
 	m_selector.setPosition(m_mouse_pos_grid.x * m_Sdata.grid_size_f.x, m_mouse_pos_grid.y * m_Sdata.grid_size_f.y);
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && isTime())
 	{
 		m_tile_map.addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
 	}
-	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && isTime())
 	{
 		m_tile_map.deleteTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
 	}
@@ -143,8 +144,26 @@ void EditorState::updatePauseInput(const float& dt)
 		quitState();
 }
 
+//Timer
+void EditorState::updateTimer(const float& dt)
+{
+	m_timer += dt;
+}
+
+bool EditorState::isTime()
+{
+	if (m_timer >= m_click_time)
+	{
+		m_timer = 0.f;
+		return true;
+	}
+
+	return false;
+}
+
 void EditorState::update(const float& dt)
 {
+	updateTimer(dt);
 	updateMousePos();
 
 	if (!m_paused)

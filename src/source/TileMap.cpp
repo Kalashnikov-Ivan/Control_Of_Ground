@@ -78,5 +78,5 @@ void TileMap::render(sf::RenderTarget& target)
 		for (auto& y : x)
 			for (auto& z : y)
 				if (z != nullptr)
-					z->render(target);
+					target.draw(*z);
 }

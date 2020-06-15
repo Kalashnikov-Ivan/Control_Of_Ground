@@ -1,7 +1,8 @@
 #ifndef TILE_H
 #define TILE_H
 
-class Tile
+class Tile :
+	public sf::RectangleShape
 {
 public:
 	//Constructors
@@ -18,12 +19,7 @@ public:
 	//Update
 	void update(const float& dt);
 
-	//Render
-	void render(sf::RenderTarget& target);
-
 protected:
-	sf::RectangleShape m_shape;
-
 	bool m_border_visible;
 
 private:
