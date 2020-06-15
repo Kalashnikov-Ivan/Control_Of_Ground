@@ -103,6 +103,14 @@ void EditorState::updateEvent(const sf::Event& event)
 			else
 				unpause();
 		}
+
+		if (event.key.code == (sf::Keyboard::Key(m_keybinds["SWITCH_TILE_BORDER_VISIBLE"])))
+		{
+			if (!m_tile_map.getTilesBorderVisible())
+				m_tile_map.setTilesBorderVisible(true);
+			else
+				m_tile_map.setTilesBorderVisible(false);
+		}
 	}
 }
 

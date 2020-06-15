@@ -8,20 +8,41 @@ Tile::Tile()
 {
 }
 
-Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy)
-	: m_shape{ size_xy }
+Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const bool border_visible)
+	: m_shape{ size_xy },
+	m_border_visible { border_visible }
 {
 	m_shape.setPosition(pos);
-
-	//DEBUG
 	m_shape.setOutlineThickness(0.5f);
-	m_shape.setOutlineColor(sf::Color::Yellow);
+
+	if (border_visible == true)
+		m_shape.setOutlineColor(sf::Color::Yellow);
+	else
+		m_shape.setOutlineColor(sf::Color::Transparent);
+
 	m_shape.setFillColor(sf::Color::Transparent);
 }
 
 Tile::~Tile()
 {
 
+}
+
+//Accessors
+bool Tile::getBorberVisible() const
+{
+	return m_border_visible;
+}
+
+//Modificators
+void Tile::setBorderVisible(const bool option)
+{
+	m_border_visible = option;
+
+	if (option == true)
+		m_shape.setOutlineColor(sf::Color::Yellow);
+	else
+		m_shape.setOutlineColor(sf::Color::Transparent);
 }
 
 //Update
