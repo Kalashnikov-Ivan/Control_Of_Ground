@@ -123,6 +123,15 @@ void EditorState::updateEvent(const sf::Event& event)
 void EditorState::updateInput(const float& dt)
 {
 	m_selector.setPosition(m_mouse_pos_grid.x * m_Sdata.grid_size_f.x, m_mouse_pos_grid.y * m_Sdata.grid_size_f.y);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		m_tile_map.addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
+	}
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+	{
+		m_tile_map.deleteTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
+	}
 }
 
 void EditorState::updatePauseInput(const float& dt)

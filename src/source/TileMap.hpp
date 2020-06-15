@@ -15,6 +15,10 @@ public:
 	//Modificators
 	void setTilesBorderVisible(const bool option);
 
+	//Function
+	void addTile(const unsigned x, const unsigned y, const unsigned z);
+	void deleteTile(const unsigned x, const unsigned y, const unsigned z);
+
 	//Update
 	void update(const float& dt);
 

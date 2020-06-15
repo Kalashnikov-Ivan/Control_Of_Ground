@@ -14,7 +14,7 @@ Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const bool border
 	m_border_visible { border_visible }
 {
 	m_shape.setPosition(pos);
-	m_shape.setOutlineThickness(0.5f);
+	m_shape.setOutlineThickness(0.6f);
 
 	if (border_visible == true)
 		m_shape.setOutlineColor(sf::Color::Yellow);
