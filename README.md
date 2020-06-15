@@ -8,11 +8,11 @@ At the moment, is in the initial stage of development.
 
 1. design - visual developments.
 2. docs - documentation of project.
-3. src - all codebase, builds for various platforms, resources and dependencies.
-    3.1 source - main codebase
-    3.2 resources - resources of application
-    3.3 config - settings of application
-    3.4 platforms - builds for various platforms
+3. src - all codebase, builds for various platforms, resources and dependencies.<br>
+    ├── source - main codebase<br>
+    ├── resources - resources of application<br>
+    ├── config - settings of application<br>
+    ├── platforms - builds for various platforms<br>
 
 ## Class diagram (old)
 
