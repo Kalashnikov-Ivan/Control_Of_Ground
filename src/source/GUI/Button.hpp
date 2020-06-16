@@ -3,7 +3,8 @@
 
 namespace GUI
 {
-class Button
+class Button :
+	public sf::RectangleShape
 {
 public:
 	//States of button
@@ -11,28 +12,33 @@ public:
 
 	//Constructors
 	Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
-			sf::Font& font, const std::string& text, uint32_t ch_size,
-			const sf::Color& color_idle, 
-			const sf::Color& color_hover, 
-			const sf::Color& color_active,
-			const size_t index = 0);
-	~Button();
+		sf::Text& text,
+		const sf::Color& color_idle, 
+		const sf::Color& color_hover, 
+		const sf::Color& color_active,
+		const size_t index = 0);
+
+	Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
+		sf::Font& font, const std::string& text, uint32_t ch_size,
+		const sf::Color& color_idle, 
+		const sf::Color& color_hover, 
+		const sf::Color& color_active,
+		const size_t index = 0);
+	virtual ~Button();
 
 	//Accessors
 		const States getState() const;
 		const size_t getIndex() const;
-		const sf::RectangleShape getShape() const;
-		const sf::Vector2f getPosition() const;
-		const sf::Vector2f getSize() const;
+		const sf::Text getText() const;
 
-		const std::string getStringText() const;
+		const bool isPressed() const;
 
 	//Modificators
 		void setIndex(const size_t index);
-		void setPosition(const sf::Vector2f& pos);
-		void setSize(const sf::Vector2f& size);
+		virtual void setPosition(const sf::Vector2f& pos);
 
-		void setStringText(const std::string& str);
+		void setText(const sf::Text& text);
+		void setTextString(const std::string& str);
 
 	//Info
 		std::string getStringInfo() const;
@@ -40,11 +46,8 @@ public:
 	//Functions
 		void update(const sf::Vector2f& mouse_pos, const float& dt);
 		void render(sf::RenderTarget& target);
-
-		const bool isPressed() const;
 private:
 	//Members
-	sf::RectangleShape m_shape;
 	States m_state;
 	size_t m_index;
 
@@ -62,6 +65,6 @@ private:
 	void updateTimer(const float& dt);
 	const bool isTime();
 };
-} // !namespace cog
+} // !namespace GUI
 
 #endif // !BUTTON_H

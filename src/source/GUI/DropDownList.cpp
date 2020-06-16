@@ -82,7 +82,7 @@ void DropDownList::updateList(const sf::Vector2f& mouse_pos, const float& dt)
 		if (elem->isPressed())
 		{
 			m_is_open = false;
-			m_active_element->setStringText(elem->getStringText());
+			m_active_element->setTextString(elem->getText().getString());
 			m_active_element->setIndex(elem->getIndex());
 		}
 	}
