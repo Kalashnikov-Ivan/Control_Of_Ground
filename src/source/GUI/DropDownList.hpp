@@ -36,7 +36,7 @@ private:
 	std::vector<Button*> m_list;
 
 	bool m_is_open;
-
+	
 	//Update
 	void inline updateList(const sf::Vector2f& mouse_pos, const float& dt);
 

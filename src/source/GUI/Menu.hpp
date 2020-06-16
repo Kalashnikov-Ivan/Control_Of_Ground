@@ -5,13 +5,12 @@
 
 namespace GUI
 {
-class Menu
+class Menu :
+	public sf::RectangleShape
 {
 public:
 	//Constructors
-	Menu(sf::RenderWindow& window,
-		 sf::Font& main_font);
-
+	Menu(sf::Font& main_font, sf::Vector2f bg_size = sf::Vector2f(0.f, 0.f));
 	virtual ~Menu();
 
 	//Accessors
@@ -36,7 +35,6 @@ public:
 
 //__________________________PROTECTED_____________________________
 protected:
-	sf::RenderWindow& m_window;
 	sf::Font& m_main_font;
 
 	//Members
@@ -44,7 +42,7 @@ protected:
 	
 //---------------------------------------------
 	//Init
-	virtual void initButtons() = 0;
+	virtual void initButtons(const sf::RenderWindow& window) = 0;
 
 	//Update
 	virtual void updateButtons(const sf::Vector2f& mouse_pos, const float& dt);

@@ -27,12 +27,11 @@ private:
 
 	//Members
 	sf::RectangleShape m_background;
-	sf::RectangleShape m_container;
 
 	sf::Text m_title;
 
-	void initBackground();
-	virtual void initButtons() override;
+	void initBackground(const sf::RenderWindow& window);
+	virtual void initButtons(const sf::RenderWindow& window) override;
 
 	//Update
 	virtual void updateButtons(const sf::Vector2f& mouse_pos, const float& dt) override;

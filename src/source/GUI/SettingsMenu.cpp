@@ -7,7 +7,7 @@ using namespace GUI;
 ////////////////////////////////////////////////////////////
 // VideoSettingsMenu
 ////////////////////////////////////////////////////////////
-SettingsMenu::VideoSettingsMenu::VideoSettingsMenu(sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes)
+SettingsMenu::VideoSettingsMenu::VideoSettingsMenu(const sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes)
 	: m_background      { sf::Vector2f(window.getSize().x / 3.f, window.getSize().y / 2.f) },
 	m_video_modes       { video_modes },
 	m_resolution_text   { "Resolution",  main_font, 32U },
@@ -23,16 +23,7 @@ SettingsMenu::VideoSettingsMenu::VideoSettingsMenu(sf::RenderWindow& window, sf:
 	m_background.setPosition(default_position_x, default_position_y);
 	m_background.setFillColor(sf::Color(20, 20, 20, 200));
 
-	m_rp = m_background.getPosition();
 	const sf::Vector2f& bg_size = m_background.getSize();
-
-	//sf::VideoMode::getFullscreenModes();
-
-	/*
-	std::vector<std::string> video_modes_str;
-	for (auto& i : m_video_modes)
-		video_modes_str.push_back(std::to_string(i.width) + 'x' + std::to_string(i.height));
-	*/
 
 	sf::Vector2f video_modes_size = { 230.f, 50.f };
 	float center_x = video_modes_size.x / 2.f;
@@ -44,23 +35,23 @@ SettingsMenu::VideoSettingsMenu::VideoSettingsMenu(sf::RenderWindow& window, sf:
 		video_modes_str.push_back(std::to_string(i.width) + 'x' + std::to_string(i.height));
 
 	m_dropdown_lists["RESOLUTION"] = new DropDownList(main_font, sf::Vector2f(
-															  m_rp.x + ((bg_size.x / 6.f) * 4.f) - center_x,
-															  m_rp.y + (bg_size.y / 6.f) - center_y
-															),
+														m_background.getPosition().x + ((bg_size.x / 6.f) * 4.f) - center_x,
+														m_background.getPosition().y + (bg_size.y / 6.f) - center_y
+														),
 													  video_modes_size, 26U,
 													  video_modes_str, 0);
 
 	center_x = m_resolution_text.getGlobalBounds().width / 2.f;
 	center_y = m_resolution_text.getGlobalBounds().height / 2.f;
 
-	m_resolution_text.setPosition (m_rp.x + (bg_size.x / 5.5f) - center_x,
-								   m_rp.y + (bg_size.y / 6.f) - center_y);
+	m_resolution_text.setPosition (m_background.getPosition().x + (bg_size.x / 5.5f) - center_x,
+								   m_background.getPosition().y + (bg_size.y / 6.f) - center_y);
 
-	m_vsync_text.setPosition	  (m_rp.x + (bg_size.x / 5.5f) - center_x,
-								   m_rp.y + ((bg_size.y / 6.f) * 2.f) - center_y);
+	m_vsync_text.setPosition	  (m_background.getPosition().x + (bg_size.x / 5.5f) - center_x,
+							       m_background.getPosition().y + ((bg_size.y / 6.f) * 2.f) - center_y);
 
-	m_antialising_text.setPosition(m_rp.x + (bg_size.x / 5.5f) - center_x,
-								   m_rp.y + ((bg_size.y / 6.f) * 3.f) - center_y);
+	m_antialising_text.setPosition(m_background.getPosition().x + (bg_size.x / 5.5f) - center_x,
+								   m_background.getPosition().y + ((bg_size.y / 6.f) * 3.f) - center_y);
 }
 
 SettingsMenu::VideoSettingsMenu::~VideoSettingsMenu()
@@ -122,11 +113,11 @@ void SettingsMenu::VideoSettingsMenu::render(sf::RenderTarget& target)
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-SettingsMenu::SettingsMenu(sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes)
-	: Menu{ window, main_font },
+SettingsMenu::SettingsMenu(const sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes)
+	: Menu{ main_font },
 	m_video_menu{ window, main_font, video_modes }
 {
-	initButtons();
+	initButtons(window);
 }
 SettingsMenu::~SettingsMenu()
 {
@@ -142,15 +133,15 @@ sf::VideoMode SettingsMenu::getCurrentVM()
 // Init
 ////////////////////////////////////////////////////////////
 
-void SettingsMenu::initButtons()
+void SettingsMenu::initButtons(const sf::RenderWindow& window)
 {
 	unsigned int font_size = 26U;
 
 	const float button_width = 230.f;
 	const float button_height = 85.f;
 
-	const float default_position_x = (m_window.getSize().x / 2.5f) - (button_width / 2.f); // 150.f;
-	const float default_position_y = (m_window.getSize().y / 2.5f) - (button_height / 2.f); // 350.f;
+	const float default_position_x = (window.getSize().x / 2.5f) - (button_width / 2.f); // 150.f;
+	const float default_position_y = (window.getSize().y / 2.5f) - (button_height / 2.f); // 350.f;
 	const float default_offset_between = 120.f;
 
 	addButton("APPLY", sf::Vector2f(default_position_x + 300.f, default_position_y + default_offset_between * 3.5f),

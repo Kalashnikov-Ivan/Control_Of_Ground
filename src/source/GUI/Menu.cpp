@@ -7,10 +7,9 @@ using namespace GUI;
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-Menu::Menu(sf::RenderWindow& window,
-		   sf::Font& main_font)
-	: m_window       { window    },
-	  m_main_font    { main_font }
+Menu::Menu(sf::Font& main_font, sf::Vector2f bg_size)
+	: sf::RectangleShape{ bg_size   },
+	  m_main_font		{ main_font }
 {
 }
 

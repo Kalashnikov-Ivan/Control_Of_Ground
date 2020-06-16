@@ -39,3 +39,14 @@ sf::Vector2f Converter::calcVecf(const sf::Vector2f& perc, const sf::Vector2f& s
 		std::floor(static_cast<float>(size_xy.y) * (perc.y / 100.f))
 	);
 }
+
+const unsigned Converter::calcCharSize(const unsigned modifier, const sf::VideoMode& vm)
+{
+
+	return static_cast<unsigned>((vm.width + vm.height) / modifier);
+}
+
+const unsigned Converter::calcCharSize(const unsigned modifier, const sf::Vector2f& size_xy)
+{
+	return static_cast<unsigned>((size_xy.x + size_xy.y) / modifier);
+}
