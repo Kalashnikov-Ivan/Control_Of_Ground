@@ -38,6 +38,7 @@ private:
 	GUI::TextureSelector* m_texture_selector;
 	
 	sf::RectangleShape m_selector;
+	sf::IntRect m_selected_rect;
 
 	//Timer
 	const float m_click_time;

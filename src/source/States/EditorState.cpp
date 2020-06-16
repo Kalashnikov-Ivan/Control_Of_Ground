@@ -152,11 +152,25 @@ void EditorState::updateInput(const float& dt)
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && isTime())
 	{
-		m_tile_map->addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0, m_textures["TILE_0"]);
+		if (m_texture_selector->isActive())
+		{
+			m_selected_rect = m_texture_selector->getSelectedRect();
+		}
+		else
+		{
+			m_tile_map->addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0, m_textures["TILE_SHEET"], m_selected_rect);
+		}
 	}
 	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && isTime())
 	{
-		m_tile_map->deleteTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
+		if (m_texture_selector->isActive())
+		{
+
+		}
+		else
+		{
+			m_tile_map->deleteTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
+		}
 	}
 }
 
@@ -193,8 +207,9 @@ void EditorState::update(const float& dt)
 
 	if (!m_paused)
 	{
-		m_texture_selector->update(m_mouse_pos_view, dt);
 		updateInput(dt);
+
+		m_texture_selector->update(m_mouse_pos_view, dt);
 	}
 	else
 	{

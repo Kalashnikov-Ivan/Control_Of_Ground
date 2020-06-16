@@ -9,7 +9,8 @@ Tile::Tile()
 {
 }
 
-Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const bool border_visible)
+Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const sf::Texture* texture, const sf::IntRect texture_rect,
+		  const bool border_visible)
 	: sf::RectangleShape{ size_xy },
 	m_border_visible { border_visible }
 {
@@ -22,6 +23,8 @@ Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const bool border
 		setOutlineColor(sf::Color::Transparent);
 
 	//setFillColor(sf::Color::Transparent);
+	setTexture(texture);
+	setTextureRect(texture_rect);
 }
 
 Tile::~Tile()

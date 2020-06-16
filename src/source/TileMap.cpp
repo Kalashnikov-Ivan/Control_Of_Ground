@@ -43,16 +43,15 @@ void TileMap::setTilesBorderVisible(const bool option)
 }
 
 //Function
-void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z, sf::Texture* texture)
+void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z, const sf::Texture* texture, const sf::IntRect& texture_rect)
 {
 	if ((x >= 0 && x < m_grid_size_u.x) && (y >= 0 && y < m_grid_size_u.y))
 	{
 		if (m_map[x][y][z] == nullptr)
 		{
-			m_map[x][y][z] = new Tile(sf::Vector2f(m_grid_size_f.x * x, m_grid_size_f.y * y), m_grid_size_f, m_tiles_border_visible);
-
-			if (texture != nullptr)
-				m_map[x][y][z]->setTexture(texture);
+			m_map[x][y][z] = new Tile(sf::Vector2f(m_grid_size_f.x * x, m_grid_size_f.y * y), m_grid_size_f, 
+									  texture, texture_rect,
+									  m_tiles_border_visible);
 		}
 	}
 }

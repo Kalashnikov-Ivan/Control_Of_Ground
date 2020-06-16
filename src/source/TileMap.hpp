@@ -16,7 +16,7 @@ public:
 	void setTilesBorderVisible(const bool option);
 
 	//Function
-	void addTile(const unsigned x, const unsigned y, const unsigned z, sf::Texture* texture = nullptr);
+	void addTile(const unsigned x, const unsigned y, const unsigned z, const sf::Texture* texture, const sf::IntRect& texture_rect);
 	void deleteTile(const unsigned x, const unsigned y, const unsigned z);
 
 	//Update

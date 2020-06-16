@@ -7,7 +7,8 @@ class Tile :
 public:
 	//Constructors
 	Tile();
-	Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const bool border_visible = false);
+	Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const sf::Texture* texture, const sf::IntRect texture_rect, 
+		 const bool border_visible = false);
 	virtual ~Tile();
 
 	//Accessors

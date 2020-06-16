@@ -16,6 +16,7 @@ public:
 	//Accessors
 	bool isActive() const;
 	sf::Vector2f getGridSize() const;
+	const sf::IntRect& getSelectedRect() const;
 
 	//Functions
 	bool isContain(const sf::Vector2f& mouse_pos) const;
@@ -34,6 +35,11 @@ private:
 	sf::Vector2f m_grid_size;
 	sf::RectangleShape m_selector;
 	sf::Vector2u m_mouse_pos_grid;
+
+	sf::IntRect m_selected_rect;
+
+	//Functions
+	void inline updateSelectorRect();
 };
 } // !namespace GUI
 #endif // !TEXTURE_SELECTOR_H

@@ -8,7 +8,7 @@ using namespace GUI;
 TextureSelector::TextureSelector(const sf::Vector2f& size, const sf::Vector2f& pos, const sf::Texture* texture_sheet, sf::Vector2f& grid_size)
 	: m_bounds { size },
 	m_sheet    { *texture_sheet },
-	m_grid_size{ grid_size }, m_selector { grid_size },
+	m_grid_size{ grid_size }, m_selector { grid_size }, m_selected_rect { 0, 0, static_cast<int>(m_grid_size.x), static_cast<int>(m_grid_size.y) },
 	m_active   { false }
 {
 	m_bounds.setPosition(pos);
@@ -61,6 +61,11 @@ sf::Vector2f TextureSelector::getGridSize() const
 	return m_grid_size;
 }
 
+const sf::IntRect& TextureSelector::getSelectedRect() const
+{
+	return m_selected_rect;
+}
+
 //Functions
 bool TextureSelector::isContain(const sf::Vector2f& mouse_pos) const
 {
@@ -71,6 +76,12 @@ bool TextureSelector::isContain(const sf::Vector2f& mouse_pos) const
 }
 
 //Update
+void inline TextureSelector::updateSelectorRect()
+{
+	m_selected_rect.left = static_cast<int>(m_selector.getPosition().x - m_bounds.getPosition().x);
+	m_selected_rect.top = static_cast<int>(m_selector.getPosition().y - m_bounds.getPosition().y);
+}
+
 void TextureSelector::update(const sf::Vector2f& mouse_pos, const float& dt)
 {
 	if (m_bounds.getGlobalBounds().contains(mouse_pos))
@@ -87,6 +98,8 @@ void TextureSelector::update(const sf::Vector2f& mouse_pos, const float& dt)
 			m_bounds.getPosition().x + m_mouse_pos_grid.x * m_grid_size.x,
 			m_bounds.getPosition().y + m_mouse_pos_grid.y * m_grid_size.y
 			);
+
+		updateSelectorRect();
 	}
 }
 
