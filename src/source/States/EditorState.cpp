@@ -14,7 +14,7 @@ using namespace States;
 
 EditorState::EditorState(StateData& Sdata, const float click_time)
 	: State{ Sdata },
-	m_tile_map { Sdata.grid_size_f, sf::Vector2u(50, 50) },
+	m_tile_map { nullptr }, m_texture_selector{ nullptr },
 	m_pause_menu { m_Sdata.window, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts},
 	m_selector   { m_Sdata.grid_size_f },
 	m_click_time { click_time }
@@ -25,10 +25,17 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 	m_selector.setOutlineThickness(1.5f);
 	m_selector.setOutlineColor(sf::Color::Green);
 	m_selector.setFillColor(sf::Color::Transparent);
+
+	m_tile_map = new TileMap(Sdata.grid_size_f, sf::Vector2u(50, 50));
+
+	sf::Vector2f grid_size = sf::Vector2f(32.f, 32.f);
+	m_texture_selector = new GUI::TextureSelector(sf::Vector2f(320.f, 192.f), sf::Vector2f(1000.f, 0.f), m_textures["TILE_SHEET"], grid_size);
 }
 
 EditorState::~EditorState()
 {
+	delete m_texture_selector;
+	delete m_tile_map;
 }
 
 ////////////////////////////////////////////////////////////
@@ -36,6 +43,15 @@ EditorState::~EditorState()
 ////////////////////////////////////////////////////////////
 void EditorState::initTextures()
 {
+	m_textures["TILE_0"] = new sf::Texture();
+
+	if (!m_textures["TILE_0"]->loadFromFile("resources/textures/Tile_02.png"))
+		throw "ERROR::EditorState::inittTextures::TILE_0 - failed to load texture resources/textures/Tile_02.png";
+
+	m_textures["TILE_SHEET"] = new sf::Texture();
+
+	if (!m_textures["TILE_SHEET"]->loadFromFile("resources/textures/Tileset.png"))
+		throw "ERROR::EditorState::inittTextures::TILE_SHEET - failed to load texture resources/textures/Tileset.png";
 }
 
 void EditorState::initKeybinds()
@@ -83,7 +99,16 @@ std::string EditorState::getStringInfo()
 	std::stringstream result;
 
 	result << getStringMousePos();
-	result << "Grid pos: " << m_mouse_pos_grid.x << ' ' << m_mouse_pos_grid.y << '\n';
+
+	if (m_texture_selector->isActive())
+	{
+		result << m_texture_selector->getStringInfo();
+	}
+	else
+	{
+		result << "Grid pos: " << m_mouse_pos_grid.x << ' ' << m_mouse_pos_grid.y << '\n';
+	}
+
 	result << m_pause_menu.getStringInfo();
 
 	return result.str();
@@ -113,10 +138,10 @@ void EditorState::updateEvent(const sf::Event& event)
 
 		if (event.key.code == (sf::Keyboard::Key(m_keybinds["SWITCH_TILE_BORDER_VISIBLE"])))
 		{
-			if (!m_tile_map.getTilesBorderVisible())
-				m_tile_map.setTilesBorderVisible(true);
+			if (!m_tile_map->getTilesBorderVisible())
+				m_tile_map->setTilesBorderVisible(true);
 			else
-				m_tile_map.setTilesBorderVisible(false);
+				m_tile_map->setTilesBorderVisible(false);
 		}
 	}
 }
@@ -127,11 +152,11 @@ void EditorState::updateInput(const float& dt)
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && isTime())
 	{
-		m_tile_map.addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
+		m_tile_map->addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0, m_textures["TILE_0"]);
 	}
 	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && isTime())
 	{
-		m_tile_map.deleteTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
+		m_tile_map->deleteTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
 	}
 }
 
@@ -168,6 +193,7 @@ void EditorState::update(const float& dt)
 
 	if (!m_paused)
 	{
+		m_texture_selector->update(m_mouse_pos_view, dt);
 		updateInput(dt);
 	}
 	else
@@ -183,8 +209,11 @@ void EditorState::update(const float& dt)
 ////////////////////////////////////////////////////////////
 void EditorState::render(sf::RenderTarget& target)
 {
-	m_tile_map.render(target);
-	target.draw(m_selector);
+	m_tile_map->render(target);
+	m_texture_selector->render(target);
+
+	if (!m_texture_selector->isActive())
+		target.draw(m_selector);
 
 	if (m_paused)
 	{

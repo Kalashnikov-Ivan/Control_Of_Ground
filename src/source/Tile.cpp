@@ -21,7 +21,7 @@ Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const bool border
 	else
 		setOutlineColor(sf::Color::Transparent);
 
-	setFillColor(sf::Color::Transparent);
+	//setFillColor(sf::Color::Transparent);
 }
 
 Tile::~Tile()

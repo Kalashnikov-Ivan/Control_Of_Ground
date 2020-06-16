@@ -6,6 +6,7 @@
 
 #include "GUI/Button.hpp"
 #include "GUI/PauseMenu.hpp"
+#include "GUI/TextureSelector.h"
 
 namespace States
 {
@@ -31,9 +32,10 @@ public:
 //__________________________PRIVATE_____________________________
 private:
 	//Members
-	TileMap m_tile_map;
+	TileMap* m_tile_map;
 
 	GUI::PauseMenu m_pause_menu;
+	GUI::TextureSelector* m_texture_selector;
 	
 	sf::RectangleShape m_selector;
 

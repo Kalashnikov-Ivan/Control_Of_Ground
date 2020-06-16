@@ -129,6 +129,9 @@
     <ClCompile Include="source\Settings\SettingsContainer.cpp">
       <Filter>Source\Core\General_classes\Settings</Filter>
     </ClCompile>
+    <ClCompile Include="source\GUI\TextureSelector.cpp">
+      <Filter>Source\Core\General_classes\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -315,6 +318,9 @@
     </ClInclude>
     <ClInclude Include="source\Settings\SettingsContainer.h">
       <Filter>Source\Core\General_classes\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\TextureSelector.h">
+      <Filter>Source\Core\General_classes\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -143,7 +143,7 @@ void Game::initSupportedFonts()
 
 void Game::initFirstState()
 {
-	sf::Vector2f grid_size{ 100.f, 100.f };
+	sf::Vector2f grid_size{ 64.f, 64.f };
 
 	m_Sdata = new States::StateData{ *m_window, m_states, m_settings, m_supported_keys, m_supported_fonts, grid_size };
 
@@ -156,7 +156,7 @@ void Game::initFirstState()
 void Game::updateInfo()
 {
 	m_tech_info.str(std::string()); //Clearing
-	m_mouse_info.str(std::string()); //Clearing
+	m_mouse_info.str(std::string());
 
 	m_tech_info << "Delta time: " << m_delta_time << " sec" << ", FPS: " << static_cast<uint32_t>(1 / m_delta_time) << '\n';
 }

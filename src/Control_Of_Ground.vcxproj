@@ -31,6 +31,7 @@
     <ClCompile Include="source\GUI\Menu.cpp" />
     <ClCompile Include="source\GUI\PauseMenu.cpp" />
     <ClCompile Include="source\GUI\SettingsMenu.cpp" />
+    <ClCompile Include="source\GUI\TextureSelector.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Settings\GraphicsSettings.cpp" />
     <ClCompile Include="source\Settings\SettingsContainer.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="source\GUI\Menu.hpp" />
     <ClInclude Include="source\GUI\PauseMenu.hpp" />
     <ClInclude Include="source\GUI\SettingsMenu.hpp" />
+    <ClInclude Include="source\GUI\TextureSelector.h" />
     <ClInclude Include="source\Settings\GraphicsSettings.h" />
     <ClInclude Include="source\Settings\ISettings.h" />
     <ClInclude Include="source\Settings\SettingsContainer.h" />
