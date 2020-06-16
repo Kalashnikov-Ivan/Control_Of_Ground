@@ -9,7 +9,7 @@ TextureSelector::TextureSelector(const sf::Vector2f& size, const sf::Vector2f& p
 	: m_bounds { size },
 	m_sheet    { *texture_sheet },
 	m_grid_size{ grid_size }, m_selector { grid_size }, m_selected_rect { 0, 0, static_cast<int>(m_grid_size.x), static_cast<int>(m_grid_size.y) },
-	m_active   { false }
+	m_active   { false }, m_hidden { false }
 {
 	m_bounds.setPosition(pos);
 	m_bounds.setFillColor(sf::Color(50, 50, 50, 100));
@@ -17,7 +17,6 @@ TextureSelector::TextureSelector(const sf::Vector2f& size, const sf::Vector2f& p
 	m_bounds.setOutlineColor(sf::Color::Red);
 
 	m_sheet.setPosition(pos);
-	//m_sheet.setScale(sf::Vector2f(2.f, 2.f));
 	
 	if (m_sheet.getGlobalBounds().width > m_bounds.getGlobalBounds().width)
 	{
@@ -84,31 +83,37 @@ void inline TextureSelector::updateSelectorRect()
 
 void TextureSelector::update(const sf::Vector2f& mouse_pos, const float& dt)
 {
-	if (m_bounds.getGlobalBounds().contains(mouse_pos))
-		m_active = true;
-	else
-		m_active = false;
-	 
-	if (m_active)
+	if (!m_hidden)
 	{
-		m_mouse_pos_grid.x = (mouse_pos.x - m_bounds.getPosition().x) / (m_grid_size.x);
-		m_mouse_pos_grid.y = (mouse_pos.y - m_bounds.getPosition().y) / (m_grid_size.y);
+		if (m_bounds.getGlobalBounds().contains(mouse_pos))
+			m_active = true;
+		else
+			m_active = false;
 
-		m_selector.setPosition(
-			m_bounds.getPosition().x + m_mouse_pos_grid.x * m_grid_size.x,
-			m_bounds.getPosition().y + m_mouse_pos_grid.y * m_grid_size.y
+		if (m_active)
+		{
+			m_mouse_pos_grid.x = static_cast<unsigned>((mouse_pos.x - m_bounds.getPosition().x) / (m_grid_size.x));
+			m_mouse_pos_grid.y = static_cast<unsigned>((mouse_pos.y - m_bounds.getPosition().y) / (m_grid_size.y));
+
+			m_selector.setPosition(
+				m_bounds.getPosition().x + m_mouse_pos_grid.x * m_grid_size.x,
+				m_bounds.getPosition().y + m_mouse_pos_grid.y * m_grid_size.y
 			);
 
-		updateSelectorRect();
+			updateSelectorRect();
+		}
 	}
 }
 
 //Render
 void TextureSelector::render(sf::RenderTarget& target)
 {
-	target.draw(m_bounds);
-	target.draw(m_sheet);
+	if (!m_hidden)
+	{
+		target.draw(m_bounds);
+		target.draw(m_sheet);
 
-	if (m_active)
-		target.draw(m_selector);
+		if (m_active)
+			target.draw(m_selector);
+	}
 }

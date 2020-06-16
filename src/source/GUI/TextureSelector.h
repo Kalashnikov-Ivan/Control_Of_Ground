@@ -28,15 +28,17 @@ public:
 	void render(sf::RenderTarget& target);
 
 private:
-	bool m_active;
 	sf::RectangleShape m_bounds;
 	sf::Sprite m_sheet;
 
-	sf::Vector2f m_grid_size;
 	sf::RectangleShape m_selector;
+	sf::Vector2f m_grid_size;
 	sf::Vector2u m_mouse_pos_grid;
 
 	sf::IntRect m_selected_rect;
+
+	bool m_hidden;
+	bool m_active;
 
 	//Functions
 	void inline updateSelectorRect();

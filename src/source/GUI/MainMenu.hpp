@@ -24,7 +24,7 @@ public:
 	void render(sf::RenderTarget& target);
 
 private:
-	virtual void inline initButtons()        override;
+	virtual void inline initButtons() override;
 			void inline resetButtons();
 };
 } // !namespace GUI

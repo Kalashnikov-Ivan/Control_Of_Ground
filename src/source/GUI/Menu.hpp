@@ -36,8 +36,7 @@ public:
 
 //__________________________PROTECTED_____________________________
 protected:
-	//Refs
-	sf::RenderWindow& m_window; //Main render target <- Game
+	sf::RenderWindow& m_window;
 	sf::Font& m_main_font;
 
 	//Members
