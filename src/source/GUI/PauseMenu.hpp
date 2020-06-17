@@ -22,9 +22,6 @@ public:
 	void render(sf::RenderTarget& target);
 
 private:
-	//Refs
-	std::map<const std::string, sf::Font*>& m_supported_fonts;
-
 	//Members
 	sf::RectangleShape m_background;
 

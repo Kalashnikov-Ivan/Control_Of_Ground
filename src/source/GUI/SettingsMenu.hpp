@@ -28,7 +28,8 @@ public:
 	virtual void render(sf::RenderTarget& target) override;
 
 private:
-	class VideoSettingsMenu
+	class VideoSettingsMenu :
+		public Menu
 	{
 	public:
 		VideoSettingsMenu(const sf::VideoMode& vm, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes);
@@ -46,9 +47,6 @@ private:
 		void render(sf::RenderTarget& target);
 
 	private:
-		//Members
-		sf::RectangleShape m_background;
-
 		//GUI
 		std::map<std::string, DropDownList*> m_dropdown_lists;
 
@@ -56,6 +54,8 @@ private:
 		sf::Text m_resolution_text;
 		sf::Text m_vsync_text;
 		sf::Text m_antialising_text;
+
+		virtual void initButtons(const sf::VideoMode& vm) override; //Delete
 	};
 
 	//Sub Menu
