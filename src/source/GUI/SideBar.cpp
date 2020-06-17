@@ -7,7 +7,7 @@ using namespace GUI;
 //Constructors
 SideBar::SideBar(sf::RenderWindow& window, sf::Font& main_font, const sf::Vector2f& pos,
 				 const sf::Vector2f& bounds_size, const sf::Vector2f& button_size)
-	: Menu { window, main_font },
+	: Menu { main_font },
 	m_bounds { bounds_size }, m_button_size { button_size }
 {
 	m_bounds.setFillColor(sf::Color(192, 192, 192, 100));
@@ -20,7 +20,7 @@ SideBar::~SideBar()
 }
 
 //Init
-void SideBar::initButtons()
+void SideBar::initButtons(const sf::RenderWindow& window)
 {
 
 }

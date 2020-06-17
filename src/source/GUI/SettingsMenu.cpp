@@ -1,5 +1,7 @@
 #include "stdHeader.hpp"
 
+#include "Converter.h"
+
 #include "SettingsMenu.hpp"
 
 using namespace GUI;
@@ -8,7 +10,10 @@ using namespace GUI;
 // VideoSettingsMenu
 ////////////////////////////////////////////////////////////
 SettingsMenu::VideoSettingsMenu::VideoSettingsMenu(const sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes)
-	: m_background      { sf::Vector2f(window.getSize().x / 3.f, window.getSize().y / 2.f) },
+	: m_background      { sf::Vector2f(
+								Converter::calcX(33.3f, (float)window.getSize().x), 
+								Converter::calcX(50.f,  (float)window.getSize().y)
+								) },
 	m_video_modes       { video_modes },
 	m_resolution_text   { "Resolution",  main_font, 32U },
 	m_vsync_text        { "Vsync",       main_font, 32U },

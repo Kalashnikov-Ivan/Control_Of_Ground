@@ -5,6 +5,7 @@ namespace GUI
 {
 class Converter
 {
+public:
 	Converter() = delete;
 	~Converter()
 	{}
@@ -18,9 +19,14 @@ class Converter
 	* @return		<const float perc> or <const sf::Vector2f& perc>		The calculated pixel value.
  */
 
+	static void foo()
+	{}
+
+	static float calcX(const float perc, const float width);
 	static float calcX(const float perc, const sf::VideoMode& vm);
 	static float calcX(const float perc, const sf::Vector2f& size_xy);
 
+	static float calcY(const float perc, const float height);
 	static float calcY(const float perc, const sf::VideoMode& vm);
 	static float calcY(const float perc, const sf::Vector2f& size_xy);
 

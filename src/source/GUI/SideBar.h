@@ -25,7 +25,7 @@ private:
 	sf::Vector2f m_button_size;
 
 	//Init
-	virtual void initButtons() override;
+	virtual void initButtons(const sf::RenderWindow& window) override;
 };
 } //!namespace GUI
 #endif // !SIDEBAR_H

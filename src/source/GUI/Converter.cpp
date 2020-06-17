@@ -4,6 +4,12 @@
 
 using namespace GUI;
 
+//XY manip
+float Converter::calcX(const float perc, const float width)
+{
+	return std::floor(static_cast<float>(width) * (perc / 100.f));
+}
+
 float Converter::calcX(const float perc, const sf::VideoMode& vm)
 {
 	return std::floor(static_cast<float>(vm.width) * (perc / 100.f));
@@ -12,6 +18,11 @@ float Converter::calcX(const float perc, const sf::VideoMode& vm)
 float Converter::calcX(const float perc, const sf::Vector2f& size_xy)
 {
 	return std::floor(static_cast<float>(size_xy.x) * (perc / 100.f));
+}
+
+float Converter::calcY(const float perc, const float height)
+{
+	return std::floor(static_cast<float>(height) * (perc / 100.f));
 }
 
 float Converter::calcY(const float perc, const sf::VideoMode& vm)
@@ -40,6 +51,7 @@ sf::Vector2f Converter::calcVecf(const sf::Vector2f& perc, const sf::Vector2f& s
 	);
 }
 
+//Char size
 const unsigned Converter::calcCharSize(const unsigned modifier, const sf::VideoMode& vm)
 {
 
