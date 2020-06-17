@@ -2,6 +2,8 @@
 
 #include "TileMap.hpp"
 
+using namespace Tiles;
+
 TileMap::TileMap(const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, const size_t layers, const bool tiles_border_visible)
 	: m_grid_size_f { grid_size },
 	m_grid_size_u   { static_cast<sf::Vector2u>(grid_size) },

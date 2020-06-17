@@ -66,9 +66,6 @@
     <ClCompile Include="source\main.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="source\Tile.cpp">
-      <Filter>Source\Tiles</Filter>
-    </ClCompile>
     <ClCompile Include="source\GUI\Button.cpp">
       <Filter>Source\Core\General_classes\GUI</Filter>
     </ClCompile>
@@ -120,9 +117,6 @@
     <ClCompile Include="source\stdHeader.cpp">
       <Filter>Headers</Filter>
     </ClCompile>
-    <ClCompile Include="source\TileMap.cpp">
-      <Filter>Source\Tiles\Map</Filter>
-    </ClCompile>
     <ClCompile Include="source\Settings\GraphicsSettings.cpp">
       <Filter>Source\Core\General_classes\Settings</Filter>
     </ClCompile>
@@ -130,6 +124,24 @@
       <Filter>Source\Core\General_classes\Settings</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\TextureSelector.cpp">
+      <Filter>Source\Core\General_classes\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Tiles\TileMap.cpp">
+      <Filter>Source\Tiles\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Tiles\Tile.cpp">
+      <Filter>Source\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\SideBar.cpp">
+      <Filter>Source\Core\General_classes\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\Converter.cpp">
+      <Filter>Source\Core\General_classes\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\AnimatedBackground.cpp">
+      <Filter>Source\Core\General_classes\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUI\RectAnimationComponent.cpp">
       <Filter>Source\Core\General_classes\GUI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -256,9 +268,6 @@
     <ClInclude Include="source\Game.hpp">
       <Filter>Source\Core\General_classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\Tile.hpp">
-      <Filter>Source\Tiles</Filter>
-    </ClInclude>
     <ClInclude Include="source\GUI\Button.hpp">
       <Filter>Source\Core\General_classes\GUI</Filter>
     </ClInclude>
@@ -307,9 +316,6 @@
     <ClInclude Include="source\GUI\DropDownList.hpp">
       <Filter>Source\Core\General_classes\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="source\TileMap.hpp">
-      <Filter>Source\Tiles\Map</Filter>
-    </ClInclude>
     <ClInclude Include="source\Settings\GraphicsSettings.h">
       <Filter>Source\Core\General_classes\Settings</Filter>
     </ClInclude>
@@ -320,6 +326,24 @@
       <Filter>Source\Core\General_classes\Settings</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\TextureSelector.h">
+      <Filter>Source\Core\General_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Tiles\TileMap.hpp">
+      <Filter>Source\Tiles\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Tiles\Tile.hpp">
+      <Filter>Source\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\SideBar.h">
+      <Filter>Source\Core\General_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\Converter.h">
+      <Filter>Source\Core\General_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\AnimatedBackground.h">
+      <Filter>Source\Core\General_classes\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GUI\RectAnimationComponent.h">
       <Filter>Source\Core\General_classes\GUI</Filter>
     </ClInclude>
   </ItemGroup>

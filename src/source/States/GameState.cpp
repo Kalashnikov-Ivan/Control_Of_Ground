@@ -12,7 +12,7 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 GameState::GameState(StateData& Sdata)
 	: State      { Sdata },
-	m_pause_menu { Sdata.window, *Sdata.supported_fonts["DOSIS"], Sdata.supported_fonts },
+	m_pause_menu { Sdata.settings.m_graphics->m_resolution, *Sdata.supported_fonts["DOSIS"], Sdata.supported_fonts },
 	m_tile_map   { sf::Vector2f(100.f, 100.f), sf::Vector2u(100, 10) }
 {
 	initTextures();

@@ -1,7 +1,7 @@
 #ifndef STATE_H
 #define STATE_H
 
-//#include "GeneralValues.h"
+#include "GUI/AnimatedBackground.h"
 #include "Settings/SettingsContainer.h"
 
 namespace States
@@ -30,6 +30,9 @@ public:
 
 	std::map<const std::string, int>&       supported_keys;
 	std::map<const std::string, sf::Font*>& supported_fonts;
+
+	//Shared objects
+	GUI::AnimatedBackground* background_anim;
 };
 
 class State //Base
@@ -53,7 +56,7 @@ public:
 	//Functions
 	void pause();
 	void unpause();
-	virtual void reset();
+	virtual void reset(const sf::VideoMode& vm);
 	virtual void quitState();
 
 	//Update and render

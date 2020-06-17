@@ -3,6 +3,8 @@
 
 #include "Tile.hpp"
 
+namespace Tiles
+{
 class TileMap
 {
 public:
@@ -35,5 +37,5 @@ private:
 
 	bool m_tiles_border_visible;
 };
-
+} // !namespace Tiles
 #endif // !TILE_MAP_H

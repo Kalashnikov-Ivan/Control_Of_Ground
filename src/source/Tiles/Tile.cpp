@@ -2,6 +2,8 @@
 
 #include "Tile.hpp"
 
+using namespace Tiles;
+
 //Constructors
 Tile::Tile()
 	: sf::RectangleShape { sf::Vector2f(0.f, 0.f)},

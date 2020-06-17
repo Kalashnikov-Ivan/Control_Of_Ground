@@ -2,11 +2,12 @@
 #define EDITOR_STATE_H
 
 #include "State.hpp"
-#include "TileMap.hpp"
+#include "Tiles/TileMap.hpp"
 
 #include "GUI/Button.hpp"
 #include "GUI/PauseMenu.hpp"
 #include "GUI/TextureSelector.h"
+#include "GUI/SideBar.h"
 
 namespace States
 {
@@ -32,9 +33,10 @@ public:
 //__________________________PRIVATE_____________________________
 private:
 	//Members
-	TileMap* m_tile_map;
+	Tiles::TileMap* m_tile_map;
 
 	GUI::PauseMenu m_pause_menu;
+	GUI::SideBar   m_sidebar;
 	GUI::TextureSelector* m_texture_selector;
 	
 	sf::RectangleShape m_selector;

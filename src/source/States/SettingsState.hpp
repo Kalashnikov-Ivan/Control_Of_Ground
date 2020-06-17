@@ -3,6 +3,7 @@
 
 #include "State.hpp"
 
+#include "GUI/AnimatedBackground.h"
 #include "GUI/SettingsMenu.hpp"
 #include "GUI/DropDownList.hpp"
 
@@ -35,14 +36,14 @@ public:
 private:
 	//GUI
 	GUI::SettingsMenu m_settings_menu;
-	sf::RectangleShape m_background;
+	GUI::AnimatedBackground& m_background;
 	sf::Text m_title;
 
 	//---------------------------------------------
 	//Init
 	virtual void inline initTextures() override;
 	virtual void inline initKeybinds() override; //Delete
-	void inline initBackground();
+	void inline initBackground(const sf::VideoMode& vm);
 
 	//Functions
 	void inline resetSettingsAllStates();

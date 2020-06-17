@@ -2,7 +2,7 @@
 #define GAME_STATE_H
 
 #include "State.hpp"
-#include "TileMap.hpp"
+#include "Tiles/TileMap.hpp"
 
 #include "GUI/PauseMenu.hpp"
 
@@ -30,7 +30,7 @@ public:
 
 private:
 	//TileMap
-	TileMap m_tile_map;
+	Tiles::TileMap m_tile_map;
 
 	//GUI
 	GUI::PauseMenu m_pause_menu;

@@ -70,7 +70,7 @@ void States::State::unpause()
 	m_paused = false;
 }
 
-void State::reset()
+void State::reset(const sf::VideoMode& vm)
 {
 
 }

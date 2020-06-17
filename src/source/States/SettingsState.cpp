@@ -1,5 +1,7 @@
 #include "stdHeader.hpp"
 
+#include "GUI/Converter.h"
+
 #include "SettingsState.hpp"
 
 #define DEBUG
@@ -11,11 +13,12 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 SettingsState::SettingsState(StateData& Sdata)
 	: State{ Sdata },
-	m_title{ "settings", *Sdata.supported_fonts["MAJOR"], 78U },
-	m_settings_menu{ Sdata.window, *Sdata.supported_fonts["DOSIS"], Sdata.settings.m_graphics->m_video_modes }
+	m_title{ "settings", *Sdata.supported_fonts["MAJOR"], GUI::Converter::calcCharSize(28, Sdata.settings.m_graphics->m_resolution) },
+	m_settings_menu{ Sdata.settings.m_graphics->m_resolution, *Sdata.supported_fonts["DOSIS"], Sdata.settings.m_graphics->m_video_modes },
+	m_background  { *Sdata.background_anim }
 {
 	initTextures();
-	initBackground();
+	initBackground(Sdata.settings.m_graphics->m_resolution);
 }
 
 SettingsState::~SettingsState()
@@ -27,27 +30,26 @@ SettingsState::~SettingsState()
 ////////////////////////////////////////////////////////////
 void SettingsState::initTextures()
 {
-	m_textures["BACKGROUND"] = new sf::Texture();
+	/*
+	const std::string bg_path = "resources/textures/backgrounds/";
 
-	if (!m_textures["BACKGROUND"]->loadFromFile("resources/textures/MainMenu/Background.jpg"))
-		throw "ERROR::MainMenuState::init_background - failed to load texture BACKGROUND";
+	m_textures["ANIMATED_BG_1"] = new sf::Texture();
+
+	if (!m_textures["ANIMATED_BG_1"]->loadFromFile(bg_path + "animated/1/Animated_BG.png"))
+		throw "ERROR::MainMenuState::init_background - failed to load texture ANIMATED_BG_1";
+	*/
 }
 
-void SettingsState::initBackground()
+void SettingsState::initBackground(const sf::VideoMode& vm)
 {
-	//Background
-	m_background.setSize(static_cast<sf::Vector2f>(m_Sdata.window.getSize()));
-	m_background.setTexture(m_textures["BACKGROUND"]);
-
 	//Title
 	m_title.setLetterSpacing(1.5f);
 	m_title.setStyle(sf::Text::Bold);
 
-	const float default_position_x = (m_Sdata.window.getSize().x / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
-	const float default_position_y = (m_Sdata.window.getSize().y / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
-	const float default_offset_y = -300.f;
+	const float default_position_x = GUI::Converter::calc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float default_position_y = GUI::Converter::calc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
 
-	m_title.setPosition(default_position_x - 20, default_position_y + default_offset_y);
+	m_title.setPosition(default_position_x, default_position_y);
 }
 
 void SettingsState::initKeybinds()
@@ -78,6 +80,7 @@ void SettingsState::updateInput(const float& dt)
 void SettingsState::update(const float& dt)
 {
 	updateMousePos();
+	m_background.update(dt);
 	m_settings_menu.update(m_mouse_pos_view, dt);
 
 	//updateKeyboardInput(dt);
@@ -89,7 +92,7 @@ void SettingsState::update(const float& dt)
 ////////////////////////////////////////////////////////////
 void SettingsState::render(sf::RenderTarget& target)
 {
-	target.draw(m_background);
+	m_background.render(target);
 	target.draw(m_title);
 
 	m_settings_menu.render(target);
@@ -113,6 +116,8 @@ std::string SettingsState::getStringInfo()
 //Functions
 void inline SettingsState::resetSettingsAllStates()
 {
+	m_Sdata.settings.m_graphics->m_resolution = m_settings_menu.getCurrentVM();
+
 	m_Sdata.window.create(m_settings_menu.getCurrentVM(), "Control Of Ground");
 	m_Sdata.window.setFramerateLimit(m_Sdata.settings.m_graphics->m_framerate_limit);
 
@@ -126,7 +131,7 @@ void inline SettingsState::resetSettingsAllStates()
 
 	for (int i = all_states.size() - 1; i >= 0; i--)
 	{
-		all_states[i]->reset();
+		all_states[i]->reset(m_Sdata.settings.m_graphics->m_resolution);
 		m_Sdata.states.push(all_states[i]);
 	}
 }

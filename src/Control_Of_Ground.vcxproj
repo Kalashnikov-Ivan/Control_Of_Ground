@@ -25,12 +25,16 @@
     <ClCompile Include="source\Entities\MovementComponent.cpp" />
     <ClCompile Include="source\Entities\Player.cpp" />
     <ClCompile Include="source\Game.cpp" />
+    <ClCompile Include="source\GUI\AnimatedBackground.cpp" />
     <ClCompile Include="source\GUI\Button.cpp" />
+    <ClCompile Include="source\GUI\Converter.cpp" />
     <ClCompile Include="source\GUI\DropDownList.cpp" />
     <ClCompile Include="source\GUI\MainMenu.cpp" />
     <ClCompile Include="source\GUI\Menu.cpp" />
     <ClCompile Include="source\GUI\PauseMenu.cpp" />
+    <ClCompile Include="source\GUI\RectAnimationComponent.cpp" />
     <ClCompile Include="source\GUI\SettingsMenu.cpp" />
+    <ClCompile Include="source\GUI\SideBar.cpp" />
     <ClCompile Include="source\GUI\TextureSelector.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Settings\GraphicsSettings.cpp" />
@@ -46,8 +50,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="source\Tile.cpp" />
-    <ClCompile Include="source\TileMap.cpp" />
+    <ClCompile Include="source\Tiles\Tile.cpp" />
+    <ClCompile Include="source\Tiles\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitattributes" />
@@ -68,12 +72,16 @@
     <ClInclude Include="source\Entities\MovementComponent.hpp" />
     <ClInclude Include="source\Entities\Player.hpp" />
     <ClInclude Include="source\Game.hpp" />
+    <ClInclude Include="source\GUI\AnimatedBackground.h" />
     <ClInclude Include="source\GUI\Button.hpp" />
+    <ClInclude Include="source\GUI\Converter.h" />
     <ClInclude Include="source\GUI\DropDownList.hpp" />
     <ClInclude Include="source\GUI\MainMenu.hpp" />
     <ClInclude Include="source\GUI\Menu.hpp" />
     <ClInclude Include="source\GUI\PauseMenu.hpp" />
+    <ClInclude Include="source\GUI\RectAnimationComponent.h" />
     <ClInclude Include="source\GUI\SettingsMenu.hpp" />
+    <ClInclude Include="source\GUI\SideBar.h" />
     <ClInclude Include="source\GUI\TextureSelector.h" />
     <ClInclude Include="source\Settings\GraphicsSettings.h" />
     <ClInclude Include="source\Settings\ISettings.h" />
@@ -84,8 +92,8 @@
     <ClInclude Include="source\States\SettingsState.hpp" />
     <ClInclude Include="source\States\State.hpp" />
     <ClInclude Include="source\stdHeader.hpp" />
-    <ClInclude Include="source\Tile.hpp" />
-    <ClInclude Include="source\TileMap.hpp" />
+    <ClInclude Include="source\Tiles\Tile.hpp" />
+    <ClInclude Include="source\Tiles\TileMap.hpp" />
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\BlendMode.hpp" />
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\CircleShape.hpp" />
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\Color.hpp" />

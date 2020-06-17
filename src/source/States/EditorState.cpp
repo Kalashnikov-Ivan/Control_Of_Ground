@@ -14,9 +14,13 @@ using namespace States;
 
 EditorState::EditorState(StateData& Sdata, const float click_time)
 	: State{ Sdata },
-	m_tile_map { nullptr }, m_texture_selector{ nullptr },
-	m_pause_menu { m_Sdata.window, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts},
-	m_selector   { m_Sdata.grid_size_f },
+	m_tile_map   { nullptr }, m_texture_selector{ nullptr },
+	m_pause_menu { Sdata.settings.m_graphics->m_resolution, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts},
+	m_selector   { m_Sdata.grid_size_f }, 
+	m_sidebar    { Sdata.settings.m_graphics->m_resolution, *Sdata.supported_fonts["DOSIS"],
+				sf::Vector2f(),
+				sf::Vector2f(Sdata.window.getSize().x / 24.f, Sdata.window.getSize().x / 6.f),
+				sf::Vector2f(Sdata.window.getSize().x / 24.f, (Sdata.window.getSize().x / 6.f) / 6.f) },
 	m_click_time { click_time }
 {
 	initTextures();
@@ -26,10 +30,11 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 	m_selector.setOutlineColor(sf::Color::Green);
 	m_selector.setFillColor(sf::Color::Transparent);
 
-	m_tile_map = new TileMap(Sdata.grid_size_f, sf::Vector2u(50, 50));
+	m_tile_map = new Tiles::TileMap(Sdata.grid_size_f, sf::Vector2u(50, 50));
 
 	sf::Vector2f grid_size = sf::Vector2f(32.f, 32.f);
-	m_texture_selector = new GUI::TextureSelector(sf::Vector2f(320.f, 192.f), sf::Vector2f(1000.f, 0.f), m_textures["TILE_SHEET"], grid_size);
+	m_texture_selector = new GUI::TextureSelector(sf::Vector2f(320.f, 192.f), sf::Vector2f(m_Sdata.window.getSize().x - 400.f, 0.f), 
+												  m_textures["TILE_SHEET"], grid_size);
 }
 
 EditorState::~EditorState()
@@ -225,6 +230,7 @@ void EditorState::update(const float& dt)
 void EditorState::render(sf::RenderTarget& target)
 {
 	m_tile_map->render(target);
+	m_sidebar.render(target);
 	m_texture_selector->render(target);
 
 	if (!m_texture_selector->isActive())
