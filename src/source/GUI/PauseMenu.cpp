@@ -5,19 +5,19 @@
 using namespace GUI;
 
 //Constructors
-PauseMenu::PauseMenu(sf::RenderWindow& window, sf::Font& main_font,
+PauseMenu::PauseMenu(const sf::VideoMode& vm, sf::Font& main_font,
 					 std::map<const std::string, sf::Font*>& supported_fonts)
 	: Menu            { main_font, sf::Vector2f(
-										static_cast<float>(window.getSize().x) / 4.f,
-										static_cast<float>(window.getSize().y)
+										static_cast<float>(vm.width) / 4.f,
+										static_cast<float>(vm.height)
 										) 
 					  },
 	m_supported_fonts { supported_fonts },
-	m_background      { static_cast<sf::Vector2f>(window.getSize()) },
+	m_background      { sf::Vector2f(vm.width, vm.height) },
 	m_title           { "paused", *supported_fonts["MAJOR"], 48U }
 {
-	initBackground(window);
-	initButtons(window);
+	initBackground(vm);
+	initButtons(vm);
 }
 
 PauseMenu::~PauseMenu()
@@ -26,33 +26,33 @@ PauseMenu::~PauseMenu()
 }
 
 //Init
-void PauseMenu::initBackground(const sf::RenderWindow& window)
+void PauseMenu::initBackground(const sf::VideoMode& vm)
 {
 	//Background
 	m_background.setFillColor(sf::Color(20, 20, 20, 100));
 
 	setFillColor(sf::Color(20, 20, 20, 200));
-	setPosition((window.getSize().x / 2.f) - (getSize().x / 2.f), 0.f);
+	setPosition((vm.width / 2.f) - (getSize().x / 2.f), 0.f);
 
 	//Title
 	m_title.setStyle(sf::Text::Bold);
 
-	const float default_position_x = (window.getSize().x / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
-	const float default_position_y = (window.getSize().y / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
+	const float default_position_x = (vm.width / 2.f) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float default_position_y = (vm.height / 2.f) - (m_title.getGlobalBounds().height / 2.f); // Center
 	const float default_offset_y = -350.f;
 
 	m_title.setPosition(default_position_x - 10, default_position_y + default_offset_y);
 }
 
-void PauseMenu::initButtons(const sf::RenderWindow& window)
+void PauseMenu::initButtons(const sf::VideoMode& vm)
 {
 	unsigned int font_size = 26U;
 
 	const float button_width = 230.f;
 	const float button_height = 85.f;
 
-	const float default_position_x = (window.getSize().x / 2.f) - (button_width / 2.f); // 150.f;
-	const float default_position_y = (window.getSize().y / 2.5f) - (button_height / 2.f); // 350.f;
+	const float default_position_x = (vm.width / 2.f) - (button_width / 2.f); // 150.f;
+	const float default_position_y = (vm.height / 2.5f) - (button_height / 2.f); // 350.f;
 	const float default_offset_between = 120.f;
 
 	addButton("SETTINGS_STATE", sf::Vector2f(default_position_x, default_position_y * 1.5f),

@@ -9,10 +9,10 @@ using namespace GUI;
 ////////////////////////////////////////////////////////////
 // VideoSettingsMenu
 ////////////////////////////////////////////////////////////
-SettingsMenu::VideoSettingsMenu::VideoSettingsMenu(const sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes)
+SettingsMenu::VideoSettingsMenu::VideoSettingsMenu(const sf::VideoMode& vm, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes)
 	: m_background      { sf::Vector2f(
-								Converter::calcX(33.3f, (float)window.getSize().x), 
-								Converter::calcX(50.f,  (float)window.getSize().y)
+								Converter::calc(33.3f, vm.width),
+								Converter::calc(50.f,  vm.height)
 								) },
 	m_video_modes       { video_modes },
 	m_resolution_text   { "Resolution",  main_font, 32U },
@@ -22,8 +22,8 @@ SettingsMenu::VideoSettingsMenu::VideoSettingsMenu(const sf::RenderWindow& windo
 	const float background_width = m_background.getSize().x;
 	const float background_height = m_background.getSize().y;
 
-	const float default_position_x = (window.getSize().x / 4.f) - (background_width / 2.f); // 150.f;
-	const float default_position_y = (window.getSize().y / 2.f) - (background_height / 2.f); // 350.f;
+	const float default_position_x = (vm.width / 4.f) - (background_width / 2.f); // 150.f;
+	const float default_position_y = (vm.height / 2.f) - (background_height / 2.f); // 350.f;
 
 	m_background.setPosition(default_position_x, default_position_y);
 	m_background.setFillColor(sf::Color(20, 20, 20, 200));
@@ -118,11 +118,11 @@ void SettingsMenu::VideoSettingsMenu::render(sf::RenderTarget& target)
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
-SettingsMenu::SettingsMenu(const sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes)
+SettingsMenu::SettingsMenu(const sf::VideoMode& vm, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes)
 	: Menu{ main_font },
-	m_video_menu{ window, main_font, video_modes }
+	m_video_menu{ vm, main_font, video_modes }
 {
-	initButtons(window);
+	initButtons(vm);
 }
 SettingsMenu::~SettingsMenu()
 {
@@ -138,15 +138,15 @@ sf::VideoMode SettingsMenu::getCurrentVM()
 // Init
 ////////////////////////////////////////////////////////////
 
-void SettingsMenu::initButtons(const sf::RenderWindow& window)
+void SettingsMenu::initButtons(const sf::VideoMode& vm)
 {
 	unsigned int font_size = 26U;
 
 	const float button_width = 230.f;
 	const float button_height = 85.f;
 
-	const float default_position_x = (window.getSize().x / 2.5f) - (button_width / 2.f); // 150.f;
-	const float default_position_y = (window.getSize().y / 2.5f) - (button_height / 2.f); // 350.f;
+	const float default_position_x = (vm.width / 2.5f) - (button_width / 2.f); // 150.f;
+	const float default_position_y = (vm.height / 2.5f) - (button_height / 2.f); // 350.f;
 	const float default_offset_between = 120.f;
 
 	addButton("APPLY", sf::Vector2f(default_position_x + 300.f, default_position_y + default_offset_between * 3.5f),

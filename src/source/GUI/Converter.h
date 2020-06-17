@@ -22,11 +22,12 @@ public:
 	static void foo()
 	{}
 
-	static float calcX(const float perc, const float width);
+	static float calc(const float perc, const float size);
+	static float calc(const float perc, const unsigned size);
+
 	static float calcX(const float perc, const sf::VideoMode& vm);
 	static float calcX(const float perc, const sf::Vector2f& size_xy);
 
-	static float calcY(const float perc, const float height);
 	static float calcY(const float perc, const sf::VideoMode& vm);
 	static float calcY(const float perc, const sf::Vector2f& size_xy);
 

@@ -10,7 +10,7 @@ class SideBar :
 {
 public:
 	//Constructors
-	SideBar(sf::RenderWindow& window, sf::Font& main_font, const sf::Vector2f& pos,
+	SideBar(const sf::VideoMode& vm, sf::Font& main_font, const sf::Vector2f& pos,
 			const sf::Vector2f& bounds_size, const sf::Vector2f& button_size);
 	~SideBar();
 
@@ -25,7 +25,7 @@ private:
 	sf::Vector2f m_button_size;
 
 	//Init
-	virtual void initButtons(const sf::RenderWindow& window) override;
+	virtual void initButtons(const sf::VideoMode& vm) override;
 };
 } //!namespace GUI
 #endif // !SIDEBAR_H

@@ -42,7 +42,7 @@ protected:
 	
 //---------------------------------------------
 	//Init
-	virtual void initButtons(const sf::RenderWindow& window) = 0;
+	virtual void initButtons(const sf::VideoMode& vm) = 0;
 
 	//Update
 	virtual void updateButtons(const sf::Vector2f& mouse_pos, const float& dt);

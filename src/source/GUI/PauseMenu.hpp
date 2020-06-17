@@ -11,7 +11,7 @@ class PauseMenu :
 {
 public:
 	//Constructors
-	PauseMenu(sf::RenderWindow& window, sf::Font& main_font,
+	PauseMenu(const sf::VideoMode& vm, sf::Font& main_font,
 			  std::map<const std::string, sf::Font*>& supported_fonts);
 	~PauseMenu();
 
@@ -30,8 +30,8 @@ private:
 
 	sf::Text m_title;
 
-	void initBackground(const sf::RenderWindow& window);
-	virtual void initButtons(const sf::RenderWindow& window) override;
+	void initBackground(const sf::VideoMode& vm);
+	virtual void initButtons(const sf::VideoMode& vm) override;
 
 	//Update
 	virtual void updateButtons(const sf::Vector2f& mouse_pos, const float& dt) override;

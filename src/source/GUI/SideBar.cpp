@@ -5,7 +5,7 @@
 using namespace GUI;
 
 //Constructors
-SideBar::SideBar(sf::RenderWindow& window, sf::Font& main_font, const sf::Vector2f& pos,
+SideBar::SideBar(const sf::VideoMode& vm, sf::Font& main_font, const sf::Vector2f& pos,
 				 const sf::Vector2f& bounds_size, const sf::Vector2f& button_size)
 	: Menu { main_font },
 	m_bounds { bounds_size }, m_button_size { button_size }
@@ -20,7 +20,7 @@ SideBar::~SideBar()
 }
 
 //Init
-void SideBar::initButtons(const sf::RenderWindow& window)
+void SideBar::initButtons(const sf::VideoMode& vm)
 {
 
 }

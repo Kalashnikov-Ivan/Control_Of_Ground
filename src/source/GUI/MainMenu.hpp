@@ -10,12 +10,11 @@ class MainMenu :
 {
 public:
 	//Constructors
-	MainMenu(sf::RenderWindow& window,
-			 sf::Font& main_font);
+	MainMenu(const sf::VideoMode& vm, sf::Font& main_font);
 	~MainMenu();
 
 	//Functions
-	void reset(const sf::RenderWindow& window);
+	void reset(const sf::VideoMode& vm);
 
 	//Update
 	void update(const sf::Vector2f& mouse_pos, const float& dt);
@@ -24,8 +23,8 @@ public:
 	void render(sf::RenderTarget& target);
 
 private:
-	virtual void inline initButtons(const sf::RenderWindow& window) override;
-			void inline resetButtons(const sf::RenderWindow& window);
+	virtual void inline initButtons(const sf::VideoMode& vm) override;
+			void inline resetButtons(const sf::VideoMode& vm);
 };
 } // !namespace GUI
 #endif // !MAIN_MENU_H

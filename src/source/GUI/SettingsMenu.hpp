@@ -12,7 +12,7 @@ class SettingsMenu :
 public:
 
 	//Constructors
-	SettingsMenu(const sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes);
+	SettingsMenu(const sf::VideoMode& vm, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes);
 	virtual ~SettingsMenu();
 
 	//Accessors
@@ -31,7 +31,7 @@ private:
 	class VideoSettingsMenu
 	{
 	public:
-		VideoSettingsMenu(const sf::RenderWindow& window, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes);
+		VideoSettingsMenu(const sf::VideoMode& vm, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes);
 		~VideoSettingsMenu();
 
 		//Accessors
@@ -62,7 +62,7 @@ private:
 	VideoSettingsMenu m_video_menu;
 
 	//Init
-	virtual void inline initButtons(const sf::RenderWindow& window) override;
+	virtual void inline initButtons(const sf::VideoMode& vm) override;
 };
 }
 
