@@ -139,21 +139,25 @@ void SettingsMenu::VideoSettingsMenu::reset(const sf::VideoMode& vm)
 		getPosition().x + Converter::calc(50.f, bg_size.x) - m_title.getGlobalBounds().width / 2,
 		getPosition().y + Converter::calc(12.f, bg_size.y) - m_title.getGlobalBounds().height / 2
 	);
+	m_title.setCharacterSize(Converter::calcCharSize(50, vm));
 
 	m_resolution_text.setPosition(
 		getPosition().x + Converter::calc(8.f, bg_size.x),
 		getPosition().y + Converter::calc(32.f, bg_size.y)
 	);
+	m_resolution_text.setCharacterSize(Converter::calcCharSize(75, vm));
 
 	m_vsync_text.setPosition(
 		getPosition().x + Converter::calc(8.f, bg_size.x),
 		getPosition().y + Converter::calc(47.f, bg_size.y)
 	);
+	m_vsync_text.setCharacterSize(Converter::calcCharSize(75, vm));
 
 	m_antialising_text.setPosition(
 		getPosition().x + Converter::calc(8.f, bg_size.x),
 		getPosition().y + Converter::calc(62.f, bg_size.y)
 	);
+	m_antialising_text.setCharacterSize(Converter::calcCharSize(75, vm));
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -181,7 +185,7 @@ sf::VideoMode SettingsMenu::getCurrentVM()
 //Init
 void SettingsMenu::initButtons(const sf::VideoMode& vm)
 {
-	unsigned int font_size = Converter::calcCharSize(95, vm); // 1600x900 = 26U
+	unsigned int char_size = Converter::calcCharSize(95, vm); // 1600x900 = 26U
 
 	const float button_width = Converter::calc(14.5f, vm.width); // 1600x900 = 230.f
 	const float button_height = Converter::calc(9.5f, vm.height); // 1600x900 = 85.f
@@ -192,12 +196,12 @@ void SettingsMenu::initButtons(const sf::VideoMode& vm)
 
 	addButton("BACK", sf::Vector2f(default_position_x, default_position_y),
 		sf::Vector2f(button_width, button_height),
-		m_main_font, "Back", font_size,
+		m_main_font, "Back", char_size,
 		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 
 	addButton("APPLY", sf::Vector2f(default_position_x + default_offset_between, default_position_y),
 		sf::Vector2f(button_width, button_height),
-		m_main_font, "Apply", font_size,
+		m_main_font, "Apply", char_size,
 		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 }
 
@@ -229,7 +233,7 @@ void SettingsMenu::render(sf::RenderTarget& target)
 //Reset
 void SettingsMenu::reset(const sf::VideoMode& vm)
 {
-	unsigned int font_size = Converter::calcCharSize(95, vm); // 1600x900 = 26U
+	unsigned int char_size = Converter::calcCharSize(95, vm); // 1600x900 = 26U
 
 	const float button_width = Converter::calc(14.5f, vm.width); // 1600x900 = 230.f
 	const float button_height = Converter::calc(9.5f, vm.height); // 1600x900 = 85.f
@@ -240,12 +244,12 @@ void SettingsMenu::reset(const sf::VideoMode& vm)
 
 	m_buttons["BACK"]->reset(sf::Vector2f(button_width, button_height),
 		sf::Vector2f(default_position_x, default_position_y),
-		font_size
+		char_size
 	);
 
 	m_buttons["APPLY"]->reset(sf::Vector2f(button_width, button_height),
 		sf::Vector2f(default_position_x + default_offset_between, default_position_y),
-		font_size
+		char_size
 	);
 
 	m_video_menu.reset(vm);

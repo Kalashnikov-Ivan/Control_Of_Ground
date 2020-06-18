@@ -139,5 +139,12 @@ void inline SettingsState::resetSettingsAllStates()
 //Reset
 void SettingsState::reset(const sf::VideoMode& vm)
 {
+	m_title.setCharacterSize(GUI::Converter::calcCharSize(28, vm));
+
+	const float default_position_x = GUI::Converter::calc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float default_position_y = GUI::Converter::calc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
+
+	m_title.setPosition(default_position_x, default_position_y);
+
 	m_settings_menu.reset(vm);
 }

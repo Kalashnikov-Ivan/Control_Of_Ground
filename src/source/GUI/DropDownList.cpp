@@ -122,6 +122,12 @@ void DropDownList::render(sf::RenderTarget& target)
 void DropDownList::reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t ch_size)
 {
 	m_active_element->reset(size_wh, pos, ch_size);
-	for (auto& i : m_list)
-		i->reset(size_wh, pos, ch_size);
+
+	for (size_t i = 0; i < m_list.size(); i++)
+	{
+		m_list[i]->reset(size_wh, 
+			sf::Vector2f(pos.x, pos.y + ((i + 1) * size_wh.y)),
+			ch_size
+		);
+	}
 }

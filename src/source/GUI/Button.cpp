@@ -192,6 +192,8 @@ void Button::reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const u
 {
 	setSize(size_wh);
 	setPosition(pos);
+
 	m_text.setCharacterSize(ch_size);
+	m_text.setOrigin(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height / 2.f);
 	m_text.setPosition(getPosition().x + getGlobalBounds().width / 2.f, getPosition().y + getGlobalBounds().height / 2.f);
 }

@@ -134,7 +134,6 @@ void MainMenuState::reset(const sf::VideoMode& vm)
 {
 	//Title
 	m_title.setCharacterSize(GUI::Converter::calcCharSize(28, vm));
-	m_title.setLetterSpacing(1.5f);
 
 	const float default_position_x = GUI::Converter::calc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
 	const float default_position_y = GUI::Converter::calc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
