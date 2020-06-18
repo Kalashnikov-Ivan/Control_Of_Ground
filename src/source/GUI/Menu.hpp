@@ -17,7 +17,7 @@ public:
 	const bool isButtonPressed(const std::string key);
 
 	//Modificators
-	void addButton(const std::string key,
+	virtual void addButton(const std::string key,
 				   const sf::Vector2f& pos, const sf::Vector2f& size_wh,
 				   sf::Font& font, const std::string& text, uint32_t ch_size,
 				   const sf::Color& color_idle,

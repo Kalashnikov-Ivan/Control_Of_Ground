@@ -1,5 +1,7 @@
 #include "stdHeader.hpp"
 
+#include "GUI/Converter.h"
+
 #include "EditorState.hpp"
 
 #include "States/SettingsState.hpp"
@@ -17,10 +19,16 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 	m_tile_map   { nullptr }, m_texture_selector{ nullptr },
 	m_pause_menu { Sdata.settings.m_graphics->m_resolution, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts},
 	m_selector   { m_Sdata.grid_size_f }, 
-	m_sidebar    { Sdata.settings.m_graphics->m_resolution, *Sdata.supported_fonts["DOSIS"],
-				sf::Vector2f(),
-				sf::Vector2f(Sdata.window.getSize().x / 24.f, Sdata.window.getSize().x / 6.f),
-				sf::Vector2f(Sdata.window.getSize().x / 24.f, (Sdata.window.getSize().x / 6.f) / 6.f) },
+	m_sidebar    { sf::Vector2f(
+						GUI::Converter::calc(96.f, Sdata.settings.m_graphics->m_resolution.width),
+						0.f
+					),
+					sf::Vector2f(
+						GUI::Converter::calc(4.f, Sdata.settings.m_graphics->m_resolution.width),
+						GUI::Converter::calc(28.f, Sdata.settings.m_graphics->m_resolution.height)
+					),
+					GUI::Converter::calc(25.f , GUI::Converter::calc(30.f, Sdata.settings.m_graphics->m_resolution.height))
+					},
 	m_click_time { click_time }
 {
 	initTextures();
@@ -35,6 +43,16 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 	sf::Vector2f grid_size = sf::Vector2f(32.f, 32.f);
 	m_texture_selector = new GUI::TextureSelector(sf::Vector2f(320.f, 192.f), sf::Vector2f(m_Sdata.window.getSize().x - 400.f, 0.f), 
 												  m_textures["TILE_SHEET"], grid_size);
+
+	m_sidebar.addButton("TS_0", *m_Sdata.supported_fonts["DOSIS"], "TS_0",
+		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200)
+	);
+	m_sidebar.addButton("111", *m_Sdata.supported_fonts["DOSIS"], "111",
+		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200)
+	);
+	m_sidebar.addButton("222", *m_Sdata.supported_fonts["DOSIS"], "222",
+		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200)
+	);
 }
 
 EditorState::~EditorState()
@@ -161,6 +179,10 @@ void EditorState::updateInput(const float& dt)
 		{
 			m_selected_rect = m_texture_selector->getSelectedRect();
 		}
+		else if (m_sidebar.getGlobalBounds().contains(m_mouse_pos_view))
+		{
+			return;
+		}
 		else
 		{
 			m_tile_map->addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0, m_textures["TILE_SHEET"], m_selected_rect);
@@ -214,6 +236,7 @@ void EditorState::update(const float& dt)
 	{
 		updateInput(dt);
 
+		m_sidebar.update(m_mouse_pos_view, dt);
 		m_texture_selector->update(m_mouse_pos_view, dt);
 	}
 	else
@@ -233,8 +256,10 @@ void EditorState::render(sf::RenderTarget& target)
 	m_sidebar.render(target);
 	m_texture_selector->render(target);
 
-	if (!m_texture_selector->isActive())
+	if (!m_texture_selector->isActive() && !m_sidebar.getGlobalBounds().contains(m_mouse_pos_view))
+	{
 		target.draw(m_selector);
+	}
 
 	if (m_paused)
 	{
@@ -245,5 +270,17 @@ void EditorState::render(sf::RenderTarget& target)
 //Reset
 void EditorState::reset(const sf::VideoMode& vm)
 {
+	m_sidebar.reset(
+		sf::Vector2f(
+			GUI::Converter::calc(96.f, m_Sdata.settings.m_graphics->m_resolution.width),
+			0.f
+		),
+		sf::Vector2f(
+			GUI::Converter::calc(4.f, m_Sdata.settings.m_graphics->m_resolution.width),
+			GUI::Converter::calc(28.f, m_Sdata.settings.m_graphics->m_resolution.height)
+		),
+		GUI::Converter::calc(25.f, GUI::Converter::calc(30.f, m_Sdata.settings.m_graphics->m_resolution.height))
+	);
+
 	m_pause_menu.reset(vm);
 }
