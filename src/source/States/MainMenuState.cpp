@@ -70,13 +70,6 @@ void MainMenuState::initKeybinds()
 {
 }
 
-void MainMenuState::reset(const sf::VideoMode& vm)
-{
-	m_title.setCharacterSize(GUI::Converter::calcCharSize(28, vm));
-	initBackground(vm);
-	m_main_menu.reset(vm);
-}
-
 ////////////////////////////////////////////////////////////
 // Update
 ////////////////////////////////////////////////////////////
@@ -134,4 +127,20 @@ std::string MainMenuState::getStringInfo()
 	result << m_main_menu.getStringInfo();
 
 	return result.str();
+}
+
+//Reset
+void MainMenuState::reset(const sf::VideoMode& vm)
+{
+	//Title
+	m_title.setCharacterSize(GUI::Converter::calcCharSize(28, vm));
+	m_title.setLetterSpacing(1.5f);
+
+	const float default_position_x = GUI::Converter::calc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float default_position_y = GUI::Converter::calc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
+
+	m_title.setPosition(default_position_x, default_position_y);
+
+	m_main_menu.reset(vm);
+	m_background->reset(vm);
 }

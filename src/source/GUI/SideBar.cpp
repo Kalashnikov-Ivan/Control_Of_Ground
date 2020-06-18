@@ -39,3 +39,7 @@ void SideBar::render(sf::RenderTarget& target)
 
 	renderButtons(target);
 }
+
+void SideBar::reset(const sf::VideoMode& vm)
+{
+}

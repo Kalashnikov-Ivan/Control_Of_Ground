@@ -16,7 +16,8 @@ public:
 			  sf::Vector2f grid_size = sf::Vector2f(100.f, 100.f))
 		: window{ window }, states{ states }, settings{ settings },
 		supported_keys { supported_keys }, supported_fonts { supported_fonts },
-		grid_size_f { grid_size }
+		grid_size_f { grid_size },
+		background_anim { nullptr }
 	{}
 	~StateData()
 	{}

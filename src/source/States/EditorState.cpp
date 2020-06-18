@@ -241,3 +241,9 @@ void EditorState::render(sf::RenderTarget& target)
 		m_pause_menu.render(target);
 	}
 }
+
+//Reset
+void EditorState::reset(const sf::VideoMode& vm)
+{
+	m_pause_menu.reset(vm);
+}

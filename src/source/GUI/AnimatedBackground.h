@@ -11,11 +11,12 @@ public:
 	AnimatedBackground(const sf::Vector2f& bg_size, sf::Texture& texture_sheet);
 	~AnimatedBackground();
 
-	//Update
+	//Functions
 	void update(const float& dt);
 
-	//Render
 	void render(sf::RenderTarget& target);
+
+	void reset(const sf::VideoMode& vm);
 
 private:
 	sf::RectangleShape m_background;

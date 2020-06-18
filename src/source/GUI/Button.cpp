@@ -187,3 +187,11 @@ void Button::render(sf::RenderTarget& target)
 	target.draw(*this);
 	target.draw(m_text);
 }
+
+void Button::reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t ch_size)
+{
+	setSize(size_wh);
+	setPosition(pos);
+	m_text.setCharacterSize(ch_size);
+	m_text.setPosition(getPosition().x + getGlobalBounds().width / 2.f, getPosition().y + getGlobalBounds().height / 2.f);
+}

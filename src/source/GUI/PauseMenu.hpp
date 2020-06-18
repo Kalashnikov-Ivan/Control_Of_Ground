@@ -15,11 +15,11 @@ public:
 			  std::map<const std::string, sf::Font*>& supported_fonts);
 	~PauseMenu();
 
-	//Update
-	void update(const sf::Vector2f& mouse_pos, const float& dt);
+	//Functions
+	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
+	virtual void render(sf::RenderTarget& target) override;
 
-	//Render
-	void render(sf::RenderTarget& target);
+	virtual void reset(const sf::VideoMode& vm) override;
 
 private:
 	//Members
@@ -32,6 +32,7 @@ private:
 
 	//Update
 	virtual void updateButtons(const sf::Vector2f& mouse_pos, const float& dt) override;
+	void inline resetButtons(const sf::VideoMode& vm);
 };
 } // !namespace GUI
 #endif // !PAUSE_MENU_H

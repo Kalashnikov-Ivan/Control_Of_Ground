@@ -28,3 +28,8 @@ void AnimatedBackground::render(sf::RenderTarget& target)
 {
 	target.draw(m_background);
 }
+
+void AnimatedBackground::reset(const sf::VideoMode& vm)
+{
+	m_background.setSize(sf::Vector2f((float)(vm.width), (float)(vm.height)));
+}

@@ -21,11 +21,11 @@ public:
 	//Info
 	virtual std::string getStringInfo() override;
 
-	//Update
+	//Functions
 	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
-
-	//Render
 	virtual void render(sf::RenderTarget& target) override;
+
+	virtual void reset(const sf::VideoMode& vm) override;
 
 private:
 	class VideoSettingsMenu :
@@ -41,12 +41,15 @@ private:
 		//Info
 		std::string getStringInfo();
 
-		//Update
+		//Functions
 		void inline update(const sf::Vector2f& mouse_pos, const float& dt);
-		//Render
 		void render(sf::RenderTarget& target);
 
+		virtual void reset(const sf::VideoMode& vm) override;
+
 	private:
+		sf::Text m_title;
+
 		//GUI
 		std::map<std::string, DropDownList*> m_dropdown_lists;
 

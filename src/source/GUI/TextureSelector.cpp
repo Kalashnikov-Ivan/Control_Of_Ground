@@ -117,3 +117,21 @@ void TextureSelector::render(sf::RenderTarget& target)
 			target.draw(m_selector);
 	}
 }
+
+void TextureSelector::reset(const sf::Vector2f& size, const sf::Vector2f& pos)
+{
+	m_bounds.setSize(size);
+	m_bounds.setPosition(pos);
+	
+	m_sheet.setPosition(pos);
+
+	if (m_sheet.getGlobalBounds().width > m_bounds.getGlobalBounds().width)
+	{
+		m_sheet.setTextureRect(sf::IntRect(0, 0, int(m_bounds.getGlobalBounds().width), int(m_sheet.getGlobalBounds().height)));
+	}
+
+	if (m_sheet.getGlobalBounds().height > m_bounds.getGlobalBounds().height)
+	{
+		m_sheet.setTextureRect(sf::IntRect(0, 0, int(m_sheet.getGlobalBounds().height), int(m_bounds.getGlobalBounds().width)));
+	}
+}

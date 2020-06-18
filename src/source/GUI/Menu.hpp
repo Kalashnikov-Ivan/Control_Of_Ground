@@ -27,11 +27,11 @@ public:
 	//Info
 	virtual std::string getStringInfo();
 
-	//Update
+	//Functions
 	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) = 0;
-
-	//Render
 	virtual void render(sf::RenderTarget& target) = 0;
+
+	virtual void reset(const sf::VideoMode& vm) = 0;
 
 //__________________________PROTECTED_____________________________
 protected:

@@ -135,3 +135,9 @@ void inline SettingsState::resetSettingsAllStates()
 		m_Sdata.states.push(all_states[i]);
 	}
 }
+
+//Reset
+void SettingsState::reset(const sf::VideoMode& vm)
+{
+	m_settings_menu.reset(vm);
+}

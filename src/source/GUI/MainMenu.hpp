@@ -14,13 +14,10 @@ public:
 	~MainMenu();
 
 	//Functions
-	void reset(const sf::VideoMode& vm);
+	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
+	virtual void render(sf::RenderTarget& target) override;
 
-	//Update
-	void update(const sf::Vector2f& mouse_pos, const float& dt);
-
-	//Render
-	void render(sf::RenderTarget& target);
+	virtual void reset(const sf::VideoMode& vm) override;
 
 private:
 	virtual void inline initButtons(const sf::VideoMode& vm) override;

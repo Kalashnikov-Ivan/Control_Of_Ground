@@ -21,11 +21,10 @@ public:
 	//Functions
 	bool isContain(const sf::Vector2f& mouse_pos) const;
 
-	//Update
 	void update(const sf::Vector2f& mouse_pos, const float& dt);
-
-	//Render
 	void render(sf::RenderTarget& target);
+
+	void reset(const sf::Vector2f& size, const sf::Vector2f& pos);
 
 private:
 	sf::RectangleShape m_bounds;

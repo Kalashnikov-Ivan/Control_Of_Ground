@@ -203,3 +203,9 @@ std::string GameState::getStringInfo()
 
 	return result.str();
 }
+
+//Reset
+void GameState::reset(const sf::VideoMode& vm)
+{
+	m_pause_menu.reset(vm);
+}

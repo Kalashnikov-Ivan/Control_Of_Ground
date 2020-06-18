@@ -118,3 +118,10 @@ void DropDownList::render(sf::RenderTarget& target)
 	if (m_is_open)
 		renderList(target);
 }
+
+void DropDownList::reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t ch_size)
+{
+	m_active_element->reset(size_wh, pos, ch_size);
+	for (auto& i : m_list)
+		i->reset(size_wh, pos, ch_size);
+}

@@ -25,11 +25,11 @@ public:
 	//Info
 	std::string getStringInfo();
 
-	//Update
+	//Functions
 	void update(const sf::Vector2f& mouse_pos, const float& dt);
-
-	//Render
 	void render(sf::RenderTarget& target);
+
+	void reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t ch_size);
 
 private:
 	Button* m_active_element;

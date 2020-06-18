@@ -25,14 +25,12 @@ public:
 	void pause()   = delete;
 	void unpause() = delete;
 
-	virtual void reset(const sf::VideoMode& vm) override;
-
-	//Update
 	virtual void updateEvent(const sf::Event& event) override;
 	virtual void update(const float& dt) override;
 
-	//Render
 	virtual void render(sf::RenderTarget& target) override;
+
+	virtual void reset(const sf::VideoMode& vm) override;
 //__________________________PRIVATE_____________________________
 private:
 	//Members

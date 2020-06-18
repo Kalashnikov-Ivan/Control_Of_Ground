@@ -22,11 +22,13 @@ public:
 	//Tech info
 	virtual std::string getStringInfo() override;
 
-	//Update
+	//Functions
 	virtual void updateEvent(const sf::Event& event) override;
 	virtual void update(const float& dt) override;
 
 	virtual void render(sf::RenderTarget& target) override;
+
+	virtual void reset(const sf::VideoMode& vm) override;
 
 private:
 	//TileMap

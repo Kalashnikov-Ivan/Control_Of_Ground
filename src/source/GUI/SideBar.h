@@ -14,11 +14,11 @@ public:
 			const sf::Vector2f& bounds_size, const sf::Vector2f& button_size);
 	~SideBar();
 
-	//Update
+	//Functions
 	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
-
-	//Render
 	virtual void render(sf::RenderTarget& target) override;
+
+	virtual void reset(const sf::VideoMode& vm) override;
 
 private:
 	sf::RectangleShape m_bounds;
