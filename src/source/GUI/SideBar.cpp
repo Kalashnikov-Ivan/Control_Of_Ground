@@ -24,14 +24,20 @@ SideBar::~SideBar()
 		delete i.second;
 }
 
+
 //Accessors
-const bool  SideBar::isButtonPressed(const std::string key)
+const Button& SideBar::getButton(const std::string& key)
+{
+	return *m_buttons[key];
+}
+
+const bool  SideBar::isButtonPressed(const std::string& key)
 {
 	return m_buttons[key]->isPressed();
 }
 
 //Modificators
-void SideBar::addButton(const std::string key,
+void SideBar::addButton(const std::string& key,
 			sf::Font& font, const std::string& text,
 			const sf::Color& color_idle,
 			const sf::Color& color_hover,
@@ -48,7 +54,6 @@ void SideBar::addButton(const std::string key,
 
 	m_quant_buttons += 1;
 }
-
 
 //Update
 void SideBar::updateButtons(const sf::Vector2f& mouse_pos, const float& dt)

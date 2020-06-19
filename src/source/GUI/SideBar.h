@@ -14,10 +14,11 @@ public:
 	~SideBar();
 
 	//Accessors
-	const bool isButtonPressed(const std::string key);
+	const Button& getButton(const std::string& key);
+	const bool isButtonPressed(const std::string& key);
 
 	//Modificators
-	void addButton(const std::string key,
+	void addButton(const std::string& key,
 			sf::Font& font, const std::string& text,
 			const sf::Color& color_idle,
 			const sf::Color& color_hover,

@@ -38,7 +38,7 @@ private:
 
 	GUI::PauseMenu m_pause_menu;
 	GUI::SideBar   m_sidebar;
-	GUI::TextureSelector* m_texture_selector;
+	GUI::TextureSelector* m_ts_0;
 	
 	sf::RectangleShape m_selector;
 	sf::IntRect m_selected_rect;

@@ -16,7 +16,7 @@ using namespace States;
 
 EditorState::EditorState(StateData& Sdata, const float click_time)
 	: State{ Sdata },
-	m_tile_map   { nullptr }, m_texture_selector{ nullptr },
+	m_tile_map   { nullptr }, m_ts_0{ nullptr },
 	m_pause_menu { Sdata.settings.m_graphics->m_resolution, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts},
 	m_selector   { m_Sdata.grid_size_f }, 
 	m_sidebar    { sf::Vector2f(
@@ -40,24 +40,23 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 
 	m_tile_map = new Tiles::TileMap(Sdata.grid_size_f, sf::Vector2u(50, 50));
 
-	sf::Vector2f grid_size = sf::Vector2f(32.f, 32.f);
-	m_texture_selector = new GUI::TextureSelector(sf::Vector2f(320.f, 192.f), sf::Vector2f(m_Sdata.window.getSize().x - 400.f, 0.f), 
-												  m_textures["TILE_SHEET"], grid_size);
 
 	m_sidebar.addButton("TS_0", *m_Sdata.supported_fonts["DOSIS"], "TS_0",
 		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200)
 	);
-	m_sidebar.addButton("111", *m_Sdata.supported_fonts["DOSIS"], "111",
-		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200)
-	);
-	m_sidebar.addButton("222", *m_Sdata.supported_fonts["DOSIS"], "222",
-		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200)
-	);
+	sf::Vector2f grid_size = sf::Vector2f(32.f, 32.f);
+	m_ts_0 = new GUI::TextureSelector(sf::Vector2f(320.f, 192.f), sf::Vector2f(m_Sdata.window.getSize().x - 400.f, 0.f),
+		m_textures["TILE_SHEET"], grid_size);
+
+	//m_ts_0->setOrigin(sf::Vector2f(320.f, 0));
+	m_ts_0->setPosition(m_sidebar.getButton("TS_0").getPosition().x - 320.f, 0);
+
+
 }
 
 EditorState::~EditorState()
 {
-	delete m_texture_selector;
+	delete m_ts_0;
 	delete m_tile_map;
 }
 
@@ -66,11 +65,6 @@ EditorState::~EditorState()
 ////////////////////////////////////////////////////////////
 void EditorState::initTextures()
 {
-	m_textures["TILE_0"] = new sf::Texture();
-
-	if (!m_textures["TILE_0"]->loadFromFile("resources/textures/Tile_02.png"))
-		throw "ERROR::EditorState::inittTextures::TILE_0 - failed to load texture resources/textures/Tile_02.png";
-
 	m_textures["TILE_SHEET"] = new sf::Texture();
 
 	if (!m_textures["TILE_SHEET"]->loadFromFile("resources/textures/Tileset.png"))
@@ -123,9 +117,9 @@ std::string EditorState::getStringInfo()
 
 	result << getStringMousePos();
 
-	if (m_texture_selector->isActive())
+	if (m_ts_0->isActive())
 	{
-		result << m_texture_selector->getStringInfo();
+		result << m_ts_0->getStringInfo();
 	}
 	else
 	{
@@ -173,15 +167,18 @@ void EditorState::updateInput(const float& dt)
 {
 	m_selector.setPosition(m_mouse_pos_grid.x * m_Sdata.grid_size_f.x, m_mouse_pos_grid.y * m_Sdata.grid_size_f.y);
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && isTime())
+	if (m_sidebar.isButtonPressed("TS_0"))
 	{
-		if (m_texture_selector->isActive())
+		if (!m_ts_0->isHidden())
+			m_ts_0->setHidden(true);
+		else
+			m_ts_0->setHidden(false);
+	}
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && isTime() && !m_sidebar.getGlobalBounds().contains(m_mouse_pos_view))
+	{
+		if (m_ts_0->isActive())
 		{
-			m_selected_rect = m_texture_selector->getSelectedRect();
-		}
-		else if (m_sidebar.getGlobalBounds().contains(m_mouse_pos_view))
-		{
-			return;
+			m_selected_rect = m_ts_0->getSelectedRect();
 		}
 		else
 		{
@@ -190,7 +187,7 @@ void EditorState::updateInput(const float& dt)
 	}
 	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && isTime())
 	{
-		if (m_texture_selector->isActive())
+		if (m_ts_0->isActive())
 		{
 
 		}
@@ -237,7 +234,7 @@ void EditorState::update(const float& dt)
 		updateInput(dt);
 
 		m_sidebar.update(m_mouse_pos_view, dt);
-		m_texture_selector->update(m_mouse_pos_view, dt);
+		m_ts_0->update(m_mouse_pos_view, dt);
 	}
 	else
 	{
@@ -254,9 +251,9 @@ void EditorState::render(sf::RenderTarget& target)
 {
 	m_tile_map->render(target);
 	m_sidebar.render(target);
-	m_texture_selector->render(target);
+	m_ts_0->render(target);
 
-	if (!m_texture_selector->isActive() && !m_sidebar.getGlobalBounds().contains(m_mouse_pos_view))
+	if (!m_ts_0->isActive() && !m_sidebar.getGlobalBounds().contains(m_mouse_pos_view))
 	{
 		target.draw(m_selector);
 	}
@@ -283,4 +280,7 @@ void EditorState::reset(const sf::VideoMode& vm)
 	);
 
 	m_pause_menu.reset(vm);
+
+	//TextureSelector
+	m_ts_0->setPosition(m_sidebar.getButton("TS_0").getPosition().x - 320.f, 0);
 }

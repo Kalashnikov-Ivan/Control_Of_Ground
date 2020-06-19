@@ -3,7 +3,8 @@
 
 namespace GUI
 {
-class TextureSelector
+class TextureSelector :
+	public sf::RectangleShape
 {
 public:
 	//Constructors
@@ -15,19 +16,23 @@ public:
 
 	//Accessors
 	bool isActive() const;
+	bool isHidden() const;
 	sf::Vector2f getGridSize() const;
 	const sf::IntRect& getSelectedRect() const;
 
-	//Functions
-	bool isContain(const sf::Vector2f& mouse_pos) const;
+	//Modificators
+	virtual void setPosition(const float x, const float y);
+	virtual void setPosition(const sf::Vector2f& pos);
 
+	void setHidden(const bool option);
+
+	//Functions
 	void update(const sf::Vector2f& mouse_pos, const float& dt);
 	void render(sf::RenderTarget& target);
 
 	void reset(const sf::Vector2f& size, const sf::Vector2f& pos);
 
 private:
-	sf::RectangleShape m_bounds;
 	sf::Sprite m_sheet;
 
 	sf::RectangleShape m_selector;
