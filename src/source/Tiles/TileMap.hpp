@@ -8,7 +8,10 @@ namespace Tiles
 class TileMap
 {
 public:
-	TileMap(const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, const size_t layers = 1, const bool tiles_border_visible = true);
+	TileMap(
+		const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, sf::Texture* sheet_texture,
+		const size_t layers = 1, const bool tiles_border_visible = true
+	);
 	~TileMap();
 
 	//Accessors
@@ -21,13 +24,16 @@ public:
 	void addTile(const unsigned x, const unsigned y, const unsigned z, const sf::Texture* texture, const sf::IntRect& texture_rect);
 	void deleteTile(const unsigned x, const unsigned y, const unsigned z);
 
-	//Update
 	void update(const float& dt);
-
-	//Render
 	void render(sf::RenderTarget& target);
 
+	//File
+	bool saveToFile(const std::string path);
+	bool loadFromFile(const std::string path);
+
 private:
+	sf::Texture* m_sheet_texture;
+
 	sf::Vector2f m_grid_size_f;
 	sf::Vector2u m_grid_size_u;
 	sf::Vector2u m_tiles_quantity;

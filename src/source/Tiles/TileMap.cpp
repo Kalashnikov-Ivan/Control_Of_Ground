@@ -4,13 +4,17 @@
 
 using namespace Tiles;
 
-TileMap::TileMap(const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, const size_t layers, const bool tiles_border_visible)
+TileMap::TileMap(
+	const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, sf::Texture* sheet_texture,
+	const size_t layers, const bool tiles_border_visible
+)
 	: m_grid_size_f { grid_size },
 	m_grid_size_u   { static_cast<sf::Vector2u>(grid_size) },
 	m_tiles_quantity{ tiles_quantity },
 	m_layers        { layers },
 	m_map           { std::vector< std::vector< std::vector<Tile*>>>(tiles_quantity.x, std::vector<std::vector<Tile*>>(tiles_quantity.y, std::vector<Tile*>(layers, nullptr) ) ) },
-	m_tiles_border_visible { tiles_border_visible }
+	m_tiles_border_visible { tiles_border_visible },
+	m_sheet_texture  { sheet_texture }
 {
 }
 
@@ -83,4 +87,55 @@ void TileMap::render(sf::RenderTarget& target)
 			for (auto& z : y)
 				if (z != nullptr)
 					target.draw(*z);
+}
+
+//File
+bool TileMap::saveToFile(const std::string path)
+{
+	/*Saves the entire tilemap to a text-file.
+	Format:
+	Size x y
+	gridSize x y
+	layers
+	texture file
+	All tiles:
+	type
+	gridPos x y layer
+	Texture rect x y
+	collision
+	tile_specific...
+	*/
+
+	std::ofstream out_f { path };
+	if (out_f.is_open())
+	{
+		out_f << "TILES_QUANTITY" << m_tiles_quantity.x << ' ' << m_tiles_quantity.y << '\n';
+		out_f << "GRID_SIZE " << m_grid_size_u.x << ' ' << m_grid_size_u.y << '\n';
+		out_f << "LAYERS " << m_layers << '\n';
+	}
+	else
+	{
+		std::cerr << "ERROR::TILE_MAP: can't open file " + path + "for save";
+		return false;
+	}
+
+	out_f.close();
+	return true;
+}
+
+bool TileMap::loadFromFile(const std::string path)
+{
+	std::ifstream in_f{ path };
+	if (in_f.is_open())
+	{
+
+	}
+	else
+	{
+		std::cerr << "ERROR::TILE_MAP: can't open file " + path + "for load";
+		return false;
+	}
+
+	in_f.close();
+	return true;
 }

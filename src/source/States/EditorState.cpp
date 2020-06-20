@@ -38,7 +38,7 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 	m_selector.setOutlineColor(sf::Color::Green);
 	m_selector.setFillColor(sf::Color::Transparent);
 
-	m_tile_map = new Tiles::TileMap(Sdata.grid_size_f, sf::Vector2u(50, 50));
+	m_tile_map = new Tiles::TileMap(Sdata.grid_size_f, sf::Vector2u(50, 50), m_textures["TILE_SHEET"]);
 
 
 	m_sidebar.addButton("TS_0", *m_Sdata.supported_fonts["DOSIS"], "TS_0",

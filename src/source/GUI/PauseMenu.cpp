@@ -49,15 +49,25 @@ void PauseMenu::initButtons(const sf::VideoMode& vm)
 
 	const float default_position_x = getPosition().x + Converter::calc(50.f, getSize().x) - (button_width / 2.f); // 150.f;
 	const float default_position_y = getPosition().y + Converter::calc(15.f, getSize().y) - (button_height / 2.f); // 350.f;
-	const float default_offset_between = Converter::calc(15.f, getSize().y); // 1600x900 = 120.f
+	const float default_offset_between = Converter::calc(12.f, getSize().y); // 1600x900 = 120.f
 
-	addButton("SETTINGS_STATE", sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.f),
+	addButton("SAVE", sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2.f),
+		sf::Vector2f(button_width, button_height),
+		m_main_font, "Save", font_size,
+		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
+
+	addButton("LOAD", sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.f),
+		sf::Vector2f(button_width, button_height),
+		m_main_font, "Load", font_size,
+		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
+
+	addButton("SETTINGS_STATE", sf::Vector2f(default_position_x, default_position_y + default_offset_between * 4.f),
 		sf::Vector2f(button_width, button_height),
 		m_main_font, "Settings", font_size,
 		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 
 
-	addButton("EXIT", sf::Vector2f(default_position_x, default_position_y + default_offset_between * 4.5f),
+	addButton("EXIT", sf::Vector2f(default_position_x, default_position_y + default_offset_between * 6.f),
 					  sf::Vector2f(button_width, button_height),
 					  m_main_font, "Exit", font_size,
 					  sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
@@ -114,6 +124,8 @@ void PauseMenu::reset(const sf::VideoMode& vm)
 
 	m_background.setSize(sf::Vector2f((float)vm.width, (float)vm.height));
 
+	//Title
+	m_title.setCharacterSize(Converter::calcCharSize(45, vm));
 	const float default_position_x = Converter::calc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
 	const float default_position_y = Converter::calc(9.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
 
