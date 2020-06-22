@@ -14,6 +14,8 @@ At the moment, is in the initial stage of development.
     ├── config - settings of application<br>
     ├── platforms - builds for various platforms<br>
 
-## Class diagram (old)
+## Class diagram
 
-![Class diagram](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/CoG_classDiagram.png)
+### Core
+![Core](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/CoG_classDiagram.png)
+
