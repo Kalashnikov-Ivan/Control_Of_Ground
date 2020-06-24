@@ -20,13 +20,13 @@ At the moment, is in the initial stage of development.
 ![Core](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/Core.png)
 
 ### Common communication of modules
-![Core](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/Communication.png)
+![Communication](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/Communication.png)
 
 ### Settings
-![Core](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/Settings.png)
+![Settings](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/Settings.png)
 
 ### GUI
-![Core](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/GUI.png)
+![GUI](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/GUI.png)
 
-### Entity
-![Core](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/Entity.png)
+### Entities
+![Entities](https://github.com/Kalashnikov-Ivan/Control_Of_Ground/blob/dev/docs/Architecture/Entities.png)
