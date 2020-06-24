@@ -16,7 +16,6 @@ State::State(StateData& Sdata)
 State::~State()
 {
 	deleteTextures();
-	std::cout << "STATE DEAD";
 }
 
 //Support_cleaner

@@ -24,7 +24,6 @@ GameState::~GameState()
 {
 	//State delete all textures
 	delete m_player;
-	std::cout << "GAME STATE DEAD";
 }
 
 ////////////////////////////////////////////////////////////
@@ -32,10 +31,12 @@ GameState::~GameState()
 ////////////////////////////////////////////////////////////
 void GameState::initTextures()
 {
+	const std::string root = "resources/textures/";
+
 	m_textures["PLAYER_SHEET"] = new sf::Texture();
 
-	if (!m_textures["PLAYER_SHEET"]->loadFromFile("resources/textures/Player/Player_sheet.png"))
-		throw "ERROR::GameState::init_textures::PLAYER_SHEET - failed to load texture resources/textures/Player/Player_sheet.png";
+	if (!m_textures["PLAYER_SHEET"]->loadFromFile(root + "Player/Player_sheet.png"))
+		throw std::runtime_error("GameState::initTextures::PLAYER_SHEET - loading texture" + root + "Player/Player_sheet.png" + " failed...");
 }
 
 void GameState::initKeybinds()

@@ -65,10 +65,12 @@ EditorState::~EditorState()
 ////////////////////////////////////////////////////////////
 void EditorState::initTextures()
 {
+	const std::string root = "resources/textures/";
+
 	m_textures["TILE_SHEET"] = new sf::Texture();
 
-	if (!m_textures["TILE_SHEET"]->loadFromFile("resources/textures/Tileset.png"))
-		throw "ERROR::EditorState::inittTextures::TILE_SHEET - failed to load texture resources/textures/Tileset.png";
+	if (!m_textures["TILE_SHEET"]->loadFromFile(root + "Tileset.png"))
+		throw std::runtime_error("EditorState::initTextures::TILE_SHEET - loading texture" + root + "Tileset.png" + " failed...");
 }
 
 void EditorState::initKeybinds()

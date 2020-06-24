@@ -37,17 +37,17 @@ MainMenuState::~MainMenuState()
 ////////////////////////////////////////////////////////////
 void MainMenuState::initTextures()
 {
-	const std::string bg_path = "resources/textures/backgrounds/";
+	const std::string root = "resources/textures/";
 
 	m_textures["DEFAULT_BG"] = new sf::Texture();
 
-	if (!m_textures["DEFAULT_BG"]->loadFromFile(bg_path + "default.png"))
-		throw "ERROR::MainMenuState::init_background - failed to load texture BACKGROUND";
+	if (!m_textures["DEFAULT_BG"]->loadFromFile(root + "backgrounds/default.png"))
+		throw std::runtime_error("MainMenuState::initTextures::DEFAULT_BG - loading texture" + root + "backgrounds/default.png" + " failed...");
 
 	m_textures["ANIMATED_BG_1"] = new sf::Texture();
 
-	if (!m_textures["ANIMATED_BG_1"]->loadFromFile(bg_path + "animated/1/Animated_BG.png"))
-		throw "ERROR::MainMenuState::init_background - failed to load texture ANIMATED_BG_1";
+	if (!m_textures["ANIMATED_BG_1"]->loadFromFile(root + "backgrounds/animated/1/Animated_BG.png"))
+		throw std::runtime_error("MainMenuState::initTextures::ANIMATED_BG_1 - loading texture" + root + "backgrounds/animated/1/Animated_BG.png" + " failed...");
 }
 
 void MainMenuState::initBackground(const sf::VideoMode& vm)

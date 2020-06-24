@@ -6,9 +6,24 @@ int main(int argc, char* argv[])
 {   
     //_CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
 
-	Core::Game game;
+    try
+    {
+        Core::Game game;
 
-    game.run();
+        game.run();
+    }
+    catch (std::runtime_error& exception)
+    {
+        std::cerr << "Error: " << exception.what() << std::endl;
+    }
+    catch (std::exception& exception)
+    {
+        std::cerr << "Error: " << exception.what() << std::endl;
+    }
+    catch (...)
+    {
+        std::cerr << "Some exception..." << std::endl;
+    }
 
     return 0;
 }

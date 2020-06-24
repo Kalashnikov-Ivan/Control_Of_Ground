@@ -46,28 +46,22 @@
     <Filter Include="Source\Tiles\Map">
       <UniqueIdentifier>{f950f00c-00d2-44c0-b56a-29e8620a307f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\General_classes">
-      <UniqueIdentifier>{23b55432-6818-419e-997c-37b9bd76a2e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\General_classes\GUI">
+    <Filter Include="Source\GUI">
       <UniqueIdentifier>{e1ad0dea-e9ca-4e89-8fa7-9b47a4e750f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\General_classes\GUI\Menu">
+    <Filter Include="Source\GUI\Menu">
       <UniqueIdentifier>{5f8366bb-9c3c-4196-beb5-4c3a1a5a0e18}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\General_classes\Settings">
+    <Filter Include="Source\Core\Settings">
       <UniqueIdentifier>{f388340d-9680-470b-9ece-30d88a4468f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\Game.cpp">
-      <Filter>Source\Core\General_classes</Filter>
-    </ClCompile>
     <ClCompile Include="source\main.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\Button.cpp">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="source\States\EditorState.cpp">
       <Filter>Source\Core\States</Filter>
@@ -100,31 +94,31 @@
       <Filter>Source\Entities</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\SettingsMenu.cpp">
-      <Filter>Source\Core\General_classes\GUI\Menu</Filter>
+      <Filter>Source\GUI\Menu</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\PauseMenu.cpp">
-      <Filter>Source\Core\General_classes\GUI\Menu</Filter>
+      <Filter>Source\GUI\Menu</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\Menu.cpp">
-      <Filter>Source\Core\General_classes\GUI\Menu</Filter>
+      <Filter>Source\GUI\Menu</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\MainMenu.cpp">
-      <Filter>Source\Core\General_classes\GUI\Menu</Filter>
+      <Filter>Source\GUI\Menu</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\DropDownList.cpp">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="source\stdHeader.cpp">
       <Filter>Headers</Filter>
     </ClCompile>
     <ClCompile Include="source\Settings\GraphicsSettings.cpp">
-      <Filter>Source\Core\General_classes\Settings</Filter>
+      <Filter>Source\Core\Settings</Filter>
     </ClCompile>
     <ClCompile Include="source\Settings\SettingsContainer.cpp">
-      <Filter>Source\Core\General_classes\Settings</Filter>
+      <Filter>Source\Core\Settings</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\TextureSelector.cpp">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="source\Tiles\TileMap.cpp">
       <Filter>Source\Tiles\Map</Filter>
@@ -133,16 +127,19 @@
       <Filter>Source\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\SideBar.cpp">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\Converter.cpp">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\AnimatedBackground.cpp">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClCompile>
     <ClCompile Include="source\GUI\RectAnimationComponent.cpp">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game.cpp">
+      <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,11 +262,8 @@
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\View.hpp">
       <Filter>Headers\SFML\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="source\Game.hpp">
-      <Filter>Source\Core\General_classes</Filter>
-    </ClInclude>
     <ClInclude Include="source\GUI\Button.hpp">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="source\States\EditorState.hpp">
       <Filter>Source\Core\States</Filter>
@@ -302,31 +296,31 @@
       <Filter>Source\Entities</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\SettingsMenu.hpp">
-      <Filter>Source\Core\General_classes\GUI\Menu</Filter>
+      <Filter>Source\GUI\Menu</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\PauseMenu.hpp">
-      <Filter>Source\Core\General_classes\GUI\Menu</Filter>
+      <Filter>Source\GUI\Menu</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\Menu.hpp">
-      <Filter>Source\Core\General_classes\GUI\Menu</Filter>
+      <Filter>Source\GUI\Menu</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\MainMenu.hpp">
-      <Filter>Source\Core\General_classes\GUI\Menu</Filter>
+      <Filter>Source\GUI\Menu</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\DropDownList.hpp">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="source\Settings\GraphicsSettings.h">
-      <Filter>Source\Core\General_classes\Settings</Filter>
+      <Filter>Source\Core\Settings</Filter>
     </ClInclude>
     <ClInclude Include="source\Settings\ISettings.h">
-      <Filter>Source\Core\General_classes\Settings</Filter>
+      <Filter>Source\Core\Settings</Filter>
     </ClInclude>
     <ClInclude Include="source\Settings\SettingsContainer.h">
-      <Filter>Source\Core\General_classes\Settings</Filter>
+      <Filter>Source\Core\Settings</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\TextureSelector.h">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="source\Tiles\TileMap.hpp">
       <Filter>Source\Tiles\Map</Filter>
@@ -335,16 +329,19 @@
       <Filter>Source\Tiles</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\SideBar.h">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\Converter.h">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\AnimatedBackground.h">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
     </ClInclude>
     <ClInclude Include="source\GUI\RectAnimationComponent.h">
-      <Filter>Source\Core\General_classes\GUI</Filter>
+      <Filter>Source\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game.hpp">
+      <Filter>Source\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

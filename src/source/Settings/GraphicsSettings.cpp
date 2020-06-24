@@ -13,7 +13,8 @@ GraphicsSettings::GraphicsSettings(const std::string& path)
 	m_framerate_limit { 60U },
 	m_context       { sf::ContextSettings() }
 {
-	loadFromFile(path);
+	if (!loadFromFile(path))
+		throw std::runtime_error("GraphicsSettings::Constructor: can't load from " + path);
 }
 
 //Constructors
@@ -25,7 +26,8 @@ GraphicsSettings::GraphicsSettings(const std::string& path, const std::vector<sf
 	m_framerate_limit{ 60U },
 	m_context        { sf::ContextSettings() }
 {
-	loadFromFile(path);
+	if (!loadFromFile(path))
+		throw std::runtime_error("GraphicsSettings::Constructor: can't load from " + path);
 }
 
 GraphicsSettings::GraphicsSettings(std::vector<sf::VideoMode> video_modes, const sf::VideoMode& resolution,

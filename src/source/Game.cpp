@@ -71,10 +71,7 @@ void Game::initWindow()
 											  sf::Style::Titlebar | sf::Style::Close, m_settings.m_graphics->m_context };
 
 	if (m_window == nullptr)
-	{
-		std::cerr << "Fault of init_window! Is nullptr..." << std::endl;
-		throw std::runtime_error("Fault of init_window! Is nullptr...");
-	}
+		throw std::runtime_error("Fault of init_window - is nullptr...");
 
 	m_window->setFramerateLimit     (m_settings.m_graphics->m_framerate_limit);
 	m_window->setVerticalSyncEnabled(m_settings.m_graphics->m_vsync);
@@ -129,16 +126,15 @@ void Game::initSupportedFonts()
 
 	m_supported_fonts["DOSIS"] = new sf::Font();
 	if (!m_supported_fonts["DOSIS"]->loadFromFile(path + "Dosis-Regular.ttf"))
-		throw "ERROR::MainMenuState: init_fonts. Can't open font fonts/Dosis-Regular.ttf";
+		throw std::runtime_error("Game::initSupportedFonts. Can't open: fonts/Dosis-Regular.ttf");
 
 	m_supported_fonts["OSWALD"] = new sf::Font();
 	if (!m_supported_fonts["OSWALD"]->loadFromFile(path + "Oswald-SemiBold.ttf"))
-		throw "ERROR::MainMenuState: init_fonts. Can't open font fonts/Oswald-SemiBold.ttf";
+		throw std::runtime_error("Game::initSupportedFonts. Can't open: fonts/Oswald-SemiBold.ttf");
 
 	m_supported_fonts["MAJOR"] = new sf::Font();
 	if (!m_supported_fonts["MAJOR"]->loadFromFile(path + "MajorMonoDisplay-Regular.ttf"))
-		throw "ERROR::MainMenuState: init_fonts. Can't open font fonts/MajorMonoDisplay-Regular.ttf";
-
+		throw std::runtime_error("Game::initSupportedFonts. Can't open: fonts/MajorMonoDisplay-Regular.ttf");
 }
 
 void Game::initFirstState()
