@@ -14,7 +14,7 @@ using namespace Core;
 ////////////////////////////////////////////////////////////
 Game::Game()
 	: m_delta_time{ 0.f },
-	m_enable_info{ true }
+	m_enable_info { true }
 {
 	initSettings();
 	initWindow(); //Dynamic for window
@@ -58,18 +58,18 @@ void inline Game::initSettings()
 
 void Game::initWindow()
 {
-	std::string title = "Control of Ground";
+	const std::string title = "Control of Ground";
 
+	unsigned char style = 0;
 	if (m_settings.m_graphics->m_fullscreen)
-		m_window = std::make_unique<sf::RenderWindow>(
-			m_settings.m_graphics->m_resolution, title,  
-			sf::Style::Fullscreen, m_settings.m_graphics->m_context
-			);
+		style = sf::Style::Fullscreen;
 	else
-		m_window = std::make_unique<sf::RenderWindow>(
-			m_settings.m_graphics->m_resolution, title,
-			sf::Style::Titlebar | sf::Style::Close, m_settings.m_graphics->m_context
-			);
+		style = sf::Style::Titlebar | sf::Style::Close;
+
+	m_window = std::make_unique<sf::RenderWindow>(
+		m_settings.m_graphics->m_resolution, title,  
+		style
+		);
 
 	if (m_window == nullptr)
 		throw std::runtime_error("Fault of init_window - is nullptr...");
