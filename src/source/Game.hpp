@@ -21,7 +21,7 @@ private:
 // Members
 ////////////////////////////////////////////////////////////
 	//General data
-		sf::RenderWindow* m_window;
+		std::unique_ptr<sf::RenderWindow> m_window;
 
 		std::stack<States::State*> m_states;
 
@@ -31,7 +31,7 @@ private:
 		std::map<const std::string, sf::Font*> m_supported_fonts;
 
 	//All values
-		States::StateData* m_Sdata;
+		std::unique_ptr<States::StateData> m_Sdata;
 
 	//Time
 		sf::Clock m_delta_time_clock;

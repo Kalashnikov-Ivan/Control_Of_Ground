@@ -23,7 +23,7 @@ public:
 	virtual std::string getStringInfo() override;
 
 	//Functions
-	void pause() = delete;
+	void pause()   = delete;
 	void unpause() = delete;
 
 	//Functions
@@ -37,7 +37,7 @@ public:
 private:
 	//GUI
 	GUI::SettingsMenu m_settings_menu;
-	GUI::AnimatedBackground& m_background;
+	std::shared_ptr<GUI::AnimatedBackground> m_background;
 	sf::Text m_title;
 
 	//---------------------------------------------

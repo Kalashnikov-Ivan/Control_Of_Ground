@@ -34,7 +34,7 @@ public:
 //__________________________PRIVATE_____________________________
 private:
 	//Members
-	Tiles::TileMap* m_tile_map;
+	std::unique_ptr<Tiles::TileMap> m_tile_map;
 
 	GUI::PauseMenu m_pause_menu;
 	GUI::SideBar   m_sidebar;

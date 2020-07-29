@@ -1,6 +1,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include <memory>
+
 #include "MovementComponent.hpp"
 #include "AnimationComponent.hpp"
 #include "HitboxComponent.hpp"
@@ -37,9 +39,9 @@ protected:
 	sf::Sprite m_sprite;
 
 	//Components
-	Components::MovementComponent*  m_movement_component;
-	Components::AnimationComponent* m_animation_component;
-	Components::HitboxComponent*    m_hitbox_component;
+	std::unique_ptr<Components::MovementComponent>  mPtr_movement_component;
+	std::unique_ptr<Components::AnimationComponent> mPtr_animation_component;
+	std::unique_ptr<Components::HitboxComponent>    mPtr_hitbox_component;
 
 	//Creators
 	void createMovementComponent (sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration);

@@ -15,11 +15,13 @@ using namespace States;
 ////////////////////////////////////////////////////////////
 
 EditorState::EditorState(StateData& Sdata, const float click_time)
-	: State{ Sdata },
-	m_tile_map   { nullptr }, m_ts_0{ nullptr },
+	: State      { Sdata },
+	m_tile_map   { nullptr }, 
+	m_ts_0       { nullptr },
 	m_pause_menu { Sdata.settings.m_graphics->m_resolution, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts},
 	m_selector   { m_Sdata.grid_size_f }, 
-	m_sidebar    { sf::Vector2f(
+	m_sidebar    { 
+					sf::Vector2f(
 						GUI::Converter::calc(96.f, Sdata.settings.m_graphics->m_resolution.width),
 						0.f
 					),
@@ -27,8 +29,11 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 						GUI::Converter::calc(4.f, Sdata.settings.m_graphics->m_resolution.width),
 						GUI::Converter::calc(28.f, Sdata.settings.m_graphics->m_resolution.height)
 					),
-					GUI::Converter::calc(25.f , GUI::Converter::calc(30.f, Sdata.settings.m_graphics->m_resolution.height))
-					},
+					GUI::Converter::calc(
+						25.f, 
+						GUI::Converter::calc(30.f, Sdata.settings.m_graphics->m_resolution.height)
+					)
+				 },
 	m_click_time { click_time }
 {
 	initTextures();
@@ -38,7 +43,7 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 	m_selector.setOutlineColor(sf::Color::Green);
 	m_selector.setFillColor(sf::Color::Transparent);
 
-	m_tile_map = new Tiles::TileMap(Sdata.grid_size_f, sf::Vector2u(50, 50), m_textures["TILE_SHEET"]);
+	m_tile_map = std::make_unique<Tiles::TileMap>(Sdata.grid_size_f, sf::Vector2u(50, 50), m_textures["TILE_SHEET"]);
 
 
 	m_sidebar.addButton("TS_0", *m_Sdata.supported_fonts["DOSIS"], "TS_0",
@@ -57,7 +62,6 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 EditorState::~EditorState()
 {
 	delete m_ts_0;
-	delete m_tile_map;
 }
 
 ////////////////////////////////////////////////////////////

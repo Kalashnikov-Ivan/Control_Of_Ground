@@ -35,7 +35,7 @@ public:
 private:
 	//Members
 	GUI::MainMenu m_main_menu;
-	GUI::AnimatedBackground* m_background;
+	std::shared_ptr<GUI::AnimatedBackground> m_background;
 
 	sf::Text m_title;
 

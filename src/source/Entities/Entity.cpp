@@ -3,29 +3,22 @@
 #include "Entity.hpp"
 
 using namespace Entities;
+using namespace Components;
 
 ////////////////////////////////////////////////////////////
 // Constructors
 ////////////////////////////////////////////////////////////
 Entity::Entity(sf::Texture& texture, const sf::Vector2f& scale)
 	: m_sprite           { texture },
-	m_movement_component { nullptr }, 
-	m_animation_component{ nullptr },
-	m_hitbox_component   { nullptr }
+	mPtr_movement_component { nullptr }, 
+	mPtr_animation_component{ nullptr },
+	mPtr_hitbox_component   { nullptr }
 {
 	m_sprite.setScale(scale);
 }
 
 Entity::~Entity()
 {
-	/*??? Idea: put possession of components (delete heap memory) in children classes ???*/
-
-	if (m_hitbox_component)
-		delete m_hitbox_component;
-	if (m_movement_component)
-		delete m_movement_component;
-	if (m_animation_component)
-		delete m_animation_component;
 }
 
 ////////////////////////////////////////////////////////////
@@ -33,17 +26,17 @@ Entity::~Entity()
 ////////////////////////////////////////////////////////////
 void Entity::createMovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration)
 {
-	m_movement_component = new Components::MovementComponent(sprite, max_speed, acceleration, deceleration);
+	mPtr_movement_component = std::make_unique<MovementComponent>(sprite, max_speed, acceleration, deceleration);
 }
 
 void Entity::createAnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet)
 {
-	m_animation_component = new Components::AnimationComponent(sprite, texture_sheet);
+	mPtr_animation_component = std::make_unique<AnimationComponent>(sprite, texture_sheet);
 }
 
 void Entity::createHitboxComponent(sf::Sprite& sprite, const sf::Vector2f& offset_xy, const sf::Vector2f& size_xy, const sf::Vector2f& scale)
 {
-	m_hitbox_component = new Components::HitboxComponent(sprite, offset_xy, size_xy, scale);
+	mPtr_hitbox_component = std::make_unique<HitboxComponent>(sprite, offset_xy, size_xy, scale);
 }
 
 
@@ -52,16 +45,16 @@ void Entity::createHitboxComponent(sf::Sprite& sprite, const sf::Vector2f& offse
 ////////////////////////////////////////////////////////////
 const sf::Vector2f Entity::getSpeed() const
 {
-	if (m_movement_component != nullptr)
-		return m_movement_component->getSpeed();
+	if (mPtr_movement_component != nullptr)
+		return mPtr_movement_component->getSpeed();
 	else
 		return sf::Vector2f(0.f, 0.f);
 }
 
 const sf::Vector2f Entity::getSpeedDir() const
 {
-	if (m_movement_component != nullptr)
-		return m_movement_component->getSpeedDir();
+	if (mPtr_movement_component != nullptr)
+		return mPtr_movement_component->getSpeedDir();
 	else
 		return sf::Vector2f(0.f, 0.f);
 }

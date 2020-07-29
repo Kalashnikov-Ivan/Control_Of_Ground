@@ -14,7 +14,7 @@ public:
 	//Init
 	void initGraphics(const std::string& path, const std::vector<sf::VideoMode>& video_modes);
 
-	GraphicsSettings* m_graphics;
+	std::unique_ptr<GraphicsSettings> m_graphics;
 private:
 
 };

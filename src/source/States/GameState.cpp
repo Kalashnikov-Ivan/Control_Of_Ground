@@ -13,7 +13,8 @@ using namespace States;
 GameState::GameState(StateData& Sdata)
 	: State      { Sdata },
 	m_pause_menu { Sdata.settings.m_graphics->m_resolution, *Sdata.supported_fonts["DOSIS"], Sdata.supported_fonts },
-	m_tile_map   { sf::Vector2f(100.f, 100.f), sf::Vector2u(100, 10), nullptr }
+	m_tile_map   { sf::Vector2f(100.f, 100.f), sf::Vector2u(100, 10), nullptr },
+	m_player     { nullptr }
 {
 	initTextures();
 	initKeybinds();
@@ -23,7 +24,6 @@ GameState::GameState(StateData& Sdata)
 GameState::~GameState()
 {
 	//State delete all textures
-	delete m_player;
 }
 
 ////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ void GameState::initKeybinds()
 void GameState::initPlayers()
 {
 	const float max_speed = 500.f;
-	m_player = new Entities::Player(sf::Vector2f(10.f, 100.f), *m_textures["PLAYER_SHEET"], max_speed, 2.f, 1.f, sf::Vector2f(4.f, 4.f));
+	m_player = std::make_unique<Entities::Player>(sf::Vector2f(10.f, 100.f), *m_textures["PLAYER_SHEET"], max_speed, 2.f, 1.f, sf::Vector2f(4.f, 4.f));
 }
 
 ////////////////////////////////////////////////////////////

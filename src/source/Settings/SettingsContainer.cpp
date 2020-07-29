@@ -12,12 +12,10 @@ SettingsContainer::SettingsContainer()
 
 SettingsContainer::~SettingsContainer()
 {
-	if (m_graphics)
-		delete m_graphics;
 }
 
 //Init
 void SettingsContainer::initGraphics(const std::string& path, const std::vector<sf::VideoMode>& video_modes)
 {
-	m_graphics = new GraphicsSettings(path, video_modes);
+	m_graphics = std::make_unique<GraphicsSettings>(path, video_modes);
 }

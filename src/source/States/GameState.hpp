@@ -38,7 +38,7 @@ private:
 	GUI::PauseMenu m_pause_menu;
 
 	//Entities
-	Entities::Player* m_player;
+	std::unique_ptr<Entities::Player> m_player;
 
 	//----Functions
 	//Init

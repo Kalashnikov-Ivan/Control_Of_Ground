@@ -110,8 +110,8 @@ bool TileMap::saveToFile(const std::string path)
 	if (out_f.is_open())
 	{
 		out_f << "TILES_QUANTITY" << m_tiles_quantity.x << ' ' << m_tiles_quantity.y << '\n';
-		out_f << "GRID_SIZE " << m_grid_size_u.x << ' ' << m_grid_size_u.y << '\n';
-		out_f << "LAYERS " << m_layers << '\n';
+		out_f << "GRID_SIZE "     << m_grid_size_u.x    << ' ' << m_grid_size_u.y    << '\n';
+		out_f << "LAYERS "        << m_layers           << '\n';
 	}
 	else
 	{
@@ -119,7 +119,6 @@ bool TileMap::saveToFile(const std::string path)
 		return false;
 	}
 
-	out_f.close();
 	return true;
 }
 
@@ -136,6 +135,5 @@ bool TileMap::loadFromFile(const std::string path)
 		return false;
 	}
 
-	in_f.close();
 	return true;
 }

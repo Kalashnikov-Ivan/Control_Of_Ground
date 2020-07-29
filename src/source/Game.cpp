@@ -27,9 +27,6 @@ Game::~Game()
 {
 	deleteStates();
 	deleteFonts();
-
-	delete m_window;
-	delete m_Sdata;
 }
 
 //Support_cleaner
@@ -64,11 +61,15 @@ void Game::initWindow()
 	std::string title = "Control of Ground";
 
 	if (m_settings.m_graphics->m_fullscreen)
-		m_window = new sf::RenderWindow{ m_settings.m_graphics->m_resolution, title,  
-											  sf::Style::Fullscreen, m_settings.m_graphics->m_context };
+		m_window = std::make_unique<sf::RenderWindow>(
+			m_settings.m_graphics->m_resolution, title,  
+			sf::Style::Fullscreen, m_settings.m_graphics->m_context
+			);
 	else
-		m_window = new sf::RenderWindow{ m_settings.m_graphics->m_resolution, title,  
-											  sf::Style::Titlebar | sf::Style::Close, m_settings.m_graphics->m_context };
+		m_window = std::make_unique<sf::RenderWindow>(
+			m_settings.m_graphics->m_resolution, title,
+			sf::Style::Titlebar | sf::Style::Close, m_settings.m_graphics->m_context
+			);
 
 	if (m_window == nullptr)
 		throw std::runtime_error("Fault of init_window - is nullptr...");
@@ -141,7 +142,7 @@ void Game::initFirstState()
 {
 	sf::Vector2f grid_size{ 64.f, 64.f };
 
-	m_Sdata = new States::StateData{ *m_window, m_states, m_settings, m_supported_keys, m_supported_fonts, grid_size };
+	m_Sdata = make_unique<States::StateData>(*m_window, m_states, m_settings, m_supported_keys, m_supported_fonts, grid_size);
 
 	m_states.push(new States::MainMenuState(*m_Sdata));
 }
@@ -168,7 +169,9 @@ sf::Text Game::getTextInfo(const sf::Font& font)
 sf::Text Core::Game::getMouseTextInfo(const sf::Font& font)
 {
 	sf::Text info_text{ m_mouse_info.str(), font, 12U };
-	info_text.setPosition(m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)).x + 15, m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)).y - 15);
+	info_text.setPosition(
+		m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)).x + 15, 
+		m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)).y - 15);
 
 	return info_text;
 }
@@ -217,7 +220,7 @@ void Game::update()
 		//Getting info
 		if (m_enable_info)
 		{
-			m_tech_info << m_states.top()->getStringInfo();
+			m_tech_info  << m_states.top()->getStringInfo();
 			m_mouse_info << m_states.top()->getStringInfoMouse();
 		}
 

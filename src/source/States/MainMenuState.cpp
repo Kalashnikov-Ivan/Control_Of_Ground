@@ -28,9 +28,7 @@ MainMenuState::MainMenuState(StateData& Sdata)
 }
 
 MainMenuState::~MainMenuState()
-{
-	delete m_Sdata.background_anim;
-}
+{}
 
 ////////////////////////////////////////////////////////////
 // Init
@@ -53,7 +51,7 @@ void MainMenuState::initTextures()
 void MainMenuState::initBackground(const sf::VideoMode& vm)
 {
 	//Background
-	m_Sdata.background_anim = new GUI::AnimatedBackground(sf::Vector2f((float)vm.width, (float)vm.height), *m_textures["ANIMATED_BG_1"]);
+	m_Sdata.background_anim = std::make_shared<GUI::AnimatedBackground>(sf::Vector2f((float)vm.width, (float)vm.height), *m_textures["ANIMATED_BG_1"]);
 	m_background = m_Sdata.background_anim;
 
 	//Title

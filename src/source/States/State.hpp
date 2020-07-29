@@ -11,14 +11,23 @@ class State;
 class StateData
 {
 public:
-	StateData(sf::RenderWindow& window, std::stack<States::State*>& states, Settings::SettingsContainer& settings,
-			  std::map<const std::string, int>& supported_keys, std::map<const std::string, sf::Font*>& supported_fonts,
-			  sf::Vector2f grid_size = sf::Vector2f(100.f, 100.f))
-		: window{ window }, states{ states }, settings{ settings },
-		supported_keys { supported_keys }, supported_fonts { supported_fonts },
-		grid_size_f { grid_size },
+	StateData(
+		sf::RenderWindow& window, 
+		std::stack<States::State*>& states, 
+		Settings::SettingsContainer& settings,
+		std::map<const std::string, int>& supported_keys, 
+		std::map<const std::string, sf::Font*>& supported_fonts,
+		sf::Vector2f grid_size = sf::Vector2f(100.f, 100.f)
+	)
+		: window        { window }, 
+		states	        { states }, 
+		settings        { settings },
+		supported_keys  { supported_keys }, 
+		supported_fonts { supported_fonts },
+		grid_size_f     { grid_size },
 		background_anim { nullptr }
 	{}
+
 	~StateData()
 	{}
 
@@ -33,7 +42,7 @@ public:
 	std::map<const std::string, sf::Font*>& supported_fonts;
 
 	//Shared objects
-	GUI::AnimatedBackground* background_anim;
+	std::shared_ptr<GUI::AnimatedBackground> background_anim;
 };
 
 class State //Base
@@ -62,14 +71,11 @@ public:
 
 	//Update and render
 	virtual void updateEvent(const sf::Event& event) = 0;
-	virtual void update(const float& dt) = 0;
-	virtual void render(sf::RenderTarget& target) = 0;
+	virtual void update(const float& dt)			 = 0;
+	virtual void render(sf::RenderTarget& target)    = 0;
 
 //__________________________PROTECTED_____________________________
 protected:
-////////////////////////////////////////////////////////////
-// Refs
-////////////////////////////////////////////////////////////
 	StateData& m_Sdata;
 
 ////////////////////////////////////////////////////////////

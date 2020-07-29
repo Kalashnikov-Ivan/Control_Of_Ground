@@ -12,10 +12,10 @@ using namespace States;
 // Constructors
 ////////////////////////////////////////////////////////////
 SettingsState::SettingsState(StateData& Sdata)
-	: State{ Sdata },
-	m_title{ "settings", *Sdata.supported_fonts["MAJOR"], GUI::Converter::calcCharSize(28, Sdata.settings.m_graphics->m_resolution) },
+	: State        { Sdata },
+	m_title        { "settings", *Sdata.supported_fonts["MAJOR"], GUI::Converter::calcCharSize(28, Sdata.settings.m_graphics->m_resolution) },
 	m_settings_menu{ Sdata.settings.m_graphics->m_resolution, *Sdata.supported_fonts["DOSIS"], Sdata.settings.m_graphics->m_video_modes },
-	m_background  { *Sdata.background_anim }
+	m_background   { Sdata.background_anim }
 {
 	initTextures();
 	initBackground(Sdata.settings.m_graphics->m_resolution);
@@ -80,7 +80,7 @@ void SettingsState::updateInput(const float& dt)
 void SettingsState::update(const float& dt)
 {
 	updateMousePos();
-	m_background.update(dt);
+	m_background->update(dt);
 	m_settings_menu.update(m_mouse_pos_view, dt);
 
 	//updateKeyboardInput(dt);
@@ -92,7 +92,7 @@ void SettingsState::update(const float& dt)
 ////////////////////////////////////////////////////////////
 void SettingsState::render(sf::RenderTarget& target)
 {
-	m_background.render(target);
+	m_background->render(target);
 	target.draw(m_title);
 
 	m_settings_menu.render(target);
