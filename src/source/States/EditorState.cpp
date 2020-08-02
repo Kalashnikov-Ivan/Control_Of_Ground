@@ -46,22 +46,23 @@ EditorState::EditorState(StateData& Sdata, const float click_time)
 	m_tile_map = std::make_unique<Tiles::TileMap>(Sdata.grid_size_f, sf::Vector2u(50, 50), m_textures["TILE_SHEET"]);
 
 
-	m_sidebar.addButton("TS_0", *m_Sdata.supported_fonts["DOSIS"], "TS_0",
+	m_sidebar.addButton(
+		"TS_0", *m_Sdata.supported_fonts["DOSIS"], "TS_0",
 		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200)
 	);
+
 	sf::Vector2f grid_size = sf::Vector2f(32.f, 32.f);
-	m_ts_0 = new GUI::TextureSelector(sf::Vector2f(320.f, 192.f), sf::Vector2f(m_Sdata.window.getSize().x - 400.f, 0.f),
-		m_textures["TILE_SHEET"], grid_size);
+	m_ts_0 = std::make_unique<GUI::TextureSelector>(
+		sf::Vector2f(320.f, 192.f), sf::Vector2f(m_Sdata.window.getSize().x - 400.f, 0.f),
+		m_textures["TILE_SHEET"].get(), grid_size
+	);
 
 	//m_ts_0->setOrigin(sf::Vector2f(320.f, 0));
 	m_ts_0->setPosition(m_sidebar.getButton("TS_0").getPosition().x - 320.f, 0);
-
-
 }
 
 EditorState::~EditorState()
 {
-	delete m_ts_0;
 }
 
 ////////////////////////////////////////////////////////////
@@ -71,7 +72,7 @@ void EditorState::initTextures()
 {
 	const std::string root = "resources/textures/";
 
-	m_textures["TILE_SHEET"] = new sf::Texture();
+	m_textures["TILE_SHEET"] = std::make_shared<sf::Texture>();
 
 	if (!m_textures["TILE_SHEET"]->loadFromFile(root + "Tileset.png"))
 		throw std::runtime_error("EditorState::initTextures::TILE_SHEET - loading texture" + root + "Tileset.png" + " failed...");
@@ -97,13 +98,11 @@ void EditorState::initKeybinds()
 	else
 	{
 		std::cerr << "config/EditorState.ini - cannot open!"
-			<< std::endl
-			<< "Using default keys..." << std::endl;
+				  << std::endl
+				  << "Using default keys..." << std::endl;
 
 		m_keybinds["CLOSE"] = m_Sdata.supported_keys.at("Escape");
 	}
-
-	keys_ifs.close();
 
 #ifdef DEBUG
 	for (auto& i : m_keybinds)
@@ -150,7 +149,6 @@ void EditorState::updateEvent(const sf::Event& event)
 
 	if (event.type == sf::Event::KeyPressed)
 	{
-
 		if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])))
 		{
 			if (!m_paused)
@@ -188,7 +186,7 @@ void EditorState::updateInput(const float& dt)
 		}
 		else
 		{
-			m_tile_map->addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0, m_textures["TILE_SHEET"], m_selected_rect);
+			m_tile_map->addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0, m_textures["TILE_SHEET"].get(), m_selected_rect);
 		}
 	}
 	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && isTime())
@@ -207,7 +205,7 @@ void EditorState::updateInput(const float& dt)
 void EditorState::updatePauseInput(const float& dt)
 {
 	if (m_pause_menu.isButtonPressed("SETTINGS_STATE"))
-		m_Sdata.states.push(new SettingsState{ m_Sdata });
+		m_Sdata.states.push_back(std::make_unique<SettingsState>(m_Sdata));
 
 	if (m_pause_menu.isButtonPressed("EXIT"))
 		quitState();

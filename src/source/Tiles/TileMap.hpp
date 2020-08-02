@@ -9,7 +9,7 @@ class TileMap
 {
 public:
 	TileMap(
-		const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, sf::Texture* sheet_texture,
+		const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, std::shared_ptr<sf::Texture> sheet_texture,
 		const size_t layers = 1, const bool tiles_border_visible = true
 	);
 	~TileMap();
@@ -32,7 +32,7 @@ public:
 	bool loadFromFile(const std::string path);
 
 private:
-	sf::Texture* m_sheet_texture;
+	std::shared_ptr<sf::Texture> m_sheet_texture;
 
 	sf::Vector2f m_grid_size_f;
 	sf::Vector2u m_grid_size_u;

@@ -121,19 +121,8 @@ void inline SettingsState::resetSettingsAllStates()
 	m_Sdata.window.create(m_settings_menu.getCurrentVM(), "Control Of Ground");
 	m_Sdata.window.setFramerateLimit(m_Sdata.settings.m_graphics->m_framerate_limit);
 
-	std::vector<State*> all_states;
-
-	while (!m_Sdata.states.empty())
-	{
-		all_states.push_back(m_Sdata.states.top());
-		m_Sdata.states.pop();
-	}
-
-	for (int i = all_states.size() - 1; i >= 0; i--)
-	{
-		all_states[i]->reset(m_Sdata.settings.m_graphics->m_resolution);
-		m_Sdata.states.push(all_states[i]);
-	}
+	for (auto& i : m_Sdata.states)
+		i->reset(m_Sdata.settings.m_graphics->m_resolution);
 }
 
 //Reset

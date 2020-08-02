@@ -13,10 +13,10 @@ class StateData
 public:
 	StateData(
 		sf::RenderWindow& window, 
-		std::stack<States::State*>& states, 
+		std::vector<std::unique_ptr<States::State>>& states,
 		Settings::SettingsContainer& settings,
 		std::map<const std::string, int>& supported_keys, 
-		std::map<const std::string, sf::Font*>& supported_fonts,
+		std::map<const std::string, std::unique_ptr<sf::Font>>& supported_fonts,
 		sf::Vector2f grid_size = sf::Vector2f(100.f, 100.f)
 	)
 		: window        { window }, 
@@ -34,12 +34,12 @@ public:
 	sf::RenderWindow& window;
 	sf::Vector2f grid_size_f;
 
-	std::stack<States::State*>& states;
+	std::vector<std::unique_ptr<States::State>>& states;
 
 	Settings::SettingsContainer& settings;
 
 	std::map<const std::string, int>&       supported_keys;
-	std::map<const std::string, sf::Font*>& supported_fonts;
+	std::map<const std::string, std::unique_ptr<sf::Font>>& supported_fonts;
 
 	//Shared objects
 	std::shared_ptr<GUI::AnimatedBackground> background_anim;
@@ -82,7 +82,7 @@ protected:
 // Member
 ////////////////////////////////////////////////////////////
 	//Resources
-	std::map<const std::string, sf::Texture*> m_textures;
+	std::map<const std::string, std::shared_ptr<sf::Texture>> m_textures;
 
 	std::map<const std::string, int> m_keybinds;
 
@@ -110,8 +110,6 @@ protected:
 
 //__________________________PRIVATE_____________________________
 private:
-	//Support_cleaner
-	void deleteTextures();
 };
 } // !namespace States
 

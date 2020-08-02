@@ -5,7 +5,7 @@
 using namespace Tiles;
 
 TileMap::TileMap(
-	const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, sf::Texture* sheet_texture,
+	const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, std::shared_ptr<sf::Texture> sheet_texture,
 	const size_t layers, const bool tiles_border_visible
 )
 	: m_grid_size_f { grid_size },

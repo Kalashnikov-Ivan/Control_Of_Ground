@@ -38,14 +38,14 @@ private:
 
 	GUI::PauseMenu m_pause_menu;
 	GUI::SideBar   m_sidebar;
-	GUI::TextureSelector* m_ts_0;
+	std::unique_ptr<GUI::TextureSelector> m_ts_0;
 	
 	sf::RectangleShape m_selector;
 	sf::IntRect m_selected_rect;
 
 	//Timer
 	const float m_click_time;
-	float m_timer;
+	float		m_timer;
 
 	//---------------------------------------------
 	//Init

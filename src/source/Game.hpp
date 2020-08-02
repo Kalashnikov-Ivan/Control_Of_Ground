@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-//#include "GeneralValues.h"
 #include "States/State.hpp"
 
 namespace Core
@@ -22,25 +21,23 @@ private:
 ////////////////////////////////////////////////////////////
 	//General data
 		std::unique_ptr<sf::RenderWindow> m_window;
+		Settings::SettingsContainer		  m_settings;
+		std::vector<std::unique_ptr<States::State>> m_states;
 
-		std::stack<States::State*> m_states;
-
-		Settings::SettingsContainer m_settings;
-
-		std::map<const std::string, int>       m_supported_keys;
-		std::map<const std::string, sf::Font*> m_supported_fonts;
+		std::map<const std::string, int> m_supported_keys;
+		std::map<const std::string, std::unique_ptr<sf::Font>> m_supported_fonts;
 
 	//All values
 		std::unique_ptr<States::StateData> m_Sdata;
 
 	//Time
 		sf::Clock m_delta_time_clock;
-		float m_delta_time;
+		float	  m_delta_time;
 
 	//Info
 		std::stringstream m_tech_info;
 		std::stringstream m_mouse_info;
-		bool m_enable_info;
+		bool              m_enable_info;
 
 ////////////////////////////////////////////////////////////
 // Init
@@ -70,13 +67,6 @@ private:
 
 	//Render
 		void inline render();
-
-////////////////////////////////////////////////////////////
-// Tech functions
-////////////////////////////////////////////////////////////
-	//Support_cleaner
-		void inline deleteStates();
-		void inline deleteFonts();
 };
 } // !namespace cog
 #endif // !GAME_H

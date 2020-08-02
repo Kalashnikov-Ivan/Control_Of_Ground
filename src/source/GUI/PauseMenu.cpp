@@ -8,7 +8,7 @@ using namespace GUI;
 
 //Constructors
 PauseMenu::PauseMenu(const sf::VideoMode& vm, sf::Font& main_font,
-					 std::map<const std::string, sf::Font*>& supported_fonts)
+					 std::map<const std::string, std::unique_ptr<sf::Font>>& supported_fonts)
 	: Menu            { main_font, sf::Vector2f(Converter::calc(22.f , vm.width), static_cast<float>(vm.height)) },
 	m_background      { sf::Vector2f((float)vm.width, (float)vm.height) },
 	m_title           { "paused", *supported_fonts["MAJOR"],  Converter::calcCharSize(45, vm) }

@@ -33,7 +33,7 @@ void GameState::initTextures()
 {
 	const std::string root = "resources/textures/";
 
-	m_textures["PLAYER_SHEET"] = new sf::Texture();
+	m_textures["PLAYER_SHEET"] = std::make_shared<sf::Texture>();
 
 	if (!m_textures["PLAYER_SHEET"]->loadFromFile(root + "Player/Player_sheet.png"))
 		throw std::runtime_error("GameState::initTextures::PLAYER_SHEET - loading texture" + root + "Player/Player_sheet.png" + " failed...");
@@ -69,8 +69,6 @@ void GameState::initKeybinds()
 		m_keybinds["MOVE_TOP"]   = m_Sdata.supported_keys.at("W");
 		m_keybinds["MOVE_DOWN"]  = m_Sdata.supported_keys.at("S");
 	}
-
-	keys_ifs.close();
 
 #ifdef DEBUG
 	for (auto& i : m_keybinds)
@@ -126,7 +124,7 @@ void GameState::updateInput(const float& dt)
 void GameState::updatePauseInput(const float& dt)
 {
 	if (m_pause_menu.isButtonPressed("SETTINGS_STATE"))
-		m_Sdata.states.push(new SettingsState{ m_Sdata });
+		m_Sdata.states.push_back(std::make_unique<SettingsState>(m_Sdata));
 
 	if (m_pause_menu.isButtonPressed("EXIT"))
 		quitState();

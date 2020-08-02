@@ -12,7 +12,7 @@ class PauseMenu :
 public:
 	//Constructors
 	PauseMenu(const sf::VideoMode& vm, sf::Font& main_font,
-			  std::map<const std::string, sf::Font*>& supported_fonts);
+			  std::map<const std::string, std::unique_ptr<sf::Font>>& supported_fonts);
 	~PauseMenu();
 
 	//Functions

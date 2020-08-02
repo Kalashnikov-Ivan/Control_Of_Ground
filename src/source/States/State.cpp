@@ -15,14 +15,6 @@ State::State(StateData& Sdata)
 }
 State::~State()
 {
-	deleteTextures();
-}
-
-//Support_cleaner
-void State::deleteTextures()
-{
-	for (auto& i : m_textures)
-		delete i.second;
 }
 
 ////////////////////////////////////////////////////////////

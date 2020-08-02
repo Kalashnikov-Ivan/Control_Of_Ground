@@ -16,12 +16,16 @@ using namespace States;
 // Constructors
 ////////////////////////////////////////////////////////////
 MainMenuState::MainMenuState(StateData& Sdata)
-	: State{ Sdata },
-	m_main_menu{ Sdata.settings.m_graphics->m_resolution, 
-				*Sdata.supported_fonts["DOSIS"] },
-	m_title{ "control of Ground",  *Sdata.supported_fonts["MAJOR"], 
-			 GUI::Converter::calcCharSize(28, Sdata.settings.m_graphics->m_resolution)   //1600x900 = ~78U
-		   }
+	: 
+	State{ Sdata },
+	m_main_menu{ 
+	             Sdata.settings.m_graphics->m_resolution, 
+				*Sdata.supported_fonts["DOSIS"] 
+			   },
+	m_title    { 
+				 "control of Ground",  *Sdata.supported_fonts["MAJOR"], 
+				 GUI::Converter::calcCharSize(28, Sdata.settings.m_graphics->m_resolution)   //1600x900 = ~78U
+			   }
 {
 	initTextures();
 	initBackground(Sdata.settings.m_graphics->m_resolution);
@@ -37,15 +41,17 @@ void MainMenuState::initTextures()
 {
 	const std::string root = "resources/textures/";
 
-	m_textures["DEFAULT_BG"] = new sf::Texture();
+	m_textures["DEFAULT_BG"] = std::make_shared<sf::Texture>();
 
 	if (!m_textures["DEFAULT_BG"]->loadFromFile(root + "backgrounds/default.png"))
-		throw std::runtime_error("MainMenuState::initTextures::DEFAULT_BG - loading texture" + root + "backgrounds/default.png" + " failed...");
+		throw std::runtime_error("MainMenuState::initTextures::DEFAULT_BG - loading texture" + root + 
+			"backgrounds/default.png" + " failed...");
 
-	m_textures["ANIMATED_BG_1"] = new sf::Texture();
+	m_textures["ANIMATED_BG_1"] = std::make_shared<sf::Texture>();
 
 	if (!m_textures["ANIMATED_BG_1"]->loadFromFile(root + "backgrounds/animated/1/Animated_BG.png"))
-		throw std::runtime_error("MainMenuState::initTextures::ANIMATED_BG_1 - loading texture" + root + "backgrounds/animated/1/Animated_BG.png" + " failed...");
+		throw std::runtime_error("MainMenuState::initTextures::ANIMATED_BG_1 - loading texture" + root + 
+			"backgrounds/animated/1/Animated_BG.png" + " failed...");
 }
 
 void MainMenuState::initBackground(const sf::VideoMode& vm)
@@ -79,13 +85,13 @@ void MainMenuState::updateEvent(const sf::Event& event)
 void MainMenuState::updateInput(const float& dt)
 {
 	if (m_main_menu.isButtonPressed("GAME_STATE"))
-		m_Sdata.states.push(new GameState{ m_Sdata });
+		m_Sdata.states.push_back(std::make_unique<GameState>(m_Sdata));
 
 	if (m_main_menu.isButtonPressed("EDITOR_STATE"))
-		m_Sdata.states.push(new EditorState{ m_Sdata });
+		m_Sdata.states.push_back(std::make_unique<EditorState>(m_Sdata));
 
 	if (m_main_menu.isButtonPressed("SETTINGS_STATE"))
-		m_Sdata.states.push(new SettingsState{ m_Sdata });
+		m_Sdata.states.push_back(std::make_unique<SettingsState>(m_Sdata));
 
 	if (m_main_menu.isButtonPressed("EXIT"))
 		quitState();

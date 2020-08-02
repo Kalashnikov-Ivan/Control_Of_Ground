@@ -24,25 +24,7 @@ Game::Game()
 }
 
 Game::~Game()
-{
-	deleteStates();
-	deleteFonts();
-}
-
-//Support_cleaner
-void Game::deleteStates()
-{
-	while (!m_states.empty())
-	{
-		delete m_states.top();
-		m_states.pop();
-	}
-}
-void Game::deleteFonts()
-{
-	for (auto& i : m_supported_fonts)
-		delete i.second;
-}
+{}
 
 ////////////////////////////////////////////////////////////
 // Init
@@ -71,9 +53,6 @@ void Game::initWindow()
 		style
 		);
 
-	if (m_window == nullptr)
-		throw std::runtime_error("Fault of init_window - is nullptr...");
-
 	m_window->setFramerateLimit     (m_settings.m_graphics->m_framerate_limit);
 	m_window->setVerticalSyncEnabled(m_settings.m_graphics->m_vsync);
 	//window->setKeyRepeatEnabled(false);
@@ -99,11 +78,11 @@ void Game::initSupportedKeys()
 	else
 	{
 		std::cerr << "config/supported_keys.ini - cannot open!"
-			<< std::endl
-			<< "Using default keys..." << std::endl;
+		          << std::endl
+			      << "Using default keys..." << std::endl;
 
 		m_supported_keys["Escape"] = sf::Keyboard::Escape;
-		m_supported_keys["F3"] = sf::Keyboard::F3;
+		m_supported_keys["F3"]     = sf::Keyboard::F3;
 
 		m_supported_keys["A"] = sf::Keyboard::A;
 		m_supported_keys["D"] = sf::Keyboard::D;
@@ -125,26 +104,28 @@ void Game::initSupportedFonts()
 {
 	const std::string path = "resources/fonts/";
 
-	m_supported_fonts["DOSIS"] = new sf::Font();
+	m_supported_fonts["DOSIS"] = std::make_unique<sf::Font>();
 	if (!m_supported_fonts["DOSIS"]->loadFromFile(path + "Dosis-Regular.ttf"))
 		throw std::runtime_error("Game::initSupportedFonts. Can't open: fonts/Dosis-Regular.ttf");
 
-	m_supported_fonts["OSWALD"] = new sf::Font();
+	m_supported_fonts["OSWALD"] = std::make_unique<sf::Font>();
 	if (!m_supported_fonts["OSWALD"]->loadFromFile(path + "Oswald-SemiBold.ttf"))
 		throw std::runtime_error("Game::initSupportedFonts. Can't open: fonts/Oswald-SemiBold.ttf");
 
-	m_supported_fonts["MAJOR"] = new sf::Font();
+	m_supported_fonts["MAJOR"] = std::make_unique<sf::Font>();
 	if (!m_supported_fonts["MAJOR"]->loadFromFile(path + "MajorMonoDisplay-Regular.ttf"))
 		throw std::runtime_error("Game::initSupportedFonts. Can't open: fonts/MajorMonoDisplay-Regular.ttf");
 }
 
 void Game::initFirstState()
 {
+	const size_t reserveForStates = 5;
 	sf::Vector2f grid_size{ 64.f, 64.f };
 
 	m_Sdata = make_unique<States::StateData>(*m_window, m_states, m_settings, m_supported_keys, m_supported_fonts, grid_size);
 
-	m_states.push(new States::MainMenuState(*m_Sdata));
+	m_states.reserve(reserveForStates);
+	m_states.push_back(std::make_unique<States::MainMenuState>(*m_Sdata));
 }
 
 ////////////////////////////////////////////////////////////
@@ -202,7 +183,7 @@ void Game::updateEvents()
 					m_enable_info = true;
 			}
 		}
-		m_states.top()->updateEvent(event);
+		m_states.back()->updateEvent(event);
 	}
 }
 
@@ -215,22 +196,18 @@ void Game::update()
 	{
 		//Update the top state
 		updateEvents();
-		m_states.top()->update(m_delta_time);
+		m_states.back()->update(m_delta_time);
 
 		//Getting info
 		if (m_enable_info)
 		{
-			m_tech_info  << m_states.top()->getStringInfo();
-			m_mouse_info << m_states.top()->getStringInfoMouse();
+			m_tech_info  << m_states.back()->getStringInfo();
+			m_mouse_info << m_states.back()->getStringInfoMouse();
 		}
 
 		//Check quit
-		if (m_states.top()->getQuit())
-		{
-			m_states.top()->quitState();
-			delete m_states.top();
-			m_states.pop();
-		}
+		if (m_states.back()->getQuit())
+			m_states.pop_back();
 	}
 	else //Application end
 	{
@@ -250,7 +227,7 @@ void Game::render()
 
 	if (!m_states.empty())
 	{
-		m_states.top()->render(*m_window);
+		m_states.back()->render(*m_window);
 	}
 
 	if (m_enable_info)
