@@ -12,60 +12,60 @@ class SettingsMenu :
 public:
 
 	//Constructors
-	SettingsMenu(const sf::VideoMode& vm, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes);
-	virtual ~SettingsMenu();
+	SettingsMenu(const sf::VideoMode& vm, sf::Font& mainFont, std::vector<sf::VideoMode>& videoModes);
+	~SettingsMenu();
 
 	//Accessors
-	sf::VideoMode getCurrentVM();
+	sf::VideoMode GetCurrentVM();
 
 	//Info
-	virtual std::string getStringInfo() override;
+	std::string GetStringInfo() override;
 
 	//Functions
-	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
-	virtual void render(sf::RenderTarget& target) override;
+	void Update(const sf::Vector2f& mousePos, const float& dt) override;
+	void Render(sf::RenderTarget& target) override;
 
-	virtual void reset(const sf::VideoMode& vm) override;
+	void Reset(const sf::VideoMode& vm) override;
 
 private:
 	class VideoSettingsMenu :
 		public Menu
 	{
 	public:
-		VideoSettingsMenu(const sf::VideoMode& vm, sf::Font& main_font, std::vector<sf::VideoMode>& video_modes);
+		VideoSettingsMenu(const sf::VideoMode& vm, sf::Font& mainFont, std::vector<sf::VideoMode>& videoModes);
 		~VideoSettingsMenu();
 
 		//Accessors
-		sf::VideoMode getCurrentVM();
+		sf::VideoMode GetCurrentVM();
 
 		//Info
-		std::string getStringInfo();
+		std::string GetStringInfo();
 
 		//Functions
-		void inline update(const sf::Vector2f& mouse_pos, const float& dt);
-		void render(sf::RenderTarget& target);
+		void inline Update(const sf::Vector2f& mousePos, const float& dt);
+		void Render(sf::RenderTarget& target);
 
-		virtual void reset(const sf::VideoMode& vm) override;
+		virtual void Reset(const sf::VideoMode& vm) override;
 
 	private:
 		sf::Text m_title;
 
 		//GUI
-		std::map<std::string, DropDownList*> m_dropdown_lists;
+		std::map<std::string, DropDownList*> m_dropdownLists;
 
-		std::vector<sf::VideoMode>& m_video_modes;
-		sf::Text m_resolution_text;
-		sf::Text m_vsync_text;
-		sf::Text m_antialising_text;
+		std::vector<sf::VideoMode>& m_videoModes;
+		sf::Text m_resolutionText;
+		sf::Text m_vsyncText;
+		sf::Text m_antialisingText;
 
-		virtual void initButtons(const sf::VideoMode& vm) override; //Delete
+		virtual void InitButtons(const sf::VideoMode& vm) override; //Delete
 	};
 
 	//Sub Menu
-	VideoSettingsMenu m_video_menu;
+	VideoSettingsMenu m_videoMenu;
 
 	//Init
-	virtual void inline initButtons(const sf::VideoMode& vm) override;
+	virtual void inline InitButtons(const sf::VideoMode& vm) override;
 };
 }
 

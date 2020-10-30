@@ -14,42 +14,41 @@ class GameState :
 	public State
 {
 public:
-	//Constructors
+//Constructors
 	GameState() = delete;
-	GameState(StateData& Sdata);
-	virtual ~GameState();
+	explicit GameState(StateContext& ctx);
+	~GameState();
 
-	//Tech info
-	virtual std::string getStringInfo() override;
+//Tech info
+	std::string GetStringInfo() override;
 
-	//Functions
-	virtual void updateEvent(const sf::Event& event) override;
-	virtual void update(const float& dt) override;
+//Functions
+	void UpdateEvent(const sf::Event& event) override;
+	void Update(const float& dt) override;
 
-	virtual void render(sf::RenderTarget& target) override;
+	void Render(sf::RenderTarget& target) override;
 
-	virtual void reset(const sf::VideoMode& vm) override;
+	void Reset(const sf::VideoMode& vm) override;
 
 private:
-	//TileMap
-	Tiles::TileMap m_tile_map;
+//TileMap
+	Tiles::TileMap m_tileMap;
 
-	//GUI
-	GUI::PauseMenu m_pause_menu;
+//GUI
+	GUI::PauseMenu m_pauseMenu;
 
-	//Entities
+//Entities
 	std::unique_ptr<Entities::Player> m_player;
 
-	//----Functions
-	//Init
-	virtual void initTextures() override;
-	virtual void initKeybinds() override;
-			void initPlayers();
+//Init
+	void InitTextures() override;
+	void InitKeybinds() override;
+	void InitPlayers();
 
-	//Update
-	virtual void updateInput(const float& dt) override;
-			void updatePauseInput(const float& dt);
-			void updatePlayerInput(const float& dt);
+//Update
+	void UpdateInput(const float& dt) override;
+	void updatePauseInput(const float& dt);
+	void updatePlayerInput(const float& dt);
 };
 } // !namespace cog
 #endif // !GAME_STATE_H

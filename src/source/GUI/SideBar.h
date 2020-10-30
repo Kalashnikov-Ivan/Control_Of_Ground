@@ -10,34 +10,35 @@ class SideBar :
 {
 public:
 	//Constructors
-	SideBar(const sf::Vector2f& pos, const sf::Vector2f& bounds_size, const float m_button_height);
+	SideBar(const sf::Vector2f& pos, const sf::Vector2f& boundsSize, const float m_buttonHeight);
 	~SideBar();
 
 	//Accessors
-	const Button& getButton(const std::string& key);
-	const bool isButtonPressed(const std::string& key);
+	const Button& GetButton(const std::string& key);
+	const bool IsButtonPressed(const std::string& key);
 
 	//Modificators
-	void addButton(const std::string& key,
+	void AddButton(const std::string& key,
 			sf::Font& font, const std::string& text,
 			const sf::Color& color_idle,
 			const sf::Color& color_hover,
 			const sf::Color& color_active);
 
 	//Functions
-	void update(const sf::Vector2f& mouse_pos, const float& dt);
-	void render(sf::RenderTarget& target);
+	void Update(const sf::Vector2f& mousePos, const float& dt);
+	void Render(sf::RenderTarget& target);
 
-	void reset(const sf::Vector2f& pos, const sf::Vector2f& bounds_size, const float button_height);
+	void Reset(const sf::Vector2f& pos, const sf::Vector2f& boundsSize, const float buttonHeight);
 private:
 	//Members
+	//#TODO: Make smart_ptr
 	std::map<std::string, Button*> m_buttons;
 
-	float m_button_height;
+	float m_buttonHeight;
 	size_t m_quant_buttons;
 
-	void updateButtons(const sf::Vector2f& mouse_pos, const float& dt);
-	void renderButtons(sf::RenderTarget& target);
+	void UpdateButtons(const sf::Vector2f& mousePos, const float& dt);
+	void RenderButtons(sf::RenderTarget& target);
 };
 } //!namespace GUI
 #endif // !SIDEBAR_H

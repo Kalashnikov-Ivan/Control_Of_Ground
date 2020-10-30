@@ -412,12 +412,12 @@ private:
 /// };
 /// \endcode
 ///
-/// A note on coordinates and undistorted rendering: \n
+/// A note on coordinates and undistorted Rendering: \n
 /// By default, SFML (or more exactly, OpenGL) may interpolate drawable objects
-/// such as sprites or texts when rendering. While this allows transitions
+/// such as sprites or texts when Rendering. While this allows transitions
 /// like slow movements or rotations to appear smoothly, it can lead to
 /// unwanted results in some cases, for example blurred or distorted objects.
-/// In order to render a sf::Drawable object pixel-perfectly, make sure
+/// In order to Render a sf::Drawable object pixel-perfectly, make sure
 /// the involved coordinates allow a 1:1 mapping of pixels in the window
 /// to texels (pixels in the texture). More specifically, this means:
 /// * The object's position, origin and scale have no fractional part

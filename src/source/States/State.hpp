@@ -8,109 +8,97 @@ namespace States
 {
 class State;
 
-class StateData
+struct StateContext
 {
-public:
-	StateData(
-		sf::RenderWindow& window, 
+	StateContext(
+		sf::RenderWindow& window,
 		std::vector<std::unique_ptr<States::State>>& states,
 		Settings::SettingsContainer& settings,
-		std::map<const std::string, int>& supported_keys, 
-		std::map<const std::string, std::unique_ptr<sf::Font>>& supported_fonts,
-		sf::Vector2f grid_size = sf::Vector2f(100.f, 100.f)
+		std::map<const std::string, int>& supportedKeys,
+		std::map<const std::string, std::unique_ptr<sf::Font>>& supportedFonts,
+		sf::Vector2f gridSize = sf::Vector2f(100.f, 100.f)
 	)
-		: window        { window }, 
-		states	        { states }, 
-		settings        { settings },
-		supported_keys  { supported_keys }, 
-		supported_fonts { supported_fonts },
-		grid_size_f     { grid_size },
-		background_anim { nullptr }
-	{}
-
-	~StateData()
+		: window{ window }
+		, states{ states }
+		, settings{ settings }
+		, supportedKeys{ supportedKeys }
+		, supportedFonts{ supportedFonts }
+		, gridSze{ gridSize }
+		, backgroundAnim{ nullptr }
 	{}
 
 	sf::RenderWindow& window;
-	sf::Vector2f grid_size_f;
+	sf::Vector2f      gridSze;
 
 	std::vector<std::unique_ptr<States::State>>& states;
 
 	Settings::SettingsContainer& settings;
 
-	std::map<const std::string, int>&       supported_keys;
-	std::map<const std::string, std::unique_ptr<sf::Font>>& supported_fonts;
+	std::map<const std::string, int>& supportedKeys;
+	std::map<const std::string, std::unique_ptr<sf::Font>>& supportedFonts;
 
 	//Shared objects
-	std::shared_ptr<GUI::AnimatedBackground> background_anim;
+	std::shared_ptr<GUI::AnimatedBackground> backgroundAnim;
 };
 
 class State //Base
 {
-//__________________________PUBLIC______________________________
 public:
-	//Constructors
+//Constructors
 	State() = delete;
-	State(StateData& sdata);
+	explicit State(StateContext& sdata);
 
 	virtual ~State();
 	
-	//Accessors
-	const bool getQuit() const;
+//Accessors
+	const bool GetQuit() const;
 
-	//Info
-	virtual std::string getStringInfo() = 0;
-	virtual std::string getStringInfoMouse();
-	std::string getStringMousePos() const;
+//Info
+	virtual std::string GetStringInfo() = 0;
+	virtual std::string GetStringInfoMouse();
+	std::string GetStringMousePos() const;
 
-	//Functions
-	void pause();
-	void unpause();
-	virtual void reset(const sf::VideoMode& vm);
-	virtual void quitState();
+//Functions
+	void Pause();
+	void Unpause();
+	virtual void Reset(const sf::VideoMode& vm);
+	virtual void QuitState();
 
-	//Update and render
-	virtual void updateEvent(const sf::Event& event) = 0;
-	virtual void update(const float& dt)			 = 0;
-	virtual void render(sf::RenderTarget& target)    = 0;
+//Update and Render
+	virtual void UpdateEvent(const sf::Event& event) = 0;
+	virtual void Update(const float& dt)			 = 0;
+	virtual void Render(sf::RenderTarget& target)    = 0;
 
-//__________________________PROTECTED_____________________________
 protected:
-	StateData& m_Sdata;
+	StateContext& m_stateContext;
 
-////////////////////////////////////////////////////////////
-// Member
-////////////////////////////////////////////////////////////
-	//Resources
+//Resources
 	std::map<const std::string, std::shared_ptr<sf::Texture>> m_textures;
 
 	std::map<const std::string, int> m_keybinds;
 
-	//Mouse
-	sf::Vector2i m_mouse_pos_screen;
-	sf::Vector2i m_mouse_pos_window;
-	sf::Vector2f m_mouse_pos_view;
-	sf::Vector2u m_mouse_pos_grid;
+//Mouse
+	sf::Vector2i m_mousePosScreen;
+	sf::Vector2i m_mousePosWindow;
+	sf::Vector2f m_mousePosView;
+	sf::Vector2u m_mousePosGrid;
 	
-	//State
+//State
 	bool m_paused;
 	bool m_quit;
 
-////////////////////////////////////////////////////////////
 // Init
-////////////////////////////////////////////////////////////
-	virtual void inline initTextures() = 0;
-	virtual void inline initKeybinds() = 0;
+	virtual void inline InitTextures() = 0;
+	virtual void inline InitKeybinds() = 0;
 
-////////////////////////////////////////////////////////////
 // Update
-////////////////////////////////////////////////////////////
-	virtual void updateMousePos();
-	virtual void updateInput(const float& dt) = 0;
-
-//__________________________PRIVATE_____________________________
-private:
+	virtual void UpdateMousePos();
+	virtual void UpdateInput(const float& dt) = 0;
 };
 } // !namespace States
+
+//#TODO: Make working alias
+//using pState = std::unique_ptr<States::State>;
+//using pFont  = std::unique_ptr<sf::Font>;
 
 #endif // !STATE_H

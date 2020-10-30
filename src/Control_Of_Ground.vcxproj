@@ -44,7 +44,7 @@
     <ClCompile Include="source\States\MainMenuState.cpp" />
     <ClCompile Include="source\States\SettingsState.cpp" />
     <ClCompile Include="source\States\State.cpp" />
-    <ClCompile Include="source\stdHeader.cpp">
+    <ClCompile Include="source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -91,7 +91,7 @@
     <ClInclude Include="source\States\MainMenuState.hpp" />
     <ClInclude Include="source\States\SettingsState.hpp" />
     <ClInclude Include="source\States\State.hpp" />
-    <ClInclude Include="source\stdHeader.hpp" />
+    <ClInclude Include="source\stdafx.h" />
     <ClInclude Include="source\Tiles\Tile.hpp" />
     <ClInclude Include="source\Tiles\TileMap.hpp" />
     <ClInclude Include="source\_libraries\SFML-2.5.1\include\SFML\Graphics\BlendMode.hpp" />
@@ -208,7 +208,7 @@
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <EnableModules>false</EnableModules>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdHeader.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -228,7 +228,7 @@
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <EnableModules>false</EnableModules>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdHeader.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -250,7 +250,7 @@
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <EnableModules>false</EnableModules>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdHeader.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -274,7 +274,7 @@
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <EnableModules>false</EnableModules>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdHeader.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

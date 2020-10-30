@@ -22,8 +22,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef SFML_RENDERSTATES_HPP
-#define SFML_RENDERSTATES_HPP
+#ifndef SFML_RenderSTATES_HPP
+#define SFML_RenderSTATES_HPP
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -49,7 +49,7 @@ public:
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
     ///
-    /// Constructing a default set of render states is equivalent
+    /// Constructing a default set of Render states is equivalent
     /// to using sf::RenderStates::Default.
     /// The default set defines:
     /// \li the BlendAlpha blend mode
@@ -61,7 +61,7 @@ public:
     RenderStates();
 
     ////////////////////////////////////////////////////////////
-    /// \brief Construct a default set of render states with a custom blend mode
+    /// \brief Construct a default set of Render states with a custom blend mode
     ///
     /// \param theBlendMode Blend mode to use
     ///
@@ -69,7 +69,7 @@ public:
     RenderStates(const BlendMode& theBlendMode);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Construct a default set of render states with a custom transform
+    /// \brief Construct a default set of Render states with a custom transform
     ///
     /// \param theTransform Transform to use
     ///
@@ -77,7 +77,7 @@ public:
     RenderStates(const Transform& theTransform);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Construct a default set of render states with a custom texture
+    /// \brief Construct a default set of Render states with a custom texture
     ///
     /// \param theTexture Texture to use
     ///
@@ -85,7 +85,7 @@ public:
     RenderStates(const Texture* theTexture);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Construct a default set of render states with a custom shader
+    /// \brief Construct a default set of Render states with a custom shader
     ///
     /// \param theShader Shader to use
     ///
@@ -93,7 +93,7 @@ public:
     RenderStates(const Shader* theShader);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Construct a set of render states with all its attributes
+    /// \brief Construct a set of Render states with all its attributes
     ///
     /// \param theBlendMode Blend mode to use
     /// \param theTransform Transform to use
@@ -107,7 +107,7 @@ public:
     ////////////////////////////////////////////////////////////
     // Static member data
     ////////////////////////////////////////////////////////////
-    static const RenderStates Default; ///< Special instance holding the default render states
+    static const RenderStates Default; ///< Special instance holding the default Render states
 
     ////////////////////////////////////////////////////////////
     // Member data
@@ -121,7 +121,7 @@ public:
 } // namespace sf
 
 
-#endif // SFML_RENDERSTATES_HPP
+#endif // SFML_RenderSTATES_HPP
 
 
 ////////////////////////////////////////////////////////////
@@ -147,13 +147,13 @@ public:
 /// on top of each object's transform.
 ///
 /// Most objects, especially high-level drawables, can be drawn
-/// directly without defining render states explicitly -- the
+/// directly without defining Render states explicitly -- the
 /// default set of states is ok in most cases.
 /// \code
 /// window.draw(sprite);
 /// \endcode
 ///
-/// If you want to use a single specific render state,
+/// If you want to use a single specific Render state,
 /// for example a shader, you can pass it directly to the Draw
 /// function: sf::RenderStates has an implicit one-argument
 /// constructor for each state.
@@ -163,7 +163,7 @@ public:
 ///
 /// When you're inside the Draw function of a drawable
 /// object (inherited from sf::Drawable), you can
-/// either pass the render states unmodified, or change
+/// either pass the Render states unmodified, or change
 /// some of them.
 /// For example, a transformable object will combine the
 /// current transform with its own transform. A sprite will

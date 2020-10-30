@@ -10,26 +10,23 @@ class GraphicsSettings :
 {
 public:
 	GraphicsSettings(const std::string& path);
-	GraphicsSettings(const std::string& path, const std::vector<sf::VideoMode>& video_modes);
-	GraphicsSettings(std::vector<sf::VideoMode> video_modes, const sf::VideoMode& resolution,
-					 const bool fullscreen = false, const bool vsync = false, const unsigned int framerate_limit = 60U,
+	GraphicsSettings(const std::string& path, const std::vector<sf::VideoMode>& videoModes);
+	GraphicsSettings(std::vector<sf::VideoMode> videoModes, const sf::VideoMode& resolution,
+					 const bool fullscreen = false, const bool vsync = false, const unsigned int framerateLimit = 60U,
 					 const sf::ContextSettings& context = sf::ContextSettings());
 	~GraphicsSettings();
 
-	//Loader
-	virtual bool loadFromFile(const std::string& path) override;
-	virtual bool saveToFile(const std::string& path)   override;
+//Loader
+	virtual bool LoadFromFile(const std::string& path) override;
+	virtual bool SaveToFile(const std::string& path)   override;
 
-	std::vector<sf::VideoMode> m_video_modes;
+	std::vector<sf::VideoMode> m_videoModes;
 
 	sf::VideoMode m_resolution;
 	bool m_fullscreen;
 	bool m_vsync;
-	unsigned int m_framerate_limit;
+	unsigned int m_framerateLimit;
 	sf::ContextSettings m_context;
-	
-private:
-
 };
 } // !namespace Settings
 #endif // !GRAPHTICS_SETTINGS_H

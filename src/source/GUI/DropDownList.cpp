@@ -1,25 +1,26 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "DropDownList.hpp"
 
 using namespace GUI;
 
 //Constructors
-DropDownList::DropDownList(sf::Font& main_font,
-						   const sf::Vector2f& pos, const sf::Vector2f& size, size_t ch_size,
+DropDownList::DropDownList(sf::Font& mainFont,
+						   const sf::Vector2f& pos, const sf::Vector2f& size, size_t chSize,
 						   std::vector<std::string>& list, size_t cur_elem)
-	: m_active_element { nullptr },
-	m_is_open{ false }
+	: m_activeElem { nullptr }
+	, m_isOpen     { false }
 {
-	m_active_element = new Button{  pos, size, main_font, list[cur_elem], ch_size,
-									sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200), cur_elem };
+	m_activeElem = new Button{  pos, size, mainFont, list[cur_elem], chSize,
+		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200), cur_elem 
+	};
 
 	//Init list
 	for (size_t i = 0; i < list.size(); i++)
 	{
 		m_list.push_back(
 			new Button(
-				sf::Vector2f(pos.x, pos.y + ((i+1) * size.y)), size, main_font, list[i], ch_size,
+				sf::Vector2f(pos.x, pos.y + ((i+1) * size.y)), size, mainFont, list[i], chSize,
 				sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200), i)
 		);
 	}
@@ -27,107 +28,108 @@ DropDownList::DropDownList(sf::Font& main_font,
 
 DropDownList::~DropDownList()
 {
-	delete m_active_element;
+	//#TODO: Make smart_ptr
+	delete m_activeElem;
 
-	deleteList();
+	DeleteList();
 }
 
 //Accessors
-size_t DropDownList::getActiveElemIndex() const
+size_t DropDownList::GetActiveElemIndex() const
 {
-	return m_active_element->getIndex();
+	return m_activeElem->GetIndex();
 }
 
 //Support func
-void DropDownList::deleteList()
+void DropDownList::DeleteList()
 {
 	for (auto& i : m_list)
 		delete i;
 }
 
 //Modificators
-void DropDownList::setPosition(const sf::Vector2f& pos)
+void DropDownList::SetPosition(const sf::Vector2f& pos)
 {
-	m_active_element->setPosition(pos);
+	m_activeElem->SetPosition(pos);
 
 	//Update position of elements
 	for (size_t i = 0; i < m_list.size(); i++)
-		m_list[i]->setPosition(sf::Vector2f(pos.x, pos.y + ((i + 1) * m_list[i]->getSize().y)));
+		m_list[i]->SetPosition(sf::Vector2f(pos.x, pos.y + ((i + 1) * m_list[i]->getSize().y)));
 }
 
 //Info
-std::string DropDownList::getStringInfo()
+std::string DropDownList::GetStringInfo()
 {
 	std::stringstream result;
 
-	if (m_active_element->getState() == Button::States::HOVER)
-		result << m_active_element->getStringInfo();
+	if (m_activeElem->GetState() == Button::States::HOVER)
+		result << m_activeElem->SetStringInfo();
 	else
 	{
 		for (auto& i : m_list)
-			if (i->getState() == Button::States::HOVER)
-				result << i->getStringInfo();
+			if (i->GetState() == Button::States::HOVER)
+				result << i->SetStringInfo();
 	}
 
 	return result.str();
 }
 
 //Update
-void DropDownList::updateList(const sf::Vector2f& mouse_pos, const float& dt)
+void DropDownList::UpdateList(const sf::Vector2f& mousePos, const float& dt)
 {
 	for (auto& elem : m_list)
 	{
-		elem->update(mouse_pos, dt);
+		elem->Update(mousePos, dt);
 
-		if (elem->isPressed())
+		if (elem->IsPressed())
 		{
-			m_is_open = false;
-			m_active_element->setTextString(elem->getText().getString());
-			m_active_element->setIndex(elem->getIndex());
+			m_isOpen = false;
+			m_activeElem->SetTextString(elem->GetText().getString());
+			m_activeElem->SetIndex(elem->GetIndex());
 		}
 	}
 }
 
-void DropDownList::update(const sf::Vector2f& mouse_pos, const float& dt)
+void DropDownList::Update(const sf::Vector2f& mousePos, const float& dt)
 {
-	m_active_element->update(mouse_pos, dt);
+	m_activeElem->Update(mousePos, dt);
 
-	if (m_is_open)
-		updateList(mouse_pos, dt);
+	if (m_isOpen)
+		UpdateList(mousePos, dt);
 
-	if (m_active_element->isPressed())
+	if (m_activeElem->IsPressed())
 	{
-		if (m_is_open)
-			m_is_open = false;
+		if (m_isOpen)
+			m_isOpen = false;
 		else
-			m_is_open = true;
+			m_isOpen = true;
 	}
 }
 
 //Render
-void DropDownList::renderList(sf::RenderTarget& target)
+void DropDownList::RenderList(sf::RenderTarget& target)
 {
 	for (auto& i : m_list)
-		i->render(target);
+		i->Render(target);
 }
 
-void DropDownList::render(sf::RenderTarget& target)
+void DropDownList::Render(sf::RenderTarget& target)
 {
-	m_active_element->render(target);
+	m_activeElem->Render(target);
 
-	if (m_is_open)
-		renderList(target);
+	if (m_isOpen)
+		RenderList(target);
 }
 
-void DropDownList::reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t ch_size)
+void DropDownList::Reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t chSize)
 {
-	m_active_element->reset(size_wh, pos, ch_size);
+	m_activeElem->Reset(size_wh, pos, chSize);
 
 	for (size_t i = 0; i < m_list.size(); i++)
 	{
-		m_list[i]->reset(size_wh, 
+		m_list[i]->Reset(size_wh, 
 			sf::Vector2f(pos.x, pos.y + ((i + 1) * size_wh.y)),
-			ch_size
+			chSize
 		);
 	}
 }

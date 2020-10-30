@@ -1,4 +1,4 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 //#include "GeneralValues.h"
 
 #include "States/MainMenuState.hpp"
@@ -9,70 +9,63 @@
 
 using namespace Core;
 
-////////////////////////////////////////////////////////////
 // Constructors
-////////////////////////////////////////////////////////////
 Game::Game()
-	: m_delta_time{ 0.f },
-	m_enable_info { true }
+	: m_dt{ 0.f }
+	, m_enableInfo { true }
 {
-	initSettings();
-	initWindow(); //Dynamic for window
-	initSupportedKeys();
-	initSupportedFonts(); //Dynamic for fonts
-	initFirstState(); //Dynamic for first state
+	InitSettings();
+	InitWindow(); //Dynamic for window
+	InitSupportedKeys();
+	InitSupportedFonts(); //Dynamic for fonts
+	InitFirstState(); //Dynamic for first state
 }
 
 Game::~Game()
 {}
 
-////////////////////////////////////////////////////////////
 // Init
-////////////////////////////////////////////////////////////
-void inline Game::initSettings()
+void inline Game::InitSettings()
 {
-	m_settings.initGraphics(
+	m_settings.InitGraphics(
 		"config/graphics.ini",
-		{ sf::VideoMode(1920, 1080), sf::VideoMode(1600, 900), sf::VideoMode(1280, 1024),
-		  sf::VideoMode(1024, 768), sf::VideoMode(800, 600) }
+		{ sf::VideoMode(1920, 1080), sf::VideoMode(1600, 900), sf::VideoMode(1280, 1024), sf::VideoMode(1024, 768), sf::VideoMode(800, 600) }
 	);
 }
 
-void Game::initWindow()
+void Game::InitWindow()
 {
 	const std::string title = "Control of Ground";
 
-	unsigned char style = 0;
+	unsigned int style = sf::Style::Titlebar | sf::Style::Close;
 	if (m_settings.m_graphics->m_fullscreen)
 		style = sf::Style::Fullscreen;
-	else
-		style = sf::Style::Titlebar | sf::Style::Close;
 
 	m_window = std::make_unique<sf::RenderWindow>(
 		m_settings.m_graphics->m_resolution, title,  
 		style
 		);
 
-	m_window->setFramerateLimit     (m_settings.m_graphics->m_framerate_limit);
+	m_window->setFramerateLimit     (m_settings.m_graphics->m_framerateLimit);
 	m_window->setVerticalSyncEnabled(m_settings.m_graphics->m_vsync);
 	//window->setKeyRepeatEnabled(false);
 }
 
-void Game::initSupportedKeys()
+void Game::InitSupportedKeys()
 {
 #ifdef DEBUG
 	std::cout << "Game: Start of init_supported_keys..." << std::endl;
 #endif // DEBUG
 
-	std::ifstream keys_ifs("config/supported_keys.ini");
-	if (keys_ifs.is_open())
+	std::ifstream keysIfs("config/supported_keys.ini");
+	if (keysIfs.is_open())
 	{
 		std::string key{ "" };
-		int key_value{ 0 };
+		int val{ 0 };
 
-		while (keys_ifs >> key >> key_value)
+		while (keysIfs >> key >> val)
 		{
-			m_supported_keys[key] = key_value;
+			m_supportedKeys[key] = val;
 		}
 	}
 	else
@@ -81,75 +74,73 @@ void Game::initSupportedKeys()
 		          << std::endl
 			      << "Using default keys..." << std::endl;
 
-		m_supported_keys["Escape"] = sf::Keyboard::Escape;
-		m_supported_keys["F3"]     = sf::Keyboard::F3;
+		m_supportedKeys["Escape"] = sf::Keyboard::Escape;
+		m_supportedKeys["F3"]     = sf::Keyboard::F3;
 
-		m_supported_keys["A"] = sf::Keyboard::A;
-		m_supported_keys["D"] = sf::Keyboard::D;
-		m_supported_keys["W"] = sf::Keyboard::W;
-		m_supported_keys["S"] = sf::Keyboard::S;
+		m_supportedKeys["A"] = sf::Keyboard::A;
+		m_supportedKeys["D"] = sf::Keyboard::D;
+		m_supportedKeys["W"] = sf::Keyboard::W;
+		m_supportedKeys["S"] = sf::Keyboard::S;
 	}
 
-	keys_ifs.close();
+	keysIfs.close();
 
 #ifdef DEBUG
-	for (auto& i : m_supported_keys)
+	for (auto& i : m_supportedKeys)
 		std::cout << i.first << " = " << i.second << std::endl;
 
 	std::cout << "Game: init_supported_keys is success!" << std::endl;
 #endif // DEBUG
 }
 
-void Game::initSupportedFonts()
+void Game::InitSupportedFonts()
 {
 	const std::string path = "resources/fonts/";
 
-	m_supported_fonts["DOSIS"] = std::make_unique<sf::Font>();
-	if (!m_supported_fonts["DOSIS"]->loadFromFile(path + "Dosis-Regular.ttf"))
+	m_supportedFonts["DOSIS"] = std::make_unique<sf::Font>();
+	if (!m_supportedFonts["DOSIS"]->loadFromFile(path + "Dosis-Regular.ttf"))
 		throw std::runtime_error("Game::initSupportedFonts. Can't open: fonts/Dosis-Regular.ttf");
 
-	m_supported_fonts["OSWALD"] = std::make_unique<sf::Font>();
-	if (!m_supported_fonts["OSWALD"]->loadFromFile(path + "Oswald-SemiBold.ttf"))
+	m_supportedFonts["OSWALD"] = std::make_unique<sf::Font>();
+	if (!m_supportedFonts["OSWALD"]->loadFromFile(path + "Oswald-SemiBold.ttf"))
 		throw std::runtime_error("Game::initSupportedFonts. Can't open: fonts/Oswald-SemiBold.ttf");
 
-	m_supported_fonts["MAJOR"] = std::make_unique<sf::Font>();
-	if (!m_supported_fonts["MAJOR"]->loadFromFile(path + "MajorMonoDisplay-Regular.ttf"))
+	m_supportedFonts["MAJOR"] = std::make_unique<sf::Font>();
+	if (!m_supportedFonts["MAJOR"]->loadFromFile(path + "MajorMonoDisplay-Regular.ttf"))
 		throw std::runtime_error("Game::initSupportedFonts. Can't open: fonts/MajorMonoDisplay-Regular.ttf");
 }
 
-void Game::initFirstState()
+void Game::InitFirstState()
 {
 	const size_t reserveForStates = 5;
-	sf::Vector2f grid_size{ 64.f, 64.f };
+	sf::Vector2f gridSize{ 64.f, 64.f };
 
-	m_Sdata = make_unique<States::StateData>(*m_window, m_states, m_settings, m_supported_keys, m_supported_fonts, grid_size);
+	m_stateContext = std::make_unique<States::StateContext>(*m_window, m_states, m_settings, m_supportedKeys, m_supportedFonts, gridSize);
 
 	m_states.reserve(reserveForStates);
-	m_states.push_back(std::make_unique<States::MainMenuState>(*m_Sdata));
+	m_states.push_back(std::make_unique<States::MainMenuState>(*m_stateContext));
 }
 
-////////////////////////////////////////////////////////////
 // Info
-////////////////////////////////////////////////////////////
-void Game::updateInfo()
+void Game::UpdateInfo()
 {
-	m_tech_info.str(std::string()); //Clearing
-	m_mouse_info.str(std::string());
+	m_techInfo.str(std::string()); //Clearing
+	m_mouseInfo.str(std::string());
 
-	m_tech_info << "Delta time: " << m_delta_time << " sec" << ", FPS: " << static_cast<uint32_t>(1 / m_delta_time) << '\n';
+	m_techInfo << "Delta time: " << m_dt << " sec" << ", FPS: " << static_cast<uint32_t>(1 / m_dt) << '\n';
 }
 
-sf::Text Game::getTextInfo(const sf::Font& font)
+sf::Text Game::GetTextInfo(const sf::Font& font)
 {
-	sf::Text info_text{ m_tech_info.str(), font, 16U };
+	sf::Text info_text{ m_techInfo.str(), font, 16U };
 	info_text.setPosition(20.f, 20.f);
 
 	return info_text;
 }
 
-sf::Text Core::Game::getMouseTextInfo(const sf::Font& font)
+sf::Text Core::Game::GetMouseTextInfo(const sf::Font& font)
 {
-	sf::Text info_text{ m_mouse_info.str(), font, 12U };
+	sf::Text info_text{ m_mouseInfo.str(), font, 12U };
 	info_text.setPosition(
 		m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)).x + 15, 
 		m_window->mapPixelToCoords(sf::Mouse::getPosition(*m_window)).y - 15);
@@ -157,15 +148,13 @@ sf::Text Core::Game::getMouseTextInfo(const sf::Font& font)
 	return info_text;
 }
 
-////////////////////////////////////////////////////////////
-// Update and render
-////////////////////////////////////////////////////////////
-void Game::updateDeltaTime()
+// Update and Render
+void Game::UpdateDeltaTime()
 {
-	m_delta_time = m_delta_time_clock.restart().asSeconds();
+	m_dt = m_dtClock.restart().asSeconds();
 }
 
-void Game::updateEvents()
+void Game::UpdateEvents()
 {
 	sf::Event event;
 	while (m_window->pollEvent(event))
@@ -175,80 +164,78 @@ void Game::updateEvents()
 
 		if (event.type == sf::Event::KeyPressed)
 		{
-			if (event.key.code == (sf::Keyboard::Key(m_supported_keys["F3"])))
+			if (event.key.code == (sf::Keyboard::Key(m_supportedKeys["F3"])))
 			{
-				if (m_enable_info)
-					m_enable_info = false;
+				if (m_enableInfo)
+					m_enableInfo = false;
 				else
-					m_enable_info = true;
+					m_enableInfo = true;
 			}
 		}
-		m_states.back()->updateEvent(event);
+		m_states.back()->UpdateEvent(event);
 	}
 }
 
-void Game::update()
+void Game::Update()
 {
-	if (m_enable_info)
-		updateInfo();
+	if (m_enableInfo)
+		UpdateInfo();
 
 	if (!m_states.empty())
 	{
 		//Update the top state
-		updateEvents();
-		m_states.back()->update(m_delta_time);
+		UpdateEvents();
+		m_states.back()->Update(m_dt);
 
 		//Getting info
-		if (m_enable_info)
+		if (m_enableInfo)
 		{
-			m_tech_info  << m_states.back()->getStringInfo();
-			m_mouse_info << m_states.back()->getStringInfoMouse();
+			m_techInfo  << m_states.back()->GetStringInfo();
+			m_mouseInfo << m_states.back()->GetStringInfoMouse();
 		}
 
 		//Check quit
-		if (m_states.back()->getQuit())
+		if (m_states.back()->GetQuit())
 			m_states.pop_back();
 	}
 	else //Application end
 	{
-		applicationEnd();
+		ApplicationEnd();
 		m_window->close();
 	}
 }
 
-void Game::applicationEnd()
+void Game::ApplicationEnd()
 {
 	std::cout << "Application: Control of Ground is end..." << std::endl;
 }
 
-void Game::render()
+void Game::Render()
 {
 	m_window->clear(sf::Color::Black);
 
 	if (!m_states.empty())
 	{
-		m_states.back()->render(*m_window);
+		m_states.back()->Render(*m_window);
 	}
 
-	if (m_enable_info)
+	if (m_enableInfo)
 	{
-		m_window->draw(getTextInfo(*m_supported_fonts["DOSIS"]));
-		m_window->draw(getMouseTextInfo(*m_supported_fonts["DOSIS"]));
+		m_window->draw(GetTextInfo(*m_supportedFonts["DOSIS"]));
+		m_window->draw(GetMouseTextInfo(*m_supportedFonts["DOSIS"]));
 	}
 
 	m_window->display();
 }
 
-////////////////////////////////////////////////////////////
 // Core
-////////////////////////////////////////////////////////////
-void Game::run()
+void Game::Run()
 {
 	while (m_window->isOpen())
 	{
-		updateDeltaTime();
+		UpdateDeltaTime();
 
-		update();
-		render();
+		Update();
+		Render();
 	}
 }

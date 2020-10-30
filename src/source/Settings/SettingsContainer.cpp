@@ -1,4 +1,4 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "SettingsContainer.h"
 
@@ -15,7 +15,7 @@ SettingsContainer::~SettingsContainer()
 }
 
 //Init
-void SettingsContainer::initGraphics(const std::string& path, const std::vector<sf::VideoMode>& video_modes)
+void SettingsContainer::InitGraphics(const std::string& path, const std::vector<sf::VideoMode>& videoModes)
 {
-	m_graphics = std::make_unique<GraphicsSettings>(path, video_modes);
+	m_graphics = std::make_unique<GraphicsSettings>(path, videoModes);
 }

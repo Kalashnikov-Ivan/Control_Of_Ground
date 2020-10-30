@@ -50,7 +50,7 @@ class SFML_GRAPHICS_API Texture : GlResource
 public:
 
     ////////////////////////////////////////////////////////////
-    /// \brief Types of texture coordinates that can be used for rendering
+    /// \brief Types of texture coordinates that can be used for Rendering
     ///
     ////////////////////////////////////////////////////////////
     enum CoordinateType
@@ -423,7 +423,7 @@ public:
     /// would need to be "uncorrected" back to linear color space before
     /// being processed by the hardware. The hardware can automatically
     /// convert it from the sRGB color space to a linear color space when
-    /// it gets sampled. When the rendered image gets output to the final
+    /// it gets sampled. When the Rendered image gets output to the final
     /// framebuffer, it gets converted back to sRGB.
     ///
     /// After enabling or disabling sRGB conversion, make sure to reload
@@ -494,7 +494,7 @@ public:
     /// of textures when they are applied to objects much smaller than they are.
     /// This is known as minification. Because fewer texels (texture elements)
     /// have to be sampled from when heavily minified, usage of mipmaps
-    /// can also improve rendering performance in certain scenarios.
+    /// can also improve Rendering performance in certain scenarios.
     ///
     /// Mipmap generation relies on the necessary OpenGL extension being
     /// available. If it is unavailable or generation fails due to another
@@ -539,7 +539,7 @@ public:
     unsigned int getNativeHandle() const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Bind a texture for rendering
+    /// \brief Bind a texture for Rendering
     ///
     /// This function is not part of the graphics API, it mustn't be
     /// used when drawing SFML entities. It must be used only if you
@@ -625,7 +625,7 @@ private:
     mutable bool m_pixelsFlipped; ///< To work around the inconsistency in Y orientation
     bool         m_fboAttachment; ///< Is this texture owned by a framebuffer object?
     bool         m_hasMipmap;     ///< Has the mipmap been generated?
-    Uint64       m_cacheId;       ///< Unique number that identifies the texture to the render target's cache
+    Uint64       m_cacheId;       ///< Unique number that identifies the texture to the Render target's cache
 };
 
 } // namespace sf
@@ -639,8 +639,8 @@ private:
 ///
 /// sf::Texture stores pixels that can be drawn, with a sprite
 /// for example. A texture lives in the graphics card memory,
-/// therefore it is very fast to draw a texture to a render target,
-/// or copy a render target to a texture (the graphics card can
+/// therefore it is very fast to draw a texture to a Render target,
+/// or copy a Render target to a texture (the graphics card can
 /// access both directly).
 ///
 /// Being stored in the graphics card memory has some drawbacks.
@@ -724,7 +724,7 @@ private:
 /// custom OpenGL geometry.
 /// \code
 /// sf::Texture::bind(&texture);
-/// ... render OpenGL geometry ...
+/// ... Render OpenGL geometry ...
 /// sf::Texture::bind(NULL);
 /// \endcode
 ///

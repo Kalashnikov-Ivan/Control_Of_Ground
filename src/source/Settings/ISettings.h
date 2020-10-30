@@ -8,8 +8,8 @@ namespace Settings
 class ISettings
 {
 public:
-	virtual bool loadFromFile(const std::string& path) = 0;
-	virtual bool saveToFile(const std::string& path) = 0;
+	virtual bool LoadFromFile(const std::string& path) = 0;
+	virtual bool SaveToFile(const std::string& path)   = 0;
 };
 } // !namespace Settings
 

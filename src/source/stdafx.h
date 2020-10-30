@@ -1,5 +1,5 @@
-#ifndef STD_HEADER
-#define STD_HEADER
+#ifndef STDAFX_H
+#define STDAFX_H
 
 //STD
 #include <iostream>
@@ -28,4 +28,4 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 
-#endif // !STD_HEADER
+#endif // !STRAFX_H

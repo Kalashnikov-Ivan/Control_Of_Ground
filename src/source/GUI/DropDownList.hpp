@@ -10,41 +10,41 @@ class DropDownList
 {
 public:
 	//Constructors
-	DropDownList(sf::Font& main_font,
-				 const sf::Vector2f& pos, const sf::Vector2f& size, size_t ch_size,
-				 std::vector<std::string>& list, size_t cur_elem);
+	DropDownList(sf::Font& mainFont,
+				 const sf::Vector2f& pos, const sf::Vector2f& size, size_t chSize,
+				 std::vector<std::string>& list, size_t curElem);
 
-	virtual ~DropDownList();
+	~DropDownList();
 
 	//Accessors
-	size_t getActiveElemIndex() const;
+	size_t GetActiveElemIndex() const;
 
 	//Modificators
-	void setPosition(const sf::Vector2f& pos);
+	void SetPosition(const sf::Vector2f& pos);
 
 	//Info
-	std::string getStringInfo();
+	std::string GetStringInfo();
 
 	//Functions
-	void update(const sf::Vector2f& mouse_pos, const float& dt);
-	void render(sf::RenderTarget& target);
+	void Update(const sf::Vector2f& mousePos, const float& dt);
+	void Render(sf::RenderTarget& target);
 
-	void reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t ch_size);
+	void Reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t chSize);
 
 private:
-	Button* m_active_element;
+	Button* m_activeElem;
 	std::vector<Button*> m_list;
 
-	bool m_is_open;
+	bool m_isOpen;
 	
 	//Update
-	void inline updateList(const sf::Vector2f& mouse_pos, const float& dt);
+	void inline UpdateList(const sf::Vector2f& mousePos, const float& dt);
 
 	//Render
-	void inline renderList(sf::RenderTarget& target);
+	void inline RenderList(sf::RenderTarget& target);
 
 	//Support func
-	void inline deleteList();
+	void inline DeleteList();
 };
 } // !namespace GUI
 #endif // !DROPDOWN_LIST_H

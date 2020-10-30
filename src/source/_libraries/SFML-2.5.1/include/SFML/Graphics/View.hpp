@@ -272,7 +272,7 @@ private:
     Vector2f          m_center;              ///< Center of the view, in scene coordinates
     Vector2f          m_size;                ///< Size of the view, in scene coordinates
     float             m_rotation;            ///< Angle of rotation of the view rectangle, in degrees
-    FloatRect         m_viewport;            ///< Viewport rectangle, expressed as a factor of the render-target's size
+    FloatRect         m_viewport;            ///< Viewport rectangle, expressed as a factor of the Render-target's size
     mutable Transform m_transform;           ///< Precomputed projection transform corresponding to the view
     mutable Transform m_inverseTransform;    ///< Precomputed inverse projection transform corresponding to the view
     mutable bool      m_transformUpdated;    ///< Internal state telling if the transform needs to be updated
@@ -297,16 +297,16 @@ private:
 /// A view is composed of a source rectangle, which defines
 /// what part of the 2D scene is shown, and a target viewport,
 /// which defines where the contents of the source rectangle
-/// will be displayed on the render target (window or texture).
+/// will be displayed on the Render target (window or texture).
 ///
 /// The viewport allows to map the scene to a custom part
-/// of the render target, and can be used for split-screen
+/// of the Render target, and can be used for split-screen
 /// or for displaying a minimap, for example. If the source
 /// rectangle doesn't have the same size as the viewport, its
 /// contents will be stretched to fit in.
 ///
-/// To apply a view, you have to assign it to the render target.
-/// Then, objects drawn in this render target will be
+/// To apply a view, you have to assign it to the Render target.
+/// Then, objects drawn in this Render target will be
 /// affected by the view until you use another view.
 ///
 /// Usage example:
@@ -336,7 +336,7 @@ private:
 /// window.draw(someText);
 /// \endcode
 ///
-/// See also the note on coordinates and undistorted rendering in sf::Transformable.
+/// See also the note on coordinates and undistorted Rendering in sf::Transformable.
 ///
 /// \see sf::RenderWindow, sf::RenderTexture
 ///

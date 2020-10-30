@@ -1,4 +1,4 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "GUI/Converter.h"
 
@@ -8,31 +8,27 @@
 
 using namespace States;
 
-////////////////////////////////////////////////////////////
 // Constructors
-////////////////////////////////////////////////////////////
-SettingsState::SettingsState(StateData& Sdata)
-	: State        { Sdata },
-	m_title        { "settings", *Sdata.supported_fonts["MAJOR"], GUI::Converter::calcCharSize(28, Sdata.settings.m_graphics->m_resolution) },
-	m_settings_menu{ Sdata.settings.m_graphics->m_resolution, *Sdata.supported_fonts["DOSIS"], Sdata.settings.m_graphics->m_video_modes },
-	m_background   { Sdata.background_anim }
+SettingsState::SettingsState(StateContext& ctx)
+	: State        { ctx }
+	, m_title      { "settings", *ctx.supportedFonts["MAJOR"], GUI::Converter::СalcCharSize(28, ctx.settings.m_graphics->m_resolution) }
+	, m_settingsMenu { ctx.settings.m_graphics->m_resolution, *ctx.supportedFonts["DOSIS"], ctx.settings.m_graphics->m_videoModes }
+	, m_background   { ctx.backgroundAnim }
 {
-	initTextures();
-	initBackground(Sdata.settings.m_graphics->m_resolution);
+	InitTextures();
+	InitBackground(ctx.settings.m_graphics->m_resolution);
 }
 
 SettingsState::~SettingsState()
 {
 }
 
-////////////////////////////////////////////////////////////
 // Init
-////////////////////////////////////////////////////////////
-void SettingsState::initTextures()
+void SettingsState::InitTextures()
 {
 	/*
 	const std::string bg_path = "resources/textures/backgrounds/";
-
+	
 	m_textures["ANIMATED_BG_1"] = new sf::Texture();
 
 	if (!m_textures["ANIMATED_BG_1"]->loadFromFile(bg_path + "animated/1/Animated_BG.png"))
@@ -40,100 +36,98 @@ void SettingsState::initTextures()
 	*/
 }
 
-void SettingsState::initBackground(const sf::VideoMode& vm)
+void SettingsState::InitBackground(const sf::VideoMode& vm)
 {
 	//Title
 	m_title.setLetterSpacing(1.5f);
 	m_title.setStyle(sf::Text::Bold);
 
-	const float default_position_x = GUI::Converter::calc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
-	const float default_position_y = GUI::Converter::calc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
+	const float defaultPosition_x = GUI::Converter::Сalc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float defaultPosition_y = GUI::Converter::Сalc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
 
-	m_title.setPosition(default_position_x, default_position_y);
+	m_title.setPosition(defaultPosition_x, defaultPosition_y);
 }
 
-void SettingsState::initKeybinds()
+void SettingsState::InitKeybinds()
 {
 }
 
-////////////////////////////////////////////////////////////
 // Update
-////////////////////////////////////////////////////////////
-void SettingsState::updateEvent(const sf::Event& event)
+void SettingsState::UpdateEvent(const sf::Event& event)
 {
 }
 
-void SettingsState::updateInput(const float& dt)
+void SettingsState::UpdateInput(const float& dt)
 {
-	if (m_settings_menu.isButtonPressed("APPLY"))
+	if (m_settingsMenu.IsButtonPressed("APPLY"))
 	{
-		resetSettingsAllStates();
+		ResetSettingsAllStates();
 	}
 
-	if (m_settings_menu.isButtonPressed("BACK"))
-		quitState();
+	if (m_settingsMenu.IsButtonPressed("BACK"))
+		QuitState();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		quitState();
+		QuitState();
 }
 
-void SettingsState::update(const float& dt)
+void SettingsState::Update(const float& dt)
 {
-	updateMousePos();
-	m_background->update(dt);
-	m_settings_menu.update(m_mouse_pos_view, dt);
+	UpdateMousePos();
+	m_background->Update(dt);
+	m_settingsMenu.Update(m_mousePosView, dt);
 
 	//updateKeyboardInput(dt);
-	updateInput(dt);
+	UpdateInput(dt);
 }
 
 ////////////////////////////////////////////////////////////
 // Render
 ////////////////////////////////////////////////////////////
-void SettingsState::render(sf::RenderTarget& target)
+void SettingsState::Render(sf::RenderTarget& target)
 {
-	m_background->render(target);
+	m_background->Render(target);
 	target.draw(m_title);
 
-	m_settings_menu.render(target);
+	m_settingsMenu.Render(target);
 }
 
 ////////////////////////////////////////////////////////////
 // Tech info
 ////////////////////////////////////////////////////////////
-std::string SettingsState::getStringInfo()
+std::string SettingsState::GetStringInfo()
 {
 	std::stringstream result;
 
-	result << getStringMousePos();
+	result << GetStringMousePos();
 
 	//Getting info from buttons
-	result << m_settings_menu.getStringInfo();
+	result << m_settingsMenu.GetStringInfo();
 
 	return result.str();
 }
 
 //Functions
-void inline SettingsState::resetSettingsAllStates()
+void inline SettingsState::ResetSettingsAllStates()
 {
-	m_Sdata.settings.m_graphics->m_resolution = m_settings_menu.getCurrentVM();
+	m_stateContext.settings.m_graphics->m_resolution = m_settingsMenu.GetCurrentVM();
 
-	m_Sdata.window.create(m_settings_menu.getCurrentVM(), "Control Of Ground");
-	m_Sdata.window.setFramerateLimit(m_Sdata.settings.m_graphics->m_framerate_limit);
+	m_stateContext.window.create(m_settingsMenu.GetCurrentVM(), "Control Of Ground");
+	m_stateContext.window.setFramerateLimit(m_stateContext.settings.m_graphics->m_framerateLimit);
 
-	for (auto& i : m_Sdata.states)
-		i->reset(m_Sdata.settings.m_graphics->m_resolution);
+	for (auto& i : m_stateContext.states)
+		i->Reset(m_stateContext.settings.m_graphics->m_resolution);
 }
 
 //Reset
-void SettingsState::reset(const sf::VideoMode& vm)
+void SettingsState::Reset(const sf::VideoMode& vm)
 {
-	m_title.setCharacterSize(GUI::Converter::calcCharSize(28, vm));
+	m_title.setCharacterSize(GUI::Converter::СalcCharSize(28, vm));
 
-	const float default_position_x = GUI::Converter::calc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
-	const float default_position_y = GUI::Converter::calc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
+	const float defaultPosition_x = GUI::Converter::Сalc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float defaultPosition_y = GUI::Converter::Сalc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
 
-	m_title.setPosition(default_position_x, default_position_y);
+	m_title.setPosition(defaultPosition_x, defaultPosition_y);
 
-	m_settings_menu.reset(vm);
+	m_settingsMenu.Reset(vm);
 }

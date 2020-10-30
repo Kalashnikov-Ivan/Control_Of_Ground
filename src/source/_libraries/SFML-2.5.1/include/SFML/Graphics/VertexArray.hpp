@@ -174,10 +174,10 @@ public:
 private:
 
     ////////////////////////////////////////////////////////////
-    /// \brief Draw the vertex array to a render target
+    /// \brief Draw the vertex array to a Render target
     ///
     /// \param target Render target to draw to
-    /// \param states Current render states
+    /// \param states Current Render states
     ///
     ////////////////////////////////////////////////////////////
     virtual void draw(RenderTarget& target, RenderStates states) const;

@@ -1,83 +1,74 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "State.hpp"
 
 using namespace States;
 
-////////////////////////////////////////////////////////////
 // Constructors
-////////////////////////////////////////////////////////////
-State::State(StateData& Sdata)
-	: m_Sdata		 { Sdata },
-	m_quit           { false },
-	m_paused         { false }
+State::State(StateContext& ctx)
+	: m_stateContext { ctx }
+	, m_quit         { false }
+	, m_paused       { false }
 {
 }
 State::~State()
 {
 }
 
-////////////////////////////////////////////////////////////
 // Accessors
-////////////////////////////////////////////////////////////
-const bool State::getQuit() const
+const bool State::GetQuit() const
 {
 	return m_quit;
 }
 
-std::string State::getStringInfoMouse()
+std::string State::GetStringInfoMouse()
 {
 	std::stringstream result;
 
-	result << "x: " << m_mouse_pos_view.x << " " << "y: " << m_mouse_pos_view.y << '\n';
-	result << "" << m_mouse_pos_grid.x << " " << "" << m_mouse_pos_grid.y << '\n';
+	result << "x: " << m_mousePosView.x << " " << "y: " << m_mousePosView.y << '\n';
+	result << "" << m_mousePosGrid.x << " " << "" << m_mousePosGrid.y << '\n';
 
 	return result.str();
 }
 
-////////////////////////////////////////////////////////////
 // Info
-////////////////////////////////////////////////////////////
-std::string States::State::getStringMousePos() const
+std::string States::State::GetStringMousePos() const
 {
 	std::stringstream result;
 
-	result << "mouse x = " << m_mouse_pos_view.x << " " << "y = " << m_mouse_pos_view.y << '\n';
+	result << "mouse x = " << m_mousePosView.x << " " << "y = " << m_mousePosView.y << '\n';
 
 	return result.str();
 }
 
-////////////////////////////////////////////////////////////
 // Functions
-////////////////////////////////////////////////////////////
-
-void States::State::pause()
+void States::State::Pause()
 {
 	m_paused = true;
 }
 
-void States::State::unpause()
+void States::State::Unpause()
 {
 	m_paused = false;
 }
 
-void State::reset(const sf::VideoMode& vm)
+void State::Reset(const sf::VideoMode& vm)
 {
 
 }
 
-void State::quitState()
+void State::QuitState()
 {
 	m_quit = true;
 }
 
-void State::updateMousePos()
+void State::UpdateMousePos()
 {
-	m_mouse_pos_screen = sf::Mouse::getPosition();
-	m_mouse_pos_window = sf::Mouse::getPosition(m_Sdata.window);
-	m_mouse_pos_view = m_Sdata.window.mapPixelToCoords(sf::Mouse::getPosition(m_Sdata.window));
-	m_mouse_pos_grid = sf::Vector2u(
-		static_cast<unsigned>(m_mouse_pos_view.x / m_Sdata.grid_size_f.x), 
-		static_cast<unsigned>(m_mouse_pos_view.y / m_Sdata.grid_size_f.y)
+	m_mousePosScreen = sf::Mouse::getPosition();
+	m_mousePosWindow = sf::Mouse::getPosition(m_stateContext.window);
+	m_mousePosView = m_stateContext.window.mapPixelToCoords(sf::Mouse::getPosition(m_stateContext.window));
+	m_mousePosGrid = sf::Vector2u(
+		static_cast<unsigned>(m_mousePosView.x / m_stateContext.gridSze.x), 
+		static_cast<unsigned>(m_mousePosView.y / m_stateContext.gridSze.y)
 		);
 }

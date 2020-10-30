@@ -9,19 +9,19 @@ class MainMenu :
 	public Menu
 {
 public:
-	//Constructors
-	MainMenu(const sf::VideoMode& vm, sf::Font& main_font);
+//Constructors
+	MainMenu(const sf::VideoMode& vm, sf::Font& mainFont);
 	~MainMenu();
 
 	//Functions
-	virtual void update(const sf::Vector2f& mouse_pos, const float& dt) override;
-	virtual void render(sf::RenderTarget& target) override;
+	virtual void Update(const sf::Vector2f& mousePos, const float& dt) override;
+	virtual void Render(sf::RenderTarget& target) override;
 
-	virtual void reset(const sf::VideoMode& vm) override;
+	virtual void Reset(const sf::VideoMode& vm) override;
 
 private:
-	virtual void inline initButtons(const sf::VideoMode& vm) override;
-			void inline resetButtons(const sf::VideoMode& vm);
+	virtual void inline InitButtons(const sf::VideoMode& vm) override;
+			void inline ResetButtons(const sf::VideoMode& vm);
 };
 } // !namespace GUI
 #endif // !MAIN_MENU_H

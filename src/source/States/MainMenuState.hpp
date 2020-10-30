@@ -11,42 +11,39 @@ namespace States
 class MainMenuState :
 	public State
 {
-//__________________________PUBLIC______________________________
 public:
-	//Constructors
+//Constructors
 	MainMenuState() = delete;
-	MainMenuState(StateData& Sdata);
-	virtual ~MainMenuState();
+	explicit MainMenuState(StateContext& Sdata);
+	~MainMenuState();
 
-	//Tech info
-	virtual std::string getStringInfo() override;
+//Tech info
+	 std::string GetStringInfo() override;
 
-	//Functions
-	void pause()   = delete;
-	void unpause() = delete;
+//Functions
+	void Pause()   = delete;
+	void Unpause() = delete;
 
-	virtual void updateEvent(const sf::Event& event) override;
-	virtual void update(const float& dt) override;
+	void UpdateEvent(const sf::Event& event) override;
+	void Update(const float& dt) override;
 
-	virtual void render(sf::RenderTarget& target) override;
+	void Render(sf::RenderTarget& target) override;
 
-	virtual void reset(const sf::VideoMode& vm) override;
-//__________________________PRIVATE_____________________________
+	void Reset(const sf::VideoMode& vm) override;
 private:
-	//Members
-	GUI::MainMenu m_main_menu;
+//Members
+	GUI::MainMenu m_mainMenu;
 	std::shared_ptr<GUI::AnimatedBackground> m_background;
 
 	sf::Text m_title;
 
-	//---------------------------------------------
-	//Init
-	virtual void inline initTextures() override;
-	virtual void inline initKeybinds() override; //Delete
-	void inline initBackground(const sf::VideoMode& vm);
+//Init
+	virtual void inline InitTextures() override;
+	virtual void inline InitKeybinds() override; //Delete
+	void inline InitBackground(const sf::VideoMode& vm);
 
-	//Update
-	virtual void updateInput(const float& dt) override; //Delete
+//Update
+	virtual void UpdateInput(const float& dt) override; //Delete
 };
 } // !namespace States
 #endif // !MAIN_MENU_STATE_H

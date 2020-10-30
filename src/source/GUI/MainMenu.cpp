@@ -1,4 +1,4 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "Converter.h"
 
@@ -6,105 +6,95 @@
 
 using namespace GUI;
 
-////////////////////////////////////////////////////////////
 // Constructors
-////////////////////////////////////////////////////////////
-MainMenu::MainMenu(const sf::VideoMode& vm, sf::Font& main_font)
-	: Menu { main_font }
+MainMenu::MainMenu(const sf::VideoMode& vm, sf::Font& mainFont)
+	: Menu { mainFont }
 {
-	initButtons(vm);
+	InitButtons(vm);
 }
 MainMenu::~MainMenu()
 {
 }
 
-////////////////////////////////////////////////////////////
 // Init
-////////////////////////////////////////////////////////////
-
-void MainMenu::initButtons(const sf::VideoMode& vm)
+void MainMenu::InitButtons(const sf::VideoMode& vm)
 {
-	unsigned int font_size = Converter::calcCharSize(95, vm); // 1600x900 = 26U
+	unsigned int fontSize = Converter::СalcCharSize(95, vm); // 1600x900 = 26U
 
-	const float button_width = Converter::calc(14.5f, vm.width); // 1600x900 = 230.f
-	const float button_height = Converter::calc(9.5f, vm.height); // 1600x900 = 85.f
+	const float buttonWidth = Converter::Сalc(14.5f, vm.width); // 1600x900 = 230.f
+	const float buttonHeight = Converter::Сalc(9.5f, vm.height); // 1600x900 = 85.f
 
-	const float default_position_x = Converter::calc(50.f, vm.width) - (button_width / 2.f); // 150.f;
-	const float default_position_y = Converter::calc(40.f, vm.height) - (button_height / 2.f); // 350.f;
-	const float default_offset_between = Converter::calc(14.f, vm.height); // 1600x900 = 120.f
+	const float defaultPosition_x = Converter::Сalc(50.f, vm.width) - (buttonWidth / 2.f); // 150.f;
+	const float defaultPosition_y = Converter::Сalc(40.f, vm.height) - (buttonHeight / 2.f); // 350.f;
+	const float defaultOffsetBetween = Converter::Сalc(14.f, vm.height); // 1600x900 = 120.f
 
-	addButton("GAME_STATE",   sf::Vector2f(default_position_x, default_position_y),
-							  sf::Vector2f(button_width, button_height),
-							  m_main_font, "New Game", font_size,
+	AddButton("GAME_STATE",   sf::Vector2f(defaultPosition_x, defaultPosition_y),
+							  sf::Vector2f(buttonWidth, buttonHeight),
+							  m_mainFont, "New Game", fontSize,
 							  sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 
-	addButton("EDITOR_STATE", sf::Vector2f(default_position_x, default_position_y + default_offset_between),
-							  sf::Vector2f(button_width, button_height),
-							  m_main_font, "Editor", font_size,
+	AddButton("EDITOR_STATE", sf::Vector2f(defaultPosition_x, defaultPosition_y + defaultOffsetBetween),
+							  sf::Vector2f(buttonWidth, buttonHeight),
+							  m_mainFont, "Editor", fontSize,
 							  sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 
-	addButton("SETTINGS_STATE",     sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2.f),
-							  sf::Vector2f(button_width, button_height),
-							  m_main_font, "Settings", font_size,
+	AddButton("SETTINGS_STATE",     sf::Vector2f(defaultPosition_x, defaultPosition_y + defaultOffsetBetween * 2.f),
+							  sf::Vector2f(buttonWidth, buttonHeight),
+							  m_mainFont, "Settings", fontSize,
 							  sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 
-	addButton("EXIT",   sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.5f),
-							  sf::Vector2f(button_width, button_height),
-							  m_main_font, "Exit", font_size,
+	AddButton("EXIT",   sf::Vector2f(defaultPosition_x, defaultPosition_y + defaultOffsetBetween * 3.5f),
+							  sf::Vector2f(buttonWidth, buttonHeight),
+							  m_mainFont, "Exit", fontSize,
 							  sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200));
 }
 
-////////////////////////////////////////////////////////////
 // Update
-////////////////////////////////////////////////////////////
-void MainMenu::update(const sf::Vector2f& mouse_pos, const float& dt)
+void MainMenu::Update(const sf::Vector2f& mousePos, const float& dt)
 {
-	updateButtons(mouse_pos, dt);
+	UpdateButtons(mousePos, dt);
 }
 
-////////////////////////////////////////////////////////////
 // Render
-////////////////////////////////////////////////////////////
-void MainMenu::render(sf::RenderTarget& target)
+void MainMenu::Render(sf::RenderTarget& target)
 {
-	renderButtons(target);
+	RenderButtons(target);
 }
-
 
 //Reset
-inline void MainMenu::resetButtons(const sf::VideoMode& vm)
+inline void MainMenu::ResetButtons(const sf::VideoMode& vm)
 {
-	unsigned int font_size = Converter::calcCharSize(95, vm); // 1600x900 = 26U
+	unsigned int fontSize = Converter::СalcCharSize(95, vm); // 1600x900 = 26U
 
-	const float button_width = Converter::calc(14.5f, vm.width); // 1600x900 = 230.f
-	const float button_height = Converter::calc(9.5f, vm.height); // 1600x900 = 85.f
+	const float buttonWidth = Converter::Сalc(14.5f, vm.width); // 1600x900 = 230.f
+	const float buttonHeight = Converter::Сalc(9.5f, vm.height); // 1600x900 = 85.f
 
-	const float default_position_x = Converter::calc(50.f, vm.width) - (button_width / 2.f); // 150.f;
-	const float default_position_y = Converter::calc(40.f, vm.height) - (button_height / 2.f); // 350.f;
-	const float default_offset_between = Converter::calc(14.f, vm.height); // 1600x900 = 120.f
+	const float defaultPosition_x = Converter::Сalc(50.f, vm.width) - (buttonWidth / 2.f); // 150.f;
+	const float defaultPosition_y = Converter::Сalc(40.f, vm.height) - (buttonHeight / 2.f); // 350.f;
+	const float defaultOffsetBetween = Converter::Сalc(14.f, vm.height); // 1600x900 = 120.f
 
-	m_buttons["GAME_STATE"]->reset(sf::Vector2f(button_width, button_height),
-		sf::Vector2f(default_position_x, default_position_y),
-		font_size
+	m_buttons["GAME_STATE"]->Reset(sf::Vector2f(buttonWidth, buttonHeight),
+		sf::Vector2f(defaultPosition_x, defaultPosition_y),
+		fontSize
 		);
 
-	m_buttons["EDITOR_STATE"]->reset(sf::Vector2f(button_width, button_height),
-		sf::Vector2f(default_position_x, default_position_y + default_offset_between),
-		font_size
+	m_buttons["EDITOR_STATE"]->Reset(sf::Vector2f(buttonWidth, buttonHeight),
+		sf::Vector2f(defaultPosition_x, defaultPosition_y + defaultOffsetBetween),
+		fontSize
 	);
 
-	m_buttons["SETTINGS_STATE"]->reset(sf::Vector2f(button_width, button_height),
-		sf::Vector2f(default_position_x, default_position_y + default_offset_between * 2.f),
-		font_size
+	m_buttons["SETTINGS_STATE"]->Reset(sf::Vector2f(buttonWidth, buttonHeight),
+		sf::Vector2f(defaultPosition_x, defaultPosition_y + defaultOffsetBetween * 2.f),
+		fontSize
 	);
 
-	m_buttons["EXIT"]->reset(sf::Vector2f(button_width, button_height),
-		sf::Vector2f(default_position_x, default_position_y + default_offset_between * 3.5f),
-		font_size
+	m_buttons["EXIT"]->Reset(sf::Vector2f(buttonWidth, buttonHeight),
+		sf::Vector2f(defaultPosition_x, defaultPosition_y + defaultOffsetBetween * 3.5f),
+		fontSize
 	);
 }
 
-void MainMenu::reset(const sf::VideoMode& vm)
+void MainMenu::Reset(const sf::VideoMode& vm)
 {
-	resetButtons(vm);
+	ResetButtons(vm);
 }

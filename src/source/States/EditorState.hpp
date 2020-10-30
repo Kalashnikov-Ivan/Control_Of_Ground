@@ -14,54 +14,51 @@ namespace States
 class EditorState :
 	public State
 {
-//__________________________PUBLIC______________________________
 public:
-	//Constructors
-	EditorState(StateData& Sdata, const float click_time = 0.07f);
-	virtual ~EditorState();
+//Constructors
+	EditorState(StateContext& ctx, const float clickTime = 0.07f);
+	~EditorState();
 
-	//Tech info
-	virtual std::string getStringInfo() override;
+//Tech info
+	std::string GetStringInfo() override;
 
-	//Functions
-	virtual void updateEvent(const sf::Event& event) override;
-	virtual void update(const float& dt) override;
+//Functions
+	void UpdateEvent(const sf::Event& event) override;
+	void Update(const float& dt) override;
 
-	virtual void render(sf::RenderTarget& target) override;
+	void Render(sf::RenderTarget& target) override;
 
-	virtual void reset(const sf::VideoMode& vm) override;
+	void Reset(const sf::VideoMode& vm) override;
 
-//__________________________PRIVATE_____________________________
 private:
-	//Members
-	std::unique_ptr<Tiles::TileMap> m_tile_map;
+	std::unique_ptr<Tiles::TileMap> m_tileMap;
 
-	GUI::PauseMenu m_pause_menu;
+	GUI::PauseMenu m_pauseMenu;
 	GUI::SideBar   m_sidebar;
-	std::unique_ptr<GUI::TextureSelector> m_ts_0;
+	std::unique_ptr<GUI::TextureSelector> m_textureSelector;
 	
 	sf::RectangleShape m_selector;
-	sf::IntRect m_selected_rect;
+	sf::IntRect m_selectedRect;
 
-	//Timer
-	const float m_click_time;
+//Timer
+	const float m_clickTime;
 	float		m_timer;
 
-	//---------------------------------------------
-	//Init
-	virtual void initTextures() override;
-	virtual void initKeybinds() override;
+//Init
+	virtual void InitTextures() override;
+	virtual void InitKeybinds() override;
 
-	//Update
-	void updatePauseInput(const float& dt);
-	virtual void updateInput(const float& dt) override;
-	//Timer
-	void updateTimer(const float& dt);
-	bool isTime();
+//Update
+	void UpdatePauseInput(const float& dt);
+	void UpdateInput(const float& dt) override;
 
-	//Render
+//Timer
+	void UpdateTimer(const float& dt);
+	bool IsTime();
 
-	//Support_cleaner
+//Render
+
+//Support_cleaner
 };
 } // !namespace States
 #endif // !EDITOR_STATE_H

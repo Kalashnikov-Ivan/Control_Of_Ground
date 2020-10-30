@@ -9,21 +9,21 @@ class Tile :
 public:
 	//Constructors
 	Tile();
-	Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const sf::Texture* texture, const sf::IntRect texture_rect,
+	Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const sf::Texture* texture, const sf::IntRect textureRect,
 		const bool border_visible = false);
-	virtual ~Tile();
+	~Tile();
 
 	//Accessors
-	bool getBorberVisible() const;
+	bool GetBorberVisible() const;
 
 	//Modificators
-	void setBorderVisible(const bool option);
+	void SetBorderVisible(const bool option);
 
 	//Update
-	void update(const float& dt);
+	void Update(const float& dt);
 
 protected:
-	bool m_border_visible;
+	bool m_borderVisible;
 
 private:
 

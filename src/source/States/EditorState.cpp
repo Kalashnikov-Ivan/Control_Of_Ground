@@ -1,4 +1,4 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "GUI/Converter.h"
 
@@ -10,65 +10,60 @@
 
 using namespace States;
 
-////////////////////////////////////////////////////////////
 // Constructors
-////////////////////////////////////////////////////////////
-
-EditorState::EditorState(StateData& Sdata, const float click_time)
-	: State      { Sdata },
-	m_tile_map   { nullptr }, 
-	m_ts_0       { nullptr },
-	m_pause_menu { Sdata.settings.m_graphics->m_resolution, *m_Sdata.supported_fonts["DOSIS"], m_Sdata.supported_fonts},
-	m_selector   { m_Sdata.grid_size_f }, 
-	m_sidebar    { 
+EditorState::EditorState(StateContext& ctx, const float clickTime)
+	: State             { ctx }
+	, m_tileMap         { nullptr }
+	, m_textureSelector { nullptr }
+	, m_pauseMenu       { ctx.settings.m_graphics->m_resolution, *m_stateContext.supportedFonts["DOSIS"], m_stateContext.supportedFonts}
+	, m_selector        { m_stateContext.gridSze }
+	, m_sidebar    { 
 					sf::Vector2f(
-						GUI::Converter::calc(96.f, Sdata.settings.m_graphics->m_resolution.width),
+						GUI::Converter::Сalc(96.f, ctx.settings.m_graphics->m_resolution.width),
 						0.f
 					),
 					sf::Vector2f(
-						GUI::Converter::calc(4.f, Sdata.settings.m_graphics->m_resolution.width),
-						GUI::Converter::calc(28.f, Sdata.settings.m_graphics->m_resolution.height)
+						GUI::Converter::Сalc(4.f, ctx.settings.m_graphics->m_resolution.width),
+						GUI::Converter::Сalc(28.f, ctx.settings.m_graphics->m_resolution.height)
 					),
-					GUI::Converter::calc(
+					GUI::Converter::Сalc(
 						25.f, 
-						GUI::Converter::calc(30.f, Sdata.settings.m_graphics->m_resolution.height)
+						GUI::Converter::Сalc(30.f, ctx.settings.m_graphics->m_resolution.height)
 					)
-				 },
-	m_click_time { click_time }
+				 }
+	, m_clickTime { clickTime }
 {
-	initTextures();
-	initKeybinds();
+	InitTextures();
+	InitKeybinds();
 
 	m_selector.setOutlineThickness(1.5f);
 	m_selector.setOutlineColor(sf::Color::Green);
 	m_selector.setFillColor(sf::Color::Transparent);
 
-	m_tile_map = std::make_unique<Tiles::TileMap>(Sdata.grid_size_f, sf::Vector2u(50, 50), m_textures["TILE_SHEET"]);
+	m_tileMap = std::make_unique<Tiles::TileMap>(ctx.gridSze, sf::Vector2u(50, 50), m_textures["TILE_SHEET"]);
 
 
-	m_sidebar.addButton(
-		"TS_0", *m_Sdata.supported_fonts["DOSIS"], "TS_0",
+	m_sidebar.AddButton(
+		"TS_0", *m_stateContext.supportedFonts["DOSIS"], "TS_0",
 		sf::Color(105, 105, 105, 200), sf::Color(192, 192, 192, 255), sf::Color(20, 20, 20, 200)
 	);
 
-	sf::Vector2f grid_size = sf::Vector2f(32.f, 32.f);
-	m_ts_0 = std::make_unique<GUI::TextureSelector>(
-		sf::Vector2f(320.f, 192.f), sf::Vector2f(m_Sdata.window.getSize().x - 400.f, 0.f),
-		m_textures["TILE_SHEET"].get(), grid_size
+	sf::Vector2f gridSize = sf::Vector2f(32.f, 32.f);
+	m_textureSelector = std::make_unique<GUI::TextureSelector>(
+		sf::Vector2f(320.f, 192.f), sf::Vector2f(m_stateContext.window.getSize().x - 400.f, 0.f),
+		m_textures["TILE_SHEET"].get(), gridSize
 	);
 
-	//m_ts_0->setOrigin(sf::Vector2f(320.f, 0));
-	m_ts_0->setPosition(m_sidebar.getButton("TS_0").getPosition().x - 320.f, 0);
+	//m_textureSelector->setOrigin(sf::Vector2f(320.f, 0));
+	m_textureSelector->setPosition(m_sidebar.GetButton("TS_0").getPosition().x - 320.f, 0);
 }
 
 EditorState::~EditorState()
 {
 }
 
-////////////////////////////////////////////////////////////
 // Init
-////////////////////////////////////////////////////////////
-void EditorState::initTextures()
+void EditorState::InitTextures()
 {
 	const std::string root = "resources/textures/";
 
@@ -78,21 +73,21 @@ void EditorState::initTextures()
 		throw std::runtime_error("EditorState::initTextures::TILE_SHEET - loading texture" + root + "Tileset.png" + " failed...");
 }
 
-void EditorState::initKeybinds()
+void EditorState::InitKeybinds()
 {
 #ifdef DEBUG
 	std::cout << "EditorState: Start of init_keybinds..." << std::endl;
 #endif // DEBUG
 
-	std::ifstream keys_ifs("config/EditorState_keybinds.ini");
-	if (keys_ifs.is_open())
+	std::ifstream keysIfs("config/EditorState_keybinds.ini");
+	if (keysIfs.is_open())
 	{
 		std::string key{ "" };
-		std::string key_value{ "" };
+		std::string val{ "" };
 
-		while (keys_ifs >> key >> key_value)
+		while (keysIfs >> key >> val)
 		{
-			m_keybinds[key] = m_Sdata.supported_keys.at(key_value);
+			m_keybinds[key] = m_stateContext.supportedKeys.at(val);
 		}
 	}
 	else
@@ -101,7 +96,7 @@ void EditorState::initKeybinds()
 				  << std::endl
 				  << "Using default keys..." << std::endl;
 
-		m_keybinds["CLOSE"] = m_Sdata.supported_keys.at("Escape");
+		m_keybinds["CLOSE"] = m_stateContext.supportedKeys.at("Escape");
 	}
 
 #ifdef DEBUG
@@ -112,39 +107,34 @@ void EditorState::initKeybinds()
 #endif // DEBUG
 }
 
-
-////////////////////////////////////////////////////////////
 // Tech info
-////////////////////////////////////////////////////////////
-std::string EditorState::getStringInfo()
+std::string EditorState::GetStringInfo()
 {
 	std::stringstream result;
 
-	result << getStringMousePos();
+	result << GetStringMousePos();
 
-	if (m_ts_0->isActive())
+	if (m_textureSelector->IsActive())
 	{
-		result << m_ts_0->getStringInfo();
+		result << m_textureSelector->GetStringInfo();
 	}
 	else
 	{
-		result << "Grid pos: " << m_mouse_pos_grid.x << ' ' << m_mouse_pos_grid.y << '\n';
+		result << "Grid pos: " << m_mousePosGrid.x << ' ' << m_mousePosGrid.y << '\n';
 	}
 
-	result << m_pause_menu.getStringInfo();
+	result << m_pauseMenu.GetStringInfo();
 
 	return result.str();
 }
 
-////////////////////////////////////////////////////////////
 // Update
-////////////////////////////////////////////////////////////
-void EditorState::updateEvent(const sf::Event& event)
+void EditorState::UpdateEvent(const sf::Event& event)
 {
 	if (event.type == sf::Event::LostFocus)
 	{
 		if (!m_paused)
-			pause();
+			Pause();
 	}
 
 	if (event.type == sf::Event::KeyPressed)
@@ -152,74 +142,74 @@ void EditorState::updateEvent(const sf::Event& event)
 		if (event.key.code == (sf::Keyboard::Key(m_keybinds["CLOSE"])))
 		{
 			if (!m_paused)
-				pause();
+				Pause();
 			else
-				unpause();
+				Unpause();
 		}
 
 		if (event.key.code == (sf::Keyboard::Key(m_keybinds["SWITCH_TILE_BORDER_VISIBLE"])))
 		{
-			if (!m_tile_map->getTilesBorderVisible())
-				m_tile_map->setTilesBorderVisible(true);
+			if (!m_tileMap->GetTilesBorderVisible())
+				m_tileMap->SetTilesBorderVisible(true);
 			else
-				m_tile_map->setTilesBorderVisible(false);
+				m_tileMap->SetTilesBorderVisible(false);
 		}
 	}
 }
 
-void EditorState::updateInput(const float& dt)
+void EditorState::UpdateInput(const float& dt)
 {
-	m_selector.setPosition(m_mouse_pos_grid.x * m_Sdata.grid_size_f.x, m_mouse_pos_grid.y * m_Sdata.grid_size_f.y);
+	m_selector.setPosition(m_mousePosGrid.x * m_stateContext.gridSze.x, m_mousePosGrid.y * m_stateContext.gridSze.y);
 
-	if (m_sidebar.isButtonPressed("TS_0"))
+	if (m_sidebar.IsButtonPressed("TS_0"))
 	{
-		if (!m_ts_0->isHidden())
-			m_ts_0->setHidden(true);
+		if (!m_textureSelector->IsHidden())
+			m_textureSelector->SetHidden(true);
 		else
-			m_ts_0->setHidden(false);
+			m_textureSelector->SetHidden(false);
 	}
-	else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && isTime() && !m_sidebar.getGlobalBounds().contains(m_mouse_pos_view))
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && IsTime() && !m_sidebar.getGlobalBounds().contains(m_mousePosView))
 	{
-		if (m_ts_0->isActive())
+		if (m_textureSelector->IsActive())
 		{
-			m_selected_rect = m_ts_0->getSelectedRect();
+			m_selectedRect = m_textureSelector->GetSelectedRect();
 		}
 		else
 		{
-			m_tile_map->addTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0, m_textures["TILE_SHEET"].get(), m_selected_rect);
+			m_tileMap->AddTile(m_mousePosGrid.x, m_mousePosGrid.y, 0, m_textures["TILE_SHEET"].get(), m_selectedRect);
 		}
 	}
-	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && isTime())
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && IsTime())
 	{
-		if (m_ts_0->isActive())
+		if (m_textureSelector->IsActive())
 		{
 
 		}
 		else
 		{
-			m_tile_map->deleteTile(m_mouse_pos_grid.x, m_mouse_pos_grid.y, 0);
+			m_tileMap->DeleteTile(m_mousePosGrid.x, m_mousePosGrid.y, 0);
 		}
 	}
 }
 
-void EditorState::updatePauseInput(const float& dt)
+void EditorState::UpdatePauseInput(const float& dt)
 {
-	if (m_pause_menu.isButtonPressed("SETTINGS_STATE"))
-		m_Sdata.states.push_back(std::make_unique<SettingsState>(m_Sdata));
+	if (m_pauseMenu.IsButtonPressed("SETTINGS_STATE"))
+		m_stateContext.states.push_back(std::make_unique<SettingsState>(m_stateContext));
 
-	if (m_pause_menu.isButtonPressed("EXIT"))
-		quitState();
+	if (m_pauseMenu.IsButtonPressed("EXIT"))
+		QuitState();
 }
 
 //Timer
-void EditorState::updateTimer(const float& dt)
+void EditorState::UpdateTimer(const float& dt)
 {
 	m_timer += dt;
 }
 
-bool EditorState::isTime()
+bool EditorState::IsTime()
 {
-	if (m_timer >= m_click_time)
+	if (m_timer >= m_clickTime)
 	{
 		m_timer = 0.f;
 		return true;
@@ -228,63 +218,61 @@ bool EditorState::isTime()
 	return false;
 }
 
-void EditorState::update(const float& dt)
+void EditorState::Update(const float& dt)
 {
-	updateTimer(dt);
-	updateMousePos();
+	UpdateTimer(dt);
+	UpdateMousePos();
 
 	if (!m_paused)
 	{
-		updateInput(dt);
+		UpdateInput(dt);
 
-		m_sidebar.update(m_mouse_pos_view, dt);
-		m_ts_0->update(m_mouse_pos_view, dt);
+		m_sidebar.Update(m_mousePosView, dt);
+		m_textureSelector->Update(m_mousePosView, dt);
 	}
 	else
 	{
-		updatePauseInput(dt);
+		UpdatePauseInput(dt);
 
-		m_pause_menu.update(m_mouse_pos_view, dt);
+		m_pauseMenu.Update(m_mousePosView, dt);
 	}
 }
 
-////////////////////////////////////////////////////////////
 // Render
-////////////////////////////////////////////////////////////
-void EditorState::render(sf::RenderTarget& target)
+void EditorState::Render(sf::RenderTarget& target)
 {
-	m_tile_map->render(target);
-	m_sidebar.render(target);
-	m_ts_0->render(target);
+	m_tileMap->Render(target);
+	m_sidebar.Render(target);
+	m_textureSelector->Render(target);
 
-	if (!m_ts_0->isActive() && !m_sidebar.getGlobalBounds().contains(m_mouse_pos_view))
+	if (!m_textureSelector->IsActive() && !m_sidebar.getGlobalBounds().contains(m_mousePosView))
 	{
 		target.draw(m_selector);
 	}
 
 	if (m_paused)
 	{
-		m_pause_menu.render(target);
+		m_pauseMenu.Render(target);
 	}
 }
 
 //Reset
-void EditorState::reset(const sf::VideoMode& vm)
+void EditorState::Reset(const sf::VideoMode& vm)
 {
-	m_sidebar.reset(
+	m_sidebar.Reset(
 		sf::Vector2f(
-			GUI::Converter::calc(96.f, m_Sdata.settings.m_graphics->m_resolution.width),
+			GUI::Converter::Сalc(96.f, m_stateContext.settings.m_graphics->m_resolution.width),
 			0.f
 		),
 		sf::Vector2f(
-			GUI::Converter::calc(4.f, m_Sdata.settings.m_graphics->m_resolution.width),
-			GUI::Converter::calc(28.f, m_Sdata.settings.m_graphics->m_resolution.height)
+			GUI::Converter::Сalc(4.f, m_stateContext.settings.m_graphics->m_resolution.width),
+			GUI::Converter::Сalc(28.f, m_stateContext.settings.m_graphics->m_resolution.height)
 		),
-		GUI::Converter::calc(25.f, GUI::Converter::calc(30.f, m_Sdata.settings.m_graphics->m_resolution.height))
+		GUI::Converter::Сalc(25.f, GUI::Converter::Сalc(30.f, m_stateContext.settings.m_graphics->m_resolution.height))
 	);
 
-	m_pause_menu.reset(vm);
+	m_pauseMenu.Reset(vm);
 
 	//TextureSelector
-	m_ts_0->setPosition(m_sidebar.getButton("TS_0").getPosition().x - 320.f, 0);
+	m_textureSelector->setPosition(m_sidebar.GetButton("TS_0").getPosition().x - 320.f, 0);
 }

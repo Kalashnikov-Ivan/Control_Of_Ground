@@ -284,7 +284,7 @@ public:
     Usage getUsage() const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Bind a vertex buffer for rendering
+    /// \brief Bind a vertex buffer for Rendering
     ///
     /// This function is not part of the graphics API, it mustn't be
     /// used when drawing SFML entities. It must be used only if you
@@ -321,10 +321,10 @@ public:
 private:
 
     ////////////////////////////////////////////////////////////
-    /// \brief Draw the vertex buffer to a render target
+    /// \brief Draw the vertex buffer to a Render target
     ///
     /// \param target Render target to draw to
-    /// \param states Current render states
+    /// \param states Current Render states
     ///
     ////////////////////////////////////////////////////////////
     virtual void draw(RenderTarget& target, RenderStates states) const;
@@ -387,7 +387,7 @@ private:
 /// this case the user can make sure to synchronize the writer threads at
 /// well-defined points in their code. The driver will make sure that all
 /// pending data transfers complete before the vertex buffer is sourced
-/// by the rendering pipeline.
+/// by the Rendering pipeline.
 ///
 /// It inherits sf::Drawable, but unlike other drawables it
 /// is not transformable.

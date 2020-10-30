@@ -1,25 +1,26 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "TileMap.hpp"
 
 using namespace Tiles;
 
 TileMap::TileMap(
-	const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, std::shared_ptr<sf::Texture> sheet_texture,
-	const size_t layers, const bool tiles_border_visible
+	const sf::Vector2f& gridSize, const sf::Vector2u& tilesQuantity, std::shared_ptr<sf::Texture> sheetTexture,
+	const size_t layers, const bool tilesBorderVisible
 )
-	: m_grid_size_f { grid_size },
-	m_grid_size_u   { static_cast<sf::Vector2u>(grid_size) },
-	m_tiles_quantity{ tiles_quantity },
-	m_layers        { layers },
-	m_map           { std::vector< std::vector< std::vector<Tile*>>>(tiles_quantity.x, std::vector<std::vector<Tile*>>(tiles_quantity.y, std::vector<Tile*>(layers, nullptr) ) ) },
-	m_tiles_border_visible { tiles_border_visible },
-	m_sheet_texture  { sheet_texture }
+	: m_gridSize_f    { gridSize }
+	, m_gridSize_u    { static_cast<sf::Vector2u>(gridSize) }
+	, m_tilesQuantity { tilesQuantity }
+	, m_layers        { layers }
+	, m_map           { std::vector< std::vector< std::vector<Tile*>>>(tilesQuantity.x, std::vector<std::vector<Tile*>>(tilesQuantity.y, std::vector<Tile*>(layers, nullptr) ) ) }
+	, m_tilesBorderVisible { tilesBorderVisible }
+	, m_sheetTexture  { sheetTexture }
 {
 }
 
 TileMap::~TileMap()
 {
+	//#TODO: Make smart_ptr
 	for (auto& x : m_map)
 		for (auto& y : x)
 			for (auto& z : y)
@@ -28,43 +29,43 @@ TileMap::~TileMap()
 }
 
 //Accessors
-bool TileMap::getTilesBorderVisible() const
+bool TileMap::GetTilesBorderVisible() const
 {
-	return m_tiles_border_visible;
+	return m_tilesBorderVisible;
 }
 
 //Modificators
-void TileMap::setTilesBorderVisible(const bool option)
+void TileMap::SetTilesBorderVisible(const bool option)
 {
-	m_tiles_border_visible = option;
+	m_tilesBorderVisible = option;
 
-	for (size_t x = 0; x < m_tiles_quantity.x; x++)
+	for (size_t x = 0; x < m_tilesQuantity.x; x++)
 	{
-		for (size_t y = 0; y < m_tiles_quantity.y; y++)
+		for (size_t y = 0; y < m_tilesQuantity.y; y++)
 		{
 			if (m_map[x][y][0] != nullptr)
-				m_map[x][y][0]->setBorderVisible(option);
+				m_map[x][y][0]->SetBorderVisible(option);
 		}
 	}
 }
 
 //Function
-void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z, const sf::Texture* texture, const sf::IntRect& texture_rect)
+void TileMap::AddTile(const unsigned x, const unsigned y, const unsigned z, const sf::Texture* texture, const sf::IntRect& textureRect)
 {
-	if ((x >= 0 && x < m_grid_size_u.x) && (y >= 0 && y < m_grid_size_u.y))
+	if ((x >= 0 && x < m_gridSize_u.x) && (y >= 0 && y < m_gridSize_u.y))
 	{
 		if (m_map[x][y][z] == nullptr)
 		{
-			m_map[x][y][z] = new Tile(sf::Vector2f(m_grid_size_f.x * x, m_grid_size_f.y * y), m_grid_size_f, 
-									  texture, texture_rect,
-									  m_tiles_border_visible);
+			m_map[x][y][z] = new Tile(sf::Vector2f(m_gridSize_f.x * x, m_gridSize_f.y * y), m_gridSize_f, 
+									  texture, textureRect,
+									  m_tilesBorderVisible);
 		}
 	}
 }
 
-void TileMap::deleteTile(const unsigned x, const unsigned y, const unsigned z)
+void TileMap::DeleteTile(const unsigned x, const unsigned y, const unsigned z)
 {
-	if ((x >= 0 && x < m_grid_size_u.x) && (y >= 0 && y < m_grid_size_u.y))
+	if ((x >= 0 && x < m_gridSize_u.x) && (y >= 0 && y < m_gridSize_u.y))
 	{
 		if (m_map[x][y][z] != nullptr)
 		{
@@ -75,12 +76,12 @@ void TileMap::deleteTile(const unsigned x, const unsigned y, const unsigned z)
 }
 
 //Update
-void TileMap::update(const float& dt)
+void TileMap::Update(const float& dt)
 {
 }
 
 //Render
-void TileMap::render(sf::RenderTarget& target)
+void TileMap::Render(sf::RenderTarget& target)
 {
 	for (auto& x : m_map)
 		for (auto& y : x)
@@ -90,9 +91,9 @@ void TileMap::render(sf::RenderTarget& target)
 }
 
 //File
-bool TileMap::saveToFile(const std::string path)
+bool TileMap::SaveToFile(const std::string path)
 {
-	/*Saves the entire tilemap to a text-file.
+	/*#TODO: Saves the entire tilemap to a text-file.
 	Format:
 	Size x y
 	gridSize x y
@@ -109,8 +110,8 @@ bool TileMap::saveToFile(const std::string path)
 	std::ofstream out_f { path };
 	if (out_f.is_open())
 	{
-		out_f << "TILES_QUANTITY" << m_tiles_quantity.x << ' ' << m_tiles_quantity.y << '\n';
-		out_f << "GRID_SIZE "     << m_grid_size_u.x    << ' ' << m_grid_size_u.y    << '\n';
+		out_f << "tilesQuantity" << m_tilesQuantity.x << ' ' << m_tilesQuantity.y << '\n';
+		out_f << "gridSize "     << m_gridSize_u.x    << ' ' << m_gridSize_u.y    << '\n';
 		out_f << "LAYERS "        << m_layers           << '\n';
 	}
 	else
@@ -122,7 +123,7 @@ bool TileMap::saveToFile(const std::string path)
 	return true;
 }
 
-bool TileMap::loadFromFile(const std::string path)
+bool TileMap::LoadFromFile(const std::string path)
 {
 	std::ifstream in_f{ path };
 	if (in_f.is_open())

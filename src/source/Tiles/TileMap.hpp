@@ -9,39 +9,40 @@ class TileMap
 {
 public:
 	TileMap(
-		const sf::Vector2f& grid_size, const sf::Vector2u& tiles_quantity, std::shared_ptr<sf::Texture> sheet_texture,
-		const size_t layers = 1, const bool tiles_border_visible = true
+		const sf::Vector2f& gridSize, const sf::Vector2u& tilesQuantity, std::shared_ptr<sf::Texture> sheetTexture,
+		const size_t layers = 1, const bool tilesBorderVisible = true
 	);
 	~TileMap();
 
 	//Accessors
-	bool getTilesBorderVisible() const;
+	bool GetTilesBorderVisible() const;
 
 	//Modificators
-	void setTilesBorderVisible(const bool option);
+	void SetTilesBorderVisible(const bool option);
 
 	//Function
-	void addTile(const unsigned x, const unsigned y, const unsigned z, const sf::Texture* texture, const sf::IntRect& texture_rect);
-	void deleteTile(const unsigned x, const unsigned y, const unsigned z);
+	void AddTile(const unsigned x, const unsigned y, const unsigned z, const sf::Texture* texture, const sf::IntRect& textureRect);
+	void DeleteTile(const unsigned x, const unsigned y, const unsigned z);
 
-	void update(const float& dt);
-	void render(sf::RenderTarget& target);
+	void Update(const float& dt);
+	void Render(sf::RenderTarget& target);
 
 	//File
-	bool saveToFile(const std::string path);
-	bool loadFromFile(const std::string path);
+	bool SaveToFile(const std::string path);
+	bool LoadFromFile(const std::string path);
 
 private:
-	std::shared_ptr<sf::Texture> m_sheet_texture;
+	std::shared_ptr<sf::Texture> m_sheetTexture;
 
-	sf::Vector2f m_grid_size_f;
-	sf::Vector2u m_grid_size_u;
-	sf::Vector2u m_tiles_quantity;
+	sf::Vector2f m_gridSize_f;
+	sf::Vector2u m_gridSize_u;
+	sf::Vector2u m_tilesQuantity;
 	size_t m_layers;
 
+	//#TODO: Make smart_ptr
 	std::vector< std::vector< std::vector<Tile*> > > m_map;
 
-	bool m_tiles_border_visible;
+	bool m_tilesBorderVisible;
 };
 } // !namespace Tiles
 #endif // !TILE_MAP_H

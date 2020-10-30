@@ -638,7 +638,7 @@ public:
     unsigned int getNativeHandle() const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Bind a shader for rendering
+    /// \brief Bind a shader for Rendering
     ///
     /// This function is not part of the graphics API, it mustn't be
     /// used when drawing SFML entities. It must be used only if you
@@ -763,7 +763,7 @@ private:
 ///
 /// Shaders are programs written using a specific language,
 /// executed directly by the graphics card and allowing
-/// to apply real-time operations to the rendered entities.
+/// to apply real-time operations to the Rendered entities.
 ///
 /// There are three kinds of shaders:
 /// \li %Vertex shaders, that process vertices
@@ -858,7 +858,7 @@ private:
 ///
 /// The first technique is more optimized because it doesn't involve
 /// retrieving the target's pixels to system memory, but the
-/// second one doesn't impact the rendering process and can be
+/// second one doesn't impact the Rendering process and can be
 /// easily inserted anywhere without impacting all the code.
 ///
 /// Like sf::Texture that can be used as a raw OpenGL texture,
@@ -866,7 +866,7 @@ private:
 /// custom OpenGL geometry.
 /// \code
 /// sf::Shader::bind(&shader);
-/// ... render OpenGL geometry ...
+/// ... Render OpenGL geometry ...
 /// sf::Shader::bind(NULL);
 /// \endcode
 ///

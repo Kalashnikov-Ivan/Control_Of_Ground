@@ -6,60 +6,56 @@ namespace Components
 class MovementComponent
 {
 public:
-	enum class MovingStates { NONE = -1, IDLE = 0, RIGHT, LEFT, DOWN, UP, BREAKING_RIGHT, BREAKING_LEFT};
-	enum class SpeedStages  { NONE = 0, FIRST, SECOND, THIRD };
+	enum class MovingState { NONE = -1, IDLE = 0, RIGHT, LEFT, DOWN, UP, BREAKING_RIGHT, BREAKING_LEFT};
+	enum class SpeedStage  { NONE = 0, FIRST, SECOND, THIRD };
 
-	//Constructors
-	MovementComponent(sf::Sprite& sprite, const float& max_speed, const float& acceleration, const float& deceleration);
+//Constructors
+	MovementComponent(sf::Sprite& sprite, const float& maxSpeed, const float& acceleration, const float& deceleration);
 	~MovementComponent();
 
-	//Accessors
-		//Speed
-			const float        getMaxSpeed() const;
-			const sf::Vector2f getSpeed() const;
-			const sf::Vector2f getSpeedDir() const;
-			const SpeedStages  getSpeedStage() const;
-		//State
-			const MovingStates getMovingState() const;
+//Accessors
+	const float        GetMaxSpeed()   const;
+	const sf::Vector2f GetSpeed()      const;
+	const sf::Vector2f GetSpeedDir()   const;
+	const SpeedStage   GetSpeedStage() const;
 
-	//Info
-		std::string getStringInfo();
+	const MovingState GetMovingState() const;
 
-	//Functions
-		void move(const sf::Vector2f& dir_xy, const float& dt);
-		void update(const float& dt);
+//Info
+	std::string GetStringInfo();
+
+//Functions
+	void Move(const sf::Vector2f& dir_xy, const float& dt);
+	void Update(const float& dt);
 
 private:
-	//Members
-		sf::Sprite& m_sprite;
+	sf::Sprite& m_sprite;
 
-	//Speed
-		float m_max_speed;
-		float m_acceleration;
-		float m_deceleration;
+//Speed
+	float m_maxSpeed;
+	float m_acceleration;
+	float m_deceleration;
 
-		sf::Vector2f m_dir_xy;
-		sf::Vector2f m_speed;
-		sf::Vector2f m_speed_dir;
-		SpeedStages  m_speed_stage;
-		MovingStates m_moving_state;
+	sf::Vector2f m_dir_xy;
+	sf::Vector2f m_speed;
+	sf::Vector2f m_speedDir;
+	SpeedStage   m_speedStage;
+	MovingState  m_movingState;
 
-		float m_first_speed_stage;
-		float m_second_speed_stage;
-		float m_third_speed_stage;
+	float m_firstSpeedStage;
+	float m_secondSpeedStage;
+	float m_thirdSpeedStage;
 
-	//Functions
-		inline void updateSpeedDir();
-		inline void updateSpeedStage();
-		inline void updateState();
+//Functions
+	inline void UpdateSpeedDir();
+	inline void UpdateSpeedStage();
+	inline void UpdateState();
 
-	//Support functions
-		//inline void acceleration(const sf::Vector2f& dir_xy);
-		inline void deceleration();
+//Support functions
+	//inline void acceleration(const sf::Vector2f& dir_xy);
+	inline void Deceleration();
 
-		inline void maxSpeedCheck();
-		
+	inline void MaxSpeedCheck();
 };
 } // !namespace Components
-
 #endif // !MOVEMENT_COMPONENT_H

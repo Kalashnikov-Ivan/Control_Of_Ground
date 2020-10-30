@@ -192,10 +192,10 @@ public:
 private:
 
     ////////////////////////////////////////////////////////////
-    /// \brief Draw the sprite to a render target
+    /// \brief Draw the sprite to a Render target
     ///
     /// \param target Render target to draw to
-    /// \param states Current render states
+    /// \param states Current Render states
     ///
     ////////////////////////////////////////////////////////////
     virtual void draw(RenderTarget& target, RenderStates states) const;
@@ -231,7 +231,7 @@ private:
 /// \ingroup graphics
 ///
 /// sf::Sprite is a drawable class that allows to easily display
-/// a texture (or a part of it) on a render target.
+/// a texture (or a part of it) on a Render target.
 ///
 /// It inherits all the functions from sf::Transformable:
 /// position, rotation, scale, origin. It also adds sprite-specific
@@ -255,7 +255,7 @@ private:
 /// used by a sf::Sprite (i.e. never write a function that
 /// uses a local sf::Texture instance for creating a sprite).
 ///
-/// See also the note on coordinates and undistorted rendering in sf::Transformable.
+/// See also the note on coordinates and undistorted Rendering in sf::Transformable.
 ///
 /// Usage example:
 /// \code

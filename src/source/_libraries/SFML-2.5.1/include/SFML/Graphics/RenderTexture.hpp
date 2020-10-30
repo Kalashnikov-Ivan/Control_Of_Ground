@@ -22,8 +22,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef SFML_RENDERTEXTURE_HPP
-#define SFML_RENDERTEXTURE_HPP
+#ifndef SFML_RenderTEXTURE_HPP
+#define SFML_RenderTEXTURE_HPP
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -42,7 +42,7 @@ namespace priv
 }
 
 ////////////////////////////////////////////////////////////
-/// \brief Target for off-screen 2D rendering into a texture
+/// \brief Target for off-screen 2D Rendering into a texture
 ///
 ////////////////////////////////////////////////////////////
 class SFML_GRAPHICS_API RenderTexture : public RenderTarget
@@ -52,8 +52,8 @@ public:
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
     ///
-    /// Constructs an empty, invalid render-texture. You must
-    /// call create to have a valid render-texture.
+    /// Constructs an empty, invalid Render-texture. You must
+    /// call create to have a valid Render-texture.
     ///
     /// \see create
     ///
@@ -67,19 +67,19 @@ public:
     virtual ~RenderTexture();
 
     ////////////////////////////////////////////////////////////
-    /// \brief Create the render-texture
+    /// \brief Create the Render-texture
     ///
-    /// Before calling this function, the render-texture is in
+    /// Before calling this function, the Render-texture is in
     /// an invalid state, thus it is mandatory to call it before
-    /// doing anything with the render-texture.
+    /// doing anything with the Render-texture.
     /// The last parameter, \a depthBuffer, is useful if you want
-    /// to use the render-texture for 3D OpenGL rendering that requires
+    /// to use the Render-texture for 3D OpenGL Rendering that requires
     /// a depth buffer. Otherwise it is unnecessary, and you should
     /// leave this parameter to false (which is its default value).
     ///
-    /// \param width       Width of the render-texture
-    /// \param height      Height of the render-texture
-    /// \param depthBuffer Do you want this render-texture to have a depth buffer?
+    /// \param width       Width of the Render-texture
+    /// \param height      Height of the Render-texture
+    /// \param depthBuffer Do you want this Render-texture to have a depth buffer?
     ///
     /// \return True if creation has been successful
     ///
@@ -89,18 +89,18 @@ public:
     SFML_DEPRECATED bool create(unsigned int width, unsigned int height, bool depthBuffer);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Create the render-texture
+    /// \brief Create the Render-texture
     ///
-    /// Before calling this function, the render-texture is in
+    /// Before calling this function, the Render-texture is in
     /// an invalid state, thus it is mandatory to call it before
-    /// doing anything with the render-texture.
+    /// doing anything with the Render-texture.
     /// The last parameter, \a settings, is useful if you want to enable
-    /// multi-sampling or use the render-texture for OpenGL rendering that
+    /// multi-sampling or use the Render-texture for OpenGL Rendering that
     /// requires a depth or stencil buffer. Otherwise it is unnecessary, and
     /// you should leave this parameter at its default value.
     ///
-    /// \param width    Width of the render-texture
-    /// \param height   Height of the render-texture
+    /// \param width    Width of the Render-texture
+    /// \param height   Height of the Render-texture
     /// \param settings Additional settings for the underlying OpenGL texture and context
     ///
     /// \return True if creation has been successful
@@ -179,13 +179,13 @@ public:
     bool generateMipmap();
 
     ////////////////////////////////////////////////////////////
-    /// \brief Activate or deactivate the render-texture for rendering
+    /// \brief Activate or deactivate the Render-texture for Rendering
     ///
-    /// This function makes the render-texture's context current for
-    /// future OpenGL rendering operations (so you shouldn't care
+    /// This function makes the Render-texture's context current for
+    /// future OpenGL Rendering operations (so you shouldn't care
     /// about it if you're not doing direct OpenGL stuff).
     /// Only one context can be current in a thread, so if you
-    /// want to draw OpenGL geometry to another render target
+    /// want to draw OpenGL geometry to another Render target
     /// (like a RenderWindow) don't forget to activate it again.
     ///
     /// \param active True to activate, false to deactivate
@@ -200,14 +200,14 @@ public:
     ///
     /// This function updates the target texture with what
     /// has been drawn so far. Like for windows, calling this
-    /// function is mandatory at the end of rendering. Not calling
+    /// function is mandatory at the end of Rendering. Not calling
     /// it may leave the texture in an undefined state.
     ///
     ////////////////////////////////////////////////////////////
     void display();
 
     ////////////////////////////////////////////////////////////
-    /// \brief Return the size of the rendering region of the texture
+    /// \brief Return the size of the Rendering region of the texture
     ///
     /// The returned value is the size that you passed to
     /// the create function.
@@ -220,10 +220,10 @@ public:
     ////////////////////////////////////////////////////////////
     /// \brief Get a read-only reference to the target texture
     ///
-    /// After drawing to the render-texture and calling Display,
+    /// After drawing to the Render-texture and calling Display,
     /// you can retrieve the updated texture using this function,
     /// and draw it using a sprite (for example).
-    /// The internal sf::Texture of a render-texture is always the
+    /// The internal sf::Texture of a Render-texture is always the
     /// same instance, so that it is possible to call this function
     /// once and keep a reference to the texture even after it is
     /// modified.
@@ -245,7 +245,7 @@ private:
 } // namespace sf
 
 
-#endif // SFML_RENDERTEXTURE_HPP
+#endif // SFML_RenderTEXTURE_HPP
 
 
 ////////////////////////////////////////////////////////////
@@ -261,16 +261,16 @@ private:
 /// Rendering to a texture can be useful in a variety of situations:
 /// \li precomputing a complex static texture (like a level's background from multiple tiles)
 /// \li applying post-effects to the whole scene with shaders
-/// \li creating a sprite from a 3D object rendered with OpenGL
+/// \li creating a sprite from a 3D object Rendered with OpenGL
 /// \li etc.
 ///
 /// Usage example:
 ///
 /// \code
-/// // Create a new render-window
+/// // Create a new Render-window
 /// sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
 ///
-/// // Create a new render-texture
+/// // Create a new Render-texture
 /// sf::RenderTexture texture;
 /// if (!texture.create(500, 500))
 ///     return -1;
@@ -292,7 +292,7 @@ private:
 ///    // We're done drawing to the texture
 ///    texture.display();
 ///
-///    // Now we start rendering to the window, clear it first
+///    // Now we start Rendering to the window, clear it first
 ///    window.clear();
 ///
 ///    // Draw the texture
@@ -304,10 +304,10 @@ private:
 /// }
 /// \endcode
 ///
-/// Like sf::RenderWindow, sf::RenderTexture is still able to render direct
+/// Like sf::RenderWindow, sf::RenderTexture is still able to Render direct
 /// OpenGL stuff. It is even possible to mix together OpenGL calls
 /// and regular SFML drawing commands. If you need a depth buffer for
-/// 3D rendering, don't forget to request it when calling RenderTexture::create.
+/// 3D Rendering, don't forget to request it when calling RenderTexture::create.
 ///
 /// \see sf::RenderTarget, sf::RenderWindow, sf::View, sf::Texture
 ///

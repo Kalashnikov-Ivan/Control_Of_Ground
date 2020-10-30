@@ -1,28 +1,26 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "Button.hpp"
 
 using namespace GUI;
 
 //Static members
-float Button::m_press_time { 0.f };
+float Button::m_pressTime { 0.f };
 
-////////////////////////////////////////////////////////////
 // Constructors
-////////////////////////////////////////////////////////////
 Button::Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
 	sf::Text& text,
 	const sf::Color& color_idle,
 	const sf::Color& color_hover,
 	const sf::Color& color_active,
 	const size_t index)
-	: sf::RectangleShape{ size_wh },
-	m_text{ text },
-	m_color_idle{ color_idle },
-	m_color_hover{ color_hover },
-	m_color_active{ color_active },
-	m_state{ States::IDLE },
-	m_index{ index }
+	: sf::RectangleShape{ size_wh }
+	, m_text            { text }
+	, m_color_idle      { color_idle }
+	, m_color_hover     { color_hover }
+	, m_color_active    { color_active }
+	, m_state           { States::IDLE }
+	, m_index           { index }
 {
 	sf::Transformable::setPosition(pos);
 	setFillColor(m_color_idle);
@@ -34,18 +32,18 @@ Button::Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
 }
 
 Button::Button(const sf::Vector2f& pos, const sf::Vector2f& size_wh,
-			   sf::Font& font, const std::string& text, uint32_t ch_size,
+			   sf::Font& font, const std::string& text, uint32_t chSize,
 			   const sf::Color& color_idle, 
 			   const sf::Color& color_hover,
 			   const sf::Color& color_active,
 			   const size_t index)
-	: sf::RectangleShape { size_wh },
-	  m_text         { text,  font, ch_size },
-	  m_color_idle   { color_idle   }, 
-	  m_color_hover  { color_hover  }, 
-	  m_color_active { color_active },
-	  m_state        { States::IDLE },
-	  m_index        { index }
+	: sf::RectangleShape { size_wh }
+	, m_text         { text,  font, chSize }
+	, m_color_idle   { color_idle   }
+	, m_color_hover  { color_hover  }
+	, m_color_active { color_active }
+	, m_state        { States::IDLE }
+	, m_index        { index }
 {
 	sf::Transformable::setPosition(pos);
 	setFillColor(m_color_idle);
@@ -60,25 +58,23 @@ Button::~Button()
 
 }
 
-////////////////////////////////////////////////////////////
 // Accessors
-////////////////////////////////////////////////////////////
-const Button::States Button::getState() const
+const Button::States Button::GetState() const
 {
 	return m_state;
 }
 
-const size_t Button::getIndex() const
+const size_t Button::GetIndex() const
 {
 	return m_index;
 }
 
-const sf::Text Button::getText() const
+const sf::Text Button::GetText() const
 {
 	return m_text;
 }
 
-const bool Button::isPressed() const
+const bool Button::IsPressed() const
 {
 	if (m_state == States::ACTIVE)
 		return true;
@@ -86,15 +82,13 @@ const bool Button::isPressed() const
 	return false;
 }
 
-////////////////////////////////////////////////////////////
 // Modificators
-////////////////////////////////////////////////////////////
-void Button::setIndex(const size_t index)
+void Button::SetIndex(const size_t index)
 {
 	m_index = index;
 }
 
-void Button::setPosition(const sf::Vector2f& pos)
+void Button::SetPosition(const sf::Vector2f& pos)
 {
 	sf::Transformable::setPosition(pos);
 
@@ -102,7 +96,7 @@ void Button::setPosition(const sf::Vector2f& pos)
 	m_text.setPosition(pos.x + getGlobalBounds().width / 2.f, pos.y + getGlobalBounds().height / 2.f);
 }
 
-void Button::setText(const sf::Text& text)
+void Button::SetText(const sf::Text& text)
 {
 	m_text = text;
 
@@ -112,15 +106,13 @@ void Button::setText(const sf::Text& text)
 	m_text.setPosition(getPosition().x + getGlobalBounds().width / 2.f, getPosition().y + getGlobalBounds().height / 2.f);
 }
 
-void Button::setTextString(const std::string& str)
+void Button::SetTextString(const std::string& str)
 {
 	m_text.setString(str);
 }
 
-////////////////////////////////////////////////////////////
 // Info
-////////////////////////////////////////////////////////////
-std::string Button::getStringInfo() const
+std::string Button::SetStringInfo() const
 {
 	std::stringstream result;
 
@@ -130,38 +122,35 @@ std::string Button::getStringInfo() const
 	return result.str();
 }
 
-
-////////////////////////////////////////////////////////////
 // Functions
-////////////////////////////////////////////////////////////
-void Button::updateTimer(const float& dt)
+void Button::UpdateTimer(const float& dt)
 {
-	m_press_time += dt;
+	m_pressTime += dt;
 }
 
-const bool Button::isTime()
+const bool Button::IsTime()
 {
-	if (m_press_time >= m_max_press_time)
+	if (m_pressTime >= m_maxPressTime)
 	{
-		m_press_time = 0.f;
+		m_pressTime = 0.f;
 		return true;
 	}
 
 	return false;
 }
 
-void Button::update(const sf::Vector2f& mouse_pos, const float& dt)
+void Button::Update(const sf::Vector2f& mousePos, const float& dt)
 {
 	/*Update the booleans for hover and pressed*/
 
-	updateTimer(dt);
+	UpdateTimer(dt);
 	m_state = States::IDLE;
 
-	if (getGlobalBounds().contains(mouse_pos))
+	if (getGlobalBounds().contains(mousePos))
 	{
 		m_state = States::HOVER;
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && isTime())
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && IsTime())
 			m_state = States::ACTIVE;
 	}
 
@@ -182,18 +171,18 @@ void Button::update(const sf::Vector2f& mouse_pos, const float& dt)
 	}
 }
 
-void Button::render(sf::RenderTarget& target)
+void Button::Render(sf::RenderTarget& target)
 {
 	target.draw(*this);
 	target.draw(m_text);
 }
 
-void Button::reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t ch_size)
+void Button::Reset(const sf::Vector2f& size_wh, const sf::Vector2f& pos, const uint32_t chSize)
 {
 	setSize(size_wh);
-	setPosition(pos);
+	SetPosition(pos);
 
-	m_text.setCharacterSize(ch_size);
+	m_text.setCharacterSize(chSize);
 	m_text.setOrigin(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height / 2.f);
 	m_text.setPosition(getPosition().x + getGlobalBounds().width / 2.f, getPosition().y + getGlobalBounds().height / 2.f);
 }

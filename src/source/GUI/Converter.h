@@ -19,20 +19,17 @@ public:
 	* @return		<const float perc> or <const sf::Vector2f& perc>		The calculated pixel value.
  */
 
-	static void foo()
-	{}
+	static float Сalc(const float perc, const float size);
+	static float Сalc(const float perc, const unsigned size);
 
-	static float calc(const float perc, const float size);
-	static float calc(const float perc, const unsigned size);
+	static float СalcX(const float perc, const sf::VideoMode& vm);
+	static float СalcX(const float perc, const sf::Vector2f& size_xy);
 
-	static float calcX(const float perc, const sf::VideoMode& vm);
-	static float calcX(const float perc, const sf::Vector2f& size_xy);
+	static float СalcY(const float perc, const sf::VideoMode& vm);
+	static float СalcY(const float perc, const sf::Vector2f& size_xy);
 
-	static float calcY(const float perc, const sf::VideoMode& vm);
-	static float calcY(const float perc, const sf::Vector2f& size_xy);
-
-	static sf::Vector2f calcVecf(const sf::Vector2f& perc, const sf::VideoMode& vm);
-	static sf::Vector2f calcVecf(const sf::Vector2f& perc, const sf::Vector2f& size_xy);
+	static sf::Vector2f СalcVecf(const sf::Vector2f& perc, const sf::VideoMode& vm);
+	static sf::Vector2f СalcVecf(const sf::Vector2f& perc, const sf::Vector2f& size_xy);
 
 /*
 	 * Calculates the character size for text using the current resolution and a constant.
@@ -43,8 +40,8 @@ public:
 	 * @return		unsigned				The calculated character size value.
 */
 
-	static const unsigned calcCharSize(const unsigned modifier, const sf::VideoMode& vm);
-	static const unsigned calcCharSize(const unsigned modifier, const sf::Vector2f& size_xy);
+	static const unsigned СalcCharSize(const unsigned modifier, const sf::VideoMode& vm);
+	static const unsigned СalcCharSize(const unsigned modifier, const sf::Vector2f& size_xy);
 };
 } // !namespace GUI
 #endif // !CONVERTER_H

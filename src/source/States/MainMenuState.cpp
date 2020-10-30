@@ -1,4 +1,4 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "GUI/Converter.h"
 
@@ -12,32 +12,27 @@
 
 using namespace States;
 
-////////////////////////////////////////////////////////////
-// Constructors
-////////////////////////////////////////////////////////////
-MainMenuState::MainMenuState(StateData& Sdata)
-	: 
-	State{ Sdata },
-	m_main_menu{ 
-	             Sdata.settings.m_graphics->m_resolution, 
-				*Sdata.supported_fonts["DOSIS"] 
-			   },
-	m_title    { 
-				 "control of Ground",  *Sdata.supported_fonts["MAJOR"], 
-				 GUI::Converter::calcCharSize(28, Sdata.settings.m_graphics->m_resolution)   //1600x900 = ~78U
-			   }
+//Constructors
+MainMenuState::MainMenuState(StateContext& ctx)
+	: State     { ctx }
+	, m_mainMenu{ 
+	             ctx.settings.m_graphics->m_resolution, 
+				*ctx.supportedFonts["DOSIS"] 
+			    }
+	, m_title   { 
+				 "control of Ground",  *ctx.supportedFonts["MAJOR"], 
+				 GUI::Converter::СalcCharSize(28, ctx.settings.m_graphics->m_resolution)   //1600x900 = ~78U
+			    }
 {
-	initTextures();
-	initBackground(Sdata.settings.m_graphics->m_resolution);
+	InitTextures();
+	InitBackground(ctx.settings.m_graphics->m_resolution);
 }
 
 MainMenuState::~MainMenuState()
 {}
 
-////////////////////////////////////////////////////////////
-// Init
-////////////////////////////////////////////////////////////
-void MainMenuState::initTextures()
+//Init
+void MainMenuState::InitTextures()
 {
 	const std::string root = "resources/textures/";
 
@@ -54,96 +49,90 @@ void MainMenuState::initTextures()
 			"backgrounds/animated/1/Animated_BG.png" + " failed...");
 }
 
-void MainMenuState::initBackground(const sf::VideoMode& vm)
+void MainMenuState::InitBackground(const sf::VideoMode& vm)
 {
 	//Background
-	m_Sdata.background_anim = std::make_shared<GUI::AnimatedBackground>(sf::Vector2f((float)vm.width, (float)vm.height), *m_textures["ANIMATED_BG_1"]);
-	m_background = m_Sdata.background_anim;
+	m_stateContext.backgroundAnim = std::make_shared<GUI::AnimatedBackground>(sf::Vector2f((float)vm.width, (float)vm.height), *m_textures["ANIMATED_BG_1"]);
+	m_background = m_stateContext.backgroundAnim;
 
 	//Title
 	m_title.setLetterSpacing(1.5f);
 	m_title.setStyle(sf::Text::Bold);
 
-	const float default_position_x = GUI::Converter::calc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
-	const float default_position_y = GUI::Converter::calc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
+	const float defaultPosition_x = GUI::Converter::Сalc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float defaultPosition_y = GUI::Converter::Сalc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
 
-	m_title.setPosition(default_position_x, default_position_y);
+	m_title.setPosition(defaultPosition_x, defaultPosition_y);
 }
 
-void MainMenuState::initKeybinds()
+void MainMenuState::InitKeybinds()
 {
 }
 
-////////////////////////////////////////////////////////////
-// Update
-////////////////////////////////////////////////////////////
-void MainMenuState::updateEvent(const sf::Event& event)
+//Update
+void MainMenuState::UpdateEvent(const sf::Event& event)
 {
 
 }
 
-void MainMenuState::updateInput(const float& dt)
+void MainMenuState::UpdateInput(const float& dt)
 {
-	if (m_main_menu.isButtonPressed("GAME_STATE"))
-		m_Sdata.states.push_back(std::make_unique<GameState>(m_Sdata));
+	if (m_mainMenu.IsButtonPressed("GAME_STATE"))
+		m_stateContext.states.push_back(std::make_unique<GameState>(m_stateContext));
 
-	if (m_main_menu.isButtonPressed("EDITOR_STATE"))
-		m_Sdata.states.push_back(std::make_unique<EditorState>(m_Sdata));
+	if (m_mainMenu.IsButtonPressed("EDITOR_STATE"))
+		m_stateContext.states.push_back(std::make_unique<EditorState>(m_stateContext));
 
-	if (m_main_menu.isButtonPressed("SETTINGS_STATE"))
-		m_Sdata.states.push_back(std::make_unique<SettingsState>(m_Sdata));
+	if (m_mainMenu.IsButtonPressed("SETTINGS_STATE"))
+		m_stateContext.states.push_back(std::make_unique<SettingsState>(m_stateContext));
 
-	if (m_main_menu.isButtonPressed("EXIT"))
-		quitState();
+	if (m_mainMenu.IsButtonPressed("EXIT"))
+		QuitState();
 }
 
-void MainMenuState::update(const float& dt)
+void MainMenuState::Update(const float& dt)
 {
-	updateMousePos();
-	m_background->update(dt);
-	m_main_menu.update(m_mouse_pos_view, dt);
+	UpdateMousePos();
+	m_background->Update(dt);
+	m_mainMenu.Update(m_mousePosView, dt);
 
 	//updateKeyboardInput(dt);
-	updateInput(dt);
+	UpdateInput(dt);
 }
 
-////////////////////////////////////////////////////////////
-// Render
-////////////////////////////////////////////////////////////
-void MainMenuState::render(sf::RenderTarget& target)
+//Render
+void MainMenuState::Render(sf::RenderTarget& target)
 {
-	m_background->render(target);
+	m_background->Render(target);
 	target.draw(m_title);
 
-	m_main_menu.render(target);
+	m_mainMenu.Render(target);
 }
 
-////////////////////////////////////////////////////////////
-// Tech info
-////////////////////////////////////////////////////////////
-std::string MainMenuState::getStringInfo()
+//Tech info
+std::string MainMenuState::GetStringInfo()
 {
 	std::stringstream result;
 
-	result << getStringMousePos();
+	result << GetStringMousePos();
 
 	//Getting info from buttons
-	result << m_main_menu.getStringInfo();
+	result << m_mainMenu.GetStringInfo();
 
 	return result.str();
 }
 
 //Reset
-void MainMenuState::reset(const sf::VideoMode& vm)
+void MainMenuState::Reset(const sf::VideoMode& vm)
 {
 	//Title
-	m_title.setCharacterSize(GUI::Converter::calcCharSize(28, vm));
+	m_title.setCharacterSize(GUI::Converter::СalcCharSize(28, vm));
 
-	const float default_position_x = GUI::Converter::calc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
-	const float default_position_y = GUI::Converter::calc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
+	const float defaultPosition_x = GUI::Converter::Сalc(49.f, vm.width) - (m_title.getGlobalBounds().width / 2.f); // Center
+	const float defaultPosition_y = GUI::Converter::Сalc(13.f, vm.height) - (m_title.getGlobalBounds().height / 2.f); // Center
 
-	m_title.setPosition(default_position_x, default_position_y);
+	m_title.setPosition(defaultPosition_x, defaultPosition_y);
 
-	m_main_menu.reset(vm);
-	m_background->reset(vm);
+	m_mainMenu.Reset(vm);
+	m_background->Reset(vm);
 }

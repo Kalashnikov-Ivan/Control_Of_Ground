@@ -167,7 +167,7 @@ public:
     /// requested size, an empty glyph is returned.
     ///
     /// Be aware that using a negative value for the outline
-    /// thickness will cause distorted rendering.
+    /// thickness will cause distorted Rendering.
     ///
     /// \param codePoint        Unicode code point of the character to get
     /// \param characterSize    Reference character size
@@ -183,7 +183,7 @@ public:
     /// \brief Get the kerning offset of two glyphs
     ///
     /// The kerning is an extra offset (negative) to apply between two
-    /// glyphs when rendering them, to make the pair look more "natural".
+    /// glyphs when Rendering them, to make the pair look more "natural".
     /// For example, the pair "AV" have a special kerning to make them
     /// closer than other characters. Most of the glyphs pairs have a
     /// kerning offset of zero, though.
@@ -389,7 +389,7 @@ private:
 /// is slow (often too slow for real-time applications). On the other
 /// side, a sf::Text is a lightweight object which can combine the
 /// glyphs data and metrics of a sf::Font to display any text on a
-/// render target.
+/// Render target.
 /// Note that it is also possible to bind several sf::Text instances
 /// to the same sf::Font.
 ///

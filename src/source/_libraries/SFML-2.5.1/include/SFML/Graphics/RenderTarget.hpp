@@ -22,8 +22,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef SFML_RENDERTARGET_HPP
-#define SFML_RENDERTARGET_HPP
+#ifndef SFML_RenderTARGET_HPP
+#define SFML_RenderTARGET_HPP
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -46,7 +46,7 @@ class Drawable;
 class VertexBuffer;
 
 ////////////////////////////////////////////////////////////
-/// \brief Base class for all render targets (window, texture, ...)
+/// \brief Base class for all Render targets (window, texture, ...)
 ///
 ////////////////////////////////////////////////////////////
 class SFML_GRAPHICS_API RenderTarget : NonCopyable
@@ -65,7 +65,7 @@ public:
     /// This function is usually called once every frame,
     /// to clear the previous contents of the target.
     ///
-    /// \param color Fill color to use to clear the render target
+    /// \param color Fill color to use to clear the Render target
     ///
     ////////////////////////////////////////////////////////////
     void clear(const Color& color = Color(0, 0, 0, 255));
@@ -75,10 +75,10 @@ public:
     ///
     /// The view is like a 2D camera, it controls which part of
     /// the 2D scene is visible, and how it is viewed in the
-    /// render target.
+    /// Render target.
     /// The new view will affect everything that is drawn, until
     /// another view is set.
-    /// The render target keeps its own copy of the view object,
+    /// The Render target keeps its own copy of the view object,
     /// so it is not necessary to keep the original one alive
     /// after calling this function.
     /// To restore the original view of the target, you can pass
@@ -92,7 +92,7 @@ public:
     void setView(const View& view);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Get the view currently in use in the render target
+    /// \brief Get the view currently in use in the Render target
     ///
     /// \return The view object that is currently used
     ///
@@ -102,12 +102,12 @@ public:
     const View& getView() const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Get the default view of the render target
+    /// \brief Get the default view of the Render target
     ///
-    /// The default view has the initial size of the render target,
+    /// The default view has the initial size of the Render target,
     /// and never changes after the target has been created.
     ///
-    /// \return The default view of the render target
+    /// \return The default view of the Render target
     ///
     /// \see setView, getView
     ///
@@ -115,11 +115,11 @@ public:
     const View& getDefaultView() const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Get the viewport of a view, applied to this render target
+    /// \brief Get the viewport of a view, applied to this Render target
     ///
     /// The viewport is defined in the view as a ratio, this function
     /// simply applies this ratio to the current dimensions of the
-    /// render target to calculate the pixels rectangle that the viewport
+    /// Render target to calculate the pixels rectangle that the viewport
     /// actually covers in the target.
     ///
     /// \param view The view for which we want to compute the viewport
@@ -153,22 +153,22 @@ public:
     /// \brief Convert a point from target coordinates to world coordinates
     ///
     /// This function finds the 2D position that matches the
-    /// given pixel of the render target. In other words, it does
+    /// given pixel of the Render target. In other words, it does
     /// the inverse of what the graphics card does, to find the
-    /// initial position of a rendered pixel.
+    /// initial position of a Rendered pixel.
     ///
     /// Initially, both coordinate systems (world units and target pixels)
     /// match perfectly. But if you define a custom view or resize your
-    /// render target, this assertion is not true anymore, i.e. a point
-    /// located at (10, 50) in your render target may map to the point
+    /// Render target, this assertion is not true anymore, i.e. a point
+    /// located at (10, 50) in your Render target may map to the point
     /// (150, 75) in your 2D world -- if the view is translated by (140, 25).
     ///
-    /// For render-windows, this function is typically used to find
+    /// For Render-windows, this function is typically used to find
     /// which point (or object) is located below the mouse cursor.
     ///
     /// This version uses a custom view for calculations, see the other
     /// overload of the function if you want to use the current view of the
-    /// render target.
+    /// Render target.
     ///
     /// \param point Pixel to convert
     /// \param view The view to use for converting the point
@@ -203,19 +203,19 @@ public:
     ////////////////////////////////////////////////////////////
     /// \brief Convert a point from world coordinates to target coordinates
     ///
-    /// This function finds the pixel of the render target that matches
+    /// This function finds the pixel of the Render target that matches
     /// the given 2D point. In other words, it goes through the same process
-    /// as the graphics card, to compute the final position of a rendered point.
+    /// as the graphics card, to compute the final position of a Rendered point.
     ///
     /// Initially, both coordinate systems (world units and target pixels)
     /// match perfectly. But if you define a custom view or resize your
-    /// render target, this assertion is not true anymore, i.e. a point
+    /// Render target, this assertion is not true anymore, i.e. a point
     /// located at (150, 75) in your 2D world may map to the pixel
-    /// (10, 50) of your render target -- if the view is translated by (140, 25).
+    /// (10, 50) of your Render target -- if the view is translated by (140, 25).
     ///
     /// This version uses a custom view for calculations, see the other
     /// overload of the function if you want to use the current view of the
-    /// render target.
+    /// Render target.
     ///
     /// \param point Point to convert
     /// \param view The view to use for converting the point
@@ -228,7 +228,7 @@ public:
     Vector2i mapCoordsToPixel(const Vector2f& point, const View& view) const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Draw a drawable object to the render target
+    /// \brief Draw a drawable object to the Render target
     ///
     /// \param drawable Object to draw
     /// \param states   Render states to use for drawing
@@ -261,15 +261,15 @@ public:
     /// \brief Draw primitives defined by a vertex buffer
     ///
     /// \param vertexBuffer Vertex buffer
-    /// \param firstVertex  Index of the first vertex to render
-    /// \param vertexCount  Number of vertices to render
+    /// \param firstVertex  Index of the first vertex to Render
+    /// \param vertexCount  Number of vertices to Render
     /// \param states       Render states to use for drawing
     ///
     ////////////////////////////////////////////////////////////
     void draw(const VertexBuffer& vertexBuffer, std::size_t firstVertex, std::size_t vertexCount, const RenderStates& states = RenderStates::Default);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Return the size of the rendering region of the target
+    /// \brief Return the size of the Rendering region of the target
     ///
     /// \return Size in pixels
     ///
@@ -277,17 +277,17 @@ public:
     virtual Vector2u getSize() const = 0;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Activate or deactivate the render target for rendering
+    /// \brief Activate or deactivate the Render target for Rendering
     ///
-    /// This function makes the render target's context current for
-    /// future OpenGL rendering operations (so you shouldn't care
+    /// This function makes the Render target's context current for
+    /// future OpenGL Rendering operations (so you shouldn't care
     /// about it if you're not doing direct OpenGL stuff).
-    /// A render target's context is active only on the current thread,
+    /// A Render target's context is active only on the current thread,
     /// if you want to make it active on another thread you have
     /// to deactivate it on the previous thread first if it was active.
     /// Only one context can be current in a thread, so if you
-    /// want to draw OpenGL geometry to another render target
-    /// don't forget to activate it again. Activating a render
+    /// want to draw OpenGL geometry to another Render target
+    /// don't forget to activate it again. Activating a Render
     /// target will automatically deactivate the previously active
     /// context (if any).
     ///
@@ -299,10 +299,10 @@ public:
     virtual bool setActive(bool active = true);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Save the current OpenGL render states and matrices
+    /// \brief Save the current OpenGL Render states and matrices
     ///
     /// This function can be used when you mix SFML drawing
-    /// and direct OpenGL rendering. Combined with popGLStates,
+    /// and direct OpenGL Rendering. Combined with popGLStates,
     /// it ensures that:
     /// \li SFML's internal states are not messed up by your OpenGL code
     /// \li your OpenGL states are not modified by a call to a SFML function
@@ -333,7 +333,7 @@ public:
     void pushGLStates();
 
     ////////////////////////////////////////////////////////////
-    /// \brief Restore the previously saved OpenGL render states and matrices
+    /// \brief Restore the previously saved OpenGL Render states and matrices
     ///
     /// See the description of pushGLStates to get a detailed
     /// description of these functions.
@@ -347,7 +347,7 @@ public:
     /// \brief Reset the internal OpenGL states so that the target is ready for drawing
     ///
     /// This function can be used when you mix SFML drawing
-    /// and direct OpenGL rendering, if you choose not to use
+    /// and direct OpenGL Rendering, if you choose not to use
     /// pushGLStates/popGLStates. It makes sure that all OpenGL
     /// states needed by SFML are set, so that subsequent draw()
     /// calls will work as expected.
@@ -480,7 +480,7 @@ private:
 } // namespace sf
 
 
-#endif // SFML_RENDERTARGET_HPP
+#endif // SFML_RenderTARGET_HPP
 
 
 ////////////////////////////////////////////////////////////
@@ -488,7 +488,7 @@ private:
 /// \ingroup graphics
 ///
 /// sf::RenderTarget defines the common behavior of all the
-/// 2D render targets usable in the graphics module. It makes
+/// 2D Render targets usable in the graphics module. It makes
 /// it possible to draw 2D entities like sprites, shapes, text
 /// without using any OpenGL command directly.
 ///
@@ -499,7 +499,7 @@ private:
 /// documentation of sf::View for more details and sample pieces of
 /// code about this class.
 ///
-/// On top of that, render targets are still able to render direct
+/// On top of that, Render targets are still able to Render direct
 /// OpenGL stuff. It is even possible to mix together OpenGL calls
 /// and regular SFML drawing commands. When doing so, make sure that
 /// OpenGL states are not messed up by calling the

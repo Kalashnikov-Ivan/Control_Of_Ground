@@ -12,45 +12,42 @@ namespace States
 class SettingsState :
 	public State
 {
-//__________________________PUBLIC______________________________
 public:
-	//Constructors
+//Constructors
 	SettingsState() = delete;
-	SettingsState(StateData& Sdata);
+	SettingsState(StateContext& Sdata);
 	virtual ~SettingsState();
 
-	//Tech info
-	virtual std::string getStringInfo() override;
+//Tech info
+	std::string GetStringInfo() override;
 
-	//Functions
-	void pause()   = delete;
-	void unpause() = delete;
+//Functions
+	void Pause()   = delete;
+	void Unpause() = delete;
 
-	//Functions
-	virtual void updateEvent(const sf::Event& event) override;
-	virtual void update(const float& dt) override;
+//Update and Render
+	void UpdateEvent(const sf::Event& event) override;
+	void Update(const float& dt) override;
 
-	virtual void render(sf::RenderTarget& target) override;
+	void Render(sf::RenderTarget& target) override;
 
-	virtual void reset(const sf::VideoMode& vm) override;
-//__________________________PRIVATE_____________________________
+	void Reset(const sf::VideoMode& vm) override;
 private:
-	//GUI
-	GUI::SettingsMenu m_settings_menu;
+//GUI
+	GUI::SettingsMenu m_settingsMenu;
 	std::shared_ptr<GUI::AnimatedBackground> m_background;
 	sf::Text m_title;
 
-	//---------------------------------------------
-	//Init
-	virtual void inline initTextures() override;
-	virtual void inline initKeybinds() override; //Delete
-	void inline initBackground(const sf::VideoMode& vm);
+//Init
+	void inline InitTextures() override;
+	void inline InitKeybinds() override; //Delete
+	void inline InitBackground(const sf::VideoMode& vm);
 
-	//Functions
-	void inline resetSettingsAllStates();
+//Functions
+	void inline ResetSettingsAllStates();
 
-	//Update
-	virtual void updateInput(const float& dt) override; //Delete
+//Update
+	virtual void UpdateInput(const float& dt) override; //Delete
 };
 } // !namespace States
 #endif // !SETTINGS_STATE_H

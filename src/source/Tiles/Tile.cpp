@@ -1,4 +1,4 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "Tile.hpp"
 
@@ -6,15 +6,15 @@ using namespace Tiles;
 
 //Constructors
 Tile::Tile()
-	: sf::RectangleShape { sf::Vector2f(0.f, 0.f)},
-	m_border_visible{ false }
+	: sf::RectangleShape{ sf::Vector2f(0.f, 0.f) }
+	, m_borderVisible   { false }
 {
 }
 
-Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const sf::Texture* texture, const sf::IntRect texture_rect,
+Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const sf::Texture* texture, const sf::IntRect textureRect,
 		  const bool border_visible)
-	: sf::RectangleShape{ size_xy },
-	m_border_visible { border_visible }
+	: sf::RectangleShape{ size_xy }
+	, m_borderVisible   { border_visible }
 {
 	setPosition(pos);
 	setOutlineThickness(0.51f);
@@ -26,7 +26,7 @@ Tile::Tile(const sf::Vector2f pos, const sf::Vector2f size_xy, const sf::Texture
 
 	//setFillColor(sf::Color::Transparent);
 	setTexture(texture);
-	setTextureRect(texture_rect);
+	setTextureRect(textureRect);
 }
 
 Tile::~Tile()
@@ -35,15 +35,15 @@ Tile::~Tile()
 }
 
 //Accessors
-bool Tile::getBorberVisible() const
+bool Tile::GetBorberVisible() const
 {
-	return m_border_visible;
+	return m_borderVisible;
 }
 
 //Modificators
-void Tile::setBorderVisible(const bool option)
+void Tile::SetBorderVisible(const bool option)
 {
-	m_border_visible = option;
+	m_borderVisible = option;
 
 	if (option == true)
 		setOutlineColor(sf::Color::Yellow);
@@ -52,6 +52,6 @@ void Tile::setBorderVisible(const bool option)
 }
 
 //Update
-void Tile::update(const float& dt)
+void Tile::Update(const float& dt)
 {
 }

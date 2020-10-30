@@ -22,8 +22,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef SFML_RENDERWINDOW_HPP
-#define SFML_RENDERWINDOW_HPP
+#ifndef SFML_RenderWINDOW_HPP
+#define SFML_RenderWINDOW_HPP
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -67,7 +67,7 @@ public:
     /// depth-buffer bits, etc. You shouldn't care about these
     /// parameters for a regular usage of the graphics module.
     ///
-    /// \param mode     Video mode to use (defines the width, height and depth of the rendering area of the window)
+    /// \param mode     Video mode to use (defines the width, height and depth of the Rendering area of the window)
     /// \param title    Title of the window
     /// \param style    %Window style, a bitwise OR combination of sf::Style enumerators
     /// \param settings Additional settings for the underlying OpenGL context
@@ -79,7 +79,7 @@ public:
     /// \brief Construct the window from an existing control
     ///
     /// Use this constructor if you want to create an SFML
-    /// rendering area into an already existing control.
+    /// Rendering area into an already existing control.
     ///
     /// The second parameter is an optional structure specifying
     /// advanced OpenGL context settings such as antialiasing,
@@ -102,7 +102,7 @@ public:
     virtual ~RenderWindow();
 
     ////////////////////////////////////////////////////////////
-    /// \brief Get the size of the rendering region of the window
+    /// \brief Get the size of the Rendering region of the window
     ///
     /// The size doesn't include the titlebar and borders
     /// of the window.
@@ -114,7 +114,7 @@ public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Activate or deactivate the window as the current target
-    ///        for OpenGL rendering
+    ///        for OpenGL Rendering
     ///
     /// A window is active only on the current thread, if you want to
     /// make it active on another thread you have to deactivate it
@@ -182,7 +182,7 @@ protected:
 } // namespace sf
 
 
-#endif // SFML_RENDERWINDOW_HPP
+#endif // SFML_RenderWINDOW_HPP
 
 
 ////////////////////////////////////////////////////////////
@@ -194,17 +194,17 @@ protected:
 /// classes of the graphics module.
 ///
 /// sf::RenderWindow is derived from sf::Window, thus it inherits
-/// all its features: events, window management, OpenGL rendering,
+/// all its features: events, window management, OpenGL Rendering,
 /// etc. See the documentation of sf::Window for a more complete
 /// description of all these features, as well as code examples.
 ///
 /// On top of that, sf::RenderWindow adds more features related to
 /// 2D drawing with the graphics module (see its base class
 /// sf::RenderTarget for more details).
-/// Here is a typical rendering and event loop with a sf::RenderWindow:
+/// Here is a typical Rendering and event loop with a sf::RenderWindow:
 ///
 /// \code
-/// // Declare and create a new render-window
+/// // Declare and create a new Render-window
 /// sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
 ///
 /// // Limit the framerate to 60 frames per second (this step is optional)
@@ -222,7 +222,7 @@ protected:
 ///            window.close();
 ///    }
 ///
-///    // Clear the whole window before rendering a new frame
+///    // Clear the whole window before Rendering a new frame
 ///    window.clear();
 ///
 ///    // Draw some graphical entities
@@ -235,12 +235,12 @@ protected:
 /// }
 /// \endcode
 ///
-/// Like sf::Window, sf::RenderWindow is still able to render direct
+/// Like sf::Window, sf::RenderWindow is still able to Render direct
 /// OpenGL stuff. It is even possible to mix together OpenGL calls
 /// and regular SFML drawing commands.
 ///
 /// \code
-/// // Create the render window
+/// // Create the Render window
 /// sf::RenderWindow window(sf::VideoMode(800, 600), "SFML OpenGL");
 ///
 /// // Create a sprite and a text to display
@@ -252,7 +252,7 @@ protected:
 /// glMatrixMode(GL_PROJECTION);
 /// ...
 ///
-/// // Start the rendering loop
+/// // Start the Rendering loop
 /// while (window.isOpen())
 /// {
 ///     // Process events
@@ -274,7 +274,7 @@ protected:
 ///     window.draw(text);
 ///     window.popGLStates();
 ///
-///     // Finally, display the rendered frame on screen
+///     // Finally, display the Rendered frame on screen
 ///     window.display();
 /// }
 /// \endcode

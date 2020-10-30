@@ -1,4 +1,4 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "Game.hpp"
 
@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
     {
         Core::Game game;
 
-        game.run();
+        game.Run();
     }
     catch (std::runtime_error& exception)
     {

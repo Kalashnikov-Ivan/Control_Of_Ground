@@ -8,65 +8,56 @@ namespace Core
 class Game final
 {
 public:
-	//Constructors
+//Constructors
 	Game();
 	~Game();
 
-	//Core
-	void run();
+//Core
+	void Run();
 
 private:
-////////////////////////////////////////////////////////////
-// Members
-////////////////////////////////////////////////////////////
-	//General data
-		std::unique_ptr<sf::RenderWindow> m_window;
-		Settings::SettingsContainer		  m_settings;
-		std::vector<std::unique_ptr<States::State>> m_states;
+//General data
+	std::unique_ptr<sf::RenderWindow> m_window;
+	Settings::SettingsContainer		  m_settings;
 
-		std::map<const std::string, int> m_supported_keys;
-		std::map<const std::string, std::unique_ptr<sf::Font>> m_supported_fonts;
+	std::vector<std::unique_ptr<States::State>> m_states;
 
-	//All values
-		std::unique_ptr<States::StateData> m_Sdata;
+	std::map<const std::string, int>   m_supportedKeys;
+	std::map<const std::string, std::unique_ptr<sf::Font>> m_supportedFonts;
 
-	//Time
-		sf::Clock m_delta_time_clock;
-		float	  m_delta_time;
+//All values
+	std::unique_ptr<States::StateContext> m_stateContext;
 
-	//Info
-		std::stringstream m_tech_info;
-		std::stringstream m_mouse_info;
-		bool              m_enable_info;
+//Time
+	sf::Clock m_dtClock;
+	float	  m_dt;
 
-////////////////////////////////////////////////////////////
+//Info
+	bool              m_enableInfo;
+	std::stringstream m_techInfo;
+	std::stringstream m_mouseInfo;
+
 // Init
-////////////////////////////////////////////////////////////
-	void inline initSettings();
-	void inline initWindow();
-	void inline initSupportedKeys();
-	void inline initSupportedFonts();
-	void inline initFirstState();
+	void inline InitSettings();
+	void inline InitWindow();
+	void inline InitSupportedKeys();
+	void inline InitSupportedFonts();
+	void inline InitFirstState();
 
-////////////////////////////////////////////////////////////
 // Info
-////////////////////////////////////////////////////////////
-	void updateInfo();
-	sf::Text getTextInfo(const sf::Font& font);
-	sf::Text getMouseTextInfo(const sf::Font& font);
+	void     UpdateInfo();
+	sf::Text GetTextInfo(const sf::Font& font);
+	sf::Text GetMouseTextInfo(const sf::Font& font);
 
-////////////////////////////////////////////////////////////
-// Functions
-////////////////////////////////////////////////////////////
-	//Update
-		void inline updateEvents();
-		void inline updateDeltaTime();
-		void inline update();
+//Update
+	void inline UpdateEvents();
+	void inline UpdateDeltaTime();
+	void inline Update();
 
-		void inline applicationEnd();
+	void inline ApplicationEnd();
 
-	//Render
-		void inline render();
+//Render
+	void inline Render();
 };
-} // !namespace cog
+} // !namespace Core
 #endif // !GAME_H

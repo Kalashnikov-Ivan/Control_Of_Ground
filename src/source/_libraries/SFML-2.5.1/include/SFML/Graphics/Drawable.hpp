@@ -38,7 +38,7 @@ class RenderTarget;
 
 ////////////////////////////////////////////////////////////
 /// \brief Abstract base class for objects that can be drawn
-///        to a render target
+///        to a Render target
 ///
 ////////////////////////////////////////////////////////////
 class SFML_GRAPHICS_API Drawable
@@ -56,14 +56,14 @@ protected:
     friend class RenderTarget;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Draw the object to a render target
+    /// \brief Draw the object to a Render target
     ///
     /// This is a pure virtual function that has to be implemented
     /// by the derived class to define how the drawable should be
     /// drawn.
     ///
     /// \param target Render target to draw to
-    /// \param states Current render states
+    /// \param states Current Render states
     ///
     ////////////////////////////////////////////////////////////
     virtual void draw(RenderTarget& target, RenderStates states) const = 0;

@@ -1,15 +1,18 @@
-#include "stdHeader.hpp"
+#include "stdafx.h"
 
 #include "TextureSelector.h"
 
 using namespace GUI;
 
 //Constructors
-TextureSelector::TextureSelector(const sf::Vector2f& size, const sf::Vector2f& pos, const sf::Texture* texture_sheet, sf::Vector2f& grid_size)
-	: sf::RectangleShape { size },
-	m_sheet    { *texture_sheet },
-	m_grid_size{ grid_size }, m_selector { grid_size }, m_selected_rect { 0, 0, static_cast<int>(m_grid_size.x), static_cast<int>(m_grid_size.y) },
-	m_active   { false }, m_hidden { false }
+TextureSelector::TextureSelector(const sf::Vector2f& size, const sf::Vector2f& pos, const sf::Texture* textureSheet, sf::Vector2f& gridSize)
+	: sf::RectangleShape { size }
+	, m_sheet            { *textureSheet }
+	, m_gridSize         { gridSize }
+	, m_selector         { gridSize }
+	, m_selectedRect     { 0, 0, static_cast<int>(m_gridSize.x), static_cast<int>(m_gridSize.y) }
+	, m_active           { false }
+	, m_hidden           { false }
 {
 	setPosition(pos);
 	setFillColor(sf::Color(50, 50, 50, 100));
@@ -40,41 +43,41 @@ TextureSelector::~TextureSelector()
 }
 
 //Info
-std::string TextureSelector::getStringInfo()
+std::string TextureSelector::GetStringInfo()
 {
 	std::stringstream result;
 
-	result << "Selector::grid pos: " << m_mouse_pos_grid.x << ' ' << m_mouse_pos_grid.y << '\n';
+	result << "Selector::grid pos: " << m_mousePosGrid.x << ' ' << m_mousePosGrid.y << '\n';
 
 	return result.str();
 }
 
-bool TextureSelector::isActive() const
+bool TextureSelector::IsActive() const
 {
 	return m_active;
 }
 
-bool TextureSelector::isHidden() const
+bool TextureSelector::IsHidden() const
 {
 	return m_hidden;
 }
 
 //Accessors
-sf::Vector2f TextureSelector::getGridSize() const
+sf::Vector2f TextureSelector::GetGridSize() const
 {
-	return m_grid_size;
+	return m_gridSize;
 }
 
-const sf::IntRect& TextureSelector::getSelectedRect() const
+const sf::IntRect& TextureSelector::GetSelectedRect() const
 {
-	return m_selected_rect;
+	return m_selectedRect;
 }
 
 //Functions
-void inline TextureSelector::updateSelectorRect()
+void inline TextureSelector::UpdateSelectorRect()
 {
-	m_selected_rect.left = static_cast<int>(m_selector.getPosition().x - getPosition().x);
-	m_selected_rect.top = static_cast<int>(m_selector.getPosition().y - getPosition().y);
+	m_selectedRect.left = static_cast<int>(m_selector.getPosition().x - getPosition().x);
+	m_selectedRect.top  = static_cast<int>(m_selector.getPosition().y - getPosition().y);
 }
 
 //Modificators
@@ -92,37 +95,37 @@ void TextureSelector::setPosition(const sf::Vector2f& pos)
 	m_sheet.setPosition(pos);
 }
 
-void TextureSelector::setHidden(const bool option)
+void TextureSelector::SetHidden(const bool option)
 {
 	m_hidden = option;
 }
 
-void TextureSelector::update(const sf::Vector2f& mouse_pos, const float& dt)
+void TextureSelector::Update(const sf::Vector2f& mousePos, const float& dt)
 {
 	if (!m_hidden)
 	{
-		if (getGlobalBounds().contains(mouse_pos))
+		if (getGlobalBounds().contains(mousePos))
 			m_active = true;
 		else
 			m_active = false;
 
 		if (m_active)
 		{
-			m_mouse_pos_grid.x = static_cast<unsigned>((mouse_pos.x - getPosition().x) / (m_grid_size.x));
-			m_mouse_pos_grid.y = static_cast<unsigned>((mouse_pos.y - getPosition().y) / (m_grid_size.y));
+			m_mousePosGrid.x = static_cast<unsigned>((mousePos.x - getPosition().x) / (m_gridSize.x));
+			m_mousePosGrid.y = static_cast<unsigned>((mousePos.y - getPosition().y) / (m_gridSize.y));
 
 			m_selector.setPosition(
-				getPosition().x + m_mouse_pos_grid.x * m_grid_size.x,
-				getPosition().y + m_mouse_pos_grid.y * m_grid_size.y
+				getPosition().x + m_mousePosGrid.x * m_gridSize.x,
+				getPosition().y + m_mousePosGrid.y * m_gridSize.y
 			);
 
-			updateSelectorRect();
+			UpdateSelectorRect();
 		}
 	}
 }
 
 //Render
-void TextureSelector::render(sf::RenderTarget& target)
+void TextureSelector::Render(sf::RenderTarget& target)
 {
 	if (!m_hidden)
 	{
@@ -134,7 +137,7 @@ void TextureSelector::render(sf::RenderTarget& target)
 	}
 }
 
-void TextureSelector::reset(const sf::Vector2f& size, const sf::Vector2f& pos)
+void TextureSelector::Reset(const sf::Vector2f& size, const sf::Vector2f& pos)
 {
 	setSize(size);
 	setPosition(pos);

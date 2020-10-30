@@ -9,37 +9,36 @@ class Player :
 	public Entity
 {
 public:
-	//Constructors
+//Constructors
 	Player(const sf::Vector2f& position_xy, sf::Texture& texture,
-		   const float& max_speed, const float& acceleration, const float& deceleration,
-		   const sf::Vector2f& scale = sf::Vector2f(1.f, 1.f));
-	virtual ~Player();
+		   const float& maxSpeed, const float& acceleration, const float& deceleration,
+		   const sf::Vector2f& scale = sf::Vector2f(1.f, 1.f)
+	);
+	~Player();
 
-	//Accessors
+//Info
+	std::string GetStringInfo() override;
 
-	//Info
-	virtual std::string getStringInfo() override;
+//Functions
+	void Move(const sf::Vector2f& dir_xy, const float& dt) override;
 
-	//Functions
-	virtual void move(const sf::Vector2f& dir_xy, const float& dt) override;
-
-	//Update and render
-	virtual void update(const float& dt) override;
-	virtual void render(sf::RenderTarget& target) override;
+//Update and Render
+	void Update(const float& dt) override;
+	void Render(sf::RenderTarget& target) override;
 
 private:
-	//Members
+//Members
 	float m_scale_x;
 	float m_scale_y;
 
-	bool m_is_attacking;
+	bool m_attacking;
 
-	//Update
-	void updateAnimations(const float& dt);
-	void updateInput();
+//Update
+	void UpdateAnimations(const float& dt);
+	void UpdateInput();
 
-	//Init
-	void inline initAnimations();
+//Init
+	void inline InitAnimations();
 };
 } // !namespace cog
 #endif // !PLAYER_H
